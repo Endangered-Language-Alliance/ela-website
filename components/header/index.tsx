@@ -1,30 +1,24 @@
-import Link from "next/link";
-import { useQuery } from "react-query";
-import { request, gql } from "graphql-request";
+import { FC } from 'react'
+import Link from 'next/link'
+import { useQuery } from 'react-query'
+import { request, gql } from 'graphql-request'
 import {
   Menu,
   MenuList,
   MenuButton,
   MenuItem,
-  MenuItems,
-  MenuPopover,
+  // MenuItems, // TODO: understand, restore
   MenuLink,
-} from "@reach/menu-button";
-import "@reach/menu-button/styles.css";
+} from '@reach/menu-button'
+import '@reach/menu-button/styles.css'
 
-const API_URL = process.env.NEXT_PUBLIC_WP_API_URL;
+import { Menu as WpMenu } from '../../wp-graphql'
 
-type Resp = {
-  data: {
-    menuItems: {
-      nodes: [{ label: string; path: string; childItems: { nodes: [] } }];
-    };
-  };
-};
+const API_URL = process.env.NEXT_PUBLIC_WP_API_URL as string
 
-function useNavItems() {
-  return useQuery("posts", async () => {
-    const data = await request(
+const Header: FC = () => {
+  const { data, error, isLoading } = useQuery<WpMenu>('posts', async () => {
+    const mainMenuResp = await request(
       API_URL,
       gql`
         query MainMenuQuery {
@@ -45,25 +39,23 @@ function useNavItems() {
           path
         }
       `
-    );
+    )
 
-    return data;
-  });
-}
+    return mainMenuResp
+  })
 
-export default function Header() {
-  const { status, data, error, isLoading } = useNavItems();
+  if (isLoading) return <span>Loading...</span>
+  if (error) return <span>Error!</span>
 
-  if (isLoading) return <span>Loading...</span>;
-  if (error) return <span>Error!</span>;
+  const { menuItems } = data
 
   return (
     <nav>
-      <ul style={{ display: "flex" }}>
-        {data.menuItems.nodes.map((node) => {
-          const { label, path, childItems } = node;
+      <ul style={{ display: 'flex' }}>
+        {menuItems.nodes.map((node) => {
+          const { label, path, childItems } = node
 
-          console.log(node);
+          console.log(node)
           if (!childItems.nodes.length) {
             return (
               <li key={path}>
@@ -71,18 +63,18 @@ export default function Header() {
                   <a>{label}</a>
                 </Link>
               </li>
-            );
+            )
           }
 
           return (
-            <Menu>
+            <Menu key={path}>
               <MenuButton>{label}</MenuButton>
               <MenuList>
                 {childItems.nodes.length ? (
                   childItems.nodes.map((item) => {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
-                    return <MenuItem key={item.label}>{item.label}</MenuItem>;
+                    return <MenuItem key={item.label}>{item.label}</MenuItem>
                   })
                 ) : (
                   <MenuLink as={Link} to={item.path}>
@@ -91,9 +83,11 @@ export default function Header() {
                 )}
               </MenuList>
             </Menu>
-          );
+          )
         })}
       </ul>
     </nav>
-  );
+  )
 }
+
+export default Header

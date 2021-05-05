@@ -1,9 +1,9 @@
-const API_URL = process.env.WP_API_URL;
+const API_URL = process.env.WP_API_URL as string
 
 async function fetchAPI(query, { variables } = {}) {
   // Set up some headers to tell the fetch call
   // that this is an application/json type
-  const headers = { 'Content-Type': 'application/json' };
+  const headers = { 'Content-Type': 'application/json' }
 
   // build out the fetch() call using the API_URL
   // environment variable pulled in at the start
@@ -11,22 +11,24 @@ async function fetchAPI(query, { variables } = {}) {
   const res = await fetch(API_URL, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ query, variables })
-  });
+    body: JSON.stringify({ query, variables }),
+  })
 
   // error handling work
-  const json = await res.json();
+  const json = await res.json()
+
   if (json.errors) {
-    console.log(json.errors);
-    console.log('error details', query, variables);
-    throw new Error('Failed to fetch API');
+    console.log(json.errors)
+    console.log('error details', query, variables)
+    throw new Error('Failed to fetch API')
   }
-  return json.data;
+
+  return json.data
 }
 
 // Notice the 'export' keyword here. We'll be calling this function
 // directly in our blog/index.js page, so it needs to be exported
-export async function getAllPosts(preview) {
+export async function getAllPosts() {
   const data = await fetchAPI(
     `
     query AllPosts {
@@ -42,9 +44,9 @@ export async function getAllPosts(preview) {
       }
     }
     `
-  );
+  )
 
-  return data?.posts;
+  return data?.posts
 }
 
 export async function getAllPostsWithSlug() {
@@ -59,8 +61,10 @@ export async function getAllPostsWithSlug() {
         }
       }
     }
-  `);
-  return data?.posts;
+  `
+  )
+
+  return data?.posts
 }
 
 export async function getAllLanguages() {
@@ -77,6 +81,8 @@ export async function getAllLanguages() {
         }
       }
     }    
-  `);
-  return data?.languages;
+  `
+  )
+
+  return data?.languages
 }
