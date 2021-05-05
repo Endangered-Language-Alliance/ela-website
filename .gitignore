@@ -18,6 +18,9 @@
 # misc
 .DS_Store
 *.pem
+/scratch
+/backup
+/_resources
 
 # debug
 npm-debug.log*
