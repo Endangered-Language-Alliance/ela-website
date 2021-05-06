@@ -1,10 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-// data
 import { getAllPostsWithSlug, getPost } from '../../lib/api'
-
-// styles
 import styles from '../../styles/Home.module.css'
 import blogStyles from '../../styles/Blog.module.css'
 

@@ -1,3 +1,7 @@
+// THIS FILE IS GENERATED, DO NOT EDIT!
+//
+// Allow Screaming_Snake_Case instead of PascalCase:
+/* eslint-disable @typescript-eslint/naming-convention */
 export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]

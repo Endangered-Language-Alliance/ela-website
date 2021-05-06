@@ -8,13 +8,20 @@ import { getAllPosts } from '../../lib/api'
 import styles from '../../styles/Home.module.css'
 import blogStyles from '../../styles/Blog.module.css'
 
+import { RootQueryToPostConnection } from '../../wp-graphql'
+
+type BlogProps = { allPosts: RootQueryToPostConnection }
+
 function createMarkup(text: string) {
   return { __html: text }
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const Blog = ({ allPosts: { edges } }) => {
+const Blog: React.FC<BlogProps> = (props) => {
+  const { allPosts } = props
+  const { edges } = allPosts
+
   return (
     <div className={styles.container}>
       <Head>
@@ -26,24 +33,26 @@ const Blog = ({ allPosts: { edges } }) => {
         <h1 className={styles.title}>Latest blog articles</h1>
         <hr />
         <section>
-          {edges.map(({ node }) => (
-            <div className={blogStyles.listitem} key={node.id}>
-              <div className={blogStyles.listitem__content}>
-                <h2>
-                  <Link href={`/blog/${node.slug}`}>
-                    <a>{node.title}</a>
-                  </Link>
-                </h2>
-                <time
-                  className={blogStyles.listitem__date}
-                  dateTime={node.date}
-                >
-                  {node.date}
-                </time>
-                <div dangerouslySetInnerHTML={createMarkup(node.excerpt)} />
+          {edges?.map(({ node }) => {
+            return (
+              <div className={blogStyles.listitem} key={node.id}>
+                <div className={blogStyles.listitem__content}>
+                  <h2>
+                    <Link href={`/blog/${node.slug}`}>
+                      <a>{node.title}</a>
+                    </Link>
+                  </h2>
+                  <time
+                    className={blogStyles.listitem__date}
+                    dateTime={node.date}
+                  >
+                    {node.date}
+                  </time>
+                  <div dangerouslySetInnerHTML={createMarkup(node.excerpt)} />
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </section>
       </main>
     </div>

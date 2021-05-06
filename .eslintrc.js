@@ -9,7 +9,6 @@ module.exports = {
     "project": "./tsconfig.json",
   }, // to enable features such as async/await
   settings: { react: { version: 'detect' } },
-  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   // We don't want to lint generated files nor node_modules, but we want to lint
   // .prettierrc.js (ignored by default by eslint)
   ignorePatterns: [
@@ -35,7 +34,7 @@ module.exports = {
     // This configuration will apply only to TypeScript files
     {
       files: ['**/*.ts', '**/*.tsx'],
-      // settings: { react: { version: 'detect' } },
+      parser: '@typescript-eslint/parser', // Specifies the ESLint parser
       env: {
         browser: true,
         node: true,
@@ -160,11 +159,21 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     "react/jsx-props-no-spreading": 0, // IT'S FINE
     "react/no-danger": 0, // dangerouslySetInnerHTML
+    "react/no-unescaped-entities": [
+      "error",
+      {
+        "forbid": [">", "}"]
+      }
+    ],
+    "react/jsx-wrap-multilines": [
+      0,
+      {
+        "prop": "parens-new-line"
+      }
+    ],
     // This rule is not compatible with Next.js's <Link /> components
     'jsx-a11y/anchor-is-valid': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
-    // I suggest this setting for requiring return types on functions only where
-    // useful
     '@typescript-eslint/explicit-function-return-type': [
       'warn',
       {

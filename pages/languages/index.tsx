@@ -1,16 +1,18 @@
 import { FC } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { GetStaticProps } from 'next'
 
 import { Layout } from '../../components/Layout'
-import { RootQueryToLanguageConnection } from '../../wp-graphql'
-import { getAllLanguages } from '../../lib/api'
+import { Language } from '../../wp-graphql'
+import { getAllLanguages } from './api'
 
-type LanguagesProps = RootQueryToLanguageConnection
+type LanguagesProps = {
+  data: { node: Language }[]
+}
 
 const Languages: FC<LanguagesProps> = (props) => {
-  console.log(props)
-  const { edges } = props
+  const { data = [] } = props
 
   return (
     <div>
@@ -23,9 +25,7 @@ const Languages: FC<LanguagesProps> = (props) => {
         <h1>Languages</h1>
         <hr />
         <section>
-          {edges?.map((ugh) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+          {data?.map((ugh) => {
             const { node } = ugh
             const { slug, title, excerpt } = node
 
@@ -48,12 +48,8 @@ const Languages: FC<LanguagesProps> = (props) => {
 
 export default Languages
 
-export async function getStaticProps() {
-  const allLanguages = await getAllLanguages()
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await getAllLanguages()
 
-  return {
-    props: {
-      allLanguages,
-    },
-  }
+  return { props: { data } }
 }
