@@ -37,7 +37,7 @@ export default function Post({ postData }) {
           />
         </article>
         <p>
-          <Link href="/blog">
+          <Link href="/latest">
             <a>back to articles</a>
           </Link>
         </p>
@@ -50,7 +50,7 @@ export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug()
 
   return {
-    paths: allPosts.edges.map(({ node }) => `/blog/${node.slug}`) || [],
+    paths: allPosts.edges.map(({ node }) => `/latest/${node.slug}`) || [],
     fallback: false,
   }
 }

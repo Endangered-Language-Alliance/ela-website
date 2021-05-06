@@ -11,18 +11,18 @@ import { Post } from '../../wp-graphql'
 
 type BlogProps = { posts: Post[] }
 
-const Blog: React.FC<BlogProps> = (props) => {
+const Latest: React.FC<BlogProps> = (props) => {
   const { posts = [] } = props
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Blog articles page</title>
+        <title>Latest articles page</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Latest blog articles</h1>
+        <h1 className={styles.title}>Latest updates</h1>
         <hr />
         <section>
           {posts.map(({ id, title, slug, date, excerpt }) => {
@@ -30,7 +30,7 @@ const Blog: React.FC<BlogProps> = (props) => {
               <div className={blogStyles.listitem} key={id}>
                 <div className={blogStyles.listitem__content}>
                   <h2>
-                    <Link href={`/blog/${slug}`}>
+                    <Link href={`/latest/${slug}`}>
                       <a>{title}</a>
                     </Link>
                   </h2>
@@ -61,4 +61,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default Blog
+export default Latest
