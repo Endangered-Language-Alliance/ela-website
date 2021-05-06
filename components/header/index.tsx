@@ -17,7 +17,7 @@ const API_URL = process.env.NEXT_PUBLIC_WP_API_URL as string
 
 const Header: FC = () => {
   const { data, error, isLoading } = useQuery<WpMenu>(
-    'posts',
+    'main-menu',
     async () => {
       const mainMenuResp = await request(
         API_URL,
