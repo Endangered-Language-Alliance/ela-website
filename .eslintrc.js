@@ -20,7 +20,7 @@ module.exports = {
     '_resources',
     '!.prettierrc.js',
     '!.eslintrc.js',
-    '!gql-ts/get-wp-gql-schema.js',
+    '!gql-ts/get-wp-gql-schema.mjs',
   ],
   extends: [
     'airbnb-typescript',

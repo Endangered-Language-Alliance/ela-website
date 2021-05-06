@@ -26,7 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     "*.js",
-    "gql-ts/get-wp-gql-schema.js"
+    "gql-ts/get-wp-gql-schema.mjs"
   ],
   "exclude": ["node_modules"]
 }
