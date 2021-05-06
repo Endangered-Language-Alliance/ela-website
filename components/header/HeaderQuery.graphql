@@ -1,0 +1,18 @@
+query MainMenuQuery {
+  menuItems(where: { location: PRIMARY, parentId: "" }) {
+    nodes {
+      ...MenuBits
+      childItems {
+        nodes {
+          ...MenuBits
+        }
+      }
+    }
+  }
+}
+
+fragment MenuBits on MenuItem {
+  label
+  path
+  parentId
+}
