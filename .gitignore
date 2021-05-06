@@ -36,5 +36,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-# auto-generated graphql
+# auto-generated
 /gql-ts/wpgraphql-schema.gql
+.eslintcache
