@@ -4047,6 +4047,7 @@ export type Page_Sitewidesettings = AcfFieldGroup & {
   contactInfo?: Maybe<Page_Sitewidesettings_ContactInfo>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
+  logo?: Maybe<MediaItem>
   /** This is all HTML for the MailChip newsletter signup form, formerly its own page called &quot;Announcement Form&quot;. Will likely need to style via CSS. */
   newsletter?: Maybe<Scalars['String']>
   social?: Maybe<Page_Sitewidesettings_Social>

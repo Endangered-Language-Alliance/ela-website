@@ -1,0 +1,28 @@
+query FooterQuery {
+  generalSettings {
+    title
+  }
+  nodeByUri(uri: "/") {
+    ... on Page {
+      title
+      siteWideSettings {
+        newsletter
+        logo {
+          altText
+          sourceUrl
+        }
+        social {
+          archiveOrg
+          facebook
+          instagram
+          youTube
+        }
+        contactInfo {
+          address
+          email
+          phone
+        }
+      }
+    }
+  }
+}
