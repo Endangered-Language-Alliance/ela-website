@@ -1,18 +1,10 @@
 import { useQuery } from 'react-query'
 import { request } from 'graphql-request'
 
-import { Page, GeneralSettings } from '../../wp-graphql'
 import footerQuery from './FooterQuery.graphql'
+import { FooterResponse, UseFooterQuery } from './types'
 
 const API_URL = process.env.NEXT_PUBLIC_WP_API_URL as string
-
-type FooterResponse = { nodeByUri: Page; generalSettings: GeneralSettings }
-type UseQuery = {
-  data?: FooterResponse
-  error: Error | null
-  isLoading: boolean
-}
-type UseFooterQuery = () => UseQuery
 
 export const useFooterQuery: UseFooterQuery = () => {
   const { data, error, isLoading } = useQuery<FooterResponse, Error>(

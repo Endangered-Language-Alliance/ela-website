@@ -1,20 +1,13 @@
 import { useQuery } from 'react-query'
 import { request } from 'graphql-request'
 
-import { Menu } from '../../wp-graphql'
 import MainMenuQuery from './HeaderQuery.graphql'
-
-type UseQuery = {
-  data?: Menu
-  error: Error | null
-  isLoading: boolean
-}
-type UseHeaderQuery = () => UseQuery
+import { HeaderResponse, UseHeaderQuery } from './types'
 
 const API_URL = process.env.NEXT_PUBLIC_WP_API_URL as string
 
 export const useHeaderQuery: UseHeaderQuery = () => {
-  const { data, error, isLoading } = useQuery<Menu, Error>(
+  const { data, error, isLoading } = useQuery<HeaderResponse, Error>(
     'main-menu',
     async () => {
       const mainMenuResp = await request(API_URL, MainMenuQuery)

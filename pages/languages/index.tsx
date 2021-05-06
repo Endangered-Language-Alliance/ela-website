@@ -36,7 +36,7 @@ const Languages: FC<LanguagesProps> = (props) => {
                     <a>{title}</a>
                   </Link>
                 </h2>
-                <p dangerouslySetInnerHTML={{ __html: excerpt }} />
+                <p dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
               </article>
             )
           })}

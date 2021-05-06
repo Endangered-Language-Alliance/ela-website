@@ -8,13 +8,11 @@ export async function getAllPosts() {
     gql`
       query AllPosts {
         posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
-          edges {
-            node {
-              date
-              title
-              slug
-              excerpt
-            }
+          nodes {
+            date
+            title
+            slug
+            excerpt
           }
         }
       }

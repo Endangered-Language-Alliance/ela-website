@@ -21,13 +21,13 @@ const Header: React.FC = () => {
   return (
     <nav>
       <ul>
-        {menuItems.nodes.map((node) => {
+        {menuItems?.nodes?.map((node) => {
           const { label, path, childItems, parentId } = node || {}
 
-          if (!parentId && !childItems.nodes.length) {
+          if (!parentId && !childItems?.nodes?.length) {
             return (
               <li key={path}>
-                <Link href={path}>
+                <Link href={path || ''}>
                   <a>{label}</a>
                 </Link>
               </li>
@@ -39,15 +39,14 @@ const Header: React.FC = () => {
               <Menu>
                 <MenuButton>{label}</MenuButton>
                 <MenuList>
-                  {childItems.nodes.map((item) => {
+                  {childItems?.nodes?.map((item) => {
                     return (
                       <MenuLink
-                        key={item.path}
+                        key={item?.path}
                         as={Link}
-                        to={item.path}
-                        href={item.path}
+                        href={item?.path || ''}
                       >
-                        <a>{item.label}</a>
+                        {item?.label}
                       </MenuLink>
                     )
                   })}

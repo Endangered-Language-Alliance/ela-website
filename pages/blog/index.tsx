@@ -1,26 +1,18 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { GetStaticProps } from 'next'
 
-// data
+import { createMarkup } from '../../lib/utils'
 import { getAllPosts } from '../../lib/api'
-
-// styles
 import styles from '../../styles/Home.module.css'
 import blogStyles from '../../styles/Blog.module.css'
 
-import { RootQueryToPostConnection } from '../../wp-graphql'
+import { Post } from '../../wp-graphql'
 
-type BlogProps = { allPosts: RootQueryToPostConnection }
+type BlogProps = { posts: Post[] }
 
-function createMarkup(text: string) {
-  return { __html: text }
-}
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 const Blog: React.FC<BlogProps> = (props) => {
-  const { allPosts } = props
-  const { edges } = allPosts
+  const { posts = [] } = props
 
   return (
     <div className={styles.container}>
@@ -33,22 +25,22 @@ const Blog: React.FC<BlogProps> = (props) => {
         <h1 className={styles.title}>Latest blog articles</h1>
         <hr />
         <section>
-          {edges?.map(({ node }) => {
+          {posts.map(({ id, title, slug, date, excerpt }) => {
             return (
-              <div className={blogStyles.listitem} key={node.id}>
+              <div className={blogStyles.listitem} key={id}>
                 <div className={blogStyles.listitem__content}>
                   <h2>
-                    <Link href={`/blog/${node.slug}`}>
-                      <a>{node.title}</a>
+                    <Link href={`/blog/${slug}`}>
+                      <a>{title}</a>
                     </Link>
                   </h2>
                   <time
                     className={blogStyles.listitem__date}
-                    dateTime={node.date}
+                    dateTime={date || ''}
                   >
-                    {node.date}
+                    {date}
                   </time>
-                  <div dangerouslySetInnerHTML={createMarkup(node.excerpt)} />
+                  <div dangerouslySetInnerHTML={createMarkup(excerpt || '')} />
                 </div>
               </div>
             )
@@ -59,14 +51,14 @@ const Blog: React.FC<BlogProps> = (props) => {
   )
 }
 
-export default Blog
-
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPosts = await getAllPosts()
 
   return {
     props: {
-      allPosts,
+      posts: allPosts.nodes,
     },
   }
 }
+
+export default Blog
