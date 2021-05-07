@@ -1,0 +1,26 @@
+.header {
+  border-bottom: 2px solid var(--primaryColor);
+  background-color: var(--darkGray);
+  width: 100%;
+  padding: var(--padding) 0;
+  /* TODO: mobile only */
+  overflow-x: auto;
+}
+
+.header a {
+  color: var(--secondaryColor);
+}
+
+.header ul {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+}
+
+.header li {
+  list-style-type: none;
+}
+
+.header li + li {
+  margin-left: var(--padding);
+}

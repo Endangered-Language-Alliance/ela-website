@@ -9,6 +9,8 @@ import {
 import '@reach/menu-button/styles.css'
 
 import { useHeaderQuery } from './hooks'
+import styles from './Header.module.css'
+import sharedStyles from '../../styles/Shared.module.css'
 
 const Header: React.FC = () => {
   const { data, error, isLoading } = useHeaderQuery()
@@ -19,8 +21,8 @@ const Header: React.FC = () => {
   const { menuItems } = data || {}
 
   return (
-    <nav>
-      <ul>
+    <nav className={styles.header}>
+      <ul className={sharedStyles.container}>
         {menuItems?.nodes?.map((node) => {
           const { label, path, childItems, parentId } = node || {}
 

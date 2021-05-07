@@ -1,3 +1,8 @@
+/* CRED: (fonts): https://type-scale.com/ */
+html {
+  font-size: 100%;
+} /*16px*/
+
 html,
 body {
   padding: 0;
@@ -6,12 +11,31 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+body {
+  min-height: 100vh;
+  line-height: 1.75;
+  --primaryColor: #503896;
+  --secondaryColor: #ffd520;
+  --white: #fff;
+  --black: #000;
+  --darkGray: #222;
+  --padding: 0.75rem;
+  --font-h1: 3.052rem;
+  --font-h2: 2.441rem;
+  --font-h3: 1.953rem;
+  --font-h4: 1.563rem;
+  --font-h5: 1.25rem;
+  --font-sm: 0.8rem;
+  --maxWidth: 1200px;
+  --borderRad-1: 4px;
+}
+
 * {
   box-sizing: border-box;
 }
 
 a {
-  color: hsl(212, 87%, 58%);
+  color: var(--primaryColor);
   text-decoration: none;
 }
 
@@ -19,4 +43,39 @@ a:hover,
 a:focus,
 a:active {
   text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 3rem 0 1.38rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: var(--font-h1);
+}
+h2 {
+  font-size: var(--font-h2);
+}
+h3 {
+  font-size: var(--font-h3);
+}
+h4 {
+  font-size: var(--font-h4);
+}
+h5 {
+  font-size: var(--font-h5);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+small {
+  font-size: var(--font-sm);
 }

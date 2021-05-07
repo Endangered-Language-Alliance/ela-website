@@ -6,8 +6,8 @@ import { createMarkup } from '../../lib/utils'
 import { getAllPosts } from '../../lib/api'
 import styles from '../../styles/Home.module.css'
 import blogStyles from '../../styles/Blog.module.css'
-
 import { Post } from '../../wp-graphql'
+import { Layout } from '../../components/Layout'
 
 type BlogProps = { posts: Post[] }
 
@@ -21,7 +21,7 @@ const Latest: React.FC<BlogProps> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <Layout>
         <h1 className={styles.title}>Latest updates</h1>
         <hr />
         <section>
@@ -46,7 +46,7 @@ const Latest: React.FC<BlogProps> = (props) => {
             )
           })}
         </section>
-      </main>
+      </Layout>
     </div>
   )
 }

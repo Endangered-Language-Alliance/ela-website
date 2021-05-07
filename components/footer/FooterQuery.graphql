@@ -19,7 +19,6 @@ query FooterQuery {
       siteWideSettings {
         newsletter
         logo {
-          altText
           sourceUrl
         }
         social {
