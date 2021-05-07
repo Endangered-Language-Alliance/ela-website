@@ -2002,7 +2002,7 @@ export type LangLocation = Node &
     id: Scalars['ID']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
-    /** Added to the GraphQL Schema because the ACF Field Group &quot;Location Info&quot; was set to Show in GraphQL. */
+    /** Lat, lon, city, etc. (used by language/s) | Added to the GraphQL Schema because the ACF Field Group &quot;Location Info&quot; was set to Show in GraphQL. */
     languageLocation?: Maybe<LangLocation_Languagelocation>
     /** Connection between the LangLocation type and the Language type */
     languages?: Maybe<LangLocationToLanguageConnection>
@@ -3995,7 +3995,7 @@ export type PageToRevisionConnectionWhereArgs = {
 export type Page_Homepagesettings = AcfFieldGroup & {
   __typename?: 'Page_Homepagesettings'
   /**
-   * Pretty much used same format as old site with some other additions.
+   * Pretty much used same format as old site with some other additions. Decent chance this code will never change, but here are some tips:
    *
    * 1. Can use this page to generate it: https://developers.facebook.com/docs/plugins/page-plugin/
    * 2. Paste in the path to your FB profile
@@ -4003,42 +4003,24 @@ export type Page_Homepagesettings = AcfFieldGroup & {
    * 4. remove the &quot;appId&amp;########&quot; portion of the code, e.g. &amp;appId=1156079591084825 (including the ampersand)
    */
   fbFeedIframeHtml?: Maybe<Scalars['String']>
-  /** Was calling this &quot;Featured Image&quot; but it&#039;s realistically going to be a more complex component like a card. Once we get this dialed in, I&#039;ll duplicate it and add another &quot;Featured&quot;. Can we simply use a Link and have it pull all the info (excerpt, feat image, title) from the internal page it points to? */
   featured1?: Maybe<Page_Homepagesettings_Featured1>
-  /** Was calling this &quot;Featured Image&quot; but it&#039;s realistically going to be a more complex component like a card. */
-  featured2?: Maybe<Page_Homepagesettings_Featured2>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
-  /** You can technically use a playlist for this one, but just note that it&#039;s not going to be fancy/tiled via API like the other pages. We&#039;re going for &quot;Big Home Interesting ELA-reppin&#039; Video&quot; */
+  numRecentPosts?: Maybe<Scalars['Float']>
+  /** Be sure to use the EMBED url, e.g. &quot;https://www.youtube.com/embed/eiW59UUivc0&quot; sans quotes. You can technically use a playlist for this one, but just note that it&#039;s not going to be fancy/tiled via API like the other pages. We&#039;re going for &quot;Big Home Interesting ELA-reppin&#039; Video&quot;. */
   youTubeUrl?: Maybe<Scalars['String']>
 }
 
 /** Field Group */
 export type Page_Homepagesettings_Featured1 = AcfFieldGroup & {
   __typename?: 'Page_Homepagesettings_Featured1'
-  btnText?: Maybe<Scalars['String']>
+  description?: Maybe<Scalars['String']>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
   heading?: Maybe<Scalars['String']>
   img?: Maybe<MediaItem>
-  /** Might be confusing/tricky since some of the URLs (e.g. /languages/africa/something) do not really exist. Really just depends on what we&#039;re intending to link to here, and if it&#039;s an external URL then that&#039;s a different story altogether. Perfect setup would simply be entering a relative path manually and not have any typos */
   link?: Maybe<AcfLink>
-  /** The card summary, likely to go below the heading. */
-  summary?: Maybe<Scalars['String']>
-}
-
-/** Field Group */
-export type Page_Homepagesettings_Featured2 = AcfFieldGroup & {
-  __typename?: 'Page_Homepagesettings_Featured2'
-  btnText?: Maybe<Scalars['String']>
-  /** The name of the ACF Field Group */
-  fieldGroupName?: Maybe<Scalars['String']>
-  heading?: Maybe<Scalars['String']>
-  img?: Maybe<MediaItem>
-  /** Might be confusing/tricky since some of the URLs (e.g. /languages/africa/something) do not really exist. Really just depends on what we&#039;re intending to link to here, and if it&#039;s an external URL then that&#039;s a different story altogether. Perfect setup would simply be entering a relative path manually and not have any typos */
-  link?: Maybe<AcfLink>
-  /** The card summary, likely to go below the heading. */
-  summary?: Maybe<Scalars['String']>
+  linkType?: Maybe<Scalars['String']>
 }
 
 /** Field Group */
@@ -5264,7 +5246,7 @@ export type Project = Node &
     previewRevisionDatabaseId?: Maybe<Scalars['Int']>
     /** Whether the object is a node in the preview state */
     previewRevisionId?: Maybe<Scalars['ID']>
-    /** Added to the GraphQL Schema because the ACF Field Group &quot;Project Meta&quot; was set to Show in GraphQL. */
+    /** Project-specific information | Added to the GraphQL Schema because the ACF Field Group &quot;Project Meta&quot; was set to Show in GraphQL. */
     projectMeta?: Maybe<Project_Projectmeta>
     /** If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node. */
     revisionOf?: Maybe<NodeWithRevisionsToContentNodeConnectionEdge>

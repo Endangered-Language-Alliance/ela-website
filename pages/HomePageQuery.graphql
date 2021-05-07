@@ -1,0 +1,38 @@
+query HomePageQuery {
+  meat: nodeByUri(uri: "/") {
+    ... on Page {
+      content
+      homePageSettings {
+        fbFeedIframeHtml
+        featured1 {
+          description
+          heading
+          img {
+            altText
+            sourceUrl
+          }
+          linkType
+          link {
+            url
+          }
+        }
+        numRecentPosts
+        youTubeUrl
+      }
+    }
+  }
+  posts(first: 5, where: { orderby: { field: DATE, order: DESC } }) {
+    edges {
+      node {
+        title
+        slug
+        excerpt
+        featuredImage {
+          node {
+            id
+          }
+        }
+      }
+    }
+  }
+}

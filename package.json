@@ -8,7 +8,7 @@
     "start": "next start",
     "reminder": "echo 'REMEMBER TO DISABLE INTROSPECTION!'",
     "create-wp-gql": "node gql-ts/get-wp-gql-schema.mjs",
-    "create-wp-gql-ts": "npm run reminder && npm run create-wp-gql && npm run create-wp-ts && npm run lint-wp-ts",
+    "create-wp-gql-ts": "npm run reminder && npm run create-wp-gql && npm run create-wp-ts",
     "create-wp-ts": "graphql-codegen --config gql-ts/codegen.yml && npm run lint-wp-ts",
     "lint-wp-ts": "eslint --fix wp-graphql.ts",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
