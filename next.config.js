@@ -2,6 +2,7 @@ module.exports = {
   images: {
     domains: ['content.endangeredlanguagealliance.org', 'ealliance.org'],
   },
+  target: 'serverless', // Netlify plugin might handle it, but had problems
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
