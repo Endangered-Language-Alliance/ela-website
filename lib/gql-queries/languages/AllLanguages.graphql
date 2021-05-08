@@ -1,0 +1,25 @@
+query AllLanguages {
+  languages {
+    edges {
+      node {
+        title
+        excerpt
+        slug
+        langLocations {
+          edges {
+            node {
+              name
+              languageLocation {
+                city
+                country
+                continent
+                lat
+                lon
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

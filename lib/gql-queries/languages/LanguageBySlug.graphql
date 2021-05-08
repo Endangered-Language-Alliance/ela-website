@@ -1,0 +1,19 @@
+query LanguageBySlug($id: ID!, $idType: LanguageIdType!) {
+  language(id: $id, idType: $idType) {
+    ...LanguageFields
+  }
+}
+
+fragment LanguageFields on Language {
+  title
+  excerpt
+  slug
+  uri
+  date
+  featuredImage {
+    node {
+      sourceUrl
+      altText
+    }
+  }
+}

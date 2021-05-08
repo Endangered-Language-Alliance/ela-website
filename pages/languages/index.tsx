@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
@@ -11,7 +10,7 @@ type LanguagesProps = {
   data: { node: Language }[]
 }
 
-const Languages: FC<LanguagesProps> = (props) => {
+const Languages: React.FC<LanguagesProps> = (props) => {
   const { data = [] } = props
 
   return (
@@ -27,7 +26,7 @@ const Languages: FC<LanguagesProps> = (props) => {
         <section>
           {data?.map((ugh) => {
             const { node } = ugh
-            const { slug, title, excerpt } = node
+            const { slug, title, excerpt, langLocations } = node
 
             return (
               <article key={slug}>
@@ -36,6 +35,7 @@ const Languages: FC<LanguagesProps> = (props) => {
                     <a>{title}</a>
                   </Link>
                 </h2>
+                <pre>{JSON.stringify(langLocations?.edges, null, 2)}</pre>
                 <p dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
               </article>
             )

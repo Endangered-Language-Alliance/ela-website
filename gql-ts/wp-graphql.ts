@@ -4014,6 +4014,7 @@ export type Page_Homepagesettings = AcfFieldGroup & {
 /** Field Group */
 export type Page_Homepagesettings_Featured1 = AcfFieldGroup & {
   __typename?: 'Page_Homepagesettings_Featured1'
+  /** The body/summary text. */
   description?: Maybe<Scalars['String']>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
