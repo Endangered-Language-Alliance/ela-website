@@ -1,0 +1,44 @@
+query FooterQuery {
+  # TODO: `FOOTER` is kinda fragile if theme-dependent. Is there another way?
+  menuItems(where: { location: FOOTER, parentId: "" }) {
+    nodes {
+      ...MenuBits
+      childItems {
+        nodes {
+          ...MenuBits
+        }
+      }
+    }
+  }
+  generalSettings {
+    title
+  }
+  nodeByUri(uri: "/") {
+    ... on Page {
+      title
+      siteWideSettings {
+        newsletter
+        logo {
+          sourceUrl
+        }
+        social {
+          archiveOrg
+          facebook
+          instagram
+          youTube
+        }
+        contactInfo {
+          address
+          email
+          phone
+        }
+      }
+    }
+  }
+}
+
+fragment MenuBits on MenuItem {
+  label
+  path
+  parentId
+}

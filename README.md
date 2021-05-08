@@ -1,43 +1,41 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Usage
 
-First, run the development server:
+### Development
+
+1. Run the development server: `yarn dev`
+2. Open [http://localhost:3000](http://localhost:3000) with your browser to see
+   the result.
+3. You can start editing the page by modifying `pages/index.js`. The page
+   auto-updates as you edit the file.
+4. [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed
+   on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This
+   endpoint can be edited in `pages/api/hello.js`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are
+treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead
+of React pages.
+
+### Generate TS from WP GQL
+
+[Yusssss GraphQL/WP/TS Codegen magic](https://dev.to/shnydercom/the-headless-seo-middleman-or-wordpress-graphql-schema-org-and-typescript-combined-16gj)
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm run create-wp-gql-ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
+### Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Notes
+## Setup Notes
 
 ### Content site
 
-https://content.endangeredlanguagealliance.org/
+[https://content.endangeredlanguagealliance.org/](https://content.endangeredlanguagealliance.org/)
 
 ### HTTPS
 
@@ -45,21 +43,21 @@ Followed [this](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-l
 
 Not sure if it was needed, probably not since never had to change GoDaddy nameservers, but did add [a DNS zone](https://lightsail.aws.amazon.com/ls/webapp/domains/content-endangeredlanguagealliance-org) in LightSail:
 
-ns-2029.awsdns-61.co.uk
-ns-557.awsdns-05.net
-ns-155.awsdns-19.com
-ns-1362.awsdns-42.org
+- `ns-2029.awsdns-61.co.uk`
+- `ns-557.awsdns-05.net`
+- `ns-155.awsdns-19.com`
+- `ns-1362.awsdns-42.org`
 
 GoDaddy's nameservers for endangeredlanguagealliance.org:
 
-ns07.domaincontrol.com
-ns08.domaincontrol.com
+- `ns07.domaincontrol.com`
+- `ns08.domaincontrol.com`
 
 Backup files from `bncert` output:
 
-- /opt/bitnami/apache2/conf/httpd.conf.back.202104292004
-- /opt/bitnami/apache2/conf/bitnami/bitnami-apps-prefix.conf.back.202104292004
-- /opt/bitnami/apache2/conf/bitnami/bitnami.conf.back.202104292004
+- _/opt/bitnami/apache2/conf/httpd.conf.back.202104292004_
+- _/opt/bitnami/apache2/conf/bitnami/bitnami-apps-prefix.conf.back.202104292004_
+- _/opt/bitnami/apache2/conf/bitnami/bitnami.conf.back.202104292004_
 
 **bncert makes automatic renewals 👏**
 
@@ -80,6 +78,8 @@ Client ID (from Gmail API): `256431451400-0jdqi29q1es4d7lelci9r8hdm8qn2o99.apps.
 Client secret: `ZSiwBfchD-XSBRDGTeAZDFJx`
 
 ## TODOs (rm later)
+
+Larger restructurings:
 
 ```
 > Products (formerly Store)

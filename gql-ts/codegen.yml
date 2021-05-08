@@ -1,0 +1,14 @@
+overwrite: true
+schema: "./gql-ts/wpgraphql-schema.gql"
+documents: "gql-ts/fragments/**/*.graphql"
+generates:
+  wp-graphql.ts:
+    plugins:
+      - add:
+          content:
+            - "// THIS FILE IS GENERATED, DO NOT EDIT!"
+            - "//"
+            - "// Allow Screaming_Snake_Case instead of PascalCase:"
+            - "/* eslint-disable @typescript-eslint/naming-convention */"
+      - "typescript"
+      - "typescript-operations"
