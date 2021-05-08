@@ -1,0 +1,19 @@
+query PostBySlug($id: ID!, $idType: PostIdType!) {
+  post(id: $id, idType: $idType) {
+    ...PostFields
+    content
+  }
+}
+
+fragment PostFields on Post {
+  title
+  excerpt
+  slug
+  uri
+  date
+  featuredImage {
+    node {
+      sourceUrl
+    }
+  }
+}

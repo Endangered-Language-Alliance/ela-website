@@ -1,7 +1,9 @@
 import Head from 'next/head'
-import Link from 'next/link'
+import { GetStaticProps } from 'next'
 
-import { getAllPostsWithSlug, getPost } from '../../lib/api'
+import { getAllPostsWithSlug, getPost } from './api'
+import { Layout } from '../../components/Layout'
+
 import styles from '../../styles/Home.module.css'
 import blogStyles from '../../styles/Blog.module.css'
 
@@ -25,7 +27,7 @@ export default function Post({ postData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <Layout>
         <article className={blogStyles.article}>
           <div className={blogStyles.postmeta}>
             <h1 className={styles.title}>{postData.title}</h1>
@@ -36,12 +38,7 @@ export default function Post({ postData }) {
             dangerouslySetInnerHTML={{ __html: postData.content }}
           />
         </article>
-        <p>
-          <Link href="/latest">
-            <a>back to articles</a>
-          </Link>
-        </p>
-      </main>
+      </Layout>
     </div>
   )
 }
@@ -51,12 +48,13 @@ export async function getStaticPaths() {
 
   return {
     paths: allPosts.edges.map(({ node }) => `/latest/${node.slug}`) || [],
-    fallback: false,
+    fallback: true,
   }
 }
 
-export async function getStaticProps({ params }) {
-  const data = await getPost(params.slug)
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slug } = params
+  const data = await getPost(slug)
 
   return {
     props: {

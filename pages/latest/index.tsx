@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
 import { createMarkup } from '../../lib/utils'
-import { getAllPosts } from '../../lib/api'
+import { getAllPosts } from './api'
 import styles from '../../styles/Home.module.css'
 import blogStyles from '../../styles/Blog.module.css'
 import { Post } from '../../wp-graphql'
@@ -25,12 +25,12 @@ const Latest: React.FC<BlogProps> = (props) => {
         <h1 className={styles.title}>Latest updates</h1>
         <hr />
         <section>
-          {posts.map(({ id, title, slug, date, excerpt }) => {
+          {posts.map(({ title, date, excerpt, uri }) => {
             return (
-              <div className={blogStyles.listitem} key={id}>
+              <div className={blogStyles.listitem} key={uri}>
                 <div className={blogStyles.listitem__content}>
                   <h2>
-                    <Link href={`/latest/${slug}`}>
+                    <Link href={uri || ''}>
                       <a>{title}</a>
                     </Link>
                   </h2>

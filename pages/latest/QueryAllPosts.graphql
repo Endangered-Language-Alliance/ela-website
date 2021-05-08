@@ -1,0 +1,11 @@
+query AllPosts {
+  posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
+    nodes {
+      date
+      title
+      excerpt
+      link
+      uri
+    }
+  }
+}
