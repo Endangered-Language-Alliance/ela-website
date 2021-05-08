@@ -1,10 +1,10 @@
 import { request } from 'graphql-request'
 
-import allPosts from './gql/QueryAllPosts.graphql'
-import postBySlug from './gql/QueryGetPost.graphql'
-import allPostsWithSlug from './gql/QueryAllPostsWithSlug.graphql'
+import { Post, RootQuery, RootQueryToPostConnection } from 'gql-ts/wp-graphql'
 
-import { Post, RootQuery, RootQueryToPostConnection } from '../../wp-graphql'
+import allPosts from './gql/blog/QueryAllPosts.graphql'
+import postBySlug from './gql/blog/QueryGetPost.graphql'
+import allPostsWithSlug from './gql/blog/QueryAllPostsWithSlug.graphql'
 
 const API_URL = process.env.WP_API_URL as string
 

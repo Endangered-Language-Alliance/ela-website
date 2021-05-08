@@ -3,11 +3,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { Layout } from '../components/Layout'
-import { getHomePageContent } from '../lib/api'
-import { createMarkup } from '../lib/utils'
-import { Page, Post } from '../wp-graphql'
-import { CONTENT_URL, PROD_URL } from '../shared/config'
+import { Layout } from 'components/Layout'
+import { getHomePageContent } from 'lib/api/api.home'
+import { createMarkup } from 'lib/utils'
+import { CONTENT_URL, PROD_URL } from 'lib/config'
+import { Page, Post } from 'gql-ts/wp-graphql'
 
 export type HomeProps = {
   data: { meat: Page; posts: { edges: { node: Post }[] } }

@@ -1,7 +1,7 @@
 import { request } from 'graphql-request'
 
-import homePageQuery from '../pages/HomePageQuery.graphql'
-import { Page, Post } from '../wp-graphql'
+import { Page, Post } from 'gql-ts/wp-graphql'
+import homePageQuery from '../../pages/HomePageQuery.graphql'
 
 const API_URL = process.env.WP_API_URL as string
 

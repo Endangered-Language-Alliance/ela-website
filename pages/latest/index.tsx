@@ -2,12 +2,13 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
-import { createMarkup } from '../../lib/utils'
-import { getAllPosts } from '../../lib/api/api.latest'
-import styles from '../../styles/Home.module.css'
-import blogStyles from '../../styles/Blog.module.css'
-import { Post } from '../../wp-graphql'
-import { Layout } from '../../components/Layout'
+import { createMarkup } from 'lib/utils'
+import { getAllPosts } from 'lib/api/api.latest'
+import { Layout } from 'components/Layout'
+import { Post } from 'gql-ts/wp-graphql'
+
+import styles from 'styles/Home.module.css'
+import blogStyles from 'styles/Blog.module.css'
 
 type BlogProps = { posts: Post[] }
 
@@ -17,7 +18,7 @@ const Latest: React.FC<BlogProps> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Latest articles page</title>
+        <title>Latest articles</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

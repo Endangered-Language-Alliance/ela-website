@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 
-import { getAllPostsWithSlug, getPost } from '../../lib/api/api.latest'
-import { Layout } from '../../components/Layout'
-import { Post } from '../../wp-graphql'
+import { getAllPostsWithSlug, getPost } from 'lib/api/api.latest'
+import { Layout } from 'components/Layout'
+import { Post } from 'gql-ts/wp-graphql'
 
-import styles from '../../styles/Home.module.css'
-import blogStyles from '../../styles/Blog.module.css'
+import styles from 'styles/Home.module.css'
+import blogStyles from 'styles/Blog.module.css'
 
 const formatDate = (date: string): string => {
   const newDate = new Date(date)

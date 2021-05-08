@@ -1,4 +1,4 @@
-import { MenuItem } from '../../wp-graphql'
+import { MenuItem } from 'gql-ts/wp-graphql'
 
 export type HeaderResponse = {
   menuItems: {
