@@ -21,43 +21,47 @@ const Header: React.FC = () => {
   const { menuItems } = data || {}
 
   return (
-    <nav className={styles.header}>
-      <ul className={sharedStyles.container}>
-        {menuItems?.nodes?.map((node) => {
-          const { label, path, childItems, parentId } = node || {}
+    <nav className={styles.root}>
+      <div className={`${sharedStyles.container} ${styles.inner}`}>
+        <ul>
+          {menuItems?.nodes?.map((node) => {
+            const { label, path, childItems, parentId } = node || {}
+            if (!parentId && !childItems?.nodes?.length) {
+              return (
+                <li key={path}>
+                  <Link href={path || ''}>
+                    <a>{label}</a>
+                  </Link>
+                </li>
+              )
+            }
 
-          if (!parentId && !childItems?.nodes?.length) {
             return (
               <li key={path}>
-                <Link href={path || ''}>
-                  <a>{label}</a>
-                </Link>
+                <Menu>
+                  <MenuButton>{label}</MenuButton>
+                  <MenuList>
+                    {childItems?.nodes?.map((item) => {
+                      return (
+                        <MenuLink
+                          key={item?.path}
+                          as={Link}
+                          href={item?.path || ''}
+                        >
+                          {item?.label}
+                        </MenuLink>
+                      )
+                    })}
+                  </MenuList>
+                </Menu>
               </li>
             )
-          }
-
-          return (
-            <li key={path}>
-              <Menu>
-                <MenuButton>{label}</MenuButton>
-                <MenuList>
-                  {childItems?.nodes?.map((item) => {
-                    return (
-                      <MenuLink
-                        key={item?.path}
-                        as={Link}
-                        href={item?.path || ''}
-                      >
-                        {item?.label}
-                      </MenuLink>
-                    )
-                  })}
-                </MenuList>
-              </Menu>
-            </li>
-          )
-        })}
-      </ul>
+          })}
+        </ul>
+        <Link href="/get-involved">
+          <a className={styles.cta}>GET INVOLVED</a>
+        </Link>
+      </div>
     </nav>
   )
 }

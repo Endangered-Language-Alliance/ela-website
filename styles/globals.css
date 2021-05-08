@@ -15,10 +15,12 @@ body {
   min-height: 100vh;
   line-height: 1.75;
   --primaryColor: #503896;
+  --primaryColorLight: hsl(255, 46%, 65%);
   --secondaryColor: #ffd520;
   --white: #fff;
   --black: #000;
   --darkGray: #222;
+  --elev-1: rgba(0, 0, 0, 0.5);
   --padding: 0.75rem;
   --font-h1: 3.052rem;
   --font-h2: 2.441rem;
