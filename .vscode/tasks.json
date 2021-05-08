@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // CRED: https://stackoverflow.com/a/46469274/1048518
+    {
+      "type": "npm",
+      "script": "check-types",
+      "problemMatcher": ["$tsc"]
+    }
+  ]
+}

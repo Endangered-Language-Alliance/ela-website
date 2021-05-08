@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
 import { createMarkup } from '../../lib/utils'
-import { getAllPosts } from './api'
+import { getAllPosts } from '../../lib/api/api.latest'
 import styles from '../../styles/Home.module.css'
 import blogStyles from '../../styles/Blog.module.css'
 import { Post } from '../../wp-graphql'

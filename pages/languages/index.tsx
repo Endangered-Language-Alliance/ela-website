@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next'
 
 import { Layout } from '../../components/Layout'
 import { Language } from '../../wp-graphql'
-import { getAllLanguages } from './api'
+import { getAllLanguages } from '../../lib/api/api.languages'
 
 type LanguagesProps = {
   data: { node: Language }[]
