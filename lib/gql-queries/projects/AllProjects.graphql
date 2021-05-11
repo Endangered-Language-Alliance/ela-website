@@ -1,0 +1,17 @@
+query AllProjects {
+  projects {
+    edges {
+      node {
+        title
+        excerpt
+        uri
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
+    }
+  }
+}

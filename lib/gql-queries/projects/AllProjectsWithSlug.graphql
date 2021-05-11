@@ -1,0 +1,9 @@
+query AllProjectsWithSlug {
+  projects(first: 10000) {
+    edges {
+      node {
+        uri
+      }
+    }
+  }
+}
