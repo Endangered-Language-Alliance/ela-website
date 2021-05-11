@@ -7,13 +7,43 @@ query LanguageBySlug($id: ID!, $idType: LanguageIdType!) {
 fragment LanguageFields on Language {
   title
   excerpt
-  slug
   uri
-  date
+  youTubePlaylist {
+    id
+  }
   featuredImage {
     node {
       sourceUrl
       altText
     }
+  }
+  customInfo {
+    endonym
+    project {
+      ... on Project {
+        title
+        uri
+      }
+    }
+    external {
+      archiveOrgLink
+      archiveOrgPlaylistId
+      gDriveDocId
+      glottolog
+      nycLangMap
+    }
+    # Background group
+    background
+    affiliation
+    endangerment
+    # Language Structure
+    langStructure
+    # Academic Work
+    academicWork
+    # Somethin' Workness
+    elaWork
+    inNewYork
+    # Catch-all dumping ground
+    addlInfo
   }
 }

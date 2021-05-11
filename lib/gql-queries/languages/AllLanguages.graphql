@@ -4,7 +4,13 @@ query AllLanguages {
       node {
         title
         excerpt
-        slug
+        uri
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
         langLocations {
           edges {
             node {

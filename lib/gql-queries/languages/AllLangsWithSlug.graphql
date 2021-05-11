@@ -2,7 +2,6 @@ query AllLangsWithSlug {
   languages(first: 10000) {
     edges {
       node {
-        slug
         uri
       }
     }

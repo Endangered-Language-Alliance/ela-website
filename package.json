@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@reach/menu-button": "^0.15.1",
+    "@reach/tabs": "^0.15.0",
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.3",

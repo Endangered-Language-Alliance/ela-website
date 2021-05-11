@@ -77,6 +77,10 @@ Client ID (from Gmail API): `256431451400-0jdqi29q1es4d7lelci9r8hdm8qn2o99.apps.
 
 Client secret: `ZSiwBfchD-XSBRDGTeAZDFJx`
 
+## Tuts to Consider
+
+[https://codepen.io/the_ruther4d/post/custom-query-string-vars-in-wordpress](https://codepen.io/the_ruther4d/post/custom-query-string-vars-in-wordpress)
+
 ## TODOs (rm later)
 
 Larger restructurings:
