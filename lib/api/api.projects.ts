@@ -7,6 +7,7 @@ import {
   Project,
   RootQuery,
   RootQueryToProjectConnection,
+  RootQueryToLanguageConnection,
 } from 'gql-ts/wp-graphql'
 
 const API_URL = process.env.WP_API_URL as string
@@ -17,13 +18,15 @@ export async function getAllProjects() {
   return data?.projects.edges
 }
 
-export const getProject = async (slug: string | string[]): Promise<Project> => {
+export const getProject = async (
+  slug: string | string[]
+): Promise<{ project: Project; languages: RootQueryToLanguageConnection }> => {
   const data = await request(API_URL, projectBySlug, {
     id: slug,
     idType: 'SLUG',
   })
 
-  return data?.project
+  return data
 }
 
 export const getAllProjectsWithSlug = async (): Promise<RootQueryToProjectConnection | null> => {

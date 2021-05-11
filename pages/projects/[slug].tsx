@@ -3,17 +3,20 @@ import Head from 'next/head'
 
 import { getAllProjectsWithSlug, getProject } from 'lib/api/api.projects'
 import { Layout } from 'components/Layout'
-import { Project } from 'gql-ts/wp-graphql'
+import { Project, RootQueryToLanguageConnection } from 'gql-ts/wp-graphql'
 
 import styles from 'styles/Home.module.css'
 import blogStyles from 'styles/Blog.module.css'
 
-const ProjectInstance: React.FC<{ projectData?: Project }> = (props) => {
-  const { projectData } = props
+const ProjectInstance: React.FC<{
+  projectData?: Project
+  langData?: RootQueryToLanguageConnection
+}> = (props) => {
+  const { projectData, langData } = props
 
   if (!projectData) <p>No data could be found for the project...</p>
 
-  const { title, content, excerpt } = projectData || {}
+  const { title, content, excerpt, uri } = projectData || {}
 
   return (
     <div className={styles.container}>
@@ -21,7 +24,6 @@ const ProjectInstance: React.FC<{ projectData?: Project }> = (props) => {
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Layout>
         <article className={blogStyles.article}>
           <div className={blogStyles.postmeta}>
@@ -32,6 +34,15 @@ const ProjectInstance: React.FC<{ projectData?: Project }> = (props) => {
               className="post-content content"
               dangerouslySetInnerHTML={{ __html: excerpt || '' }}
             />
+          )}
+          {langData?.nodes && (
+            <ul>
+              {langData?.nodes
+                ?.filter((lang) => lang?.customInfo?.project?.uri === uri)
+                .map((lang) => (
+                  <li key={lang?.title}>{lang?.title}</li>
+                ))}
+            </ul>
           )}
           <div
             className="post-content content"
@@ -62,7 +73,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      projectData: data,
+      projectData: data?.project,
+      langData: data?.languages,
     },
   }
 }

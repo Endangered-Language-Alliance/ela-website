@@ -2,6 +2,19 @@ query ProjectBySlug($id: ID!, $idType: ProjectIdType!) {
   project(id: $id, idType: $idType) {
     ...ProjectFields
   }
+  languages {
+    nodes {
+      title
+      slug
+      customInfo {
+        project {
+          ... on Project {
+            uri
+          }
+        }
+      }
+    }
+  }
 }
 
 fragment ProjectFields on Project {
