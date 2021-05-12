@@ -23,6 +23,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
 
       <Layout>
         <h1>Languages</h1>
+        <p>Pretend it's a map...</p>
         <hr />
         <section
           style={{
@@ -67,7 +68,10 @@ const Languages: React.FC<LanguagesProps> = (props) => {
                       <ul>
                         {langLocations.edges.map((loc) => {
                           return (
-                            <li key={loc?.node?.name}>
+                            <li
+                              key={loc?.node?.name}
+                              style={{ color: 'black' }}
+                            >
                               {loc?.node?.languageLocation?.city},{' '}
                               {loc?.node?.languageLocation?.country}
                             </li>
@@ -75,7 +79,10 @@ const Languages: React.FC<LanguagesProps> = (props) => {
                         })}
                       </ul>
                     )}
-                    <p dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
+                    <p
+                      style={{ color: 'black' }}
+                      dangerouslySetInnerHTML={{ __html: excerpt || '' }}
+                    />
                   </article>
                 </a>
               </Link>

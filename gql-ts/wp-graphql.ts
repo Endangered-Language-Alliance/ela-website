@@ -2696,11 +2696,11 @@ export type LanguageToTermNodeConnectionWhereArgs = {
 /** Field Group */
 export type Language_Custominfo = AcfFieldGroup & {
   __typename?: 'Language_Custominfo'
-  academicWork?: Maybe<Scalars['String']>
   /** Catch-all for anything extra and non-standardized, e.g. Garifuna nursery rhymes */
   addlInfo?: Maybe<Scalars['String']>
   affiliation?: Maybe<Scalars['String']>
   background?: Maybe<Scalars['String']>
+  /** This content will be shown as a heading-less intro (same concept as Background) and will include a section called Texts if there is a Drive URL. */
   elaWork?: Maybe<Scalars['String']>
   endangerment?: Maybe<Scalars['String']>
   endonym?: Maybe<Scalars['String']>
@@ -2710,6 +2710,8 @@ export type Language_Custominfo = AcfFieldGroup & {
   /** NYC-specific info */
   inNewYork?: Maybe<Scalars['String']>
   langStructure?: Maybe<Scalars['String']>
+  /** An outbound link will be featured above the content to Glottolog page if there is one. */
+  prevResearch?: Maybe<Scalars['String']>
   /** Select an associated project if relevant */
   project?: Maybe<Language_Custominfo_Project>
 }
@@ -2718,12 +2720,11 @@ export type Language_Custominfo = AcfFieldGroup & {
 export type Language_Custominfo_External = AcfFieldGroup & {
   __typename?: 'Language_Custominfo_External'
   archiveOrgLink?: Maybe<Scalars['String']>
-  archiveOrgPlaylistId?: Maybe<Scalars['String']>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
   /** e.g. &quot;1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v&quot; sans quotes for file https://drive.google.com/file/d/1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v */
   gDriveDocId?: Maybe<Scalars['String']>
-  glottolog?: Maybe<Scalars['String']>
+  glottologId?: Maybe<Scalars['String']>
   nycLangMap?: Maybe<Scalars['String']>
 }
 

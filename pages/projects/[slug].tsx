@@ -1,22 +1,25 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 
 import { getAllProjectsWithSlug, getProject } from 'lib/api/api.projects'
 import { Layout } from 'components/Layout'
-import { Project, RootQueryToLanguageConnection } from 'gql-ts/wp-graphql'
+import { Project, Language } from 'gql-ts/wp-graphql'
 
 import styles from 'styles/Home.module.css'
 import blogStyles from 'styles/Blog.module.css'
 
-const ProjectInstance: React.FC<{
-  projectData?: Project
-  langData?: RootQueryToLanguageConnection
-}> = (props) => {
-  const { projectData, langData } = props
+type ProjectInstanceProps = {
+  project?: Project
+  languages?: Language[]
+}
 
-  if (!projectData) <p>No data could be found for the project...</p>
+const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
+  const { project, languages } = props
 
-  const { title, content, excerpt, uri } = projectData || {}
+  if (!project) <p>No data could be found for the project...</p>
+
+  const { title, content, uri } = project || {}
 
   return (
     <div className={styles.container}>
@@ -29,25 +32,32 @@ const ProjectInstance: React.FC<{
           <div className={blogStyles.postmeta}>
             <h1 className={styles.title}>{title}</h1>
           </div>
-          {excerpt && (
-            <div
-              className="post-content content"
-              dangerouslySetInnerHTML={{ __html: excerpt || '' }}
-            />
+          {languages && (
+            <>
+              <h2>Languages in this project</h2>
+              <p>Pretend it's a map...</p>
+              <ul>
+                {languages
+                  .filter((lang) => lang?.customInfo?.project?.uri === uri)
+                  .map((lang) => (
+                    <li key={lang?.title}>
+                      <Link href={lang?.uri || ''}>
+                        <a>{lang?.title}</a>
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </>
           )}
-          {langData?.nodes && (
-            <ul>
-              {langData?.nodes
-                ?.filter((lang) => lang?.customInfo?.project?.uri === uri)
-                .map((lang) => (
-                  <li key={lang?.title}>{lang?.title}</li>
-                ))}
-            </ul>
+          {content && (
+            <>
+              <h2>And then our old friend, the content</h2>
+              <div
+                className="post-content content"
+                dangerouslySetInnerHTML={{ __html: content || '' }}
+              />
+            </>
           )}
-          <div
-            className="post-content content"
-            dangerouslySetInnerHTML={{ __html: content || '' }}
-          />
         </article>
       </Layout>
     </div>
@@ -73,8 +83,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      projectData: data?.project,
-      langData: data?.languages,
+      project: data?.project,
+      languages: data?.languages?.nodes,
     },
   }
 }

@@ -15,7 +15,7 @@ const API_URL = process.env.WP_API_URL as string
 export async function getAllProjects() {
   const data = await request(API_URL, allProjects)
 
-  return data?.projects.edges
+  return data
 }
 
 export const getProject = async (

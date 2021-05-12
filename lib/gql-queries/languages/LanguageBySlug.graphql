@@ -11,12 +11,6 @@ fragment LanguageFields on Language {
   youTubePlaylist {
     id
   }
-  featuredImage {
-    node {
-      sourceUrl
-      altText
-    }
-  }
   customInfo {
     endonym
     project {
@@ -27,9 +21,8 @@ fragment LanguageFields on Language {
     }
     external {
       archiveOrgLink
-      archiveOrgPlaylistId
       gDriveDocId
-      glottolog
+      glottologId
       nycLangMap
     }
     # Background group
@@ -38,10 +31,11 @@ fragment LanguageFields on Language {
     endangerment
     # Language Structure
     langStructure
-    # Academic Work
-    academicWork
-    # Somethin' Workness
+    # Previous Research (inc. Glottolog)
+    prevResearch
+    # ELA's Work (inc. Texts, aka Drive embed)
     elaWork
+    # In New York
     inNewYork
     # Catch-all dumping ground
     addlInfo

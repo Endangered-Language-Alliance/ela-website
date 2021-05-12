@@ -6,6 +6,7 @@ query ProjectBySlug($id: ID!, $idType: ProjectIdType!) {
     nodes {
       title
       slug
+      uri
       customInfo {
         project {
           ... on Project {
@@ -19,8 +20,8 @@ query ProjectBySlug($id: ID!, $idType: ProjectIdType!) {
 
 fragment ProjectFields on Project {
   title
-  excerpt
   uri
+  content
   youTubePlaylist {
     id
   }

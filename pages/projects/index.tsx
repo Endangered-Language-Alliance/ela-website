@@ -4,15 +4,16 @@ import { GetStaticProps } from 'next'
 
 import { Layout } from 'components/Layout'
 import { getAllProjects } from 'lib/api/api.projects'
-import { Project } from 'gql-ts/wp-graphql'
+import { Project, Language } from 'gql-ts/wp-graphql'
 import Image from 'next/image'
 
 type ProjectsProps = {
-  data: { node: Project }[]
+  projects?: Project[]
+  languages?: Language[]
 }
 
 const Projects: React.FC<ProjectsProps> = (props) => {
-  const { data = [] } = props
+  const { projects, languages } = props
 
   return (
     <div>
@@ -23,6 +24,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
 
       <Layout>
         <h1>Projects</h1>
+        <p>Pretend it's a map...</p>
         <hr />
         <section
           style={{
@@ -31,42 +33,58 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             gridGap: 'calc(var(--padding) * 2)',
           }}
         >
-          {data?.map(({ node }) => {
+          {projects?.map((node) => {
             const { uri, title, excerpt, featuredImage } = node
 
             return (
-              <Link key={uri} href={uri || ''}>
-                <a href="">
-                  <article
-                    style={{
-                      border: 'solid 1px var(--lightGray)',
-                      borderRadius: 'var(--borderRad-1)',
-                      padding: 'var(--padding)',
-                      boxShadow: 'var(--elev-1)',
-                    }}
-                  >
-                    <h2>{title}</h2>
-                    {featuredImage?.node?.sourceUrl && (
-                      <div
-                        style={{
-                          position: 'relative',
-                          width: 150,
-                          height: 150,
-                          borderRadius: 'var(--borderRad-1)',
-                        }}
-                      >
-                        <Image
-                          src={featuredImage?.node.sourceUrl || ''}
-                          alt={featuredImage?.node?.altText || ''}
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      </div>
-                    )}
-                    <p dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
-                  </article>
-                </a>
-              </Link>
+              <article
+                key={uri}
+                style={{
+                  border: 'solid 1px var(--lightGray)',
+                  borderRadius: 'var(--borderRad-1)',
+                  padding: 'var(--padding)',
+                  boxShadow: 'var(--elev-1)',
+                }}
+              >
+                <Link href={uri || ''}>
+                  <h2>
+                    <a>
+                      {title}
+                      {featuredImage?.node?.sourceUrl && (
+                        <div
+                          style={{
+                            position: 'relative',
+                            width: 150,
+                            height: 150,
+                            borderRadius: 'var(--borderRad-1)',
+                          }}
+                        >
+                          <Image
+                            src={featuredImage?.node.sourceUrl || ''}
+                            alt={featuredImage?.node?.altText || ''}
+                            layout="fill"
+                            objectFit="cover"
+                          />
+                        </div>
+                      )}
+                    </a>
+                  </h2>
+                </Link>
+                <div dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
+                {languages && (
+                  <ul>
+                    {languages
+                      .filter((lang) => lang?.customInfo?.project?.uri === uri)
+                      .map((lang) => (
+                        <li key={lang?.title}>
+                          <Link href={lang?.uri || ''}>
+                            <a>{lang?.title}</a>
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                )}
+              </article>
             )
           })}
         </section>
@@ -80,5 +98,10 @@ export default Projects
 export const getStaticProps: GetStaticProps = async () => {
   const data = await getAllProjects()
 
-  return { props: { data } }
+  return {
+    props: {
+      projects: data?.projects?.nodes,
+      languages: data?.languages?.nodes,
+    },
+  }
 }
