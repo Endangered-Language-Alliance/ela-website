@@ -1,0 +1,10 @@
+query PublishedPages {
+  pages(
+    where: { orderby: { field: TITLE, order: ASC }, status: PUBLISH }
+    first: 2000
+  ) {
+    nodes {
+      uri
+    }
+  }
+}

@@ -37,5 +37,5 @@
     "*.js",
     "gql-ts/get-wp-gql-schema.mjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "backup"]
 }
