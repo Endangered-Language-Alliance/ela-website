@@ -14,6 +14,16 @@ type BlogProps = { posts: Post[] }
 
 const Latest: React.FC<BlogProps> = (props) => {
   const { posts = [] } = props
+  const currentYear = new Date().getFullYear()
+  const spanOfYears = currentYear - 2009 // 2009 = oldest post year
+
+  // TODO: into lib/utils
+  // CRED: https://stackoverflow.com/a/55776744/1048518
+  const range = (start: number, stop: number, step: number): number[] =>
+    Array.from(
+      { length: (stop - start) / step + 1 },
+      (_, i) => start + i * step
+    )
 
   return (
     <div className={styles.container}>
@@ -21,10 +31,22 @@ const Latest: React.FC<BlogProps> = (props) => {
         <title>Latest articles</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Layout>
         <h1 className={styles.title}>Latest updates</h1>
         <hr />
+        <nav>
+          <ul>
+            {range(currentYear, currentYear - spanOfYears, -1).map(
+              (postYear) => (
+                <li key={postYear}>
+                  <Link href={`/latest/${postYear}`}>
+                    <a>{postYear}</a>
+                  </Link>
+                </li>
+              )
+            )}
+          </ul>
+        </nav>
         <section>
           {posts.map(({ title, date, excerpt, uri }) => {
             return (

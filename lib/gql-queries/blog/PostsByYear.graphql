@@ -1,0 +1,18 @@
+query PostsByYear($year: Int!) {
+  posts(
+    first: 200
+    where: { dateQuery: { year: $year }, orderby: { field: DATE, order: DESC } }
+  ) {
+    nodes {
+      title
+      excerpt
+      uri
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
+    }
+  }
+}
