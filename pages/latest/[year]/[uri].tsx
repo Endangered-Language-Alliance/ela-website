@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 
-import { getAllPostsWithSlug, getPost } from '../../lib/api/api.latest'
-import { Layout } from '../../components/Layout'
-import { Post } from '../../wp-graphql'
+import { getAllPostsWithSlug, getPost } from 'lib/api/api.latest'
+import { Layout } from 'components/Layout'
+import { Post } from 'gql-ts/wp-graphql'
 
-import styles from '../../styles/Home.module.css'
-import blogStyles from '../../styles/Blog.module.css'
+import styles from 'styles/Home.module.css'
+import blogStyles from 'styles/Blog.module.css'
 
 const formatDate = (date: string): string => {
   const newDate = new Date(date)
@@ -16,7 +16,7 @@ const formatDate = (date: string): string => {
   }/${newDate.getFullYear()}`
 }
 
-const BlogPost: React.FC<{ postData?: Post }> = (props) => {
+const PostByYear: React.FC<{ postData?: Post }> = (props) => {
   const { postData } = props
 
   if (!postData) <p>No data could be found for the post...</p>
@@ -54,20 +54,21 @@ export async function getStaticPaths() {
       allPosts?.edges?.map((edge) => {
         const { node } = edge || {}
 
-        return `/latest/${node?.slug}`
+        return node?.uri
       }) || [],
     fallback: true,
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = await getPost(params?.slug || '')
+  const data = await getPost(`/latest/${params?.year}/${params?.uri}` || '')
 
   return {
     props: {
       postData: data,
+      params,
     },
   }
 }
 
-export default BlogPost
+export default PostByYear

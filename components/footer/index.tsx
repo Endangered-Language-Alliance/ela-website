@@ -1,13 +1,14 @@
+import { Fragment } from 'react'
 import Link from 'next/link'
 
-import { createMarkup } from '../../lib/utils'
+import { createMarkup } from 'lib/utils'
+import sharedStyles from 'styles/Shared.module.css'
+
 import { useFooterQuery } from './hooks'
 import { ContactInfo } from './ContactInfo'
 import { TheFinalWord } from './TheFinalWord'
 import { SocialIcons } from './SocialIcons'
-
 import styles from './Footer.module.css'
-import sharedStyles from '../../styles/Shared.module.css'
 
 export const Footer: React.FC = () => {
   const { data, error, isLoading } = useFooterQuery()
@@ -28,8 +29,8 @@ export const Footer: React.FC = () => {
         <nav>
           {nodes?.map((node) => {
             return (
-              <>
-                <h4 key={node.label}>{node.label}</h4>
+              <Fragment key={node.label}>
+                <h4>{node.label}</h4>
                 {node.childItems?.nodes?.map((childItem) => (
                   <li key={childItem?.label}>
                     <Link href={childItem?.path || ''} key={childItem?.path}>
@@ -37,7 +38,7 @@ export const Footer: React.FC = () => {
                     </Link>
                   </li>
                 ))}
-              </>
+              </Fragment>
             )
           })}
         </nav>

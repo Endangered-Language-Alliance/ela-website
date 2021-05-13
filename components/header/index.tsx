@@ -8,9 +8,9 @@ import {
 } from '@reach/menu-button'
 import '@reach/menu-button/styles.css'
 
+import sharedStyles from 'styles/Shared.module.css'
 import { useHeaderQuery } from './hooks'
 import styles from './Header.module.css'
-import sharedStyles from '../../styles/Shared.module.css'
 
 const Header: React.FC = () => {
   const { data, error, isLoading } = useHeaderQuery()

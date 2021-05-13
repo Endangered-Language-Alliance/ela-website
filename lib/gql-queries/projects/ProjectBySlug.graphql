@@ -1,0 +1,34 @@
+query ProjectBySlug($id: ID!, $idType: ProjectIdType!) {
+  project(id: $id, idType: $idType) {
+    ...ProjectFields
+  }
+  languages {
+    nodes {
+      title
+      slug
+      uri
+      customInfo {
+        project {
+          ... on Project {
+            uri
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment ProjectFields on Project {
+  title
+  uri
+  content
+  youTubePlaylist {
+    id
+  }
+  featuredImage {
+    node {
+      sourceUrl
+      altText
+    }
+  }
+}

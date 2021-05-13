@@ -1,0 +1,43 @@
+query LanguageBySlug($id: ID!, $idType: LanguageIdType!) {
+  language(id: $id, idType: $idType) {
+    ...LanguageFields
+  }
+}
+
+fragment LanguageFields on Language {
+  title
+  excerpt
+  uri
+  youTubePlaylist {
+    id
+  }
+  customInfo {
+    endonym
+    project {
+      ... on Project {
+        title
+        uri
+      }
+    }
+    external {
+      archiveOrgLink
+      gDriveDocId
+      glottologId
+      nycLangMap
+    }
+    # Background group
+    background
+    affiliation
+    endangerment
+    # Language Structure
+    langStructure
+    # Previous Research (inc. Glottolog)
+    prevResearch
+    # ELA's Work (inc. Texts, aka Drive embed)
+    elaWork
+    # In New York
+    inNewYork
+    # Catch-all dumping ground
+    addlInfo
+  }
+}

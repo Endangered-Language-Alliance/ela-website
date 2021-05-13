@@ -10,7 +10,7 @@
     "create-wp-gql": "node gql-ts/get-wp-gql-schema.mjs",
     "create-wp-ts": "graphql-codegen --config gql-ts/codegen.yml && npm run lint-wp-ts",
     "dev": "next dev",
-    "lint-wp-ts": "eslint --fix wp-graphql.ts",
+    "lint-wp-ts": "eslint --fix gql-ts/wp-graphql.ts",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
     "prepare": "husky install",
     "reminder": "echo 'REMEMBER TO DISABLE INTROSPECTION!'",
@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@reach/menu-button": "^0.15.1",
+    "@reach/tabs": "^0.15.0",
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.3",

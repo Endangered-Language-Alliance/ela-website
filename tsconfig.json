@@ -15,13 +15,20 @@
     "strict": true,
     "target": "es5",
     // NEW:
+    "baseUrl": "./",
     "noUnusedLocals": true, // Report errors on unused locals
-    "noUnusedParameters": true // Report errors on unused parameters
+    "noUnusedParameters": true, // Report errors on unused parameters
     // Enable incremental compilation by reading/writing information from prior
     // compilations to a file on disk
     // "incremental": true // produces Type error:
     // Option '--incremental' can only be specified using tsconfig, emitting to
     // single file or when option `--tsBuildInfoFile` is specified.
+    "paths": {
+      "components/*": ["components/*"],
+      "gql-ts/*": ["gql-ts/*"],
+      "lib/*": ["lib/*"],
+      "styles/*": ["styles/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -30,5 +37,5 @@
     "*.js",
     "gql-ts/get-wp-gql-schema.mjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "backup"]
 }

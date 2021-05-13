@@ -2409,6 +2409,8 @@ export type Language = Node &
     title?: Maybe<Scalars['String']>
     /** URI path for the resource */
     uri: Scalars['String']
+    /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist ID&quot; was set to Show in GraphQL. */
+    youTubePlaylist?: Maybe<Language_Youtubeplaylist>
   }
 
 /** The Language type */
@@ -2694,12 +2696,11 @@ export type LanguageToTermNodeConnectionWhereArgs = {
 /** Field Group */
 export type Language_Custominfo = AcfFieldGroup & {
   __typename?: 'Language_Custominfo'
-  academicWork?: Maybe<Scalars['String']>
   /** Catch-all for anything extra and non-standardized, e.g. Garifuna nursery rhymes */
   addlInfo?: Maybe<Scalars['String']>
   affiliation?: Maybe<Scalars['String']>
-  /** Should this be required or no? Seems like it... */
   background?: Maybe<Scalars['String']>
+  /** This content will be shown as a heading-less intro (same concept as Background) and will include a section called Texts if there is a Drive URL. */
   elaWork?: Maybe<Scalars['String']>
   endangerment?: Maybe<Scalars['String']>
   endonym?: Maybe<Scalars['String']>
@@ -2709,6 +2710,8 @@ export type Language_Custominfo = AcfFieldGroup & {
   /** NYC-specific info */
   inNewYork?: Maybe<Scalars['String']>
   langStructure?: Maybe<Scalars['String']>
+  /** An outbound link will be featured above the content to Glottolog page if there is one. */
+  prevResearch?: Maybe<Scalars['String']>
   /** Select an associated project if relevant */
   project?: Maybe<Language_Custominfo_Project>
 }
@@ -2717,16 +2720,26 @@ export type Language_Custominfo = AcfFieldGroup & {
 export type Language_Custominfo_External = AcfFieldGroup & {
   __typename?: 'Language_Custominfo_External'
   archiveOrgLink?: Maybe<Scalars['String']>
-  archiveOrgPlaylistId?: Maybe<Scalars['String']>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
   /** e.g. &quot;1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v&quot; sans quotes for file https://drive.google.com/file/d/1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v */
   gDriveDocId?: Maybe<Scalars['String']>
-  glottolog?: Maybe<Scalars['String']>
+  glottologId?: Maybe<Scalars['String']>
   nycLangMap?: Maybe<Scalars['String']>
 }
 
 export type Language_Custominfo_Project = Project
+
+/** Field Group */
+export type Language_Youtubeplaylist = AcfFieldGroup & {
+  __typename?: 'Language_Youtubeplaylist'
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+  /** Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. &quot;PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX&quot; sans quotes, obtained from the  full URL of https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
+  id?: Maybe<Scalars['String']>
+  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). */
+  url?: Maybe<Scalars['String']>
+}
 
 /** File details for a Media Item */
 export type MediaDetails = {
@@ -3760,7 +3773,7 @@ export type Page = Node &
     title?: Maybe<Scalars['String']>
     /** URI path for the resource */
     uri: Scalars['String']
-    /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist (full URL)&quot; was set to Show in GraphQL. */
+    /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist ID&quot; was set to Show in GraphQL. */
     youTubePlaylist?: Maybe<Page_Youtubeplaylist>
   }
 
@@ -4014,6 +4027,7 @@ export type Page_Homepagesettings = AcfFieldGroup & {
 /** Field Group */
 export type Page_Homepagesettings_Featured1 = AcfFieldGroup & {
   __typename?: 'Page_Homepagesettings_Featured1'
+  /** The body/summary text. */
   description?: Maybe<Scalars['String']>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
@@ -4061,7 +4075,9 @@ export type Page_Youtubeplaylist = AcfFieldGroup & {
   __typename?: 'Page_Youtubeplaylist'
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
-  /** In order to enabled the preview within the WP admin, instead of just the playlist ID we will use the full URL, e.g. https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
+  /** Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. &quot;PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX&quot; sans quotes, obtained from the  full URL of https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
+  id?: Maybe<Scalars['String']>
+  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). */
   url?: Maybe<Scalars['String']>
 }
 
@@ -4203,6 +4219,8 @@ export type Post = Node &
     toPing?: Maybe<Array<Maybe<Scalars['String']>>>
     /** URI path for the resource */
     uri: Scalars['String']
+    /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist ID&quot; was set to Show in GraphQL. */
+    youTubePlaylist?: Maybe<Post_Youtubeplaylist>
   }
 
 /** The post type */
@@ -5176,6 +5194,17 @@ export type PostTypeLabelDetails = {
   viewItems?: Maybe<Scalars['String']>
 }
 
+/** Field Group */
+export type Post_Youtubeplaylist = AcfFieldGroup & {
+  __typename?: 'Post_Youtubeplaylist'
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+  /** Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. &quot;PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX&quot; sans quotes, obtained from the  full URL of https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
+  id?: Maybe<Scalars['String']>
+  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). */
+  url?: Maybe<Scalars['String']>
+}
+
 /** The Project type */
 export type Project = Node &
   ContentNode &
@@ -5262,6 +5291,8 @@ export type Project = Node &
     title?: Maybe<Scalars['String']>
     /** URI path for the resource */
     uri: Scalars['String']
+    /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist ID&quot; was set to Show in GraphQL. */
+    youTubePlaylist?: Maybe<Project_Youtubeplaylist>
   }
 
 /** The Project type */
@@ -5388,6 +5419,17 @@ export type Project_Projectmeta = AcfFieldGroup & {
   fieldGroupName?: Maybe<Scalars['String']>
   /** The icon color for this project when shown on a projects map (at time of writing, just /projects) */
   iconColor?: Maybe<Scalars['String']>
+}
+
+/** Field Group */
+export type Project_Youtubeplaylist = AcfFieldGroup & {
+  __typename?: 'Project_Youtubeplaylist'
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+  /** Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. &quot;PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX&quot; sans quotes, obtained from the  full URL of https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
+  id?: Maybe<Scalars['String']>
+  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). */
+  url?: Maybe<Scalars['String']>
 }
 
 /** The reading setting type */

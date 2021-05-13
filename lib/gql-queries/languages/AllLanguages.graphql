@@ -1,0 +1,31 @@
+query AllLanguages {
+  languages {
+    edges {
+      node {
+        title
+        excerpt
+        uri
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        langLocations {
+          edges {
+            node {
+              name
+              languageLocation {
+                city
+                country
+                continent
+                lat
+                lon
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

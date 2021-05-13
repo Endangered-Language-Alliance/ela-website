@@ -1,4 +1,4 @@
-import { Page, GeneralSettings, MenuItem } from '../../wp-graphql'
+import { Page, GeneralSettings, MenuItem } from 'gql-ts/wp-graphql'
 
 export type FooterResponse = {
   nodeByUri: Page

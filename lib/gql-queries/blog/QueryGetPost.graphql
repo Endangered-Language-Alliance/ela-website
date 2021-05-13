@@ -1,4 +1,4 @@
-query PostBySlug($id: ID!, $idType: PostIdType!) {
+query QueryGetPost($id: ID!, $idType: PostIdType!) {
   post(id: $id, idType: $idType) {
     ...PostFields
     content

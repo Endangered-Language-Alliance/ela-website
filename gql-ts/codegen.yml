@@ -2,7 +2,7 @@ overwrite: true
 schema: "./gql-ts/wpgraphql-schema.gql"
 documents: "gql-ts/fragments/**/*.graphql"
 generates:
-  wp-graphql.ts:
+  gql-ts/wp-graphql.ts:
     plugins:
       - add:
           content:

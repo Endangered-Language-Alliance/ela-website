@@ -1,0 +1,39 @@
+query AllProjects {
+  projects {
+    nodes {
+      title
+      excerpt
+      uri
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
+    }
+  }
+  languages {
+    nodes {
+      title
+      uri
+      customInfo {
+        project {
+          ... on Project {
+            uri
+          }
+        }
+      }
+      langLocations {
+        nodes {
+          languageLocation {
+            city
+            continent
+            country
+            lat
+            lon
+          }
+        }
+      }
+    }
+  }
+}

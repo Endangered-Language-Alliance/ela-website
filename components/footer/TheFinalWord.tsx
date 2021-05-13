@@ -1,5 +1,5 @@
+import sharedStyles from 'styles/Shared.module.css'
 import styles from './Footer.module.css'
-import sharedStyles from '../../styles/Shared.module.css'
 
 import { TheFinalWordProps } from './types'
 
