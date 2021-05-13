@@ -1,10 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 import '@reach/tabs/styles.css'
 
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
+import { LoadingLayout } from 'components/LoadingLayout'
 import { Language as LanguageType } from 'gql-ts/wp-graphql'
 
 import styles from 'styles/Home.module.css'
@@ -12,6 +14,11 @@ import Link from 'next/link'
 
 const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { data } = props
+  const router = useRouter()
+
+  // Not sure if necessary. Docs:
+  // https://nextjs.org/docs/basic-features/data-fetching#fallback-pages
+  if (router.isFallback) return <LoadingLayout />
 
   if (!data) return <p>No data could be found for this language...</p>
 
