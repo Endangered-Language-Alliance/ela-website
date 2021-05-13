@@ -103,5 +103,6 @@ export const getStaticProps: GetStaticProps = async () => {
       projects: data?.projects?.nodes,
       languages: data?.languages?.nodes,
     },
+    revalidate: 15,
   }
 }

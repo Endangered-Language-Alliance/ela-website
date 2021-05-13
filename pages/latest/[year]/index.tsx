@@ -1,6 +1,6 @@
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { GetStaticProps } from 'next'
 
 import { Layout } from 'components/Layout'
 import { Hero } from 'components/Hero'
@@ -57,16 +57,27 @@ const Latest: React.FC<BlogProps> = (props) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { year } = params || { year: '2000' }
-  const data = await getPostsByYear(parseInt(year as string, 10))
+  const yearOfPost = parseInt(year as string, 10)
+  const data = await getPostsByYear(yearOfPost)
 
-  return { props: { posts: data?.nodes, year } }
+  // Refetch current year's list of posts in background every 30 seconds.
+  const currentYear = new Date().getFullYear()
+  const revalidate = currentYear >= yearOfPost ? 30 : false
+
+  return {
+    props: {
+      posts: data?.nodes,
+      year,
+    },
+    revalidate,
+  }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allPosts = await getAllPostsWithSlug()
 
   return {
-    paths: allPosts?.nodes?.map((node) => node?.uri) || [],
+    paths: allPosts?.nodes?.map((node) => node?.uri || '') || [],
     fallback: true,
   }
 }

@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { Layout } from 'components/Layout'
@@ -38,14 +38,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       page: data,
     },
+    revalidate: 15,
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allPublishedPages = await getPublishedPages()
 
   return {
-    paths: allPublishedPages?.nodes?.map((node) => node?.uri) || [],
+    paths: allPublishedPages?.nodes?.map((node) => node?.uri || '') || [],
     fallback: true,
   }
 }

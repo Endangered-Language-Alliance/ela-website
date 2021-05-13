@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 import '@reach/tabs/styles.css'
@@ -167,7 +167,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allLangs = await getAllLangsWithSlug()
 
   return {
@@ -175,7 +175,7 @@ export async function getStaticPaths() {
       allLangs?.edges?.map((edge) => {
         const { node } = edge || {}
 
-        return node?.uri
+        return node?.uri || ''
       }) || [],
     fallback: true,
   }
@@ -188,6 +188,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       data,
     },
+    revalidate: 10,
   }
 }
 

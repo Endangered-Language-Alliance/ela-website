@@ -100,5 +100,8 @@ export default Languages
 export const getStaticProps: GetStaticProps = async () => {
   const data = await getAllLanguages()
 
-  return { props: { data } }
+  return {
+    props: { data },
+    revalidate: 10,
+  }
 }
