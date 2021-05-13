@@ -1,16 +1,12 @@
 import Link from 'next/link'
-import {
-  Menu,
-  MenuList,
-  MenuButton,
-  // MenuItems, // TODO: understand, restore
-  MenuLink,
-} from '@reach/menu-button'
+import Image from 'next/image'
+import { Menu, MenuList, MenuButton, MenuLink } from '@reach/menu-button'
 import '@reach/menu-button/styles.css'
 
 import sharedStyles from 'styles/Shared.module.css'
-import { useHeaderQuery } from './hooks'
 import styles from './Header.module.css'
+
+import { useHeaderQuery } from './hooks'
 
 const Header: React.FC = () => {
   const { data, error, isLoading } = useHeaderQuery()
@@ -18,11 +14,24 @@ const Header: React.FC = () => {
   if (isLoading) return <span>Loading...</span>
   if (error) return <span>Error!</span>
 
-  const { menuItems } = data || {}
+  const { menuItems, logo } = data || {}
+  const src = logo?.siteWideSettings?.logo?.sourceUrl || ''
 
   return (
     <nav className={styles.root}>
       <div className={`${sharedStyles.container} ${styles.inner}`}>
+        <Link href="/">
+          <a className={styles.logo}>
+            {src && (
+              <Image
+                src={src}
+                alt="organization logo"
+                layout="fill"
+                objectFit="contain"
+              />
+            )}
+          </a>
+        </Link>
         <ul>
           {/* Manually link to Home so we can use different Home title */}
           <li>
@@ -45,14 +54,16 @@ const Header: React.FC = () => {
             return (
               <li key={path}>
                 <Menu>
-                  <MenuButton>{label}</MenuButton>
-                  <MenuList>
+                  <MenuButton>
+                    {label} <span aria-hidden>▾</span>
+                  </MenuButton>
+                  <MenuList className={styles.ahhhh}>
                     {childItems?.nodes?.map((item) => {
                       return (
                         <MenuLink
                           key={item?.path}
                           as={Link}
-                          href={item?.path || ''}
+                          href={item?.path || '/'}
                         >
                           {item?.label}
                         </MenuLink>

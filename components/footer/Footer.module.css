@@ -15,30 +15,34 @@
 
 .footer__wrap {
   display: grid;
-  grid-template-columns: auto auto;
-  grid-column-gap: calc(var(--padding) * 2);
-  padding-bottom: calc(var(--padding) * 2);
+  grid-template-columns: auto auto auto;
+  grid-column-gap: calc(var(--padding1) * 2);
+  padding-bottom: calc(var(--padding1) * 2);
 }
 
 .contact {
   text-align: center;
   font-style: normal;
   font-size: var(--font-sm);
-  margin-bottom: var(--padding);
+  margin-bottom: var(--padding1);
 }
 
 .final {
   text-align: center;
-  background-color: var(--black);
-  padding-top: calc(var(--padding) * 2);
+  padding-top: calc(var(--padding1) * 2);
+}
+
+.copyright {
+  display: block;
+  margin-bottom: var(--padding1);
 }
 
 .social {
   display: grid;
-  font-size: var(--font-h3);
+  font-size: var(--font-h2);
   justify-content: center;
-  grid-template-columns: auto auto auto auto;
-  grid-column-gap: var(--padding);
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+  grid-column-gap: var(--padding1);
   margin: 0;
   padding: 0;
 }
@@ -46,4 +50,5 @@
 .logo {
   width: 100px;
   height: 83.5px;
+  display: inline-block;
 }

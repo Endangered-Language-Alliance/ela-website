@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
 import { Layout } from 'components/Layout'
+import { Hero } from 'components/Hero'
 import { getAllLanguages } from 'lib/api/api.languages'
 import { Language } from 'gql-ts/wp-graphql'
 import Image from 'next/image'
@@ -22,14 +23,14 @@ const Languages: React.FC<LanguagesProps> = (props) => {
       </Head>
 
       <Layout>
-        <h1>Languages</h1>
-        <p>Pretend it's a map...</p>
-        <hr />
+        <Hero title="Languages">
+          <p>Pretend it's a map...</p>
+        </Hero>
         <section
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gridGap: 'calc(var(--padding) * 2)',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gridGap: 'calc(var(--padding1) * 2)',
           }}
         >
           {data?.map(({ node }) => {
@@ -41,9 +42,9 @@ const Languages: React.FC<LanguagesProps> = (props) => {
                   <article
                     style={{
                       border: 'solid 1px var(--lightGray)',
-                      borderRadius: 'var(--borderRad-1)',
-                      padding: 'var(--padding)',
-                      boxShadow: 'var(--elev-1)',
+                      borderRadius: 'var(--borderRad2)',
+                      padding: 'var(--padding3)',
+                      boxShadow: 'var(--elev1)',
                     }}
                   >
                     <h2>{title}</h2>
@@ -53,7 +54,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
                           position: 'relative',
                           width: 150,
                           height: 150,
-                          borderRadius: 'var(--borderRad-1)',
+                          borderRadius: 'var(--borderRad2)',
                         }}
                       >
                         <Image

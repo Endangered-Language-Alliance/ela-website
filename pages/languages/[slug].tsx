@@ -46,7 +46,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
             style={{
               listStyle: 'none',
               display: 'grid',
-              gridColumnGap: 'var(--padding)',
+              gridColumnGap: 'var(--padding1)',
               gridTemplateColumns: 'repeat(auto-fit, minmax(150px, auto))',
               justifyContent: 'center',
             }}

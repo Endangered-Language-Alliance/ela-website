@@ -1,8 +1,11 @@
-import { MenuItem } from 'gql-ts/wp-graphql'
+import { MenuItem, Page_Sitewidesettings } from 'gql-ts/wp-graphql'
 
 export type HeaderResponse = {
   menuItems: {
     nodes: MenuItem[]
+  }
+  logo: {
+    siteWideSettings: Page_Sitewidesettings
   }
 }
 

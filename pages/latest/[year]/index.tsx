@@ -2,9 +2,10 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
+import { Layout } from 'components/Layout'
+import { Hero } from 'components/Hero'
 import { createMarkup } from 'lib/utils'
 import { getAllPostsWithSlug, getPostsByYear } from 'lib/api/api.latest'
-import { Layout } from 'components/Layout'
 import { Post } from 'gql-ts/wp-graphql'
 
 import styles from 'styles/Home.module.css'
@@ -23,8 +24,7 @@ const Latest: React.FC<BlogProps> = (props) => {
       </Head>
 
       <Layout>
-        <h1 className={styles.title}>{year}</h1>
-        <hr />
+        <Hero title={year} />
         <section>
           {(posts.length &&
             posts.map(({ title, date, excerpt, uri }) => {

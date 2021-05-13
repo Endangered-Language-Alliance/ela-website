@@ -5,6 +5,7 @@ import { GetStaticProps } from 'next'
 import { createMarkup } from 'lib/utils'
 import { getAllPosts } from 'lib/api/api.latest'
 import { Layout } from 'components/Layout'
+import { Hero } from 'components/Hero'
 import { Post } from 'gql-ts/wp-graphql'
 
 import styles from 'styles/Home.module.css'
@@ -32,8 +33,7 @@ const Latest: React.FC<BlogProps> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h1 className={styles.title}>Latest updates</h1>
-        <hr />
+        <Hero title="Latest updates" />
         <nav>
           <ul>
             {range(currentYear, currentYear - spanOfYears, -1).map(

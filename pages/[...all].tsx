@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { Layout } from 'components/Layout'
+import { Hero } from 'components/Hero'
 import { getPublishedPages, getPage } from 'lib/api/api.home'
 import { createMarkup } from 'lib/utils'
 import { Page } from 'gql-ts/wp-graphql'
@@ -17,11 +18,11 @@ const AllOtherPages: React.FC<AllOtherPagesProps> = (props) => {
   return (
     <>
       <Head>
-        <title>Use the title from the site</title>
+        <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h1>{title}</h1>
+        <Hero title={title || ''} />
         <section dangerouslySetInnerHTML={createMarkup(content || '')} />
       </Layout>
     </>
