@@ -1,7 +1,8 @@
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { Layout } from 'components/Layout'
+import { Hero } from 'components/Hero'
 import { getPublishedPages, getPage } from 'lib/api/api.home'
 import { createMarkup } from 'lib/utils'
 import { Page } from 'gql-ts/wp-graphql'
@@ -17,11 +18,11 @@ const AllOtherPages: React.FC<AllOtherPagesProps> = (props) => {
   return (
     <>
       <Head>
-        <title>Use the title from the site</title>
+        <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h1>{title}</h1>
+        <Hero title={title || ''} />
         <section dangerouslySetInnerHTML={createMarkup(content || '')} />
       </Layout>
     </>
@@ -37,14 +38,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       page: data,
     },
+    revalidate: 15,
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allPublishedPages = await getPublishedPages()
 
   return {
-    paths: allPublishedPages?.nodes?.map((node) => node?.uri) || [],
+    paths: allPublishedPages?.nodes?.map((node) => node?.uri || '') || [],
     fallback: true,
   }
 }

@@ -5,8 +5,6 @@ import { createMarkup } from 'lib/utils'
 import sharedStyles from 'styles/Shared.module.css'
 
 import { useFooterQuery } from './hooks'
-import { ContactInfo } from './ContactInfo'
-import { TheFinalWord } from './TheFinalWord'
 import { SocialIcons } from './SocialIcons'
 import styles from './Footer.module.css'
 
@@ -26,6 +24,10 @@ export const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={`${sharedStyles.container} ${styles.footer__wrap}`}>
+        <div>
+          <h3>Subscribe to our mailing list</h3>
+          <div dangerouslySetInnerHTML={createMarkup(newsletter || '')} />
+        </div>
         <nav>
           {nodes?.map((node) => {
             return (
@@ -42,15 +44,14 @@ export const Footer: React.FC = () => {
             )
           })}
         </nav>
-        <div>
-          <h3>Subscribe to our mailing list</h3>
-          <div dangerouslySetInnerHTML={createMarkup(newsletter || '')} />
+        <div className={styles.final}>
+          <img src={sourceUrl || ''} alt="ELA logo" className={styles.logo} />
+          <small className={styles.copyright}>
+            &copy; Copyright {new Date().getFullYear()}, {title}
+          </small>
+          <SocialIcons {...(contactInfo || {})} {...(social || {})} />
         </div>
       </div>
-      <TheFinalWord sourceUrl={sourceUrl} title={title}>
-        <ContactInfo {...(contactInfo || {})} />
-        <SocialIcons {...(social || {})} />
-      </TheFinalWord>
     </footer>
   )
 }

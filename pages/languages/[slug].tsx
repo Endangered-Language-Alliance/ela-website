@@ -1,10 +1,12 @@
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 import '@reach/tabs/styles.css'
 
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
+import { LoadingLayout } from 'components/LoadingLayout'
 import { Language as LanguageType } from 'gql-ts/wp-graphql'
 
 import styles from 'styles/Home.module.css'
@@ -12,6 +14,11 @@ import Link from 'next/link'
 
 const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { data } = props
+  const router = useRouter()
+
+  // Not sure if necessary. Docs:
+  // https://nextjs.org/docs/basic-features/data-fetching#fallback-pages
+  if (router.isFallback) return <LoadingLayout />
 
   if (!data) return <p>No data could be found for this language...</p>
 
@@ -46,7 +53,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
             style={{
               listStyle: 'none',
               display: 'grid',
-              gridColumnGap: 'var(--padding)',
+              gridColumnGap: 'var(--padding1)',
               gridTemplateColumns: 'repeat(auto-fit, minmax(150px, auto))',
               justifyContent: 'center',
             }}
@@ -167,7 +174,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allLangs = await getAllLangsWithSlug()
 
   return {
@@ -175,7 +182,7 @@ export async function getStaticPaths() {
       allLangs?.edges?.map((edge) => {
         const { node } = edge || {}
 
-        return node?.uri
+        return node?.uri || ''
       }) || [],
     fallback: true,
   }
@@ -188,6 +195,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       data,
     },
+    revalidate: 10,
   }
 }
 

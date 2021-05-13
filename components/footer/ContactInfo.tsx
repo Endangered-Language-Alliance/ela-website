@@ -6,9 +6,9 @@ export const ContactInfo: React.FC<ContactInfoProps> = (props) => {
 
   return (
     <address className={footerStyles.contact}>
-      <a href="tel:+">{phone}</a>
+      <a href={`tel:+${phone}`}>{phone}</a>
       <br />
-      <a href="mailto:">{email}</a>
+      <a href={`mailto:${email}`}>{email}</a>
       <br />
       {address}
     </address>

@@ -12,6 +12,15 @@ query MainMenuQuery {
       }
     }
   }
+  logo: nodeByUri(uri: "/") {
+    ... on Page {
+      siteWideSettings {
+        logo {
+          sourceUrl
+        }
+      }
+    }
+  }
 }
 
 fragment MenuBits on MenuItem {

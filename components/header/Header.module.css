@@ -1,17 +1,33 @@
 .root {
-  border-bottom: 2px solid var(--primaryColor);
   background-color: var(--darkGray);
-  box-shadow: 0 2px 8px var(--elev-1);
-  width: 100%;
-  padding: calc(var(--padding) / 2) 0;
+  border-bottom: 2px solid var(--primaryColor);
+  box-shadow: 0 2px 8px var(--elev1);
+  color: var(--secondaryColor);
   overflow-x: auto; /* TODO: mobile only */
+  padding: calc(var(--padding1) / 2) 0;
   position: sticky;
   top: 0;
+  width: 100%;
+  text-transform: uppercase;
   z-index: 1;
 }
 
-.root ul a {
-  color: var(--secondaryColor);
+.root a {
+  color: inherit;
+}
+
+.root [data-reach-menu-button][aria-expanded='true'] {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.root [data-reach-menu-button] {
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  text-transform: inherit;
+  font-size: inherit;
+  cursor: pointer;
 }
 
 .root ul {
@@ -19,6 +35,7 @@
   align-items: center;
   margin: 0;
   padding: 0;
+  margin-left: auto;
 }
 
 .root li {
@@ -26,18 +43,50 @@
 }
 
 .root li + li {
-  margin-left: var(--padding);
+  margin-left: var(--padding2);
+}
+
+.logo {
+  height: 50px;
+  width: 75px;
+  display: inline-block;
+  position: relative;
+}
+
+.root .cta {
+  color: var(--primaryColorLight);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: var(--borderRad1);
+  padding: calc(var(--padding1) / 2) calc(var(--padding1) * 2);
 }
 
 .inner {
   display: flex;
-  justify-content: space-between;
 }
 
-.cta {
-  color: var(--primaryColorLight);
-  border-width: 2px;
-  border-style: solid;
-  border-radius: var(--borderRad-1);
-  padding: calc(var(--padding) / 2) calc(var(--padding) * 2);
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ahhhh[data-reach-menu-list],
+.ahhhh[data-reach-menu-items] {
+  animation: slide-down 0.2s ease;
+  z-index: 222222222;
+}
+
+.ahhhh {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: var(--padding1);
+  z-index: 1;
+  box-shadow: var(--elev2);
 }

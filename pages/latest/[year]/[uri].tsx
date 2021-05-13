@@ -1,5 +1,5 @@
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
-import { GetStaticProps } from 'next'
 
 import { getAllPostsWithSlug, getPost } from 'lib/api/api.latest'
 import { Layout } from 'components/Layout'
@@ -46,7 +46,7 @@ const PostByYear: React.FC<{ postData?: Post }> = (props) => {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const allPosts = await getAllPostsWithSlug()
 
   return {
@@ -54,7 +54,7 @@ export async function getStaticPaths() {
       allPosts?.edges?.map((edge) => {
         const { node } = edge || {}
 
-        return node?.uri
+        return node?.uri || ''
       }) || [],
     fallback: true,
   }
@@ -62,12 +62,18 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await getPost(`/latest/${params?.year}/${params?.uri}` || '')
+  const yearOfPost = parseInt(params?.year as string, 10)
+
+  // Refetch current-year posts in background every 30 seconds.
+  const currentYear = new Date().getFullYear()
+  const revalidate = currentYear >= yearOfPost ? 30 : false
 
   return {
     props: {
       postData: data,
       params,
     },
+    revalidate,
   }
 }
 

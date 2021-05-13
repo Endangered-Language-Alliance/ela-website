@@ -4,19 +4,28 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { Layout } from 'components/Layout'
+import { Hero } from 'components/Hero'
 import { getHomePageContent } from 'lib/api/api.home'
 import { createMarkup } from 'lib/utils'
 import { CONTENT_URL, PROD_URL } from 'lib/config'
-import { Page, Post } from 'gql-ts/wp-graphql'
+import {
+  GeneralSettings,
+  Page,
+  RootQueryToPostConnection,
+} from 'gql-ts/wp-graphql'
 
 export type HomeProps = {
-  data: { meat: Page; posts: { edges: { node: Post }[] } }
+  data: {
+    generalSettings: GeneralSettings
+    homePageContent: Page
+    posts: RootQueryToPostConnection
+  }
 }
 
 const Home: React.FC<HomeProps> = (props) => {
   const { data } = props || {}
-  const { meat, posts } = data
-  const { content, homePageSettings = {} } = meat
+  const { homePageContent, posts, generalSettings } = data
+  const { content, homePageSettings = {}, title } = homePageContent
   const { fbFeedIframeHtml = '', featured1, numRecentPosts, youTubeUrl } =
     homePageSettings || {}
   const { description, heading, img, link } = featured1 || {}
@@ -24,13 +33,13 @@ const Home: React.FC<HomeProps> = (props) => {
   return (
     <>
       <Head>
-        <title>Use the title from the site</title>
+        <title>Home - {generalSettings?.title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Layout>
-        <h1>Should there be custom title?</h1>
-        <div dangerouslySetInnerHTML={createMarkup(content || '')} />
+        <Hero title={title || ''}>
+          <div dangerouslySetInnerHTML={createMarkup(content || '')} />
+        </Hero>
         <iframe
           src={youTubeUrl || ''}
           title="TODO: add title"
@@ -38,7 +47,7 @@ const Home: React.FC<HomeProps> = (props) => {
           allow="encrypted-media"
           allowFullScreen
         />
-        <h2>Featuredness</h2>
+        <h2>Featured</h2>
         <section>
           <h3>{heading}</h3>
           {img?.sourceUrl && (
@@ -47,7 +56,7 @@ const Home: React.FC<HomeProps> = (props) => {
                 position: 'relative',
                 width: 500,
                 height: 300,
-                borderRadius: 'var(--borderRad-1)',
+                borderRadius: 'var(--borderRad2)',
               }}
             >
               <Image
@@ -71,8 +80,8 @@ const Home: React.FC<HomeProps> = (props) => {
         <div dangerouslySetInnerHTML={createMarkup(fbFeedIframeHtml || '')} />
         <nav>
           <ul>
-            {posts?.edges?.slice(0, numRecentPosts || 5).map((post) => {
-              return <li key={post.node.title}>{post.node.title}</li>
+            {posts?.nodes?.slice(0, numRecentPosts || 5).map((node) => {
+              return <li key={node?.title}>{node?.title}</li>
             })}
           </ul>
         </nav>
@@ -88,5 +97,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { data },
+    revalidate: 15,
   }
 }

@@ -1,7 +1,8 @@
 query HomePageQuery {
-  meat: nodeByUri(uri: "/") {
+  homePageContent: nodeByUri(uri: "/") {
     ... on Page {
       content
+      title
       homePageSettings {
         fbFeedIframeHtml
         featured1 {
@@ -22,17 +23,19 @@ query HomePageQuery {
     }
   }
   posts(first: 5, where: { orderby: { field: DATE, order: DESC } }) {
-    edges {
-      node {
-        title
-        slug
-        excerpt
-        featuredImage {
-          node {
-            id
-          }
+    nodes {
+      title
+      slug
+      excerpt
+      featuredImage {
+        node {
+          id
         }
       }
     }
+  }
+  # Site title, tagline, etc.
+  generalSettings {
+    title
   }
 }
