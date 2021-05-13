@@ -24,6 +24,12 @@ const Header: React.FC = () => {
     <nav className={styles.root}>
       <div className={`${sharedStyles.container} ${styles.inner}`}>
         <ul>
+          {/* Manually link to Home so we can use different Home title */}
+          <li>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
+          </li>
           {menuItems?.nodes?.map((node) => {
             const { label, path, childItems, parentId } = node || {}
             if (!parentId && !childItems?.nodes?.length) {
