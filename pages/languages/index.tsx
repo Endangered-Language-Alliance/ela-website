@@ -10,11 +10,13 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import { Layout } from 'components/Layout'
 import { Hero } from 'components/Hero'
 import { getAllLanguages } from 'lib/api/api.languages'
-import { Language } from 'gql-ts/wp-graphql'
+import { LangLocation_Languagelocation, Language } from 'gql-ts/wp-graphql'
 import Image from 'next/image'
+import MapMarkers from 'components/map/MapMarkers'
+import { MapMarkerFields } from 'components/map/types'
 
 type LanguagesProps = {
-  data: { node: Language }[]
+  data: Language[]
 }
 
 export type ViewportState = Partial<ViewportProps>
@@ -23,10 +25,23 @@ const { publicRuntimeConfig } = getConfig()
 const Languages: React.FC<LanguagesProps> = (props) => {
   const { data = [] } = props
   const [viewport, setViewport] = React.useState<ViewportState>({
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8,
+    latitude: 0,
+    longitude: 0,
+    zoom: 0.5,
   })
+
+  const citiesCoords = data?.map((node) => {
+    const { langLocations } = node
+
+    if (!langLocations?.nodes?.length)
+      return {
+        city: 'alpena',
+        lat: 45,
+        lon: -79,
+      }
+
+    return langLocations.nodes[0]?.languageLocation
+  }) as LangLocation_Languagelocation[]
 
   return (
     <>
@@ -50,7 +65,9 @@ const Languages: React.FC<LanguagesProps> = (props) => {
             width="100%"
             height="100%"
             onViewportChange={setViewport}
-          />
+          >
+            <MapMarkers markers={citiesCoords || ([] as MapMarkerFields[])} />
+          </ReactMapGL>
         </div>
         <section
           style={{
@@ -59,7 +76,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
             gridGap: 'calc(var(--padding1) * 2)',
           }}
         >
-          {data?.map(({ node }) => {
+          {data?.map((node) => {
             const { uri, title, excerpt, featuredImage, langLocations } = node
 
             return (
@@ -91,16 +108,13 @@ const Languages: React.FC<LanguagesProps> = (props) => {
                         />
                       </div>
                     )}
-                    {langLocations?.edges && (
+                    {langLocations?.nodes && (
                       <ul>
-                        {langLocations.edges.map((loc) => {
+                        {langLocations.nodes?.map((loc) => {
                           return (
-                            <li
-                              key={loc?.node?.name}
-                              style={{ color: 'black' }}
-                            >
-                              {loc?.node?.languageLocation?.city},{' '}
-                              {loc?.node?.languageLocation?.country}
+                            <li key={loc?.name} style={{ color: 'black' }}>
+                              {loc?.languageLocation?.city},{' '}
+                              {loc?.languageLocation?.country}
                             </li>
                           )
                         })}

@@ -1,28 +1,24 @@
 query AllLanguages {
   languages {
-    edges {
-      node {
-        title
-        excerpt
-        uri
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
+    nodes {
+      title
+      excerpt
+      uri
+      featuredImage {
+        node {
+          sourceUrl
+          altText
         }
-        langLocations {
-          edges {
-            node {
-              name
-              languageLocation {
-                city
-                country
-                continent
-                lat
-                lon
-              }
-            }
+      }
+      langLocations {
+        nodes {
+          name
+          languageLocation {
+            city
+            country
+            continent
+            lat
+            lon
           }
         }
       }

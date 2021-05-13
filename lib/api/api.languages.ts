@@ -14,7 +14,7 @@ const API_URL = process.env.WP_API_URL as string
 export async function getAllLanguages() {
   const data = await request(API_URL, allLanguages)
 
-  return data?.languages.edges
+  return data?.languages?.nodes
 }
 
 export const getLanguage = async (
