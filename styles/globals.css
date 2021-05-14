@@ -1,41 +1,91 @@
-/* CRED: (fonts): https://type-scale.com/ */
-html {
-  font-size: 100%;
-} /*16px*/
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: 'Libre Franklin', sans-serif;
-}
-
-body {
-  min-height: 100vh;
-  line-height: 1.75;
-  --primaryColor: #503896;
-  --primaryColorLight: hsl(255, 46%, 65%);
-  --secondaryColor: #ffd520;
-  --white: #fff;
+:root {
+  /* Grayscale */
   --black: #000;
   --darkGray: #222;
   --lightGray: #ddd;
+  --white: #fff;
+
+  /* Colors */
+  --purple: hsl(255, 46%, 40%);
+  --primary-h: 255;
+  --primary-s: 46%;
+  --primary-l: 40%;
+  --primary--light-l: 65%;
+  --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+  --primaryLight: hsl(
+    var(--primary-h),
+    var(--primary-s),
+    var(--primary--light-l)
+  );
+  --secondary: #ffd520;
+
+  /* Borders */
+  --borderRad1: 2px;
+  --borderRad2: 4px;
+  --borderRad3: 8px;
+
+  /* Elevation */
   --elev1: 0 2px 8px rgba(0, 0, 0, 0.25);
   --elev2: 0 2px 10px rgba(0, 0, 0, 0.45);
-  --padding1: 0.75rem;
-  --padding2: 1rem;
-  --padding3: 1.25rem;
-  --padding4: 1.5rem;
+
+  /* Typography */
+  --headingFontFam: 'Libre Franklin', sans-serif;
+  --bodyFontFam: 'Libre Franklin', sans-serif;
+  --btnFontFam: var(--headingFontFam);
+  /* TODO: Noto serif */
+
+  /* Font sizes */
   --font-h1: 3.052rem;
   --font-h2: 2.441rem;
   --font-h3: 1.953rem;
   --font-h4: 1.563rem;
   --font-h5: 1.25rem;
   --font-sm: 0.8rem;
+  --font-body: 1rem;
+
+  /* Layout */
   --maxWidth: 1200px;
-  --borderRad1: 2px;
-  --borderRad2: 4px;
-  --borderRad3: 8px;
+
+  /* Spacing */
+  --padding1: 0.75rem;
+  --padding2: 1rem;
+  --padding3: 1.25rem;
+  --padding4: 1.5rem;
+
+  /* Breakpoints */
+  --phone: 400px;
+  --phablet: 600px;
+  --tablet: 768px;
+  --laptop: 1200px;
+  --monster: 1500px;
+}
+
+/* CRED: (fonts): https://type-scale.com/ */
+html {
+  font-size: 16px;
+}
+
+@media screen and (min-width: 1500px) {
+  :root {
+    --maxWidth: 1300px;
+  }
+
+  html {
+    font-size: 20px;
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--bodyFontFam);
+  font-size: var(--font-body);
+  min-height: 100vh;
+  line-height: 1.75;
 }
 
 * {
@@ -43,7 +93,7 @@ body {
 }
 
 a {
-  color: var(--primaryColor);
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -58,6 +108,7 @@ h2,
 h3,
 h4,
 h5 {
+  font-family: var(--headingFont);
   margin: 3rem 0 1.38rem;
   font-weight: 700;
   line-height: 1.3;

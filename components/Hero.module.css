@@ -1,6 +1,6 @@
 .root {
-  text-align: center;
-  padding: var(--padding2);
-  max-width: 768px;
   margin: 0 auto var(--padding2);
+  max-width: 1000px;
+  padding: var(--padding2);
+  text-align: center;
 }

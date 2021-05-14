@@ -11,9 +11,9 @@ import { Layout } from 'components/Layout'
 import { Hero } from 'components/Hero'
 import { getAllLanguages } from 'lib/api/api.languages'
 import { LangLocation_Languagelocation, Language } from 'gql-ts/wp-graphql'
-import Image from 'next/image'
 import MapMarkers from 'components/map/MapMarkers'
 import { MapMarkerFields } from 'components/map/types'
+import { ImageCard } from 'components/cards/ImageCard'
 
 type LanguagesProps = {
   data: Language[]
@@ -50,15 +50,14 @@ const Languages: React.FC<LanguagesProps> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Hero title="Languages">
-          <p>
-            Do we want to say anything down here? And/or change the title? If
-            so, it's not going to be dynamic if we still want to call the nav
-            menu item "Languages". Same concept as Home, where we want a
-            different title.
-          </p>
-        </Hero>
-        <div style={{ height: 250, width: '100%' }}>
+        <Hero title="Languages" />
+        <div
+          style={{
+            height: 250,
+            width: '100%',
+            marginBottom: 'var(--padding2)',
+          }}
+        >
           <ReactMapGL
             {...viewport}
             mapboxApiAccessToken={publicRuntimeConfig.REACT_APP_MB_TOKEN}
@@ -69,64 +68,47 @@ const Languages: React.FC<LanguagesProps> = (props) => {
             <MapMarkers markers={citiesCoords || ([] as MapMarkerFields[])} />
           </ReactMapGL>
         </div>
-        <section
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gridGap: 'calc(var(--padding1) * 2)',
-          }}
-        >
+        <section>
           {data?.map((node) => {
             const { uri, title, excerpt, featuredImage, langLocations } = node
 
             return (
-              <Link key={uri} href={uri || ''}>
-                <a href="">
-                  <article
+              <article key={uri}>
+                <Link href={uri || ''}>
+                  <a
                     style={{
-                      border: 'solid 1px var(--lightGray)',
-                      borderRadius: 'var(--borderRad2)',
-                      padding: 'var(--padding3)',
-                      boxShadow: 'var(--elev1)',
+                      display: 'grid',
+                      gridTemplateColumns: '200px 1fr',
+                      height: 200,
+                      gridGap: 'var(--padding2)',
                     }}
                   >
-                    <h2>{title}</h2>
-                    {featuredImage?.node?.sourceUrl && (
-                      <div
-                        style={{
-                          position: 'relative',
-                          width: 150,
-                          height: 150,
-                          borderRadius: 'var(--borderRad2)',
-                        }}
-                      >
-                        <Image
-                          src={featuredImage?.node.sourceUrl || ''}
-                          alt={featuredImage?.node?.altText || ''}
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      </div>
-                    )}
-                    {langLocations?.nodes && (
-                      <ul>
-                        {langLocations.nodes?.map((loc) => {
-                          return (
-                            <li key={loc?.name} style={{ color: 'black' }}>
-                              {loc?.languageLocation?.city},{' '}
-                              {loc?.languageLocation?.country}
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    )}
-                    <p
-                      style={{ color: 'black' }}
-                      dangerouslySetInnerHTML={{ __html: excerpt || '' }}
+                    <ImageCard
+                      title={title}
+                      sourceUrl={featuredImage?.node?.sourceUrl}
+                      altText={featuredImage?.node?.altText}
                     />
-                  </article>
-                </a>
-              </Link>
+                    <div>
+                      {langLocations?.nodes && (
+                        <ul>
+                          {langLocations.nodes?.map((loc) => {
+                            return (
+                              <li key={loc?.name} style={{ color: 'black' }}>
+                                {loc?.languageLocation?.city},{' '}
+                                {loc?.languageLocation?.country}
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      )}
+                      <p
+                        style={{ color: 'black' }}
+                        dangerouslySetInnerHTML={{ __html: excerpt || '' }}
+                      />
+                    </div>
+                  </a>
+                </Link>
+              </article>
             )
           })}
         </section>

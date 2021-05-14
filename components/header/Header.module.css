@@ -1,41 +1,38 @@
 .root {
   background-color: var(--darkGray);
-  border-bottom: 2px solid var(--primaryColor);
+  border-bottom: 2px solid var(--primary);
   box-shadow: 0 2px 8px var(--elev1);
-  color: var(--secondaryColor);
+  color: var(--secondary);
+  display: flex;
+  min-height: 75px;
   overflow-x: auto; /* TODO: mobile only */
-  padding: calc(var(--padding1) / 2) 0;
+  padding: 0 var(--padding2);
   position: sticky;
+  text-transform: uppercase;
   top: 0;
   width: 100%;
-  text-transform: uppercase;
   z-index: 1;
 }
 
-.root a {
-  color: inherit;
-}
-
 .root [data-reach-menu-button][aria-expanded='true'] {
-  background-color: rebeccapurple;
-  color: white;
+  /* font-weight: bold; */
 }
 
 .root [data-reach-menu-button] {
-  color: inherit;
   background-color: transparent;
   border: none;
-  text-transform: inherit;
-  font-size: inherit;
+  color: inherit;
   cursor: pointer;
+  font-size: inherit;
+  text-transform: inherit;
 }
 
 .root ul {
-  display: flex;
   align-items: center;
+  display: flex;
+  margin-left: auto;
   margin: 0;
   padding: 0;
-  margin-left: auto;
 }
 
 .root li {
@@ -48,21 +45,21 @@
 
 .logo {
   height: 50px;
-  width: 75px;
-  display: inline-block;
+  margin-right: auto;
   position: relative;
+  width: 75px;
 }
 
-.root .cta {
-  color: var(--primaryColorLight);
-  border-width: 2px;
-  border-style: solid;
-  border-radius: var(--borderRad1);
-  padding: calc(var(--padding1) / 2) calc(var(--padding1) * 2);
+.link,
+.link:visited {
+  color: var(--secondary);
 }
 
 .inner {
+  align-items: center;
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 @keyframes slide-down {
@@ -79,7 +76,7 @@
 .ahhhh[data-reach-menu-list],
 .ahhhh[data-reach-menu-items] {
   animation: slide-down 0.2s ease;
-  z-index: 222222222;
+  z-index: 2;
 }
 
 .ahhhh {

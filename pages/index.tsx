@@ -13,6 +13,7 @@ import {
   Page,
   RootQueryToPostConnection,
 } from 'gql-ts/wp-graphql'
+import btnStyles from 'components/buttons/Button.module.css'
 
 export type HomeProps = {
   data: {
@@ -73,10 +74,12 @@ const Home: React.FC<HomeProps> = (props) => {
               link?.url?.replace(CONTENT_URL, '').replace(PROD_URL, '') || ''
             }
           >
-            <a>Read More</a>
+            <a className={`${btnStyles.button} ${btnStyles.primary}`}>
+              Read More
+            </a>
           </Link>
         </section>
-        <h2>Recent, Updates, Latest, Posts, etc.</h2>
+        <h2>Recent Updates</h2>
         <div dangerouslySetInnerHTML={createMarkup(fbFeedIframeHtml || '')} />
         <nav>
           <ul>

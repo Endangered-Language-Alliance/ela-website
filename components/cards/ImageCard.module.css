@@ -1,0 +1,25 @@
+.root {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  box-shadow: var(--elev2);
+  border-radius: var(--borderRad3);
+  background: linear-gradient(45deg, black, transparent);
+}
+
+.inner {
+  padding: var(--padding1);
+}
+
+.title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: var(--font-h4);
+  background: linear-gradient(45deg, black, transparent);
+  color: var(--white);
+}
+
+.root img {
+  border-radius: var(--borderRad3);
+}

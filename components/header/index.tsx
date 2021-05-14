@@ -4,6 +4,7 @@ import { Menu, MenuList, MenuButton, MenuLink } from '@reach/menu-button'
 import '@reach/menu-button/styles.css'
 
 import sharedStyles from 'styles/Shared.module.css'
+import btnStyles from 'components/buttons/Button.module.css'
 import styles from './Header.module.css'
 
 import { useHeaderQuery } from './hooks'
@@ -18,7 +19,7 @@ const Header: React.FC = () => {
   const src = logo?.siteWideSettings?.logo?.sourceUrl || ''
 
   return (
-    <nav className={styles.root}>
+    <header className={styles.root}>
       <div className={`${sharedStyles.container} ${styles.inner}`}>
         <Link href="/">
           <a className={styles.logo}>
@@ -32,54 +33,59 @@ const Header: React.FC = () => {
             )}
           </a>
         </Link>
-        <ul>
-          {/* Manually link to Home so we can use different Home title */}
-          <li>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
-          {menuItems?.nodes?.map((node) => {
-            const { label, path, childItems, parentId } = node || {}
-            if (!parentId && !childItems?.nodes?.length) {
+        <nav>
+          <ul>
+            {/* Manually link to Home so we can use different Home title */}
+            <li>
+              <Link href="/">
+                <a className={styles.link}>Home</a>
+              </Link>
+            </li>
+            {menuItems?.nodes?.map((node) => {
+              const { label, path, childItems, parentId } = node || {}
+
+              if (!parentId && !childItems?.nodes?.length) {
+                return (
+                  <li key={path}>
+                    <Link href={path || ''}>
+                      <a className={styles.link}>{label}</a>
+                    </Link>
+                  </li>
+                )
+              }
+
               return (
                 <li key={path}>
-                  <Link href={path || ''}>
-                    <a>{label}</a>
-                  </Link>
+                  <Menu>
+                    <MenuButton>
+                      {label} <span aria-hidden>▾</span>
+                    </MenuButton>
+                    <MenuList className={styles.ahhhh}>
+                      {childItems?.nodes?.map((item) => {
+                        return (
+                          <MenuLink
+                            key={item?.path}
+                            as={Link}
+                            href={item?.path || '/'}
+                          >
+                            {item?.label}
+                          </MenuLink>
+                        )
+                      })}
+                    </MenuList>
+                  </Menu>
                 </li>
               )
-            }
-
-            return (
-              <li key={path}>
-                <Menu>
-                  <MenuButton>
-                    {label} <span aria-hidden>▾</span>
-                  </MenuButton>
-                  <MenuList className={styles.ahhhh}>
-                    {childItems?.nodes?.map((item) => {
-                      return (
-                        <MenuLink
-                          key={item?.path}
-                          as={Link}
-                          href={item?.path || '/'}
-                        >
-                          {item?.label}
-                        </MenuLink>
-                      )
-                    })}
-                  </MenuList>
-                </Menu>
-              </li>
-            )
-          })}
-        </ul>
+            })}
+          </ul>
+        </nav>
         <Link href="/get-involved">
-          <a className={styles.cta}>GET INVOLVED</a>
+          <a className={`${btnStyles.button} ${btnStyles.primary}`}>
+            Get involved
+          </a>
         </Link>
       </div>
-    </nav>
+    </header>
   )
 }
 
