@@ -23,7 +23,7 @@ const AllOtherPages: React.FC<AllOtherPagesProps> = (props) => {
       </Head>
       <Layout>
         <Hero title={title || ''} />
-        <section dangerouslySetInnerHTML={createMarkup(content || '')} />
+        <div dangerouslySetInnerHTML={createMarkup(content || '')} />
       </Layout>
     </>
   )

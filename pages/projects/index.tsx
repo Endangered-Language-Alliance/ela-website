@@ -26,7 +26,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         <Hero title="Projects">
           <p>Pretend it's a map...</p>
         </Hero>
-        <section
+        <div
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
@@ -40,7 +40,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
               <article
                 key={uri}
                 style={{
-                  border: 'solid 1px var(--lightGray)',
+                  border: 'solid 1px var(--gray2)',
                   borderRadius: 'var(--borderRad2)',
                   padding: 'var(--padding1)',
                   boxShadow: 'var(--elev1)',
@@ -87,7 +87,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
               </article>
             )
           })}
-        </section>
+        </div>
       </Layout>
     </div>
   )

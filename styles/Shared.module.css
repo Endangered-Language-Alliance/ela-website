@@ -3,18 +3,26 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .container {
   margin: 0 auto;
   max-width: var(--maxWidth);
-  padding-left: var(--padding3);
-  padding-right: var(--padding3);
+  padding-left: var(--padding2);
+  padding-right: var(--padding2);
 }
 
 .main {
   margin-bottom: auto;
-  padding-bottom: var(--padding4);
-  padding-top: var(--padding4);
+  padding-bottom: var(--padding2);
+  padding-top: var(--padding2);
   width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  .main {
+    padding-left: var(--padding3);
+    padding-right: var(--padding3);
+  }
 }

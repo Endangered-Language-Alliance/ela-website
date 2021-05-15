@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import Link from 'next/link'
 
 import { createMarkup } from 'lib/utils'
@@ -6,6 +5,7 @@ import sharedStyles from 'styles/Shared.module.css'
 
 import { useFooterQuery } from './hooks'
 import { SocialIcons } from './SocialIcons'
+import { ContactInfo } from './ContactInfo'
 import styles from './Footer.module.css'
 
 export const Footer: React.FC = () => {
@@ -31,16 +31,23 @@ export const Footer: React.FC = () => {
         <nav>
           {nodes?.map((node) => {
             return (
-              <Fragment key={node.label}>
-                <h4>{node.label}</h4>
-                {node.childItems?.nodes?.map((childItem) => (
-                  <li key={childItem?.label}>
-                    <Link href={childItem?.path || ''} key={childItem?.path}>
-                      <a>{childItem?.label}</a>
-                    </Link>
-                  </li>
-                ))}
-              </Fragment>
+              <div key={node.label}>
+                <h3>{node.label}</h3>
+                {node.childItems?.nodes && (
+                  <ul className={styles.navList}>
+                    {node.childItems.nodes.map((childItem) => (
+                      <li key={childItem?.label}>
+                        <Link
+                          href={childItem?.path || ''}
+                          key={childItem?.path}
+                        >
+                          <a>{childItem?.label}</a>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             )
           })}
         </nav>
@@ -49,6 +56,7 @@ export const Footer: React.FC = () => {
           <small className={styles.copyright}>
             &copy; Copyright {new Date().getFullYear()}, {title}
           </small>
+          <ContactInfo {...(contactInfo || {})} />
           <SocialIcons {...(contactInfo || {})} {...(social || {})} />
         </div>
       </div>

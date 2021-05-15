@@ -89,16 +89,16 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
               <TabPanel>
                 <div dangerouslySetInnerHTML={{ __html: background || '' }} />
                 {affiliation && (
-                  <section>
+                  <div>
                     <h3>Affiliation</h3>
                     <div dangerouslySetInnerHTML={{ __html: affiliation }} />
-                  </section>
+                  </div>
                 )}
                 {endangerment && (
-                  <section>
+                  <div>
                     <h3>Endangerment</h3>
                     <div dangerouslySetInnerHTML={{ __html: endangerment }} />
-                  </section>
+                  </div>
                 )}
               </TabPanel>
               {langStructure && (
@@ -148,7 +148,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
               )}
               {inNewYork && (
                 <TabPanel>
-                  <section>
+                  <div>
                     <h3>In New York</h3>
                     <p>
                       <b>
@@ -158,7 +158,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
                       </b>
                     </p>
                     <div dangerouslySetInnerHTML={{ __html: inNewYork }} />
-                  </section>
+                  </div>
                 </TabPanel>
               )}
               {addlInfo && (

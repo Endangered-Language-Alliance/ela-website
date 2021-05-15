@@ -1,17 +1,30 @@
 .root {
-  background-color: var(--darkGray);
-  border-bottom: 2px solid var(--primary);
-  box-shadow: 0 2px 8px var(--elev1);
+  background-color: var(--gray9);
+  border-bottom: 2px solid var(--secondary);
+  box-shadow: var(--elev2);
   color: var(--secondary);
   display: flex;
-  min-height: 75px;
-  overflow-x: auto; /* TODO: mobile only */
-  padding: 0 var(--padding2);
+  min-height: 55px;
+  overflow-x: hidden; /* TODO: mobile only */
   position: sticky;
   text-transform: uppercase;
   top: 0;
   width: 100%;
   z-index: 1;
+}
+
+.root nav {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .root {
+    min-height: 75px;
+  }
+
+  .root nav {
+    display: block;
+  }
 }
 
 .root [data-reach-menu-button][aria-expanded='true'] {
@@ -44,10 +57,10 @@
 }
 
 .logo {
-  height: 50px;
+  height: 40px;
   margin-right: auto;
   position: relative;
-  width: 75px;
+  width: 45px;
 }
 
 .link,

@@ -32,7 +32,4 @@ export type SocialIconsProps = {
   facebook?: string | null
   instagram?: string | null
   youTube?: string | null
-  address?: string | null
-  phone?: string | null
-  email?: string | null
 }

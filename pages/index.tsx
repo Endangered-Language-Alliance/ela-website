@@ -49,13 +49,13 @@ const Home: React.FC<HomeProps> = (props) => {
           allowFullScreen
         />
         <h2>Featured</h2>
-        <section>
+        <div>
           <h3>{heading}</h3>
           {img?.sourceUrl && (
             <div
               style={{
                 position: 'relative',
-                width: 500,
+                width: '100%',
                 height: 300,
                 borderRadius: 'var(--borderRad2)',
               }}
@@ -78,7 +78,7 @@ const Home: React.FC<HomeProps> = (props) => {
               Read More
             </a>
           </Link>
-        </section>
+        </div>
         <h2>Recent Updates</h2>
         <div dangerouslySetInnerHTML={createMarkup(fbFeedIframeHtml || '')} />
         <nav>

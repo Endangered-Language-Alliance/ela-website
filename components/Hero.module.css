@@ -1,6 +1,10 @@
 .root {
   margin: 0 auto var(--padding2);
   max-width: 1000px;
-  padding: var(--padding2);
+  padding: var(--padding2) 0;
   text-align: center;
+}
+
+.title {
+  margin-bottom: var(--padding2);
 }

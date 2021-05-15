@@ -25,11 +25,11 @@ const Latest: React.FC<BlogProps> = (props) => {
 
       <Layout>
         <Hero title={year} />
-        <section>
+        <div>
           {(posts.length &&
             posts.map(({ title, date, excerpt, uri }) => {
               return (
-                <div className={blogStyles.listitem} key={uri}>
+                <article className={blogStyles.listitem} key={uri}>
                   <div className={blogStyles.listitem__content}>
                     <h2>
                       <Link href={uri || ''}>
@@ -46,10 +46,10 @@ const Latest: React.FC<BlogProps> = (props) => {
                       dangerouslySetInnerHTML={createMarkup(excerpt || '')}
                     />
                   </div>
-                </div>
+                </article>
               )
             })) || <p>No posts found.</p>}
-        </section>
+        </div>
       </Layout>
     </div>
   )
