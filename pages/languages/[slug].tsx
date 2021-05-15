@@ -11,8 +11,8 @@ import { LoadingLayout } from 'components/LoadingLayout'
 import { YouTubePlaylist } from 'components/video/YouTubePlaylist'
 import { Language as LanguageType } from 'gql-ts/wp-graphql'
 
-import styles from 'styles/Home.module.css'
 import Link from 'next/link'
+import { Hero } from 'components/Hero'
 
 const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { data } = props
@@ -39,12 +39,12 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <article style={{ textAlign: 'center' }}>
-          <h1 className={styles.title}>{title}</h1>
-          {customInfo?.endonym && <p>{customInfo.endonym}</p>}
-          <div dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
-          <p>Pretend it's a map...</p>
-          <hr />
+        <article>
+          <Hero
+            title={title || ''}
+            subtitle={customInfo?.endonym || ''}
+            summary={excerpt || ''}
+          />
           {youTubePlaylist?.id && (
             <YouTubePlaylist playlistId={youTubePlaylist.id} />
           )}
@@ -55,6 +55,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
               gridColumnGap: 'var(--padding1)',
               gridTemplateColumns: 'repeat(auto-fit, minmax(150px, auto))',
               justifyContent: 'center',
+              textAlign: 'center',
             }}
           >
             {project && (

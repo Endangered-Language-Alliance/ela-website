@@ -50,10 +50,7 @@
 
 .root li {
   list-style-type: none;
-}
-
-.root li + li {
-  margin-left: var(--padding2);
+  margin-right: var(--padding2);
 }
 
 .logo {

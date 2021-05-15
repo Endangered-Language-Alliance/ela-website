@@ -64,6 +64,7 @@
   --padding3: 1.25rem;
   --padding4: 1.5rem;
   --padding5: 2rem;
+  --padding6: 3rem;
 
   /* Breakpoints */
   --phone: 400px;
@@ -71,6 +72,11 @@
   --tablet: 768px;
   --laptop: 1200px;
   --monster: 1500px;
+
+  /* Transition/s */
+  --btnTrans: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
 /* CRED: (fonts): https://type-scale.com/ */
@@ -151,7 +157,7 @@ small {
   font-size: var(--font-sm);
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1921px) {
   :root {
     --maxWidth: 1300px;
   }

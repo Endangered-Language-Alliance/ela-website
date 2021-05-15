@@ -1,10 +1,21 @@
 .root {
-  margin: 0 auto var(--padding2);
   max-width: 1000px;
-  padding: var(--padding2) 0;
+  padding: var(--padding3) 0 var(--padding2);
   text-align: center;
 }
 
 .title {
+  margin-bottom: 0;
+}
+
+.subtitle {
+  font-family: var(--bodyFontFam);
+  font-size: var(--font-h3);
+  color: var(--gray6);
+  margin: 0;
+}
+
+/* e.g. excerpt */
+.summary p {
   margin-bottom: var(--padding2);
 }

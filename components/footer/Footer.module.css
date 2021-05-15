@@ -2,8 +2,8 @@
   background-color: var(--gray10);
   border-top: 2px solid var(--secondary);
   color: var(--white);
-  padding-bottom: var(--padding5);
-  padding-top: var(--padding5);
+  padding-bottom: var(--padding3);
+  padding-top: var(--padding6);
   width: 100%;
 }
 
