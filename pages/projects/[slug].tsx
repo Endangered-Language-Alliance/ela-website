@@ -22,7 +22,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
   const { title, content, uri } = project || {}
 
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -60,7 +60,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
           )}
         </article>
       </Layout>
-    </div>
+    </>
   )
 }
 

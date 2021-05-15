@@ -24,12 +24,11 @@ const PostByYear: React.FC<{ postData?: Post }> = (props) => {
   const { title, date, content } = postData || {}
 
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Layout>
         <article className={blogStyles.article}>
           <div className={blogStyles.postmeta}>
@@ -42,7 +41,7 @@ const PostByYear: React.FC<{ postData?: Post }> = (props) => {
           />
         </article>
       </Layout>
-    </div>
+    </>
   )
 }
 

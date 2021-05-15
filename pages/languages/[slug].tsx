@@ -33,7 +33,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { gDriveDocId } = external || {}
 
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -169,7 +169,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
           </Tabs>
         </article>
       </Layout>
-    </div>
+    </>
   )
 }
 

@@ -8,7 +8,6 @@ import { createMarkup } from 'lib/utils'
 import { getAllPostsWithSlug, getPostsByYear } from 'lib/api/api.latest'
 import { Post } from 'gql-ts/wp-graphql'
 
-import styles from 'styles/Home.module.css'
 import blogStyles from 'styles/Blog.module.css'
 
 type BlogProps = { posts: Post[]; year: string }
@@ -17,7 +16,7 @@ const Latest: React.FC<BlogProps> = (props) => {
   const { posts = [], year } = props
 
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Latest articles</title>
         <link rel="icon" href="/favicon.ico" />
@@ -51,7 +50,7 @@ const Latest: React.FC<BlogProps> = (props) => {
             })) || <p>No posts found.</p>}
         </div>
       </Layout>
-    </div>
+    </>
   )
 }
 

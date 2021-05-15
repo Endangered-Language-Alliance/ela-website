@@ -8,7 +8,6 @@ import { Layout } from 'components/Layout'
 import { Hero } from 'components/Hero'
 import { Post } from 'gql-ts/wp-graphql'
 
-import styles from 'styles/Home.module.css'
 import blogStyles from 'styles/Blog.module.css'
 
 type BlogProps = { posts: Post[] }
@@ -27,7 +26,7 @@ const Latest: React.FC<BlogProps> = (props) => {
     )
 
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Latest articles</title>
         <link rel="icon" href="/favicon.ico" />
@@ -70,7 +69,7 @@ const Latest: React.FC<BlogProps> = (props) => {
           })}
         </div>
       </Layout>
-    </div>
+    </>
   )
 }
 
