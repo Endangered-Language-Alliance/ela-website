@@ -11,8 +11,14 @@ export const Hero: React.FC<HeroProps> = (props) => {
 
   return (
     <div className={styles.root}>
-      <h1 className={styles.title}>{title}</h1>
-      {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+      {subtitle ? (
+        <>
+          <h1 style={{ marginBottom: 0 }}>{title}</h1>
+          <p className={styles.subtitle}>{subtitle}</p>
+        </>
+      ) : (
+        <h1>{title}</h1>
+      )}
       {summary && (
         <div
           dangerouslySetInnerHTML={{ __html: summary || '' }}

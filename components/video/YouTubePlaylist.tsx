@@ -1,24 +1,29 @@
-import getConfig from 'next/config'
+import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { BiPlay } from 'react-icons/bi'
 
 import { YouTubePlaylistResponse, YouTubePlaylistProps } from './types'
 import styles from './YouTube.module.css'
-
-const { publicRuntimeConfig } = getConfig()
-const { youTubeKey } = publicRuntimeConfig
-
-const baseUrl = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=200&key=${youTubeKey}&playlistId=`
+import { YouTubeModal } from './YouTubeModal'
+import { playlistBaseUrl } from './utils'
 
 export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
   const { playlistId } = props
   const { data, error, isLoading } = useQuery<YouTubePlaylistResponse, Error>(
     playlistId,
-    () => fetch(`${baseUrl}${playlistId}`).then((res) => res.json())
+    () => fetch(`${playlistBaseUrl}${playlistId}`).then((res) => res.json())
   )
+  const [modalVideoId, setModalVideoId] = useState<string>('')
 
   if (isLoading) return <div style={{ height: 88 }}>Loading...</div>
-  if (error) return <h2>Could not get playlist ID {playlistId}.</h2>
+
+  if (error || data?.error) {
+    return (
+      <p>
+        Problems with playlist ID <code>{playlistId}</code>.
+      </p>
+    )
+  }
 
   if (!data?.items?.length) {
     return <h2>No data found for playlist ID {playlistId}.</h2>
@@ -34,6 +39,14 @@ export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
           <div
             key={contentDetails.videoId}
             className={styles.thumb}
+            onClick={() => {
+              setModalVideoId(snippet?.resourceId?.videoId || '')
+            }}
+            onKeyDown={() => {
+              setModalVideoId(snippet?.resourceId?.videoId || '')
+            }}
+            role="button"
+            tabIndex={0}
             style={{
               width: thumbnails.medium.width,
               height: thumbnails.medium.height,
@@ -46,6 +59,13 @@ export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
           </div>
         )
       })}
+      <YouTubeModal
+        videoOrPlaylistId={modalVideoId}
+        isOpen={modalVideoId !== ''}
+        close={() => {
+          setModalVideoId('')
+        }}
+      />
     </div>
   )
 }

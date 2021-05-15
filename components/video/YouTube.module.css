@@ -40,3 +40,53 @@
 .mask:hover {
   background-color: transparent;
 }
+
+/* Won't beat the specificity w/just .dialog */
+.dialog[data-reach-dialog-content] {
+  width: auto;
+  max-width: 800px;
+  padding: var(--padding5) var(--padding2);
+  position: relative;
+  margin: 0;
+  height: 100vh;
+}
+
+@media screen and (min-width: 600px) {
+  .dialog[data-reach-dialog-content] {
+    padding: var(--padding5);
+    margin: var(--padding4) auto;
+    height: auto;
+  }
+}
+
+.dialogTitle {
+  text-align: center;
+}
+
+.dialogDescrip {
+  color: var(--gray8);
+}
+
+.dialogCloseBtn {
+  position: absolute;
+  top: var(--padding1);
+  right: var(--padding1);
+}
+
+.videoContainer {
+  height: 0;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  position: relative;
+  margin-bottom: var(--padding4);
+}
+
+.videoContainer iframe,
+.videoContainer object,
+.videoContainer embed {
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+}

@@ -5,12 +5,10 @@
   color: var(--secondary);
   display: flex;
   min-height: 55px;
-  overflow-x: hidden; /* TODO: mobile only */
   position: sticky;
   text-transform: uppercase;
   top: 0;
   width: 100%;
-  z-index: 1;
 }
 
 .root nav {

@@ -5,7 +5,6 @@ import { getAllPostsWithSlug, getPost } from 'lib/api/api.latest'
 import { Layout } from 'components/Layout'
 import { Post } from 'gql-ts/wp-graphql'
 
-import styles from 'styles/Home.module.css'
 import blogStyles from 'styles/Blog.module.css'
 
 const formatDate = (date: string): string => {
@@ -32,7 +31,7 @@ const PostByYear: React.FC<{ postData?: Post }> = (props) => {
       <Layout>
         <article className={blogStyles.article}>
           <div className={blogStyles.postmeta}>
-            <h1 className={styles.title}>{title}</h1>
+            <h1>{title}</h1>
             <p>{formatDate(date || '')}</p>
           </div>
           <div

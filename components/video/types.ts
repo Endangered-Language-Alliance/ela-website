@@ -26,10 +26,15 @@ type YouTubePlaylistItem = {
   contentDetails: {
     videoId: string
   }
+  // TODO: rm this for playlists, it's only for videos
+  player: {
+    embedHtml: string
+  }
 }
 
 // DOCS: https://www.youtube.com/watch?v=w7Dj1iF6BJA&list=/po
 export type YouTubePlaylistResponse = {
+  error?: Error // appears within the data, react-query doesn't catch it
   items: YouTubePlaylistItem[]
   pageInfo: {
     totalResults: number
@@ -39,4 +44,10 @@ export type YouTubePlaylistResponse = {
 
 export type YouTubePlaylistProps = {
   playlistId: string
+}
+
+export type YouTubeModalProps = {
+  videoOrPlaylistId: string
+  isOpen: boolean
+  close: () => void
 }

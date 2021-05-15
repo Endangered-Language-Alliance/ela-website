@@ -38,9 +38,7 @@ const Home: React.FC<HomeProps> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Hero title={title || ''}>
-          <div dangerouslySetInnerHTML={createMarkup(content || '')} />
-        </Hero>
+        <Hero title={title || ''} summary={content || ''} />
         <iframe
           src={youTubeUrl || ''}
           title="TODO: add title"

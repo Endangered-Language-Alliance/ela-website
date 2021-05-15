@@ -12,8 +12,23 @@ import { useHeaderQuery } from './hooks'
 const Header: React.FC = () => {
   const { data, error, isLoading } = useHeaderQuery()
 
-  if (isLoading) return <span>Loading...</span>
-  if (error) return <span>Error!</span>
+  const GetInvolvedCta = (
+    <Link href="/get-involved">
+      <a className={`${btnStyles.button} ${btnStyles.primary}`}>Get involved</a>
+    </Link>
+  )
+
+  if (isLoading || error) {
+    return (
+      <header className={styles.root}>
+        <div className={`${sharedStyles.container} ${styles.inner}`}>
+          <div className={styles.logo} />
+          {error ? <div>Problems loading nav</div> : <div />}
+          {GetInvolvedCta}
+        </div>
+      </header>
+    )
+  }
 
   const { menuItems, logo } = data || {}
   const src = logo?.siteWideSettings?.logo?.sourceUrl || ''
@@ -79,11 +94,7 @@ const Header: React.FC = () => {
             })}
           </ul>
         </nav>
-        <Link href="/get-involved">
-          <a className={`${btnStyles.button} ${btnStyles.primary}`}>
-            Get involved
-          </a>
-        </Link>
+        {GetInvolvedCta}
       </div>
     </header>
   )

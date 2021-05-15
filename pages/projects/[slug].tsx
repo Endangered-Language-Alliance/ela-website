@@ -6,7 +6,6 @@ import { getAllProjectsWithSlug, getProject } from 'lib/api/api.projects'
 import { Layout } from 'components/Layout'
 import { Project, Language } from 'gql-ts/wp-graphql'
 
-import styles from 'styles/Home.module.css'
 import blogStyles from 'styles/Blog.module.css'
 
 type ProjectInstanceProps = {
@@ -30,7 +29,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
       <Layout>
         <article className={blogStyles.article}>
           <div className={blogStyles.postmeta}>
-            <h1 className={styles.title}>{title}</h1>
+            <h1>{title}</h1>
           </div>
           {languages && (
             <>
