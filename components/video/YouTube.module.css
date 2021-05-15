@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.thumb {
+  flex: 1;
+}
+
+.thumb + .thumb {
+  margin-left: var(--padding1);
+}

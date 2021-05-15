@@ -1,3 +1,4 @@
+// TODO: rename file to [uri].tsx, adapt code
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -7,6 +8,7 @@ import '@reach/tabs/styles.css'
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
 import { LoadingLayout } from 'components/LoadingLayout'
+import { YouTubePlaylist } from 'components/video/YouTubePlaylist'
 import { Language as LanguageType } from 'gql-ts/wp-graphql'
 
 import styles from 'styles/Home.module.css'
@@ -44,10 +46,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
           <p>Pretend it's a map...</p>
           <hr />
           {youTubePlaylist?.id && (
-            <p>
-              YouTube playlist ID (will be used in tandem with YouTube API to
-              create thumbs): <code>{youTubePlaylist.id}</code>
-            </p>
+            <YouTubePlaylist playlistId={youTubePlaylist.id} />
           )}
           <ul
             style={{
