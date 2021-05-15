@@ -4,7 +4,17 @@ import sharedStyles from 'styles/Shared.module.css'
 import { Footer } from './footer'
 import Header from './header'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: Infinity,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
+    },
+  },
+})
 
 export const Layout: React.FC = ({ children }) => {
   return (

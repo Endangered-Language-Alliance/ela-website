@@ -13,12 +13,6 @@ export const useFooterQuery: UseFooterQuery = () => {
       const footerData = await request(API_URL, footerQuery)
 
       return footerData
-    },
-    {
-      cacheTime: Infinity,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
     }
   )
 

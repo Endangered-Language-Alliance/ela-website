@@ -13,12 +13,6 @@ export const useHeaderQuery: UseHeaderQuery = () => {
       const mainMenuResp = await request(API_URL, MainMenuQuery)
 
       return mainMenuResp
-    },
-    {
-      cacheTime: Infinity,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
     }
   )
 
