@@ -1,5 +1,6 @@
 import getConfig from 'next/config'
 import { useQuery } from 'react-query'
+import { BiPlay } from 'react-icons/bi'
 
 import { YouTubePlaylistResponse, YouTubePlaylistProps } from './types'
 import styles from './YouTube.module.css'
@@ -25,18 +26,26 @@ export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
 
   return (
     <div className={styles.list}>
-      {data.items.map((item) => (
-        <img
-          key={item.contentDetails.videoId}
-          alt={item.snippet.title}
-          src={item.snippet.thumbnails.default.url}
-          className={styles.thumb}
-          style={{
-            width: item.snippet.thumbnails.default.width,
-            height: item.snippet.thumbnails.default.height,
-          }}
-        />
-      ))}
+      {data.items.map((item) => {
+        const { contentDetails, snippet } = item
+        const { title, thumbnails } = snippet
+
+        return (
+          <div
+            key={contentDetails.videoId}
+            className={styles.thumb}
+            style={{
+              width: thumbnails.medium.width,
+              height: thumbnails.medium.height,
+            }}
+          >
+            <img alt={title} src={thumbnails.medium.url} />
+            <div className={styles.mask}>
+              <BiPlay />
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

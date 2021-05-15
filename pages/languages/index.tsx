@@ -78,6 +78,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
                 <article key={uri}>
                   <ImageCard
                     title={title}
+                    uri={uri}
                     sourceUrl={featuredImage?.node?.sourceUrl}
                     altText={featuredImage?.node?.altText}
                     excerpt={excerpt}
