@@ -21,7 +21,9 @@ type LanguagesProps = {
 }
 
 export type ViewportState = Partial<ViewportProps>
+
 const { publicRuntimeConfig } = getConfig()
+const { mbToken } = publicRuntimeConfig
 
 const Languages: React.FC<LanguagesProps> = (props) => {
   const { data = [] } = props
@@ -59,7 +61,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
             <ReactMapGL
               {...viewport}
               mapStyle="mapbox://styles/mapbox/outdoors-v11"
-              mapboxApiAccessToken={publicRuntimeConfig.REACT_APP_MB_TOKEN}
+              mapboxApiAccessToken={mbToken}
               width="100%"
               height="100%"
               onViewportChange={setViewport}

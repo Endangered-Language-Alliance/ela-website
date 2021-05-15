@@ -4,7 +4,9 @@ module.exports = {
   },
   target: 'serverless', // Netlify plugin might handle it, but had problems
   publicRuntimeConfig: {
-    REACT_APP_MB_TOKEN: process.env.REACT_APP_MB_TOKEN,
+    mbToken: process.env.MB_TOKEN,
+    youTubeKey: process.env.YOUTUBE_KEY,
+    wpGqlEndpoint: process.env.WP_API_URL,
   },
   webpack: (config) => {
     config.module.rules.push({
