@@ -1,0 +1,26 @@
+.page {
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: var(--maxWidth);
+  padding: 0 var(--gutter);
+}
+
+.main {
+  margin-bottom: auto;
+  padding: calc(var(--gutter) / 2);
+  width: 100%;
+}
+
+.content {
+  --linkColor: var(--primary);
+  background-color: var(--white);
+  color: var(--black);
+  border-radius: var(--borderRad2);
+  padding: var(--padding6) var(--gutter);
+  margin-bottom: var(--padding4);
+  box-shadow: var(--elev3);
+}

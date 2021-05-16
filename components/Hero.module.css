@@ -1,19 +1,33 @@
 .root {
+  color: var(--white);
+  margin: 0 auto var(--padding6);
   max-width: 1000px;
-  padding: var(--padding3) 0 var(--padding2);
+  padding-top: var(--padding1);
   text-align: center;
-  margin: 0 auto;
+  /* TODO: rm if not using: */
+  /* background-image: radial-gradient(var(--primary), transparent); */
+}
+
+.title {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: inherit;
 }
 
 .subtitle {
+  color: var(--gray2);
   font-family: var(--bodyFontFam);
-  font-size: var(--font-h2);
-  color: var(--gray6);
-  margin: 0 0 var(--padding1);
+  font-size: var(--font-h4);
   line-height: 1;
+  margin: 0 0 var(--padding4);
 }
 
 /* e.g. excerpt */
 .summary p {
   margin-bottom: var(--padding2);
+}
+
+.divider {
+  border-color: var(--secondaryLight);
+  max-width: 50vw;
 }

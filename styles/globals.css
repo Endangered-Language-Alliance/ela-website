@@ -25,7 +25,17 @@
     var(--primary-s),
     var(--primary--light-l)
   );
-  --secondary: #ffd520;
+  --secondary-h: 49;
+  --secondary-s: 100%;
+  --secondary-l: 56%;
+  --secondary--light-l: 65%;
+  --secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l));
+  --secondaryLight: hsl(
+    var(--secondary-h),
+    var(--secondary-s),
+    var(--secondary--light-l)
+  );
+  --linkColor: var(--secondary);
 
   /* Borders */
   --borderRad1: 2px;
@@ -34,7 +44,8 @@
 
   /* Elevation */
   --elev1: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --elev2: 0 2px 10px rgba(0, 0, 0, 0.45);
+  --elev2: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --elev3: 0 3px 15px rgba(0, 0, 0, 0.45);
 
   /* Typography */
   --headingFontFam: 'Libre Franklin', sans-serif;
@@ -59,19 +70,24 @@
   --maxWidth: 1100px;
 
   /* Spacing */
-  --padding1: 0.75rem;
+  --padding0: 0.512rem;
+  --padding1: 0.8rem;
   --padding2: 1rem;
   --padding3: 1.25rem;
-  --padding4: 1.5rem;
-  --padding5: 2rem;
-  --padding6: 3rem;
+  --padding4: 1.563rem;
+  --padding5: 1.953rem;
+  --padding6: 2.441rem;
+  --padding7: 3.052rem;
+  --gutter: var(--padding2);
 
-  /* Breakpoints */
-  --phone: 400px;
-  --phablet: 600px;
-  --tablet: 768px;
-  --laptop: 1200px;
-  --monster: 1500px;
+  /* 
+    Breakpoints (surrrre):
+    --phone: 400px;
+    --phablet: 600px;
+    --tablet: 768px;
+    --laptop: 1200px;
+    --monster: 1500px;
+  */
 
   /* Transition/s */
   --btnTrans: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
@@ -90,11 +106,33 @@ body {
   margin: 0;
 }
 
+/* CRED: BG img */
+/*
+  Photo by <a href="https://unsplash.com/@thkelley?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Thomas Kelley</a> on <a href="https://unsplash.com/s/photos/languages?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+*/
 body {
   font-family: var(--bodyFontFam);
   font-size: var(--font-body);
-  min-height: 100vh;
   line-height: 1.75;
+  background-image: linear-gradient(
+      10deg,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.75)
+    ),
+    /* TODO: improve, obvi */ -webkit-image-set(url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-300x200.jpg')
+          1x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1024x683.jpg')
+          3x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-768x512.jpg')
+          2x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1536x1024.jpg')
+          4x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-2048x1365.jpg')
+          5x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1568x1045.jpg')
+          6x);
+  background-image: linear-gradient(
+      10deg,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.75)
+    ),
+    url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-2048x1365.jpg');
+  background-size: cover;
 }
 
 * {
@@ -102,8 +140,9 @@ body {
 }
 
 a {
-  color: var(--primary);
+  color: var(--linkColor);
   text-decoration: none;
+  /* TODO: nice chubby underline */
 }
 
 a:hover,
@@ -125,6 +164,7 @@ h5 {
 }
 
 h1 {
+  margin-top: 2rem;
   font-size: var(--font-h1);
 }
 h2 {
@@ -141,9 +181,10 @@ h5 {
 }
 
 /* Somehow still overrides inline styles from WP */
-img {
+img,
+iframe {
+  /* TODO: careful w/iframe! */
   max-width: 100%;
-  height: auto;
 }
 
 p {
@@ -155,6 +196,10 @@ p {
 
 small {
   font-size: var(--font-sm);
+}
+
+button {
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1921px) {
@@ -172,6 +217,7 @@ small {
 @media screen and (min-width: 600px) {
   :root {
     --font-h1: var(--font-monster);
+    --gutter: var(--padding5);
   }
 }
 

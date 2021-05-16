@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
-import { createMarkup } from 'lib/utils'
-import sharedStyles from 'styles/Shared.module.css'
+import sharedStyles from 'components/Layout.module.css'
 
 import { useFooterQuery } from './hooks'
 import { SocialIcons } from './SocialIcons'
@@ -26,7 +25,7 @@ export const Footer: React.FC = () => {
       <div className={`${sharedStyles.container} ${styles.footer__wrap}`}>
         <div>
           <h3>Subscribe to our mailing list</h3>
-          <div dangerouslySetInnerHTML={createMarkup(newsletter || '')} />
+          <div dangerouslySetInnerHTML={{ __html: newsletter || '' }} />
         </div>
         <nav>
           {nodes?.map((node) => {

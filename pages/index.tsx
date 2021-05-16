@@ -1,12 +1,9 @@
 import { GetStaticProps } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { Layout } from 'components/Layout'
-import { Hero } from 'components/Hero'
 import { getHomePageContent } from 'lib/api/api.home'
-import { createMarkup } from 'lib/utils'
 import { CONTENT_URL, PROD_URL } from 'lib/config'
 import {
   GeneralSettings,
@@ -17,6 +14,7 @@ import btnStyles from 'components/buttons/Button.module.css'
 
 export type HomeProps = {
   data: {
+    // TODO: get tagline for <meta>, otherwise remove this from HomeProps
     generalSettings: GeneralSettings
     homePageContent: Page
     posts: RootQueryToPostConnection
@@ -25,69 +23,60 @@ export type HomeProps = {
 
 const Home: React.FC<HomeProps> = (props) => {
   const { data } = props || {}
-  const { homePageContent, posts, generalSettings } = data
-  const { content, homePageSettings = {}, title } = homePageContent
+  const { homePageContent, posts } = data
+  const { content, homePageSettings = {} } = homePageContent
   const { fbFeedIframeHtml = '', featured1, numRecentPosts, youTubeUrl } =
     homePageSettings || {}
   const { description, heading, img, link } = featured1 || {}
 
   return (
-    <>
-      <Head>
-        <title>Home - {generalSettings?.title}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <Hero title={title || ''} summary={content || ''} />
-        <iframe
-          src={youTubeUrl || ''}
-          title="TODO: add title"
-          frameBorder="0"
-          allow="encrypted-media"
-          allowFullScreen
-        />
-        <h2>Featured</h2>
-        <div>
-          <h3>{heading}</h3>
-          {img?.sourceUrl && (
-            <div
-              style={{
-                position: 'relative',
-                width: '100%',
-                height: 300,
-                borderRadius: 'var(--borderRad2)',
-              }}
-            >
-              <Image
-                src={img.sourceUrl || ''}
-                alt={img?.altText || ''}
-                layout="fill"
-                objectFit="cover"
-              />
-            </div>
-          )}
-          <p>{description}</p>
-          <Link
-            href={
-              link?.url?.replace(CONTENT_URL, '').replace(PROD_URL, '') || ''
-            }
+    <Layout title="Home" summary={content || ''}>
+      <iframe
+        src={youTubeUrl || ''}
+        title="TODO: add title"
+        frameBorder="0"
+        allow="encrypted-media"
+        allowFullScreen
+      />
+      <h2>Featured</h2>
+      <div>
+        <h3>{heading}</h3>
+        {img?.sourceUrl && (
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+              height: 300,
+              borderRadius: 'var(--borderRad2)',
+            }}
           >
-            <a className={`${btnStyles.button} ${btnStyles.primary}`}>
-              Read More
-            </a>
-          </Link>
-        </div>
-        <h2>Recent Updates</h2>
-        <div dangerouslySetInnerHTML={createMarkup(fbFeedIframeHtml || '')} />
-        <nav>
-          <ul>
-            {posts?.nodes?.slice(0, numRecentPosts || 5).map((node) => {
-              return <li key={node?.title}>{node?.title}</li>
-            })}
-          </ul>
-        </nav>
-      </Layout>
-    </>
+            <Image
+              src={img.sourceUrl || ''}
+              alt={img?.altText || ''}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+        )}
+        <p>{description}</p>
+        <Link
+          href={link?.url?.replace(CONTENT_URL, '').replace(PROD_URL, '') || ''}
+        >
+          <a className={`${btnStyles.button} ${btnStyles.primary}`}>
+            Read More
+          </a>
+        </Link>
+      </div>
+      <h2>Recent Updates</h2>
+      <div dangerouslySetInnerHTML={{ __html: fbFeedIframeHtml || '' }} />
+      <nav>
+        <ul>
+          {posts?.nodes?.slice(0, numRecentPosts || 5).map((node) => {
+            return <li key={node?.title}>{node?.title}</li>
+          })}
+        </ul>
+      </nav>
+    </Layout>
   )
 }
 

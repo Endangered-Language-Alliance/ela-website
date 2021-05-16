@@ -1,0 +1,36 @@
+.chip {
+  background-color: var(--gray4);
+  border-radius: var(--borderRad2);
+  box-shadow: var(--elev1);
+  color: var(--white);
+  display: inline-flex;
+  font-family: var(--btnFontFam);
+  font-size: var(--font-xs);
+  font-weight: bold;
+  justify-content: center;
+  padding: 2px 6px;
+}
+
+.list {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-gap: var(--padding0);
+  margin: 0;
+  overflow-x: auto;
+  padding: 0;
+}
+
+.primary {
+  background-color: var(--primary);
+}
+
+.primary a {
+  color: inherit;
+}
+
+.listWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto var(--padding1);
+  max-width: 99%;
+}

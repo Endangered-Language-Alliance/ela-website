@@ -1,12 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
 
 import { getAllProjectsWithSlug, getProject } from 'lib/api/api.projects'
 import { Layout } from 'components/Layout'
 import { Project, Language } from 'gql-ts/wp-graphql'
 
-import blogStyles from 'styles/Blog.module.css'
+import blogStyles from 'components/latest/Blog.module.css'
 
 type ProjectInstanceProps = {
   project?: Project
@@ -21,45 +20,39 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
   const { title, content, uri } = project || {}
 
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <article className={blogStyles.article}>
-          <div className={blogStyles.postmeta}>
-            <h1>{title}</h1>
-          </div>
-          {languages && (
-            <>
-              <h2>Languages in this project</h2>
-              <p>Pretend it's a map...</p>
-              <ul>
-                {languages
-                  .filter((lang) => lang?.customInfo?.project?.uri === uri)
-                  .map((lang) => (
-                    <li key={lang?.title}>
-                      <Link href={lang?.uri || ''}>
-                        <a>{lang?.title}</a>
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </>
-          )}
-          {content && (
-            <>
-              <h2>And then our old friend, the content</h2>
-              <div
-                className="post-content content"
-                dangerouslySetInnerHTML={{ __html: content || '' }}
-              />
-            </>
-          )}
-        </article>
-      </Layout>
-    </>
+    <Layout title={title}>
+      <article className={blogStyles.article}>
+        <div className={blogStyles.postmeta}>
+          <h1>{title}</h1>
+        </div>
+        {languages && (
+          <>
+            <h2>Languages in this project</h2>
+            <p>Pretend it's a map...</p>
+            <ul>
+              {languages
+                .filter((lang) => lang?.customInfo?.project?.uri === uri)
+                .map((lang) => (
+                  <li key={lang?.title}>
+                    <Link href={lang?.uri || ''}>
+                      <a>{lang?.title}</a>
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </>
+        )}
+        {content && (
+          <>
+            <h2>And then our old friend, the content</h2>
+            <div
+              className="post-content content"
+              dangerouslySetInnerHTML={{ __html: content || '' }}
+            />
+          </>
+        )}
+      </article>
+    </Layout>
   )
 }
 

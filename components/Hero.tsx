@@ -1,9 +1,9 @@
 import styles from './Hero.module.css'
 
-type HeroProps = {
-  title: string
-  subtitle?: string // e.g. endonym
-  summary?: string // e.g. excerpt
+export type HeroProps = {
+  title?: string | null
+  subtitle?: string | null // e.g. endonym
+  summary?: string | null // e.g. excerpt
 }
 
 export const Hero: React.FC<HeroProps> = (props) => {
@@ -13,11 +13,16 @@ export const Hero: React.FC<HeroProps> = (props) => {
     <div className={styles.root}>
       {subtitle ? (
         <>
-          <h1 style={{ marginBottom: 0 }}>{title}</h1>
+          <h1
+            className={styles.title}
+            style={{ marginBottom: 'var(--padding4)' }}
+          >
+            {title}
+          </h1>
           <p className={styles.subtitle}>{subtitle}</p>
         </>
       ) : (
-        <h1>{title}</h1>
+        <h1 className={styles.title}>{title}</h1>
       )}
       {summary && (
         <div
@@ -26,6 +31,7 @@ export const Hero: React.FC<HeroProps> = (props) => {
         />
       )}
       {children}
+      <hr className={styles.divider} />
     </div>
   )
 }

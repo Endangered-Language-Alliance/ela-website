@@ -1,75 +1,20 @@
-import Head from 'next/head'
-import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
-import { createMarkup } from 'lib/utils'
 import { getAllPosts } from 'lib/api/api.latest'
 import { Layout } from 'components/Layout'
-import { Hero } from 'components/Hero'
+import { PostsItem } from 'components/latest/PostsItem'
+import { PostsYearsNavList } from 'components/latest/PostsYearsNavList'
 import { Post } from 'gql-ts/wp-graphql'
 
-import blogStyles from 'styles/Blog.module.css'
-
-type BlogProps = { posts: Post[] }
-
-const Latest: React.FC<BlogProps> = (props) => {
+const PostsList: React.FC<{ posts: Post[] }> = (props) => {
   const { posts = [] } = props
-  const currentYear = new Date().getFullYear()
-  const spanOfYears = currentYear - 2009 // 2009 = oldest post year
-
-  // TODO: into lib/utils
-  // CRED: https://stackoverflow.com/a/55776744/1048518
-  const range = (start: number, stop: number, step: number): number[] =>
-    Array.from(
-      { length: (stop - start) / step + 1 },
-      (_, i) => start + i * step
-    )
 
   return (
-    <>
-      <Head>
-        <title>Latest articles</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <Hero title="Latest updates" />
-        <nav>
-          <ul>
-            {range(currentYear, currentYear - spanOfYears, -1).map(
-              (postYear) => (
-                <li key={postYear}>
-                  <Link href={`/latest/${postYear}`}>
-                    <a>{postYear}</a>
-                  </Link>
-                </li>
-              )
-            )}
-          </ul>
-        </nav>
-        <div>
-          {posts.map(({ title, date, excerpt, uri }) => {
-            return (
-              <article className={blogStyles.listitem} key={uri}>
-                <div className={blogStyles.listitem__content}>
-                  <h2>
-                    <Link href={uri || ''}>
-                      <a>{title}</a>
-                    </Link>
-                  </h2>
-                  <time
-                    className={blogStyles.listitem__date}
-                    dateTime={date || ''}
-                  >
-                    {date}
-                  </time>
-                  <div dangerouslySetInnerHTML={createMarkup(excerpt || '')} />
-                </div>
-              </article>
-            )
-          })}
-        </div>
-      </Layout>
-    </>
+    <Layout title="Latest articles" tweenerContent={<PostsYearsNavList />}>
+      {posts.map((post) => (
+        <PostsItem key={post.date} {...post} />
+      ))}
+    </Layout>
   )
 }
 
@@ -84,4 +29,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default Latest
+export default PostsList

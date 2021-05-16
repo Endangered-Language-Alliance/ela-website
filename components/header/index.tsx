@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Menu, MenuList, MenuButton, MenuLink } from '@reach/menu-button'
 import '@reach/menu-button/styles.css'
 
-import sharedStyles from 'styles/Shared.module.css'
+import sharedStyles from 'components/Layout.module.css'
 import btnStyles from 'components/buttons/Button.module.css'
 import styles from './Header.module.css'
 
