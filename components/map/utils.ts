@@ -1,21 +1,25 @@
-import { LangLocation_Languagelocation, Language } from 'gql-ts/wp-graphql'
+import { Language } from 'gql-ts/wp-graphql'
 
 import { PreppedMarker } from './types'
 
-export const getCitiesCoords = (
-  languages: Language[]
-): LangLocation_Languagelocation[] => {
-  return languages?.map((node) => {
-    const { langLocations, title: langName, uri } = node || {}
+export const getCitiesCoords = (languages: Language[]): PreppedMarker[] => {
+  const allOfEm = languages.reduce((all, thisOne): PreppedMarker[] => {
+    const { langLocations, title: langName, uri } = thisOne || {}
     const { nodes } = langLocations || {}
 
-    if (!nodes?.length) return { city: 'alpena', lat: 45, lon: -79 }
+    if (!nodes?.length) return all
+
+    const locsMapped = nodes?.map((node) => {
+      return {
+        ...(node?.languageLocation || {}),
+        langName,
+        langUri: uri,
+      }
+    })
 
     // TODO: reduce to get all of them
-    return {
-      ...(nodes[0]?.languageLocation || {}),
-      langName,
-      langUri: uri,
-    }
-  }) as PreppedMarker[]
+    return [...all, ...locsMapped] as PreppedMarker[]
+  }, [] as PreppedMarker[])
+
+  return allOfEm
 }
