@@ -17,11 +17,6 @@ export const NavMenu: React.FC<NavMenuProps> = (props) => {
   return (
     <nav aria-labelledby={id}>
       <ul>
-        <li>
-          <Link href="/">
-            <a className={styles.link}>Home</a>
-          </Link>
-        </li>
         {data.map((node) => {
           const { label, path, childItems, parentId } = node || {}
 

@@ -10,7 +10,7 @@ const PostsList: React.FC<{ posts: Post[] }> = (props) => {
   const { posts = [] } = props
 
   return (
-    <Layout title="Latest articles" tweenerContent={<PostsYearsNavList />}>
+    <Layout title="Latest" tweenerContent={<PostsYearsNavList />}>
       {posts.map((post) => (
         <PostsItem key={post.date} {...post} />
       ))}
