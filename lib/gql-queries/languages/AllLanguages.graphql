@@ -1,14 +1,20 @@
 query AllLanguages {
+  # A bit fragile, but easy way to populate the hero summary
+  contentType(id: "language", idType: NAME) {
+    description
+  }
   languages {
     nodes {
       title
-      excerpt
       uri
-      featuredImage {
+      contentType {
         node {
-          sourceUrl
-          altText
+          description
         }
+      }
+      customInfo {
+        endonym
+        background
       }
       langLocations {
         nodes {

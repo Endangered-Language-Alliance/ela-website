@@ -1,44 +1,29 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import styles from './ImageCard.module.css'
 
 type ImageCardProps = {
   title?: string | null
-  sourceUrl?: string | null
-  altText?: string | null
   uri?: string | null
-  excerpt?: string | null
+  summary?: string | null
+  subtitle?: string | null
 }
 
 export const ImageCard: React.FC<ImageCardProps> = (props) => {
-  const { title, sourceUrl, altText, uri, children, excerpt } = props
+  const { title, uri, summary, subtitle } = props
 
   return (
-    <div className={styles.root}>
-      {sourceUrl && (
-        <div className={styles.image}>
-          <Image
-            src={sourceUrl}
-            alt={altText || title || ''}
-            layout="fill"
-            objectFit="cover"
-            className={styles.image}
-          />
-        </div>
-      )}
-      <div className={styles.inner}>
-        <h2 className={styles.title}>
-          <Link href={uri || ''}>
-            <a>{title}</a>
-          </Link>
-        </h2>
+    <Link href={uri || ''}>
+      <a className={styles.root}>
+        <header className={styles.header}>
+          <h2 className={styles.title}>{title}</h2>
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+        </header>
         <div
-          dangerouslySetInnerHTML={{ __html: excerpt || '' }}
+          dangerouslySetInnerHTML={{ __html: summary?.trim() || '' }}
           className={styles.summary}
         />
-        {children}
-      </div>
-    </div>
+      </a>
+    </Link>
   )
 }

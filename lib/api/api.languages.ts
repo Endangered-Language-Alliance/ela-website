@@ -16,7 +16,7 @@ const { wpGqlEndpoint } = publicRuntimeConfig
 export async function getAllLanguages() {
   const data = await request(wpGqlEndpoint, allLanguages)
 
-  return data?.languages?.nodes
+  return { languages: data?.languages?.nodes, contentType: data?.contentType }
 }
 
 export const getLanguage = async (

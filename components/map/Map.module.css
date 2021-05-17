@@ -15,13 +15,26 @@
 }
 
 .content {
+  border-left: solid 1px var(--gray2);
+  display: grid;
   flex: 1;
-  width: 100%;
-  overflow-y: auto;
-  padding: var(--padding3) var(--padding3) 0;
-  padding-bottom: 0;
+  grid-gap: var(--padding1);
   height: 40vh;
+  overflow-y: auto;
+  padding-bottom: 0;
+  padding: var(--padding2);
+  width: 100%;
+  grid: auto / repeat(6, 1fr);
 }
+
+.contentItem {
+  grid-column: span 3;
+}
+
+/* CRED: 
+themeover.com/alternating-columns-3-2-using-css-grid-and-nth-child-formulas */
+/* .contentItem:nth-child(5n) { } */
+/* .contentItem:nth-child(5n-2) { grid-column: span 6; } */
 
 @media screen and (min-width: 769px) {
   .root {
@@ -40,5 +53,6 @@
 
   .mapWrap .mapboxgl-map {
     border-radius: var(--borderRad3) 0 0 var(--borderRad3);
+    border-radius: 50px 0 0 0;
   }
 }
