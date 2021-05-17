@@ -1,5 +1,7 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { GetStaticProps } from 'next'
+import { LngLatBounds, Map as MbMap } from 'mapbox-gl'
+
 import ReactMapGL, { NavigationControl, FullscreenControl } from 'react-map-gl'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -11,7 +13,12 @@ import MapMarkers from 'components/map/MapMarkers'
 import { MapPopup } from 'components/map/MapPopup'
 import { getCitiesCoords } from 'components/map/utils'
 import { mapConfig, initialState, mapCtrlBtnStyle } from 'components/map/config'
-import { PreppedMarker, ViewportState, PopupState } from 'components/map/types'
+import {
+  PreppedMarker,
+  ViewportState,
+  PopupState,
+  ZoomEndEvent,
+} from 'components/map/types'
 import { ImageCard } from 'components/cards/ImageCard'
 
 import mapStyles from 'components/map/Map.module.css'
@@ -23,13 +30,48 @@ type LanguagesProps = {
   }
 }
 
+// TODO: init clusters:
+// https://github.com/visgl/react-map-gl/tree/6.1-release/examples/clusters/src
 const Languages: React.FC<LanguagesProps> = (props) => {
   const { data } = props || {}
   const { contentType, languages } = data
-  const [viewport, setViewport] = React.useState<ViewportState>(initialState)
-  const [popupInfo, setPopupInfo] = React.useState<PopupState>(null)
-  const citiesCoords = getCitiesCoords(languages)
+  const [viewport, setViewport] = useState<ViewportState>(initialState)
+  const [popupInfo, setPopupInfo] = useState<PopupState>(null)
+  const [mapIsMoving, setMapIsMoving] = useState<boolean>(true)
+  const preppedData = getCitiesCoords(languages)
   // const more = [...languages, ...languages, ...languages, ...languages]
+
+  function onLoad(mapLoadEvent: { target: MbMap }): void {
+    const { target: map } = mapLoadEvent
+    const bounds = new LngLatBounds()
+
+    preppedData.forEach(({ lon, lat }) => {
+      if (lon && lat) bounds.extend([lon, lat])
+    })
+
+    // Maintain viewport state sync if needed (e.g. after `flyTo`), otherwise
+    // the map shifts back to previous position after panning or zooming.
+    map.on('moveend', function onMoveEnd(zoomEndEvent: ZoomEndEvent): void {
+      setMapIsMoving(false)
+
+      // No custom event data, regular move event
+      if (zoomEndEvent.forceViewportUpdate) {
+        setViewport({
+          ...viewport, // spreading just in case bearing or pitch are added
+          latitude: map.getCenter().lat,
+          longitude: map.getCenter().lng,
+          pitch: map.getPitch(),
+          zoom: map.getZoom(),
+        })
+      }
+    })
+
+    map.on('movestart', function onMoveStart(zoomEndEvent: ZoomEndEvent): void {
+      if (zoomEndEvent.forceViewportUpdate) setMapIsMoving(true)
+    })
+
+    map.fitBounds(bounds, { padding: 50 }, { forceViewportUpdate: true })
+  }
 
   return (
     <Layout title="Languages" summary={contentType?.description}>
@@ -39,11 +81,14 @@ const Languages: React.FC<LanguagesProps> = (props) => {
             {...viewport}
             {...mapConfig}
             onViewportChange={setViewport}
+            onLoad={onLoad}
           >
-            <MapMarkers
-              markers={citiesCoords || ([] as PreppedMarker[])}
-              onClick={setPopupInfo}
-            />
+            {!mapIsMoving && (
+              <MapMarkers
+                markers={preppedData || ([] as PreppedMarker[])}
+                onClick={setPopupInfo}
+              />
+            )}
             {popupInfo && (
               <MapPopup popupInfo={popupInfo} setPopupInfo={setPopupInfo} />
             )}

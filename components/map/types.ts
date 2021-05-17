@@ -21,3 +21,8 @@ export type MapMarkersProps = {
   markers: LangLocation_Languagelocation[]
   onClick: React.Dispatch<PopupState>
 }
+
+// Custom data at end of MB event, e.g. moveend
+export type ZoomEndEvent = {
+  forceViewportUpdate?: boolean
+}
