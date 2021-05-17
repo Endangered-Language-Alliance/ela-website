@@ -6,7 +6,6 @@ query LanguageBySlug($id: ID!, $idType: LanguageIdType!) {
 
 fragment LanguageFields on Language {
   title
-  excerpt
   uri
   youTubePlaylist {
     id

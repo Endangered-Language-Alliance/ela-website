@@ -18,7 +18,7 @@
   --primary-h: 255;
   --primary-s: 46%;
   --primary-l: 40%;
-  --primary--light-l: 65%;
+  --primary--light-l: 55%;
   --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
   --primaryLight: hsl(
     var(--primary-h),
@@ -90,9 +90,11 @@
   */
 
   /* Transition/s */
-  --btnTrans: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+  /* --btnTrans: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; */
+  --transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  --btnTrans: var(--transition);
 
   /* Line heights */
   --headingLineHt: 1.3;
@@ -145,13 +147,14 @@ body {
 a {
   color: var(--linkColor);
   text-decoration: none;
+  transition: var(--transition);
   /* TODO: nice chubby underline */
 }
 
 a:hover,
 a:focus,
 a:active {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 h1,

@@ -1,12 +1,12 @@
 import { Language_Custominfo_External, Project } from 'gql-ts/wp-graphql'
 import Link from 'next/link'
 
-import chipStyles from 'components/buttons/Chip.module.css'
+import btnStyles from 'components/buttons/Button.module.css'
 import styles from './Languages.module.css'
 
 export type LangInstanceLinksListProps = {
-  external?: Language_Custominfo_External
-  project?: Project
+  external?: null | Language_Custominfo_External
+  project?: null | Project
 }
 
 export const LangInstanceLinksList: React.FC<LangInstanceLinksListProps> = (
@@ -14,24 +14,30 @@ export const LangInstanceLinksList: React.FC<LangInstanceLinksListProps> = (
 ) => {
   const { project, external } = props
   const { archiveOrgLink, nycLangMap } = external || {}
+  const { button, primary, small } = btnStyles
+  const btnClasses = `${button} ${primary} ${small}`
 
   return (
-    <ul className={styles.root}>
+    <ul className={styles.linksList}>
       {project && (
-        <li className={`${chipStyles.chip} ${chipStyles.primary}`}>
+        <li>
           <Link href={project.uri || ''}>
-            <a>Project: {project.title}</a>
+            <a className={btnClasses}>Project: {project.title}</a>
           </Link>
         </li>
       )}
       {archiveOrgLink && (
-        <li className={`${chipStyles.chip} ${chipStyles.primary}`}>
-          <a href={archiveOrgLink}>Archive.org</a>
+        <li>
+          <a className={btnClasses} href={archiveOrgLink}>
+            Archive.org
+          </a>
         </li>
       )}
       {nycLangMap && (
-        <li className={`${chipStyles.chip} ${chipStyles.primary}`}>
-          <a href={nycLangMap}>Languages of NYC Map</a>
+        <li>
+          <a className={btnClasses} href={nycLangMap}>
+            Languages of NYC Map
+          </a>
         </li>
       )}
       {/* TODO: Glotto? */}

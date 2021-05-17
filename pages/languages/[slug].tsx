@@ -1,8 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 import '@reach/tabs/styles.css'
 
+import btnStyles from 'components/buttons/Button.module.css'
+import langStyles from 'components/languages/Languages.module.css'
+import sharedStyles from 'components/Layout.module.css'
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
 import { YouTubePlaylist } from 'components/video/YouTubePlaylist'
@@ -25,24 +29,23 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
       />
     )
 
-  const { title, excerpt, customInfo, youTubePlaylist } = data || {}
+  const { title, customInfo, youTubePlaylist } = data || {}
   const { project, external, background, affiliation, endangerment } =
     customInfo || {}
   const { langStructure, prevResearch, addlInfo } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
-  const { glottologId } = external || {}
-  const { gDriveDocId } = external || {}
+  const { glottologId, gDriveDocId } = external || {}
 
   return (
-    <Layout title={title} subtitle={customInfo?.endonym} summary={excerpt}>
+    <Layout title={title} subtitle={customInfo?.endonym} summary={background}>
       <article>
         {youTubePlaylist?.id && (
           <YouTubePlaylist playlistId={youTubePlaylist.id} />
         )}
         <LangInstanceLinksList external={external} project={project} />
-        <Tabs>
+        <Tabs className={langStyles.tabs}>
           <TabList>
-            <Tab>Background</Tab>
+            {(affiliation || endangerment) && <Tab>Background</Tab>}
             {langStructure && <Tab>Language Structure</Tab>}
             {(glottologId || prevResearch) && <Tab>Previous Research</Tab>}
             {elaWork && <Tab>ELA's Work</Tab>}
@@ -51,7 +54,6 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <div dangerouslySetInnerHTML={{ __html: background || '' }} />
               {affiliation && (
                 <div>
                   <h3>Affiliation</h3>
@@ -88,12 +90,6 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
             )}
             {(elaWork || gDriveDocId) && (
               <TabPanel>
-                <p>
-                  <b>
-                    @Ross would this maybe be a better spot for the Project
-                    link? Or BOTH spots perhaps, since it's important?
-                  </b>
-                </p>
                 {elaWork && (
                   <div dangerouslySetInnerHTML={{ __html: elaWork }} />
                 )}
@@ -108,21 +104,35 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
                     />
                   </>
                 )}
+                {project && (
+                  <div
+                    className={sharedStyles.flexCenter}
+                    style={{ marginTop: 'var(--padding2)' }} // dammit
+                  >
+                    <Link href={project.uri || ''}>
+                      <a className={`${btnStyles.button} ${btnStyles.primary}`}>
+                        View project
+                      </a>
+                    </Link>
+                  </div>
+                )}
               </TabPanel>
             )}
             {inNewYork && (
               <TabPanel>
-                <div>
-                  <h3>In New York</h3>
-                  <p>
-                    <b>
-                      @Ross would this maybe be a better spot for the NYC map
-                      link? Or are there scenarios where this section doesn't
-                      exist but a link does?
-                    </b>
-                  </p>
-                  <div dangerouslySetInnerHTML={{ __html: inNewYork }} />
-                </div>
+                <div dangerouslySetInnerHTML={{ __html: inNewYork }} />
+                {external?.nycLangMap && (
+                  <div className={sharedStyles.flexCenter}>
+                    <a
+                      href={external?.nycLangMap}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`${btnStyles.button} ${btnStyles.primary}`}
+                    >
+                      View NYC map
+                    </a>
+                  </div>
+                )}
               </TabPanel>
             )}
             {addlInfo && (

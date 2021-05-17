@@ -57,6 +57,10 @@
   color: var(--secondary);
 }
 
+.link:hover {
+  color: var(--secondaryLight);
+}
+
 .inner {
   align-items: center;
   display: flex;
