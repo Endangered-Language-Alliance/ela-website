@@ -2,6 +2,7 @@
   display: flex;
   overflow-x: auto;
   padding-bottom: var(--padding1);
+  /* TODO: padding-left or other way to obviate scrollability on mobile */
 }
 
 .thumb {
@@ -49,15 +50,13 @@
   max-width: 800px;
   padding: var(--padding5) var(--padding2);
   position: relative;
-  margin: 0;
-  height: 100vh;
+  margin: var(--padding2);
 }
 
 @media screen and (min-width: 600px) {
   .dialog[data-reach-dialog-content] {
     padding: var(--padding5);
     margin: var(--padding4) auto;
-    height: auto;
   }
 }
 

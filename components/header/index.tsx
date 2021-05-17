@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, MenuList, MenuButton, MenuLink } from '@reach/menu-button'
-import '@reach/menu-button/styles.css'
 
 import sharedStyles from 'components/Layout.module.css'
 import btnStyles from 'components/buttons/Button.module.css'
 import styles from './Header.module.css'
 
+import { Burger } from './Burger'
+import { NavMenu } from './NavMenu'
 import { useHeaderQuery } from './hooks'
 
 const Header: React.FC = () => {
@@ -39,6 +39,7 @@ const Header: React.FC = () => {
         <Link href="/">
           <a className={styles.logo}>
             {src && (
+              // TODO: stop using Image
               <Image
                 src={src}
                 alt="organization logo"
@@ -48,52 +49,15 @@ const Header: React.FC = () => {
             )}
           </a>
         </Link>
-        <nav>
-          <ul>
-            {/* Manually link to Home so we can use different Home title */}
-            <li>
-              <Link href="/">
-                <a className={styles.link}>Home</a>
-              </Link>
-            </li>
-            {menuItems?.nodes?.map((node) => {
-              const { label, path, childItems, parentId } = node || {}
-
-              if (!parentId && !childItems?.nodes?.length) {
-                return (
-                  <li key={path}>
-                    <Link href={path || ''}>
-                      <a className={styles.link}>{label}</a>
-                    </Link>
-                  </li>
-                )
-              }
-
-              return (
-                <li key={path}>
-                  <Menu>
-                    <MenuButton>
-                      {label} <span aria-hidden>▾</span>
-                    </MenuButton>
-                    <MenuList className={styles.ahhhh}>
-                      {childItems?.nodes?.map((item) => {
-                        return (
-                          <MenuLink
-                            key={item?.path}
-                            as={Link}
-                            href={item?.path || '/'}
-                          >
-                            {item?.label}
-                          </MenuLink>
-                        )
-                      })}
-                    </MenuList>
-                  </Menu>
-                </li>
-              )
-            })}
-          </ul>
-        </nav>
+        {menuItems?.nodes && (
+          <>
+            <NavMenu data={menuItems.nodes} />
+            <Burger
+              id="menu-label"
+              navMenu={<NavMenu id="menu-label" data={menuItems.nodes} />}
+            />
+          </>
+        )}
         {GetInvolvedCta}
       </div>
     </header>

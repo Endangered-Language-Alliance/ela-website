@@ -17,16 +17,6 @@
   font-weight: bold;
 }
 
-@media screen and (min-width: 600px) {
-  .root {
-    min-height: 75px;
-  }
-
-  .root nav {
-    display: block;
-  }
-}
-
 .root [data-reach-menu-button][aria-expanded='true'] {
   /* font-weight: bold; */
 }
@@ -96,4 +86,34 @@
   flex-direction: column;
   position: relative;
   box-shadow: var(--elev2);
+}
+
+@media screen and (min-width: 600px) {
+  .root {
+    min-height: 75px;
+  }
+
+  .root nav {
+    display: block;
+  }
+}
+
+.burger {
+  display: flex;
+  order: 3; /* after cta */
+}
+
+.burger:focus {
+  outline: 2px solid;
+}
+
+.burger button {
+  font-size: 1.5rem;
+}
+
+/* Might could do 800 */
+@media screen and (min-width: 769px) {
+  .burger {
+    display: none;
+  }
 }

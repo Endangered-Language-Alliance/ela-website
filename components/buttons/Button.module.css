@@ -42,6 +42,9 @@
   background-color: var(--primaryLight);
 }
 
-.text-only {
+/* e.g. just icon */
+.contentOnly {
   padding: 6px 8px;
+  min-width: unset;
+  box-shadow: none;
 }
