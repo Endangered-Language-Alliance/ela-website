@@ -2,6 +2,7 @@
   display: flex;
   overflow-x: auto;
   padding-bottom: var(--padding1);
+  margin-bottom: var(--padding1);
   /* TODO: padding-left or other way to obviate scrollability on mobile */
 }
 

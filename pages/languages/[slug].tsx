@@ -1,6 +1,4 @@
-// TODO: rename file to [uri].tsx, adapt code
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 import '@reach/tabs/styles.css'
@@ -9,6 +7,7 @@ import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
 import { YouTubePlaylist } from 'components/video/YouTubePlaylist'
 import { Language as LanguageType } from 'gql-ts/wp-graphql'
+import { LangInstanceLinksList } from 'components/languages/LangInstanceLinksList'
 
 const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { data } = props
@@ -18,14 +17,20 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
   // https://nextjs.org/docs/basic-features/data-fetching#fallback-pages
   if (router.isFallback) return <Layout title="Loading..." />
 
-  if (!data) return <p>No data could be found for this language...</p>
+  if (!data)
+    return (
+      <Layout
+        title="Not found"
+        summary="No data could be found for this language..."
+      />
+    )
 
   const { title, excerpt, customInfo, youTubePlaylist } = data || {}
   const { project, external, background, affiliation, endangerment } =
     customInfo || {}
   const { langStructure, prevResearch, addlInfo } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
-  const { archiveOrgLink, glottologId, nycLangMap } = external || {}
+  const { glottologId } = external || {}
   const { gDriveDocId } = external || {}
 
   return (
@@ -34,34 +39,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
         {youTubePlaylist?.id && (
           <YouTubePlaylist playlistId={youTubePlaylist.id} />
         )}
-        <ul
-          style={{
-            listStyle: 'none',
-            display: 'grid',
-            gridColumnGap: 'var(--padding1)',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, auto))',
-            justifyContent: 'center',
-            textAlign: 'center',
-          }}
-        >
-          {project && (
-            <li>
-              <Link href={project.uri || ''}>
-                <a>Project: {project.title}</a>
-              </Link>
-            </li>
-          )}
-          {archiveOrgLink && (
-            <li>
-              <a href={archiveOrgLink}>Archive.org</a>
-            </li>
-          )}
-          {nycLangMap && (
-            <li>
-              <a href={nycLangMap}>Languages of NYC Map</a>
-            </li>
-          )}
-        </ul>
+        <LangInstanceLinksList external={external} project={project} />
         <Tabs>
           <TabList>
             <Tab>Background</Tab>

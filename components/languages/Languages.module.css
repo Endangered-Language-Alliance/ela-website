@@ -1,0 +1,14 @@
+.root {
+  margin: 0 0 var(--padding2);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.root li + li {
+  margin-left: var(--padding0);
+}
+
+.root li {
+  flex-shrink: 0;
+}

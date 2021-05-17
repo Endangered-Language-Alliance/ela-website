@@ -1,3 +1,12 @@
+.list {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-gap: var(--padding0);
+  margin: 0;
+  overflow-x: auto;
+  padding: 0;
+}
+
 .chip {
   background-color: var(--gray4);
   border-radius: var(--borderRad2);
@@ -11,21 +20,16 @@
   padding: 2px 6px;
 }
 
-.list {
-  display: inline-grid;
-  grid-auto-flow: column;
-  grid-gap: var(--padding0);
-  margin: 0;
-  overflow-x: auto;
-  padding: 0;
+.chip a {
+  color: inherit;
 }
 
 .primary {
   background-color: var(--primary);
 }
 
-.primary a {
-  color: inherit;
+.secondary {
+  background-color: var(--secondary);
 }
 
 .listWrapper {
