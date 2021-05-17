@@ -11,7 +11,7 @@
   cursor: pointer;
   display: inline-flex;
   font-family: var(--btnFontFam);
-  font-size: 0.875rem;
+  font-size: var(--font-sm);
   font-weight: 700;
   justify-content: center;
   letter-spacing: 0.02857em;
@@ -47,4 +47,12 @@
   padding: 6px 8px;
   min-width: unset;
   box-shadow: none;
+}
+
+.small {
+  font-size: var(--font-xs);
+}
+
+.large {
+  font-size: var(--font-md);
 }

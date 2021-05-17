@@ -1,19 +1,17 @@
 import * as React from 'react'
 import { GetStaticProps } from 'next'
-import getConfig from 'next/config'
-import ReactMapGL, { ViewportProps } from 'react-map-gl'
+import ReactMapGL, { NavigationControl, FullscreenControl } from 'react-map-gl'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import { Layout } from 'components/Layout'
 import { getAllLanguages } from 'lib/api/api.languages'
-import {
-  ContentType,
-  LangLocation_Languagelocation,
-  Language,
-} from 'gql-ts/wp-graphql'
+import { ContentType, Language } from 'gql-ts/wp-graphql'
 import MapMarkers from 'components/map/MapMarkers'
-import { MapMarkerFields } from 'components/map/types'
+import { MapPopup } from 'components/map/MapPopup'
+import { getCitiesCoords } from 'components/map/utils'
+import { mapConfig, initialState, mapCtrlBtnStyle } from 'components/map/config'
+import { PreppedMarker, ViewportState, PopupState } from 'components/map/types'
 import { ImageCard } from 'components/cards/ImageCard'
 
 import mapStyles from 'components/map/Map.module.css'
@@ -25,35 +23,13 @@ type LanguagesProps = {
   }
 }
 
-export type ViewportState = Partial<ViewportProps>
-
-const { publicRuntimeConfig } = getConfig()
-const { mbToken } = publicRuntimeConfig
-
 const Languages: React.FC<LanguagesProps> = (props) => {
   const { data } = props || {}
   const { contentType, languages } = data
-  const [viewport, setViewport] = React.useState<ViewportState>({
-    latitude: 0,
-    longitude: 0,
-    zoom: 0.5,
-  })
-
-  const citiesCoords = languages?.map((node) => {
-    const { langLocations } = node
-
-    if (!langLocations?.nodes?.length)
-      return {
-        city: 'alpena',
-        lat: 45,
-        lon: -79,
-      }
-
-    // TODO: reduce to get all of them
-    return langLocations.nodes[0]?.languageLocation
-  }) as LangLocation_Languagelocation[]
-
-  const more = [...languages, ...languages, ...languages, ...languages]
+  const [viewport, setViewport] = React.useState<ViewportState>(initialState)
+  const [popupInfo, setPopupInfo] = React.useState<PopupState>(null)
+  const citiesCoords = getCitiesCoords(languages)
+  // const more = [...languages, ...languages, ...languages, ...languages]
 
   return (
     <Layout title="Languages" summary={contentType?.description}>
@@ -61,18 +37,22 @@ const Languages: React.FC<LanguagesProps> = (props) => {
         <div className={mapStyles.mapWrap}>
           <ReactMapGL
             {...viewport}
-            mapStyle="mapbox://styles/mapbox/outdoors-v11"
-            mapboxApiAccessToken={mbToken}
-            width="100%"
-            height="100%"
+            {...mapConfig}
             onViewportChange={setViewport}
-            maxZoom={10}
           >
-            <MapMarkers markers={citiesCoords || ([] as MapMarkerFields[])} />
+            <MapMarkers
+              markers={citiesCoords || ([] as PreppedMarker[])}
+              onClick={setPopupInfo}
+            />
+            {popupInfo && (
+              <MapPopup popupInfo={popupInfo} setPopupInfo={setPopupInfo} />
+            )}
+            <FullscreenControl style={mapCtrlBtnStyle} />
+            <NavigationControl style={mapCtrlBtnStyle} />
           </ReactMapGL>
         </div>
         <div className={mapStyles.content}>
-          {more.map((node) => {
+          {languages.map((node) => {
             const { uri, title, customInfo } = node
             const { background, endonym } = customInfo || {}
 

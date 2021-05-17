@@ -14,6 +14,16 @@
   border-radius: var(--borderRad3) var(--borderRad3) 0 0;
 }
 
+.marker {
+  --size: 20px;
+  --offset: calc(var(--size) * -1);
+  height: var(--size);
+  cursor: pointer;
+  fill: var(--primary);
+  stroke: none;
+  transform: translate(calc(var(--offset) / 2), var(--offset));
+}
+
 .content {
   border-left: solid 1px var(--gray2);
   display: grid;
@@ -29,6 +39,17 @@
 
 .contentItem {
   grid-column: span 3;
+}
+
+.popupHeading {
+  font-size: var(--font-h4);
+  margin-bottom: var(--padding0);
+}
+
+.popupSubtitle {
+  font-size: var(--font-md);
+  color: var(--gray8);
+  margin-bottom: var(--padding2);
 }
 
 /* CRED: 

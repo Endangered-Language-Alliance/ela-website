@@ -35,6 +35,7 @@
 }
 
 /* e.g. excerpt or background */
+/* TODO: follow the rest of this: https://css-tricks.com/line-clampin/ */
 .summary p {
   font-size: var(--font-sm);
   color: var(--gray7);
