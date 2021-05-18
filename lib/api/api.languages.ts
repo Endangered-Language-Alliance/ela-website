@@ -22,10 +22,7 @@ export async function getAllLanguages() {
 export const getLanguage = async (
   slug: string | string[]
 ): Promise<Language> => {
-  const data = await request(wpGqlEndpoint, languageBySlug, {
-    id: slug,
-    idType: 'SLUG',
-  })
+  const data = await request(wpGqlEndpoint, languageBySlug, { id: slug })
 
   return data?.language
 }

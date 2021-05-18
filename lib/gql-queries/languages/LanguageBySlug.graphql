@@ -1,5 +1,5 @@
-query LanguageBySlug($id: ID!, $idType: LanguageIdType!) {
-  language(id: $id, idType: $idType) {
+query LanguageBySlug($id: ID!) {
+  language(id: $id, idType: SLUG) {
     ...LanguageFields
   }
 }
