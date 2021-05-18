@@ -11,6 +11,8 @@ import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
 import { Language as LanguageType } from 'gql-ts/wp-graphql'
 import { LangInstanceLinksList } from 'components/languages/LangInstanceLinksList'
+import { getCitiesCoords } from 'components/map/utils'
+import { Map } from 'components/map/Map'
 
 const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { data } = props
@@ -34,6 +36,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { langStructure, prevResearch, addlInfo } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
   const { glottologId, gDriveDocId } = external || {}
+  const preppedData = getCitiesCoords([data])
 
   return (
     <Layout
@@ -143,6 +146,9 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
             )}
           </TabPanels>
         </Tabs>
+        <div style={{ height: 300, width: '100%' }}>
+          <Map excludePopupLinkBtn preppedData={preppedData} />
+        </div>
       </article>
     </Layout>
   )

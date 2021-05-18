@@ -26,3 +26,17 @@ export type MapMarkersProps = {
 export type ZoomEndEvent = {
   forceViewportUpdate?: boolean
 }
+
+type PopupOverrides = {
+  excludePopupLinkBtn?: boolean
+}
+
+export type MapProps = PopupOverrides & {
+  preppedData: PreppedMarker[]
+}
+
+export type MapPopupProps = PopupOverrides & {
+  popupInfo: PopupState
+  setPopupInfo: React.Dispatch<PopupState>
+  excludePopupLinkBtn?: boolean // avoid self-linking buttons on Lang instance
+}

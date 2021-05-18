@@ -29,12 +29,12 @@
   display: grid;
   flex: 1;
   grid-gap: var(--padding1);
+  grid: auto / repeat(6, 1fr);
   height: 40vh;
   overflow-y: auto;
   padding-bottom: 0;
   padding: var(--padding2);
   width: 100%;
-  grid: auto / repeat(6, 1fr);
 }
 
 .contentItem {

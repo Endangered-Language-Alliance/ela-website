@@ -25,6 +25,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: var(--elev2);
+  margin-bottom: var(--padding4);
 }
 
 .tabs [data-reach-tab-list] {

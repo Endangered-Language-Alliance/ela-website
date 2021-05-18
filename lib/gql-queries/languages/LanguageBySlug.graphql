@@ -10,6 +10,18 @@ fragment LanguageFields on Language {
   youTubePlaylist {
     id
   }
+  langLocations {
+    nodes {
+      name
+      languageLocation {
+        city
+        country
+        continent
+        lat
+        lon
+      }
+    }
+  }
   customInfo {
     endonym
     project {

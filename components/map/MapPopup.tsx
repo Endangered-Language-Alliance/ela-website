@@ -3,15 +3,10 @@ import { Popup } from 'react-map-gl'
 
 import btnStyles from 'components/buttons/Button.module.css'
 import styles from './Map.module.css'
-import { PopupState } from './types'
-
-export type MapPopupProps = {
-  popupInfo: PopupState
-  setPopupInfo: React.Dispatch<PopupState>
-}
+import { MapPopupProps } from './types'
 
 export const MapPopup: React.FC<MapPopupProps> = (props) => {
-  const { popupInfo, setPopupInfo } = props
+  const { popupInfo, setPopupInfo, excludePopupLinkBtn } = props
 
   if (!popupInfo) return null // ughhh already know it's not null
 
@@ -31,7 +26,7 @@ export const MapPopup: React.FC<MapPopupProps> = (props) => {
       <div role="doc-subtitle" className={styles.popupSubtitle}>
         {subtitle}
       </div>
-      {linkUri && (
+      {!excludePopupLinkBtn && linkUri && (
         <Link href={linkUri}>
           <a
             className={`${btnStyles.button} ${btnStyles.primary} ${btnStyles.contentOnly} ${btnStyles.small}`}
