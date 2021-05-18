@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import sharedStyles from 'components/Layout.module.css'
-
+import { prodHostName, siteMapUri } from 'lib/config'
 import { useFooterQuery } from './hooks'
 import { SocialIcons } from './SocialIcons'
 import { ContactInfo } from './ContactInfo'
@@ -28,6 +28,7 @@ export const Footer: React.FC = () => {
           <div dangerouslySetInnerHTML={{ __html: newsletter || '' }} />
         </div>
         <nav>
+          {/* TODO: allow standalone links w/o a heading and child items? */}
           {nodes?.map((node) => {
             return (
               <div key={node.label}>
@@ -36,10 +37,7 @@ export const Footer: React.FC = () => {
                   <ul className={styles.navList}>
                     {node.childItems.nodes.map((childItem) => (
                       <li key={childItem?.label}>
-                        <Link
-                          href={childItem?.path || ''}
-                          key={childItem?.path}
-                        >
+                        <Link href={childItem?.path || ''}>
                           <a>{childItem?.label}</a>
                         </Link>
                       </li>
@@ -49,6 +47,23 @@ export const Footer: React.FC = () => {
               </div>
             )
           })}
+          {/* Sitemap internal so far */}
+          {window?.location?.hostname !== prodHostName && (
+            <div>
+              <h3>Sanity Check</h3>
+              <p>
+                Currently this is for internal use only and will be excluded
+                from <code>{prodHostName}</code> if it's not useful to users.
+              </p>
+              <ul className={styles.navList}>
+                <li>
+                  <Link href={siteMapUri}>
+                    <a>Sitemap</a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </nav>
         <div className={styles.final}>
           <img src={sourceUrl || ''} alt="ELA logo" className={styles.logo} />
