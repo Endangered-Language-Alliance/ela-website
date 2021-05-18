@@ -1,12 +1,11 @@
 import Link from 'next/link'
 
-import { Post } from 'gql-ts/wp-graphql'
 import { formatDate } from 'lib/utils'
-
 import styles from './Blog.module.css'
+import { PostsItemProps } from './types'
 
-export const PostsItem: React.FC<Post> = (props) => {
-  const { title, date, excerpt, uri } = props
+export const PostsItem: React.FC<PostsItemProps> = (props) => {
+  const { title, date, summary, uri } = props
 
   return (
     <article className={styles.listitem}>
@@ -16,13 +15,21 @@ export const PostsItem: React.FC<Post> = (props) => {
             <a>{title}</a>
           </Link>
         </h2>
-        <time className={styles.listItemDate} dateTime={date || ''}>
-          {formatDate(date || '')}
-        </time>
-        <div
-          className={styles.excerpt}
-          dangerouslySetInnerHTML={{ __html: excerpt || '' }}
-        />
+        {date && (
+          <time className={styles.subtitle} dateTime={date || ''}>
+            {formatDate(date || '')}
+          </time>
+        )}
+        {summary && (
+          <div
+            className={styles.summary}
+            // Remove WP's "Read More..." links
+            // CRED: https://stackoverflow.com/a/960178/1048518
+            dangerouslySetInnerHTML={{
+              __html: summary.replace(/<a\b[^>]*>(.*?)<\/a>/i, '') || '',
+            }}
+          />
+        )}
       </div>
     </article>
   )

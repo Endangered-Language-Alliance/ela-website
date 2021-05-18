@@ -10,10 +10,18 @@ type AllOtherPagesProps = {
 
 const AllOtherPages: React.FC<AllOtherPagesProps> = (props) => {
   const { page } = props || {}
-  const { title, content } = page || {}
+  const { title, content, youTubePlaylist, customExcerpt, children } =
+    page || {}
 
   return (
-    <Layout title={title}>
+    <Layout
+      title={title}
+      youTubePlaylistId={youTubePlaylist?.id}
+      summary={customExcerpt?.excerpt}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      childPages={children?.nodes} // not today, TS. Careful though!
+    >
       <div dangerouslySetInnerHTML={{ __html: content || '' }} />
     </Layout>
   )

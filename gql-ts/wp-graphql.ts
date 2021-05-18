@@ -3690,6 +3690,8 @@ export type Page = Node &
     content?: Maybe<Scalars['String']>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Custom Excerpt, etc.&quot; was set to Show in GraphQL. */
+    customExcerpt?: Maybe<Page_Customexcerpt>
     /** The ID of the node in the database. */
     databaseId: Scalars['Int']
     /** Post publishing date. */
@@ -4002,6 +4004,15 @@ export type PageToRevisionConnectionWhereArgs = {
   status?: Maybe<PostStatusEnum>
   /** Title of the object */
   title?: Maybe<Scalars['String']>
+}
+
+/** Field Group */
+export type Page_Customexcerpt = AcfFieldGroup & {
+  __typename?: 'Page_Customexcerpt'
+  /** This is the workaround for Pages not having excerpts in WP. For blog Posts and Project instances, continue to use the built-in Excerpt or leave it blank and WP will just grab the first bit of Editor content, although a hand-crafted Excerpt is preferable though since the first paragraph of Editor stuff may not be ideal as an excerpt. For Language instances, use Background. */
+  excerpt?: Maybe<Scalars['String']>
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
 }
 
 /** Field Group */
@@ -5841,7 +5852,7 @@ export type RootQuery = {
   langLocation?: Maybe<LangLocation>
   /** Connection between the RootQuery type and the LangLocation type */
   langLocations?: Maybe<RootQueryToLangLocationConnection>
-  /** An object of the Language Type.  */
+  /** An object of the Language Type. With ten current larger-scale projects and additional work on individual languages, ELA focuses on languages spoken by communities and individuals in the New York City area. */
   language?: Maybe<Language>
   /**
    * A Language object

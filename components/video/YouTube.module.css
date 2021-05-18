@@ -2,8 +2,9 @@
   display: flex;
   overflow-x: auto;
   padding-bottom: var(--padding1);
-  margin-bottom: var(--padding1);
+  margin-bottom: var(--padding4);
   /* TODO: padding-left or other way to obviate scrollability on mobile */
+  /* LIKE: last-child margin-right + an overlay mask on parent's right side */
 }
 
 .thumb {
@@ -19,6 +20,7 @@
 .thumb img {
   border-radius: inherit;
   width: 100%;
+  border: solid var(--gray7) 1px;
 }
 
 .thumb + .thumb {

@@ -2,5 +2,23 @@ query GetPage($id: ID!) {
   page(id: $id, idType: URI) {
     title
     content
+    youTubePlaylist {
+      id
+    }
+    customExcerpt {
+      excerpt
+    }
+    children {
+      nodes {
+        uri
+        ... on Page {
+          title
+          customExcerpt {
+            excerpt
+          }
+          # featuredImage would go here
+        }
+      }
+    }
   }
 }

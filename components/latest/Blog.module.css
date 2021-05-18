@@ -34,12 +34,12 @@
   font-size: var(--font-h3);
 }
 
-.listItemDate {
+.subtitle {
   color: var(--gray6);
   margin-bottom: var(--padding2);
   display: block;
 }
 
-.excerpt p {
+.summary p {
   font-size: var(--font-body);
 }

@@ -9,10 +9,18 @@ import { Post } from 'gql-ts/wp-graphql'
 const PostsList: React.FC<{ posts: Post[] }> = (props) => {
   const { posts = [] } = props
 
+  if (!posts.length) return <Layout title="No posts found" />
+
   return (
     <Layout title="Latest" tweenerContent={<PostsYearsNavList />}>
       {posts.map((post) => (
-        <PostsItem key={post.date} {...post} />
+        <PostsItem
+          key={post.date}
+          date={post.date || ''}
+          title={post.title || ''}
+          uri={post.uri}
+          summary={post.excerpt || ''}
+        />
       ))}
     </Layout>
   )

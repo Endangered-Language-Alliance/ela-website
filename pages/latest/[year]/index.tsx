@@ -10,12 +10,19 @@ type PostsListProps = { posts: Post[]; year: string }
 const PostsListByYear: React.FC<PostsListProps> = (props) => {
   const { posts = [], year } = props
 
+  if (!posts.length) return <Layout title={`No ${year} posts found`} />
+
   return (
     <Layout title={`${year} posts`}>
-      {(posts.length &&
-        posts.map((post) => <PostsItem key={post.date} {...post} />)) || (
-        <p>No posts found.</p>
-      )}
+      {posts.map((post) => (
+        <PostsItem
+          key={post.date}
+          date={post.date || ''}
+          title={post.title || ''}
+          uri={post.uri}
+          summary={post.excerpt || ''}
+        />
+      ))}
     </Layout>
   )
 }

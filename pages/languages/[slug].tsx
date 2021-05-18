@@ -9,7 +9,6 @@ import langStyles from 'components/languages/Languages.module.css'
 import sharedStyles from 'components/Layout.module.css'
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
-import { YouTubePlaylist } from 'components/video/YouTubePlaylist'
 import { Language as LanguageType } from 'gql-ts/wp-graphql'
 import { LangInstanceLinksList } from 'components/languages/LangInstanceLinksList'
 
@@ -37,11 +36,13 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { glottologId, gDriveDocId } = external || {}
 
   return (
-    <Layout title={title} subtitle={customInfo?.endonym} summary={background}>
+    <Layout
+      title={title}
+      subtitle={customInfo?.endonym}
+      summary={background}
+      youTubePlaylistId={youTubePlaylist?.id}
+    >
       <article>
-        {youTubePlaylist?.id && (
-          <YouTubePlaylist playlistId={youTubePlaylist.id} />
-        )}
         <LangInstanceLinksList external={external} project={project} />
         <Tabs className={langStyles.tabs}>
           <TabList>
