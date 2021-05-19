@@ -6,7 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 import MapMarkers from './MapMarkers'
 import { MapPopup } from './MapPopup'
-import { mapConfig, initialState, mapCtrlBtnStyle } from './config'
+import { mapConfig, initialState } from './config'
 import {
   PreppedMarker,
   ViewportState,
@@ -14,6 +14,7 @@ import {
   ZoomEndEvent,
   MapProps,
 } from './types'
+import styles from './Map.module.css'
 
 export const Map: React.FC<MapProps> = (props) => {
   const { preppedData, excludePopupLinkBtn } = props
@@ -50,7 +51,7 @@ export const Map: React.FC<MapProps> = (props) => {
       if (zoomEndEvent.forceViewportUpdate) setMapIsMoving(true)
     })
 
-    map.fitBounds(bounds, { padding: 50 }, { forceViewportUpdate: true })
+    map.fitBounds(bounds, { padding: 45 }, { forceViewportUpdate: true })
   }
 
   return (
@@ -59,6 +60,7 @@ export const Map: React.FC<MapProps> = (props) => {
       {...mapConfig}
       onViewportChange={setViewport}
       onLoad={onLoad}
+      className={styles.map}
     >
       {!mapIsMoving && (
         <MapMarkers
@@ -73,8 +75,8 @@ export const Map: React.FC<MapProps> = (props) => {
           setPopupInfo={setPopupInfo}
         />
       )}
-      <FullscreenControl style={mapCtrlBtnStyle} />
-      <NavigationControl style={mapCtrlBtnStyle} />
+      <FullscreenControl className={styles.mapCtrlBtnStyle} />
+      <NavigationControl className={styles.mapCtrlBtnStyle} />
     </ReactMapGL>
   )
 }

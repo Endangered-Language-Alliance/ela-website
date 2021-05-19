@@ -11,7 +11,7 @@
 
 .main {
   margin-bottom: auto;
-  padding: calc(var(--gutter) / 2);
+  padding: var(--gutter);
   width: 100%;
 }
 

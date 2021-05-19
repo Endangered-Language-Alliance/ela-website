@@ -1,46 +1,56 @@
+/* TODO: rename everything to just CARD */
 .root {
-  --cardGutter: var(--padding1);
-  /* background: linear-gradient(135deg, var(--primary), var(--primaryLight)); */
+  --cardGutter: var(--padding2) var(--padding3);
   border-radius: var(--borderRad3);
+  border: 1px solid var(--gray1);
   box-shadow: var(--elev1);
-  display: flex;
-  margin-bottom: var(--padding2);
   overflow: hidden;
-  flex-direction: column;
+  padding: var(--cardGutter);
+  min-height: 100px;
+  width: 100%;
+}
+
+.link {
+  display: block;
 }
 
 .header {
-  background-color: var(--primary);
-  padding: var(--cardGutter) var(--cardGutter) 0;
-  display: flex;
-  align-items: center;
   line-height: var(--headingLineHt);
+  border-bottom: solid 1px var(--gray2);
+  margin-bottom: var(--padding1);
 }
 
 .title {
   font-size: var(--font-h5);
-  margin-top: 0;
-  margin-bottom: var(--padding0);
-  color: var(--white);
   line-height: inherit;
+  margin-bottom: var(--padding0);
+  margin-top: 0;
 }
 
 .subtitle {
-  margin-bottom: 0;
   color: var(--gray2);
   font-size: var(--font-h5);
-  margin-left: var(--padding2);
   line-height: var(--font-h5);
+  margin-bottom: var(--padding0);
   vertical-align: middle;
+}
+
+.inner {
+  font-size: var(--font-md);
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 /* e.g. excerpt or background */
 /* TODO: follow the rest of this: https://css-tricks.com/line-clampin/ */
-.summary p {
-  font-size: var(--font-sm);
+.inner p {
+  font-size: inherit;
   color: var(--gray7);
   display: -webkit-box;
-  padding: var(--cardGutter);
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+.summary:hover {
+  background-color: red;
 }

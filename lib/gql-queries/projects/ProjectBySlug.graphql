@@ -1,13 +1,27 @@
-query ProjectBySlug($id: ID!, $idType: ProjectIdType!) {
-  project(id: $id, idType: $idType) {
+query ProjectBySlug($id: ID!) {
+  project(id: $id, idType: SLUG) {
     ...ProjectFields
   }
   languages {
     nodes {
       title
       slug
+      excerpt
       uri
+      langLocations {
+        nodes {
+          name
+          languageLocation {
+            city
+            country
+            continent
+            lat
+            lon
+          }
+        }
+      }
       customInfo {
+        endonym
         project {
           ... on Project {
             uri
@@ -22,6 +36,7 @@ fragment ProjectFields on Project {
   title
   uri
   content
+  excerpt
   youTubePlaylist {
     id
   }

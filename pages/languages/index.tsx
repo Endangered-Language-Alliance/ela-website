@@ -4,8 +4,8 @@ import { Layout } from 'components/Layout'
 import { getAllLanguages } from 'lib/api/api.languages'
 import { Map } from 'components/map/Map'
 import { getCitiesCoords } from 'components/map/utils'
-import { ImageCard } from 'components/cards/ImageCard'
 import { LanguagesProps } from 'components/languages/types'
+import { LanguagesList } from 'components/languages/LanguagesList'
 
 import mapStyles from 'components/map/Map.module.css'
 
@@ -18,29 +18,16 @@ const Languages: React.FC<LanguagesProps> = (props) => {
   // const more = [...languages, ...languages, ...languages, ...languages]
 
   return (
-    <Layout title="Languages" summary={contentType?.description}>
-      <div className={mapStyles.root}>
-        <div className={mapStyles.mapWrap}>
+    <Layout
+      title="Languages"
+      summary={contentType?.description}
+      tweenerContent={
+        <div className={mapStyles.fullWidthMap}>
           <Map preppedData={preppedData} />
         </div>
-        <div className={mapStyles.content}>
-          {languages.map((node) => {
-            const { uri, title, customInfo } = node
-            const { background, endonym } = customInfo || {}
-
-            return (
-              <article key={uri} className={mapStyles.contentItem}>
-                <ImageCard
-                  title={title}
-                  subtitle={endonym}
-                  uri={uri}
-                  summary={background}
-                />
-              </article>
-            )
-          })}
-        </div>
-      </div>
+      }
+    >
+      <LanguagesList languages={languages} />
     </Layout>
   )
 }

@@ -23,10 +23,7 @@ export async function getAllProjects() {
 export const getProject = async (
   slug: string | string[]
 ): Promise<{ project: Project; languages: RootQueryToLanguageConnection }> => {
-  const data = await request(wpGqlEndpoint, projectBySlug, {
-    id: slug,
-    idType: 'SLUG',
-  })
+  const data = await request(wpGqlEndpoint, projectBySlug, { id: slug })
 
   return data
 }

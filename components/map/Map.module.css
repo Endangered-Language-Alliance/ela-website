@@ -5,13 +5,20 @@
   border-radius: var(--borderRad3);
 }
 
-.mapWrap {
+.fullWidthMap {
+  height: 300px;
+  width: calc(100% + 2 * var(--gutter));
   width: 100%;
-  height: 35vh;
 }
 
-.mapWrap .mapboxgl-map {
+.fullWidthMap .map {
   border-radius: var(--borderRad3) var(--borderRad3) 0 0;
+  box-shadow: var(--elev2);
+}
+
+.gridContentList {
+  padding: var(--padding3);
+  overflow-y: auto;
 }
 
 .marker {
@@ -26,8 +33,8 @@
 
 .content {
   border-left: solid 1px var(--gray2);
-  display: grid;
   flex: 1;
+  display: grid;
   grid-gap: var(--padding1);
   grid: auto / repeat(6, 1fr);
   height: 40vh;
@@ -52,6 +59,10 @@
   margin-bottom: var(--padding2);
 }
 
+.mapCtrlBtnStyle {
+  padding: 10px;
+}
+
 /* CRED: 
 themeover.com/alternating-columns-3-2-using-css-grid-and-nth-child-formulas */
 /* .contentItem:nth-child(5n) { } */
@@ -65,15 +76,5 @@ themeover.com/alternating-columns-3-2-using-css-grid-and-nth-child-formulas */
 
   .content {
     height: 100%;
-  }
-
-  .mapWrap {
-    width: 475px;
-    height: 100%;
-  }
-
-  .mapWrap .mapboxgl-map {
-    border-radius: var(--borderRad3) 0 0 var(--borderRad3);
-    border-radius: 50px 0 0 0;
   }
 }

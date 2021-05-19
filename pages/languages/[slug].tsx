@@ -47,7 +47,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
     >
       <article>
         <LangInstanceLinksList external={external} project={project} />
-        <Tabs className={langStyles.tabs}>
+        <Tabs className={langStyles.tabStyles}>
           <TabList>
             {(affiliation || endangerment) && <Tab>Background</Tab>}
             {langStructure && <Tab>Language Structure</Tab>}

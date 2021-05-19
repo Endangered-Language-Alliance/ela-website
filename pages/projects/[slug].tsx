@@ -1,11 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Link from 'next/link'
 
 import { getAllProjectsWithSlug, getProject } from 'lib/api/api.projects'
 import { Layout } from 'components/Layout'
 import { Project, Language } from 'gql-ts/wp-graphql'
-
-import blogStyles from 'components/latest/Blog.module.css'
+import { getCitiesCoords } from 'components/map/utils'
+import mapStyles from 'components/map/Map.module.css'
+import { Map } from 'components/map/Map'
+import { LanguagesList } from 'components/languages/LanguagesList'
 
 type ProjectInstanceProps = {
   project?: Project
@@ -15,43 +16,33 @@ type ProjectInstanceProps = {
 const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
   const { project, languages } = props
 
-  if (!project) <p>No data could be found for the project...</p>
+  if (!project)
+    return (
+      <Layout
+        title="Not found"
+        summary="No data could be found for this project..."
+      />
+    )
 
-  const { title, content, uri } = project || {}
+  const { title, content, uri, excerpt, youTubePlaylist } = project || {}
+  const langsInThisProject = (languages || []).filter(
+    (lang) => lang?.customInfo?.project?.uri === uri
+  )
+  const preppedData = getCitiesCoords(langsInThisProject)
 
   return (
-    <Layout title={title}>
-      <article className={blogStyles.article}>
-        <div className={blogStyles.postmeta}>
-          <h1>{title}</h1>
+    <Layout
+      title={title}
+      summary={excerpt}
+      youTubePlaylistId={youTubePlaylist?.id}
+      tweenerContent={
+        <div className={mapStyles.fullWidthMap}>
+          <Map preppedData={preppedData} />
         </div>
-        {languages && (
-          <>
-            <h2>Languages in this project</h2>
-            <p>Pretend it's a map...</p>
-            <ul>
-              {languages
-                .filter((lang) => lang?.customInfo?.project?.uri === uri)
-                .map((lang) => (
-                  <li key={lang?.title}>
-                    <Link href={lang?.uri || ''}>
-                      <a>{lang?.title}</a>
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          </>
-        )}
-        {content && (
-          <>
-            <h2>And then our old friend, the content</h2>
-            <div
-              className="post-content content"
-              dangerouslySetInnerHTML={{ __html: content || '' }}
-            />
-          </>
-        )}
-      </article>
+      }
+    >
+      <LanguagesList languages={langsInThisProject} />
+      <div dangerouslySetInnerHTML={{ __html: content || '' }} />
     </Layout>
   )
 }

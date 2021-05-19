@@ -7,6 +7,7 @@ query AllLanguages {
     nodes {
       title
       uri
+      excerpt
       contentType {
         node {
           description
@@ -14,7 +15,6 @@ query AllLanguages {
       }
       customInfo {
         endonym
-        background
       }
       langLocations {
         nodes {

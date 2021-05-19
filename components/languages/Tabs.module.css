@@ -1,0 +1,40 @@
+.tabs {
+  height: 50vh;
+  outline: solid var(--gray2) 1px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--elev2);
+  margin-bottom: var(--padding4);
+}
+
+.tabs [data-reach-tab-list] {
+  overflow-x: auto;
+  flex-shrink: 0;
+  box-shadow: var(--elev2);
+}
+
+.tabs [data-reach-tab-panels] {
+  padding: var(--gutter);
+  overflow-y: auto;
+  font-size: var(--font-sm);
+  flex: 1;
+}
+
+/* .tabs [data-reach-tab-panel] { } */
+
+.tabs [data-reach-tab] {
+  flex-shrink: 0;
+  color: var(--white);
+  padding-left: var(--padding1);
+  padding-right: var(--padding1);
+  background-color: var(--primaryLight);
+}
+
+.tabs [data-reach-tab] + [data-reach-tab] {
+  border-left: solid rgba(255, 255, 255, 0.15) 1px;
+}
+
+.tabs [data-reach-tab][data-selected] {
+  font-weight: bold;
+  background-color: var(--primary);
+}

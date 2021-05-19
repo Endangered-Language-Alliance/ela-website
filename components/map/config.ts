@@ -20,5 +20,3 @@ export const initialState = {
   longitude: 0,
   zoom: 0.5,
 }
-
-export const mapCtrlBtnStyle = { padding: 10 } // TODO: use className

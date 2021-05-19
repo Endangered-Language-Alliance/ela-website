@@ -6,3 +6,7 @@ export type LanguagesProps = {
     languages: Language[]
   }
 }
+
+export type LanguagesListProps = {
+  languages: Language[]
+}
