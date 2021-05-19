@@ -2,12 +2,9 @@ import { useState } from 'react'
 import { RiMenu5Fill } from 'react-icons/ri'
 
 import btnStyles from 'components/buttons/Button.module.css'
-import styles from './Header.module.css'
+import mobileNavStyles from './MobileNav.module.css'
 import { NavMenuModal } from './NavMenuModal'
-
-export type BurgerProps = {
-  id: string
-}
+import { BurgerProps } from './types'
 
 // CRED: (partial):
 // http://www.ashleysheridan.co.uk/blog/Making+an+Accessible+Hamburger+Menu
@@ -16,7 +13,7 @@ export const Burger: React.FC<BurgerProps> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
-    <div className={styles.burger}>
+    <div className={mobileNavStyles.burger}>
       <span hidden id={id}>
         Navigation menu
       </span>

@@ -16,3 +16,7 @@ export type UseQuery = {
 }
 
 export type UseHeaderQuery = () => UseQuery
+
+export type BurgerProps = {
+  id: string
+}

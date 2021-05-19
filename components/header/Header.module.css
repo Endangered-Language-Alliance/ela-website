@@ -27,9 +27,7 @@
   color: var(--secondaryLight);
 }
 
-.root [data-reach-menu-button][aria-expanded='true'] {
-  /* font-weight: bold; */
-}
+/* .root [data-reach-menu-button][aria-expanded='true'] {} */
 
 .root [data-reach-menu-button] {
   background-color: transparent;
@@ -90,52 +88,6 @@
   font-size: var(--font-body);
 }
 
-.mobileNavModal[data-reach-dialog-content] {
-  background-color: var(--black);
-  height: 100vh;
-  margin: 0;
-  padding: var(--padding5) var(--padding2);
-  width: 100vw;
-}
-
-.mobileNav {
-  --verticalSpacer: var(--padding3);
-  z-index: 1;
-}
-
-.mobileNav ul {
-  list-style-type: none;
-  margin-bottom: var(--verticalSpacer);
-  padding: 0;
-}
-
-.mobileNavHeading {
-  color: var(--white);
-  margin-bottom: var(--padding0);
-  font-size: var(--font-h4);
-}
-
-.mobileNavList {
-  display: grid;
-  grid-column-gap: var(--padding2);
-  grid-template-columns: 1fr 1fr;
-  margin: 0;
-  padding: var(--padding2) var(--padding3);
-}
-
-.burger {
-  display: flex;
-  order: 3; /* after cta */
-}
-
-.burger:focus {
-  outline: 2px solid;
-}
-
-.burger button {
-  font-size: 1.5rem;
-}
-
 @media screen and (min-width: 801px) {
   .root {
     min-height: 75px;
@@ -143,13 +95,6 @@
 
   .root nav {
     display: block;
-  }
-}
-
-/* Might could do 800 */
-@media screen and (min-width: 801px) {
-  .burger {
-    display: none;
   }
 }
 

@@ -3,7 +3,7 @@ import '@reach/menu-button/styles.css'
 
 import { MenuItem } from 'gql-ts/wp-graphql'
 
-import styles from './Header.module.css'
+import mobileNavStyles from './MobileNav.module.css'
 
 export type MobileNavMenuProps = {
   id: string
@@ -14,7 +14,7 @@ export const MobileNavMenu: React.FC<MobileNavMenuProps> = (props) => {
   const { id, data } = props
 
   return (
-    <nav aria-labelledby={id} className={styles.mobileNav}>
+    <nav aria-labelledby={id} className={mobileNavStyles.mobileNav}>
       <ul>
         {data.map((node) => {
           const { label, path, childItems, parentId } = node || {}
@@ -31,8 +31,8 @@ export const MobileNavMenu: React.FC<MobileNavMenuProps> = (props) => {
 
           return (
             <li key={path}>
-              <h2 className={styles.mobileNavHeading}>{label}</h2>
-              <ul className={styles.mobileNavList}>
+              <h2 className={mobileNavStyles.mobileNavHeading}>{label}</h2>
+              <ul className={mobileNavStyles.mobileNavList}>
                 {childItems?.nodes?.map((item) => {
                   return (
                     <li key={item?.path}>
