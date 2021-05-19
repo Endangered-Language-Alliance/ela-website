@@ -13,7 +13,6 @@ export const LanguagesList: React.FC<LanguagesListProps> = (props) => {
       {languages.map((node) => {
         const { uri, excerpt, title, customInfo } = node
         const { endonym } = customInfo || {}
-        console.log(node)
 
         return (
           <article key={uri} className={cardStyles.root}>

@@ -8,6 +8,7 @@ import styles from './Layout.module.css'
 import { Footer } from './footer'
 import Header from './header'
 import { YouTubePlaylist } from './video/YouTubePlaylist'
+import { Breadcrumbs } from './breadcrumbs/Breadcrumbs'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,6 +49,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
             <YouTubePlaylist playlistId={youTubePlaylistId} />
           )}
           <div className={styles.content}>
+            <Breadcrumbs />
             {childPages?.map((childPage) => (
               <PostsItem
                 key={childPage.uri}

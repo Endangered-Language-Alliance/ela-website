@@ -1,0 +1,16 @@
+.root {
+  margin-bottom: var(--padding3);
+}
+
+.list {
+  display: flex;
+  margin: 0;
+}
+
+.list > :last-child {
+  color: red;
+}
+
+.list > * + * {
+  margin-left: var(--padding2);
+}
