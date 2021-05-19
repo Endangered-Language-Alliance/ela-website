@@ -48,11 +48,11 @@ export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
             role="button"
             tabIndex={0}
             style={{
-              width: thumbnails.medium.width,
-              height: thumbnails.medium.height,
+              width: thumbnails.medium?.width || 320,
+              height: thumbnails.medium?.height || 180,
             }}
           >
-            <img alt={title} src={thumbnails.medium.url} />
+            <img alt={title} src={thumbnails.medium?.url || ''} />
             <div className={styles.mask}>
               <BiPlay />
             </div>

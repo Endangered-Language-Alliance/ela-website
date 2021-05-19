@@ -24,11 +24,6 @@ export const Map: React.FC<MapProps> = (props) => {
 
   function onLoad(mapLoadEvent: { target: MbMap }): void {
     const { target: map } = mapLoadEvent
-    const bounds = new LngLatBounds()
-
-    preppedData.forEach(({ lon, lat }) => {
-      if (lon && lat) bounds.extend([lon, lat])
-    })
 
     // Maintain viewport state sync if needed (e.g. after `flyTo`), otherwise
     // the map shifts back to previous position after panning or zooming.
@@ -49,6 +44,25 @@ export const Map: React.FC<MapProps> = (props) => {
 
     map.on('movestart', function onMoveStart(zoomEndEvent: ZoomEndEvent): void {
       if (zoomEndEvent.forceViewportUpdate) setMapIsMoving(true)
+    })
+
+    // Avoid crazy zoom if only one marker
+    if (preppedData.length === 1) {
+      map.easeTo(
+        {
+          center: [preppedData[0]?.lon || 0, preppedData[0]?.lat || 0],
+          zoom: 4,
+        },
+        { forceViewportUpdate: true }
+      )
+
+      return
+    }
+
+    const bounds = new LngLatBounds()
+
+    preppedData.forEach(({ lon, lat }) => {
+      if (lon && lat) bounds.extend([lon, lat])
     })
 
     map.fitBounds(bounds, { padding: 45 }, { forceViewportUpdate: true })

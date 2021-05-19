@@ -25,6 +25,24 @@
   box-shadow: var(--elev3);
 }
 
+/* Deal with the few stragglers, e.g. Garifuna has some complexities */
+.content table {
+  margin-bottom: var(--padding4);
+}
+
+.content table,
+.content table th,
+.content table td {
+  border: 1px solid #d4e0ee;
+  border-collapse: collapse;
+  color: #555;
+}
+
+.content table th,
+.content table td {
+  padding: var(--padding0);
+}
+
 /* Helpers */
 .flexCenter {
   justify-content: center;

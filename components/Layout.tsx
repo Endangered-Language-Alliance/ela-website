@@ -44,10 +44,10 @@ export const Layout: React.FC<LayoutProps> = (props) => {
         <Header />
         <main className={`${styles.container} ${styles.main}`}>
           <Hero title={title} summary={summary} subtitle={subtitle} />
-          {tweenerContent}
           {youTubePlaylistId && (
             <YouTubePlaylist playlistId={youTubePlaylistId} />
           )}
+          {tweenerContent}
           <div className={styles.content}>
             <Breadcrumbs />
             {childPages?.map((childPage) => (
