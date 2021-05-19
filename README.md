@@ -1,5 +1,28 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Documentation for CMSing
+
+### Plugins
+
+In addition to built-in WP features, these plugins are doing the bulk of the work:
+
+- ACF (Advanced Custom Fields)
+- CPT (Custom Post Type)
+- Anything to do with those or GraphQL
+
+With the exception of `Post Type Description` the Projects or Languages CPT,
+**avoid messing with the plugin stuff unless you're Jason**. The `Post Type Description` field is an easy hack to allow content managers to control the
+Projects and Languages landing "hero" summary text in lieu of an Excerpt since
+those pages don't actually exist anywhere in WP.
+
+### How/where to edit content??
+
+- The `Custom Fields > Field Groups` is a good place to get aquainted/oriented
+  with how the super-custom stuff is dished out. Again, **don't edit these**,
+  but feel free to browse.
+- In addition to the built-in Posts and Pages, the `Languages` and `Projects`
+  links in the WP sidebar will contain everything you can edit.
+
 ## Usage
 
 ### Development
