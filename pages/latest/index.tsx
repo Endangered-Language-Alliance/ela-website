@@ -12,7 +12,8 @@ const PostsList: React.FC<{ posts: Post[] }> = (props) => {
   if (!posts.length) return <Layout title="No posts found" />
 
   return (
-    <Layout title="Latest" tweenerContent={<PostsYearsNavList />}>
+    <Layout title="Latest">
+      <PostsYearsNavList />
       {posts.map((post) => (
         <PostsItem
           key={post.date}
