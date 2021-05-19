@@ -1,3 +1,4 @@
+import { Breadcrumbs } from 'components/breadcrumbs/Breadcrumbs'
 import styles from './Hero.module.css'
 
 export type HeroProps = {
@@ -11,6 +12,7 @@ export const Hero: React.FC<HeroProps> = (props) => {
 
   return (
     <div className={styles.root}>
+      <Breadcrumbs />
       {subtitle ? (
         <>
           <h1

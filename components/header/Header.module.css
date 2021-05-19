@@ -1,4 +1,5 @@
 .root {
+  --transNavBg: hsl(0 0% 0% / 85%);
   background-color: var(--gray10);
   border-bottom: 2px solid var(--secondary);
   box-shadow: var(--elev3);
@@ -13,8 +14,17 @@
 }
 
 .root nav {
-  display: none;
   font-weight: bold;
+  display: none;
+}
+
+.root nav a {
+  font-weight: bold;
+  color: var(--secondary);
+}
+
+.root nav a:hover {
+  color: var(--secondaryLight);
 }
 
 .root [data-reach-menu-button][aria-expanded='true'] {
@@ -52,15 +62,6 @@
   width: 45px;
 }
 
-.link,
-.link:visited {
-  color: var(--secondary);
-}
-
-.link:hover {
-  color: var(--secondaryLight);
-}
-
 .inner {
   align-items: center;
   display: flex;
@@ -68,38 +69,58 @@
   width: 100%;
 }
 
-@keyframes slide-down {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.ahhhh[data-reach-menu-list],
-.ahhhh[data-reach-menu-items] {
+.menuList[data-reach-menu-list][data-reach-menu-items] {
   animation: slide-down 0.2s ease;
+  background-color: var(--transNavBg);
+  border-radius: var(--borderRad2);
+  border: solid var(--secondaryLight) 1px;
+  box-shadow: var(--elev2);
+  display: grid;
+  grid-column-gap: var(--padding2);
+  grid-row-gap: var(--padding1);
+  grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 1fr);
+  max-width: 345px;
+  padding: var(--padding2) var(--padding3);
+  position: relative;
   z-index: 2;
 }
 
-.ahhhh {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  box-shadow: var(--elev2);
+.menuList a {
+  font-weight: bold;
+  font-size: var(--font-body);
 }
 
-@media screen and (min-width: 600px) {
-  .root {
-    min-height: 75px;
-  }
+.mobileNavModal[data-reach-dialog-content] {
+  background-color: var(--black);
+  height: 100vh;
+  margin: 0;
+  padding: var(--padding5) var(--padding2);
+  width: 100vw;
+}
 
-  .root nav {
-    display: block;
-  }
+.mobileNav {
+  --verticalSpacer: var(--padding3);
+  z-index: 1;
+}
+
+.mobileNav ul {
+  list-style-type: none;
+  margin-bottom: var(--verticalSpacer);
+  padding: 0;
+}
+
+.mobileNavHeading {
+  color: var(--white);
+  margin-bottom: var(--padding0);
+  font-size: var(--font-h4);
+}
+
+.mobileNavList {
+  display: grid;
+  grid-column-gap: var(--padding2);
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  padding: var(--padding2) var(--padding3);
 }
 
 .burger {
@@ -115,9 +136,30 @@
   font-size: 1.5rem;
 }
 
+@media screen and (min-width: 801px) {
+  .root {
+    min-height: 75px;
+  }
+
+  .root nav {
+    display: block;
+  }
+}
+
 /* Might could do 800 */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 801px) {
   .burger {
     display: none;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

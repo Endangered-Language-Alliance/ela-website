@@ -7,6 +7,7 @@ import styles from './Header.module.css'
 
 import { Burger } from './Burger'
 import { NavMenu } from './NavMenu'
+import { MobileNavMenu } from './MobileNavMenu'
 import { useHeaderQuery } from './hooks'
 
 const Header: React.FC = () => {
@@ -56,10 +57,9 @@ const Header: React.FC = () => {
         {menuItems?.nodes && (
           <>
             <NavMenu data={menuItems.nodes} />
-            <Burger
-              id="menu-label"
-              navMenu={<NavMenu id="menu-label" data={menuItems.nodes} />}
-            />
+            <Burger id="menu-label">
+              <MobileNavMenu data={menuItems.nodes} id="menu-label" />
+            </Burger>
           </>
         )}
         {GetInvolvedCta}

@@ -7,13 +7,12 @@ import { NavMenuModal } from './NavMenuModal'
 
 export type BurgerProps = {
   id: string
-  navMenu: React.ReactNode
 }
 
 // CRED: (partial):
 // http://www.ashleysheridan.co.uk/blog/Making+an+Accessible+Hamburger+Menu
 export const Burger: React.FC<BurgerProps> = (props) => {
-  const { navMenu, id } = props
+  const { id, children } = props
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
@@ -36,7 +35,7 @@ export const Burger: React.FC<BurgerProps> = (props) => {
           setIsOpen(false)
         }}
       >
-        {navMenu}
+        {children}
       </NavMenuModal>
     </div>
   )

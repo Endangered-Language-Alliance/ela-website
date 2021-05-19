@@ -1,5 +1,5 @@
 .root {
-  margin-bottom: var(--padding3);
+  margin-bottom: var(--padding0);
   width: 100%;
   overflow-x: auto; /* just in case on mobile */
 }

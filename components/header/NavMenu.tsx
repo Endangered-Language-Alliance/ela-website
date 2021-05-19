@@ -7,15 +7,14 @@ import { MenuItem } from 'gql-ts/wp-graphql'
 import styles from './Header.module.css'
 
 export type NavMenuProps = {
-  id?: string
   data: MenuItem[]
 }
 
 export const NavMenu: React.FC<NavMenuProps> = (props) => {
-  const { id, data } = props
+  const { data } = props
 
   return (
-    <nav aria-labelledby={id}>
+    <nav>
       <ul>
         {data.map((node) => {
           const { label, path, childItems, parentId } = node || {}
@@ -24,7 +23,7 @@ export const NavMenu: React.FC<NavMenuProps> = (props) => {
             return (
               <li key={path}>
                 <Link href={path || ''}>
-                  <a className={styles.link}>{label}</a>
+                  <a>{label}</a>
                 </Link>
               </li>
             )
@@ -36,7 +35,7 @@ export const NavMenu: React.FC<NavMenuProps> = (props) => {
                 <MenuButton>
                   {label} <span aria-hidden>▾</span>
                 </MenuButton>
-                <MenuList className={styles.ahhhh}>
+                <MenuList className={styles.menuList}>
                   {childItems?.nodes?.map((item) => {
                     return (
                       <MenuLink
