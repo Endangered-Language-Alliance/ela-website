@@ -1,40 +1,58 @@
+// CRED: for much of this file:
+// https://github.com/NiklasMencke/nextjs-breadcrumbs/blob/main/src/index.js
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { slugToTitleCase } from 'lib/utils'
 import styles from './Breadcrumbs.module.css'
-
-export type CrumbProps = {
-  text: string
-  uri?: string
-}
+import { convertBreadcrumb } from './utils'
+import { CrumbProps } from './types'
 
 const Crumb: React.FC<CrumbProps> = (props) => {
-  const { text, uri } = props
+  const { text, href } = props
 
-  if (!uri) return <span>{text}</span>
+  if (!href) return <span>{convertBreadcrumb(text)}</span>
 
   return (
-    <Link href={uri}>
+    <Link href={href}>
       <a>{text}</a>
     </Link>
   )
 }
 
 export const Breadcrumbs: React.FC = () => {
-  if (!process.browser || window?.location.pathname === '/') return null
+  const router = useRouter()
+  const [breadcrumbs, setBreadcrumbs] = useState<CrumbProps[] | null>(null)
 
-  const paths = window?.location.pathname.split('/')
+  useEffect(() => {
+    if (router) {
+      const linkPath = router.asPath.split('/')
+      linkPath.shift()
+
+      const pathArray = linkPath.map((path, i) => {
+        return {
+          text: convertBreadcrumb(path),
+          href: `/${linkPath.slice(0, i + 1).join('/')}`,
+        }
+      })
+
+      setBreadcrumbs(pathArray)
+    }
+  }, [router])
+
+  if (!breadcrumbs) return null
 
   return (
-    <nav>
+    <nav aria-label="breadcrumbs" className={styles.root}>
       <p className={styles.list}>
-        {paths.map((path, i) => (
-          <Crumb
-            key={path}
-            text={slugToTitleCase(path) || 'Home'}
-            uri={i === paths.length - 1 ? '' : path || '/'}
-          />
-        ))}
+        <Crumb href="/" text="Home" />
+        {breadcrumbs.map(({ href, text }, i) => {
+          const lastOne = i === breadcrumbs.length - 1
+
+          return lastOne ? null : (
+            <Crumb key={href} href={lastOne ? '' : href} text={text} />
+          )
+        })}
       </p>
     </nav>
   )

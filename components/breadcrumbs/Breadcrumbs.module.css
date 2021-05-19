@@ -1,16 +1,17 @@
 .root {
   margin-bottom: var(--padding3);
+  width: 100%;
+  overflow-x: auto; /* just in case on mobile */
 }
 
 .list {
   display: flex;
   margin: 0;
+  text-transform: capitalize;
 }
 
-.list > :last-child {
-  color: red;
-}
-
-.list > * + * {
-  margin-left: var(--padding2);
+.list > *:not(:first-child):before {
+  margin: 0 var(--padding0);
+  color: var(--gray6);
+  content: '>';
 }
