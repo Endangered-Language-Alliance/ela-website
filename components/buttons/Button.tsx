@@ -4,7 +4,7 @@ type ButtonProps = {
   onClick: () => void
 }
 
-export const ImageCard: React.FC<ButtonProps> = (props) => {
+export const Button: React.FC<ButtonProps> = (props) => {
   const { children, onClick } = props
 
   return (

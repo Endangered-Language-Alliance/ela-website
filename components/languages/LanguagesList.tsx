@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import cardStyles from 'components/cards/ImageCard.module.css'
+import cardStyles from 'components/cards/Card.module.css'
 import styles from './Languages.module.css'
 import { LanguagesListProps } from './types'
 

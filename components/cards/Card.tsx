@@ -1,15 +1,9 @@
 import Link from 'next/link'
 
-import styles from './ImageCard.module.css'
+import styles from './Card.module.css'
+import { CardProps } from './types'
 
-type ImageCardProps = {
-  title?: string | null
-  uri?: string | null
-  summary?: string | null
-  subtitle?: string | null
-}
-
-export const ImageCard: React.FC<ImageCardProps> = (props) => {
+export const Card: React.FC<CardProps> = (props) => {
   const { title, uri, summary, subtitle } = props
 
   return (
