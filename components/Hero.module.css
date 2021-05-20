@@ -1,7 +1,6 @@
 .root {
   color: var(--white);
   margin: 0 auto var(--padding6);
-  max-width: 1000px;
   padding-top: var(--padding1);
   text-align: center;
 }

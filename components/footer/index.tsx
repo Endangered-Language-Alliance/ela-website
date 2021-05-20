@@ -24,8 +24,16 @@ export const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={`${sharedStyles.container} ${styles.footer__wrap}`}>
         <div>
-          <h3>Subscribe to our mailing list</h3>
+          <h3>Join our mailing list</h3>
           <div dangerouslySetInnerHTML={{ __html: newsletter || '' }} />
+        </div>
+        <div className={styles.final}>
+          <img src={sourceUrl || ''} alt="ELA logo" className={styles.logo} />
+          <small className={styles.copyright}>
+            &copy; Copyright {new Date().getFullYear()}, {title}
+          </small>
+          <ContactInfo {...(contactInfo || {})} />
+          <SocialIcons {...(contactInfo || {})} {...(social || {})} />
         </div>
         <nav>
           {/* TODO: allow standalone links w/o a heading and child items? */}
@@ -65,14 +73,6 @@ export const Footer: React.FC = () => {
             </div>
           )}
         </nav>
-        <div className={styles.final}>
-          <img src={sourceUrl || ''} alt="ELA logo" className={styles.logo} />
-          <small className={styles.copyright}>
-            &copy; Copyright {new Date().getFullYear()}, {title}
-          </small>
-          <ContactInfo {...(contactInfo || {})} />
-          <SocialIcons {...(contactInfo || {})} {...(social || {})} />
-        </div>
       </div>
     </footer>
   )

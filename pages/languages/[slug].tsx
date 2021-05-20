@@ -30,10 +30,9 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
       />
     )
 
-  const { title, customInfo, youTubePlaylist } = data || {}
-  const { project, external, background, affiliation, endangerment } =
-    customInfo || {}
-  const { langStructure, prevResearch, addlInfo } = customInfo || {}
+  const { title, customInfo, youTubePlaylist, customExcerpt } = data || {}
+  const { project, external, affiliation, endangerment } = customInfo || {}
+  const { langStructure, prevResearch, addlInfo, background } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
   const { glottologId, gDriveDocId } = external || {}
   const preppedData = getCitiesCoords([data])
@@ -42,14 +41,21 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
     <Layout
       title={title}
       subtitle={customInfo?.endonym}
-      summary={background}
+      summary={customExcerpt?.excerpt}
       youTubePlaylistId={youTubePlaylist?.id}
+      tweenerContent={
+        <div>
+          <LangInstanceLinksList external={external} project={project} />
+          <div style={{ height: 300, width: '100%' }}>
+            <Map excludePopupLinkBtn preppedData={preppedData} />
+          </div>
+        </div>
+      }
     >
       <article>
-        <LangInstanceLinksList external={external} project={project} />
         <Tabs className={langStyles.tabStyles}>
           <TabList>
-            {(affiliation || endangerment) && <Tab>Background</Tab>}
+            <Tab>Background</Tab>
             {langStructure && <Tab>Language Structure</Tab>}
             {(glottologId || prevResearch) && <Tab>Previous Research</Tab>}
             {elaWork && <Tab>ELA's Work</Tab>}
@@ -58,6 +64,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
           </TabList>
           <TabPanels>
             <TabPanel>
+              {background}
               {affiliation && (
                 <div>
                   <h3>Affiliation</h3>
@@ -146,9 +153,6 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
             )}
           </TabPanels>
         </Tabs>
-        <div style={{ height: 300, width: '100%' }}>
-          <Map excludePopupLinkBtn preppedData={preppedData} />
-        </div>
       </article>
     </Layout>
   )

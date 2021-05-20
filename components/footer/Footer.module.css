@@ -16,8 +16,8 @@
 }
 
 .footer__wrap {
-  grid-column-gap: var(--padding2);
-  grid-template-columns: auto 1fr auto;
+  grid-column-gap: var(--padding5);
+  grid-template-columns: auto 1fr 1fr;
   justify-items: center;
 }
 
