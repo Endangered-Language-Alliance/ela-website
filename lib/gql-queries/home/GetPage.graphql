@@ -16,7 +16,6 @@ query GetPage($id: ID!) {
           customExcerpt {
             excerpt
           }
-          # featuredImage would go here
         }
       }
     }

@@ -6,6 +6,9 @@ query AllPosts {
       excerpt
       link
       uri
+      customExcerpt {
+        excerpt
+      }
     }
   }
 }

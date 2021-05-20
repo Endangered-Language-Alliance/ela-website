@@ -8,11 +8,8 @@ query PostsByYear($year: Int!) {
       excerpt
       uri
       date
-      featuredImage {
-        node {
-          sourceUrl
-          altText
-        }
+      customExcerpt {
+        excerpt
       }
     }
   }

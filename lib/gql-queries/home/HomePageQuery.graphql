@@ -27,11 +27,6 @@ query HomePageQuery {
       title
       slug
       excerpt
-      featuredImage {
-        node {
-          id
-        }
-      }
     }
   }
   # Site title, tagline, etc.

@@ -11,7 +11,7 @@ export const LanguagesList: React.FC<LanguagesListProps> = (props) => {
   return (
     <div className={styles.langsList}>
       {languages.map((node) => {
-        const { uri, excerpt, title, customInfo } = node
+        const { uri, customExcerpt, title, customInfo } = node
         const { endonym } = customInfo || {}
 
         return (
@@ -28,7 +28,9 @@ export const LanguagesList: React.FC<LanguagesListProps> = (props) => {
                 </header>
                 <div className={cardStyles.inner}>
                   <div
-                    dangerouslySetInnerHTML={{ __html: excerpt?.trim() || '' }}
+                    dangerouslySetInnerHTML={{
+                      __html: customExcerpt?.excerpt?.trim() || '',
+                    }}
                   />
                 </div>
               </a>

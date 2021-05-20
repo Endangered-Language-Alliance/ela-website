@@ -6,7 +6,6 @@ query ProjectBySlug($id: ID!) {
     nodes {
       title
       slug
-      excerpt
       uri
       langLocations {
         nodes {
@@ -36,14 +35,10 @@ fragment ProjectFields on Project {
   title
   uri
   content
-  excerpt
+  customExcerpt {
+    excerpt
+  }
   youTubePlaylist {
     id
-  }
-  featuredImage {
-    node {
-      sourceUrl
-      altText
-    }
   }
 }

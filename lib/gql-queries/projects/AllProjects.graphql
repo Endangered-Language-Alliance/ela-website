@@ -1,14 +1,14 @@
 query AllProjects {
+  # A bit fragile, but easy way to populate the hero summary
+  contentType(id: "project", idType: NAME) {
+    description
+  }
   projects {
     nodes {
       title
-      excerpt
       uri
-      featuredImage {
-        node {
-          sourceUrl
-          altText
-        }
+      customExcerpt {
+        excerpt
       }
     }
   }

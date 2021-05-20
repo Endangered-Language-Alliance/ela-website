@@ -14,15 +14,19 @@ const PostsList: React.FC<{ posts: Post[] }> = (props) => {
   return (
     <Layout title="Latest">
       <PostsYearsNavList />
-      {posts.map((post) => (
-        <PostsItem
-          key={post.date}
-          date={post.date || ''}
-          title={post.title || ''}
-          uri={post.uri}
-          summary={post.excerpt || ''}
-        />
-      ))}
+      {posts.map((post) => {
+        const { date, title, uri, excerpt, customExcerpt } = post || {}
+
+        return (
+          <PostsItem
+            key={date}
+            date={date || ''}
+            title={title || ''}
+            uri={uri}
+            summary={customExcerpt?.excerpt || excerpt || ''}
+          />
+        )
+      })}
     </Layout>
   )
 }

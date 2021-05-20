@@ -3,19 +3,19 @@ import { GetStaticProps } from 'next'
 
 import { Layout } from 'components/Layout'
 import { getAllProjects } from 'lib/api/api.projects'
-import { Project, Language } from 'gql-ts/wp-graphql'
-import Image from 'next/image'
+import { Project, Language, ContentType } from 'gql-ts/wp-graphql'
 
 type ProjectsProps = {
   projects?: Project[]
   languages?: Language[]
+  contentType?: ContentType
 }
 
 const Projects: React.FC<ProjectsProps> = (props) => {
-  const { projects, languages } = props
+  const { projects, languages, contentType } = props
 
   return (
-    <Layout title="Projects" subtitle="Pretend it's a map...">
+    <Layout title="Projects" summary={contentType?.description}>
       <div
         style={{
           display: 'grid',
@@ -24,7 +24,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         }}
       >
         {projects?.map((node) => {
-          const { uri, title, excerpt, featuredImage } = node
+          const { uri, title, excerpt } = node
 
           return (
             <article
@@ -38,26 +38,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             >
               <Link href={uri || ''}>
                 <h2>
-                  <a>
-                    {title}
-                    {featuredImage?.node?.sourceUrl && (
-                      <div
-                        style={{
-                          position: 'relative',
-                          width: 150,
-                          height: 150,
-                          borderRadius: 'var(--borderRad2)',
-                        }}
-                      >
-                        <Image
-                          src={featuredImage?.node.sourceUrl || ''}
-                          alt={featuredImage?.node?.altText || ''}
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      </div>
-                    )}
-                  </a>
+                  <a>{title}</a>
                 </h2>
               </Link>
               <div dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
@@ -91,6 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       projects: data?.projects?.nodes,
       languages: data?.languages?.nodes,
+      contentType: data?.contentType,
     },
     revalidate: 15,
   }

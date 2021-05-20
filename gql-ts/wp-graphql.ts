@@ -5941,7 +5941,7 @@ export type RootQuery = {
   postFormats?: Maybe<RootQueryToPostFormatConnection>
   /** Connection between the RootQuery type and the post type */
   posts?: Maybe<RootQueryToPostConnection>
-  /** An object of the Project Type. Hey Ross: edit this and it will affect the &quot;excerpt&quot; of /projects. */
+  /** An object of the Project Type. HEY ROSS: edit this in the &quot;Post Type Description&quot; section of https://content.endangeredlanguagealliance.org/wp-admin/admin.php?page=cptui_manage_post_types&amp;action=edit (go to that page and select &quot;Projects&quot; from the &quot;Select&quot; dropdown at the top) */
   project?: Maybe<Project>
   /**
    * A Project object
@@ -10052,15 +10052,4 @@ export type WritingSettings = {
 export type PostPreviewFragment = { __typename?: 'Post' } & Pick<
   Post,
   'title' | 'excerpt' | 'slug'
-> & {
-    featuredImage?: Maybe<
-      { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge' } & {
-        node?: Maybe<
-          { __typename?: 'MediaItem' } & Pick<
-            MediaItem,
-            'sourceUrl' | 'altText' | 'description' | 'srcSet'
-          >
-        >
-      }
-    >
-  }
+>

@@ -24,7 +24,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
       />
     )
 
-  const { title, content, uri, excerpt, youTubePlaylist } = project || {}
+  const { title, content, uri, customExcerpt, youTubePlaylist } = project || {}
   const langsInThisProject = (languages || []).filter(
     (lang) => lang?.customInfo?.project?.uri === uri
   )
@@ -33,7 +33,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
   return (
     <Layout
       title={title}
-      summary={excerpt}
+      summary={customExcerpt?.excerpt}
       youTubePlaylistId={youTubePlaylist?.id}
       tweenerContent={
         <div className={mapStyles.fullWidthMap}>

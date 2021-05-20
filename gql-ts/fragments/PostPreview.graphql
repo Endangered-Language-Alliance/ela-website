@@ -1,14 +1,7 @@
-# CRED: https://bit.ly/33iyyVl 
+# TODO: actually use fragments to avoid ultra-redundancy
+# CRED: https://bit.ly/33iyyVl
 fragment PostPreview on Post {
   title
   excerpt
   slug
-  featuredImage {
-    node {
-      sourceUrl
-      altText
-      description(format: RAW)
-      srcSet(size: THUMBNAIL)
-    }
-  }
 }
