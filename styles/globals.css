@@ -211,6 +211,14 @@ button {
   cursor: pointer;
 }
 
+figure {
+  margin: 0 0 var(--padding4);
+}
+
+figure img {
+  height: auto;
+}
+
 @media screen and (min-width: 1921px) {
   :root {
     --maxWidth: 1300px;

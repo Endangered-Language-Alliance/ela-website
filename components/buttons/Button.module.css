@@ -52,6 +52,11 @@
   padding: 6px 8px;
   min-width: unset;
   box-shadow: none;
+  background-color: transparent;
+}
+
+.contentOnly:hover {
+  background-color: transparent;
 }
 
 .small {
@@ -60,3 +65,14 @@
 }
 
 /* .large { } */
+
+.dialogCloseBtn {
+  position: absolute;
+  top: var(--padding1);
+  right: var(--padding1);
+  padding: 0;
+}
+
+.dialogCloseBtn svg {
+  font-size: var(--font-h4);
+}
