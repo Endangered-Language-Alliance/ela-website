@@ -1,7 +1,9 @@
 .root {
+  font-family: var(--paraFontFam);
   margin-bottom: var(--padding0);
-  width: 100%;
   overflow-x: auto; /* just in case on mobile */
+  width: 100%;
+  font-size: var(--font-h5);
 }
 
 .list {
@@ -11,7 +13,8 @@
 }
 
 .list > *:not(:first-child):before {
-  margin: 0 var(--padding0);
-  color: var(--gray6);
-  content: '>';
+  margin: 0 6px;
+  color: var(--secondaryLight);
+  opacity: 0.5;
+  content: '/';
 }

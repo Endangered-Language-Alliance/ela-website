@@ -63,6 +63,7 @@
   --font-h5: 1.25rem;
   --font-body: 1rem;
   --font-sm: 0.8rem;
+  --font-md: 1rem;
   --font-xs: 0.64rem;
   --font-tiny: 0.512rem;
 
@@ -70,6 +71,8 @@
   --maxWidth: 1100px;
 
   /* Spacing */
+  /* TODO: rename all these to --p0, etc. */
+  --paddingTiniest: 4px;
   --padding0: 0.512rem;
   --padding1: 0.8rem;
   --padding2: 1rem;
@@ -78,7 +81,7 @@
   --padding5: 1.953rem;
   --padding6: 2.441rem;
   --padding7: 3.052rem;
-  --gutter: var(--padding2);
+  --gutter: var(--padding1);
 
   /* 
     Breakpoints (surrrre):
@@ -223,7 +226,7 @@ button {
 @media screen and (min-width: 600px) {
   :root {
     --font-h1: var(--font-monster);
-    --gutter: var(--padding5);
+    --gutter: var(--padding4);
   }
 }
 

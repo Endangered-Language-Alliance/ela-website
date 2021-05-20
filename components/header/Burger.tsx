@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { RiMenu5Fill } from 'react-icons/ri'
+import { HiOutlineMenu } from 'react-icons/hi'
 
 import btnStyles from 'components/buttons/Button.module.css'
 import mobileNavStyles from './MobileNav.module.css'
@@ -24,7 +24,7 @@ export const Burger: React.FC<BurgerProps> = (props) => {
         aria-expanded={isOpen ? 'true' : 'false'}
         onClick={() => setIsOpen(true)}
       >
-        <RiMenu5Fill />
+        <HiOutlineMenu />
       </button>
       <NavMenuModal
         isOpen={isOpen}

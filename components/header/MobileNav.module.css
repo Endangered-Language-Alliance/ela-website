@@ -1,6 +1,7 @@
 /* NOTE: some stuff is inherited from Header.module.css */
 .mobileNavModal[data-reach-dialog-overlay] {
   background-color: transparent;
+  z-index: 3; /* above header */
 }
 
 .mobileNavModal [data-reach-dialog-content] {
@@ -23,6 +24,11 @@
   padding: 0;
 }
 
+.mobileNav li {
+  margin-bottom: var(--padding0);
+  line-height: var(--headingLineHt);
+}
+
 .mobileNavHeading {
   color: var(--white);
   margin-bottom: var(--padding0);
@@ -31,7 +37,7 @@
 
 .mobileNavList {
   display: grid;
-  grid-column-gap: var(--padding2);
+  grid-column-gap: var(--padding1);
   grid-template-columns: 1fr 1fr;
   margin: 0;
   padding: var(--padding2) var(--padding3);

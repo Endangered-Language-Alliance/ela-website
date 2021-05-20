@@ -1,5 +1,5 @@
 .root {
-  --transNavBg: hsl(0 0% 0% / 85%);
+  --gutter: var(--padding0);
   background-color: var(--gray10);
   border-bottom: 2px solid var(--secondary);
   box-shadow: var(--elev3);
@@ -10,7 +10,7 @@
   text-transform: uppercase;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 3; /* above MB attribs */
 }
 
 .root nav {
@@ -69,7 +69,7 @@
 
 .menuList[data-reach-menu-list][data-reach-menu-items] {
   animation: slide-down 0.2s ease;
-  background-color: var(--transNavBg);
+  background-color: hsl(0 0% 0% / 85%);
   border-radius: var(--borderRad2);
   border: solid var(--secondaryLight) 1px;
   box-shadow: var(--elev2);
@@ -80,7 +80,7 @@
   max-width: 345px;
   padding: var(--padding2) var(--padding3);
   position: relative;
-  z-index: 2;
+  z-index: 3; /* my goodness */
 }
 
 .menuList a {
@@ -90,6 +90,7 @@
 
 @media screen and (min-width: 801px) {
   .root {
+    --gutter: var(--padding2);
     min-height: 75px;
   }
 

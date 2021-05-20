@@ -40,7 +40,7 @@ export const Breadcrumbs: React.FC = () => {
     }
   }, [router])
 
-  if (!breadcrumbs) return null
+  if (!breadcrumbs || breadcrumbs.length === 1) return null
 
   return (
     <nav aria-label="breadcrumbs" className={styles.root}>

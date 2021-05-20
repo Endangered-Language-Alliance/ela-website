@@ -10,9 +10,8 @@
 }
 
 .main {
-  margin-bottom: auto;
-  padding: var(--gutter);
-  width: 100%;
+  padding-top: var(--padding3);
+  padding-bottom: var(--padding3);
 }
 
 .content {
