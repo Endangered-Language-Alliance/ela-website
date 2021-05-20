@@ -11,10 +11,7 @@ export const Hero: React.FC<HeroProps> = (props) => {
       <Breadcrumbs />
       {subtitle ? (
         <>
-          <h1
-            className={styles.title}
-            style={{ marginBottom: 'var(--padding4)' }}
-          >
+          <h1 className={styles.title} style={{ marginBottom: 'var(--p4)' }}>
             {title}
           </h1>
           <p className={styles.subtitle}>{subtitle}</p>

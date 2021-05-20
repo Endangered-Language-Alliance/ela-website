@@ -9,12 +9,12 @@
   background-color: hsl(0 0% 0% / 95%);
   height: 100%;
   margin: 0;
-  padding: var(--padding5) var(--padding2);
+  padding: var(--p5) var(--p2);
   width: 100vw;
 }
 
 .mobileNav {
-  --verticalSpacer: var(--padding3);
+  --verticalSpacer: var(--p3);
   z-index: 1;
 }
 
@@ -25,22 +25,22 @@
 }
 
 .mobileNav li {
-  margin-bottom: var(--padding0);
+  margin-bottom: var(--p0);
   line-height: var(--headingLineHt);
 }
 
 .mobileNavHeading {
   color: var(--white);
-  margin-bottom: var(--padding0);
+  margin-bottom: var(--p0);
   font-size: var(--font-h4);
 }
 
 .mobileNavList {
   display: grid;
-  grid-column-gap: var(--padding1);
+  grid-column-gap: var(--p1);
   grid-template-columns: 1fr 1fr;
   margin: 0;
-  padding: var(--padding2) var(--padding3);
+  padding: var(--p2) var(--p3);
 }
 
 .burger {

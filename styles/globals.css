@@ -2,16 +2,16 @@
   /* Grayscale */
   --black: #000;
   --white: #fff;
-  --gray1: rgb(222, 222, 222);
-  --gray2: rgb(200, 200, 200);
-  --gray3: rgb(180, 180, 180);
-  --gray4: rgb(160, 160, 160);
-  --gray5: rgb(140, 140, 140);
-  --gray6: rgb(120, 120, 120);
-  --gray7: rgb(100, 100, 100);
-  --gray8: rgb(80, 80, 80);
-  --gray9: rgb(60, 60, 60);
-  --gray10: rgb(40, 40, 40);
+  --gr1: rgb(222, 222, 222);
+  --gr2: rgb(200, 200, 200);
+  --gr3: rgb(180, 180, 180);
+  --gr4: rgb(160, 160, 160);
+  --gr5: rgb(140, 140, 140);
+  --gr6: rgb(120, 120, 120);
+  --gr7: rgb(100, 100, 100);
+  --gr8: rgb(80, 80, 80);
+  --gr9: rgb(60, 60, 60);
+  --gr10: rgb(40, 40, 40);
 
   /* Colors */
   --purple: hsl(255, 46%, 40%);
@@ -38,11 +38,11 @@
   --linkColor: var(--secondary);
 
   /* Border radii */
-  --borderRad1: 2px;
-  --borderRad2: 4px;
-  --borderRad3: 8px;
-  --borderRad4: 12px;
-  --borderRad5: 18px;
+  --rad1: 2px;
+  --rad2: 4px;
+  --rad3: 8px;
+  --rad4: 12px;
+  --rad5: 18px;
 
   /* Elevation */
   /* TODO: from MUI */
@@ -74,16 +74,16 @@
 
   /* Spacing */
   /* TODO: rename all these to --p0, etc. */
-  --paddingTiniest: 4px;
-  --padding0: 0.512rem;
-  --padding1: 0.8rem;
-  --padding2: 1rem;
-  --padding3: 1.25rem;
-  --padding4: 1.563rem;
-  --padding5: 1.953rem;
-  --padding6: 2.441rem;
-  --padding7: 3.052rem;
-  --gutter: var(--padding1);
+  --pTiniest: 4px;
+  --p0: 0.512rem;
+  --p1: 0.8rem;
+  --p2: 1rem;
+  --p3: 1.25rem;
+  --p4: 1.563rem;
+  --p5: 1.953rem;
+  --p6: 2.441rem;
+  --p7: 3.052rem;
+  --gutter: var(--p1);
 
   /* 
     Breakpoints (surrrre):
@@ -214,7 +214,7 @@ button {
 }
 
 figure {
-  margin: 0 0 var(--padding4);
+  margin: 0 0 var(--p4);
 }
 
 figure img {
@@ -236,7 +236,7 @@ figure img {
 @media screen and (min-width: 600px) {
   :root {
     --font-h1: var(--font-monster);
-    --gutter: var(--padding4);
+    --gutter: var(--p4);
   }
 }
 

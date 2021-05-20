@@ -1,10 +1,10 @@
 .tabs {
   height: 50vh;
-  outline: solid var(--gray2) 1px;
+  outline: solid var(--gr2) 1px;
   display: flex;
   flex-direction: column;
   box-shadow: var(--elev2);
-  margin-bottom: var(--padding4);
+  margin-bottom: var(--p4);
 }
 
 .tabs [data-reach-tab-list] {
@@ -25,8 +25,8 @@
 .tabs [data-reach-tab] {
   flex-shrink: 0;
   color: var(--white);
-  padding-left: var(--padding1);
-  padding-right: var(--padding1);
+  padding-left: var(--p1);
+  padding-right: var(--p1);
   background-color: var(--primaryLight);
 }
 

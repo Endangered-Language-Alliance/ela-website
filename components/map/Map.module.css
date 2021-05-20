@@ -1,8 +1,8 @@
 .root {
-  margin-bottom: var(--padding3);
+  margin-bottom: var(--p3);
   width: 100%;
   box-shadow: var(--elev2);
-  border-radius: var(--borderRad3);
+  border-radius: var(--rad3);
 }
 
 .fullWidthMap {
@@ -12,12 +12,12 @@
 }
 
 .fullWidthMap .map {
-  border-radius: var(--borderRad3) var(--borderRad3) 0 0;
+  border-radius: var(--rad3) var(--rad3) 0 0;
   box-shadow: var(--elev2);
 }
 
 .gridContentList {
-  padding: var(--padding3);
+  padding: var(--p3);
   overflow-y: auto;
 }
 
@@ -32,15 +32,15 @@
 }
 
 .content {
-  border-left: solid 1px var(--gray2);
+  border-left: solid 1px var(--gr2);
   flex: 1;
   display: grid;
-  grid-gap: var(--padding1);
+  grid-gap: var(--p1);
   grid: auto / repeat(6, 1fr);
   height: 40vh;
   overflow-y: auto;
   padding-bottom: 0;
-  padding: var(--padding2);
+  padding: var(--p2);
   width: 100%;
 }
 
@@ -50,13 +50,13 @@
 
 .popupHeading {
   font-size: var(--font-h4);
-  margin-bottom: var(--padding0);
+  margin-bottom: var(--p0);
 }
 
 .popupSubtitle {
   font-size: var(--font-md);
-  color: var(--gray8);
-  margin-bottom: var(--padding2);
+  color: var(--gr8);
+  margin-bottom: var(--p2);
 }
 
 .mapCtrlBtnStyle {

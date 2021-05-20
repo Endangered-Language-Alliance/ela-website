@@ -1,8 +1,8 @@
 /* TODO: rename everything to just CARD */
 .root {
-  --cardGutter: var(--padding2) var(--padding3);
-  border-radius: var(--borderRad3);
-  border: 1px solid var(--gray1);
+  --cardGutter: var(--p2) var(--p3);
+  border-radius: var(--rad3);
+  border: 1px solid var(--gr1);
   box-shadow: var(--elev1);
   overflow: hidden;
   padding: var(--cardGutter);
@@ -16,22 +16,22 @@
 
 .header {
   line-height: var(--headingLineHt);
-  border-bottom: solid 1px var(--gray2);
-  margin-bottom: var(--padding1);
+  border-bottom: solid 1px var(--gr2);
+  margin-bottom: var(--p1);
 }
 
 .title {
   font-size: var(--font-h5);
   line-height: inherit;
-  margin-bottom: var(--padding0);
+  margin-bottom: var(--p0);
   margin-top: 0;
 }
 
 .subtitle {
-  color: var(--gray2);
+  color: var(--gr2);
   font-size: var(--font-h5);
   line-height: var(--font-h5);
-  margin-bottom: var(--padding0);
+  margin-bottom: var(--p0);
   vertical-align: middle;
 }
 
@@ -45,7 +45,7 @@
 /* TODO: follow the rest of this: https://css-tricks.com/line-clampin/ */
 .inner p {
   font-size: inherit;
-  color: var(--gray7);
+  color: var(--gr7);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

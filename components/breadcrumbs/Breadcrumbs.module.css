@@ -1,6 +1,6 @@
 .root {
   font-family: var(--paraFontFam);
-  margin-bottom: var(--padding0);
+  margin-bottom: var(--p0);
   overflow-x: auto; /* just in case on mobile */
   width: 100%;
 }

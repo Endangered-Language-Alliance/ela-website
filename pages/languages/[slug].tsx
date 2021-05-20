@@ -118,7 +118,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
                 {project && (
                   <div
                     className={sharedStyles.flexCenter}
-                    style={{ marginTop: 'var(--padding2)' }} // dammit
+                    style={{ marginTop: 'var(--p2)' }} // dammit
                   >
                     <Link href={project.uri || ''}>
                       <a className={`${btnStyles.button} ${btnStyles.primary}`}>

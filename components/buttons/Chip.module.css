@@ -1,15 +1,15 @@
 .list {
   display: inline-grid;
   grid-auto-flow: column;
-  grid-gap: var(--padding0);
-  margin: 0 0 var(--padding3);
+  grid-gap: var(--p0);
+  margin: 0 0 var(--p3);
   overflow-x: auto;
   padding: 0;
 }
 
 /* GROSS. But otherwise `.button` wins every time */
 .list .chip {
-  border-radius: var(--borderRad5);
+  border-radius: var(--rad5);
   font-size: var(--font-sm);
   padding: 0.15em 1em;
   text-transform: none;
@@ -18,6 +18,6 @@
 .listWrapper {
   display: flex;
   justify-content: center;
-  margin: 0 auto var(--padding1);
+  margin: 0 auto var(--p1);
   max-width: 99%;
 }

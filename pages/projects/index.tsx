@@ -20,7 +20,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gridGap: 'calc(var(--padding1) * 2)',
+          gridGap: 'calc(var(--p1) * 2)',
         }}
       >
         {projects?.map((node) => {
@@ -30,9 +30,9 @@ const Projects: React.FC<ProjectsProps> = (props) => {
             <article
               key={uri}
               style={{
-                border: 'solid 1px var(--gray2)',
-                borderRadius: 'var(--borderRad2)',
-                padding: 'var(--padding1)',
+                border: 'solid 1px var(--gr2)',
+                borderRadius: 'var(--rad2)',
+                padding: 'var(--p1)',
                 boxShadow: 'var(--elev1)',
               }}
             >

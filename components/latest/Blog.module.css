@@ -1,5 +1,5 @@
 .listitem {
-  padding: var(--padding2) 0 0;
+  padding: var(--p2) 0 0;
   margin: 1em auto 0.5em;
   display: flex;
   max-width: var(--maxWidth);
@@ -11,13 +11,13 @@
 }
 
 .listItemTitle {
-  margin-bottom: var(--padding0);
+  margin-bottom: var(--p0);
   font-size: var(--font-h3);
 }
 
 .subtitle {
-  color: var(--gray6);
-  margin-bottom: var(--padding2);
+  color: var(--gr6);
+  margin-bottom: var(--p2);
   display: block;
 }
 

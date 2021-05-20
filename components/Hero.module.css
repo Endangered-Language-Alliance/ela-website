@@ -1,7 +1,7 @@
 .root {
   color: var(--white);
-  margin: 0 auto var(--padding6);
-  padding-top: var(--padding1);
+  margin: 0 auto var(--p6);
+  padding-top: var(--p1);
   text-align: center;
 }
 
@@ -12,20 +12,20 @@
 }
 
 .subtitle {
-  color: var(--gray2);
+  color: var(--gr2);
   font-family: var(--bodyFontFam);
   font-size: var(--font-h4);
   line-height: 1;
-  margin: 0 0 var(--padding4);
+  margin: 0 0 var(--p4);
 }
 
 /* e.g. excerpt */
 .summary {
-  margin-bottom: var(--padding3);
+  margin-bottom: var(--p3);
   margin-left: auto;
   margin-right: auto;
   max-width: 900px;
-  padding: 0 var(--padding1);
+  padding: 0 var(--p1);
 }
 
 /*
@@ -33,11 +33,11 @@ TODO: rm if not using
 
 .summaryReadMore {
   --lineHeight: 2rem;
-  margin-bottom: var(--padding3);
+  margin-bottom: var(--p3);
   margin-left: auto;
   margin-right: auto;
   max-width: 900px;
-  padding: 0 var(--padding1);
+  padding: 0 var(--p1);
   position: relative;
   line-height: var(--lineHeight);
   height: calc(var(--lineHeight) * 4);

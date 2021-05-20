@@ -1,17 +1,17 @@
 .langsList {
   display: grid;
-  grid-gap: var(--padding2);
+  grid-gap: var(--p2);
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   height: 40vh;
   max-height: 175px;
-  margin-bottom: var(--padding2);
+  margin-bottom: var(--p2);
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;
 }
 
 .linksList {
-  margin: 0 0 var(--padding2);
+  margin: 0 0 var(--p2);
   padding: 0;
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@
 }
 
 .linksList li + li {
-  margin-left: var(--padding0);
+  margin-left: var(--p0);
 }
 
 .linksList li {

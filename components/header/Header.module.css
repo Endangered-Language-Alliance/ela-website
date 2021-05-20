@@ -1,6 +1,6 @@
 .root {
-  --gutter: var(--padding0);
-  background-color: var(--gray10);
+  --gutter: var(--p0);
+  background-color: var(--gr10);
   border-bottom: 2px solid var(--secondary);
   box-shadow: var(--elev3);
   color: var(--linkColor);
@@ -50,7 +50,7 @@
 
 .root li {
   list-style-type: none;
-  margin-right: var(--padding3);
+  margin-right: var(--p3);
 }
 
 .logo {
@@ -70,15 +70,15 @@
 .menuList[data-reach-menu-list][data-reach-menu-items] {
   animation: slide-down 0.2s ease;
   background-color: hsl(0 0% 0% / 85%);
-  border-radius: var(--borderRad2);
+  border-radius: var(--rad2);
   border: solid var(--secondaryLight) 1px;
   box-shadow: var(--elev2);
   display: grid;
-  grid-column-gap: var(--padding2);
-  grid-row-gap: var(--padding1);
+  grid-column-gap: var(--p2);
+  grid-row-gap: var(--p1);
   grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 1fr);
   max-width: 345px;
-  padding: var(--padding2) var(--padding3);
+  padding: var(--p2) var(--p3);
   position: relative;
   z-index: 3; /* my goodness */
 }
@@ -90,7 +90,7 @@
 
 @media screen and (min-width: 801px) {
   .root {
-    --gutter: var(--padding2);
+    --gutter: var(--p2);
     min-height: 75px;
   }
 

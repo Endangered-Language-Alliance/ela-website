@@ -47,7 +47,7 @@ const Home: React.FC<HomeProps> = (props) => {
               position: 'relative',
               width: '100%',
               height: 300,
-              borderRadius: 'var(--borderRad2)',
+              borderRadius: 'var(--rad2)',
             }}
           >
             <Image
