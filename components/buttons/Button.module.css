@@ -60,8 +60,8 @@
 }
 
 .small {
-  padding: 4px 8px;
-  font-size: var(--font-xs);
+  padding: 3px 6px;
+  font-size: var(--font-sm);
 }
 
 /* .large { } */

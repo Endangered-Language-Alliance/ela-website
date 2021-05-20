@@ -28,6 +28,9 @@
   padding: 0 var(--padding1);
 }
 
+/*
+TODO: rm if not using
+
 .summaryReadMore {
   --lineHeight: 2rem;
   margin-bottom: var(--padding3);
@@ -55,6 +58,7 @@
     rgba(0, 0, 0, 0.5) 65%
   );
 }
+*/
 
 .divider {
   border-color: rgba(255, 255, 255, 0.45); /* TODO: var seems useful */

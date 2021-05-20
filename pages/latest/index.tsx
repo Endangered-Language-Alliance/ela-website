@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
 
 import { getAllPosts } from 'lib/api/api.latest'
+import { prepRecentYearChips } from 'lib/utils'
 import { Layout } from 'components/Layout'
 import { PostsItem } from 'components/latest/PostsItem'
-import { PostsYearsNavList } from 'components/latest/PostsYearsNavList'
 import { Post } from 'gql-ts/wp-graphql'
 
 const PostsList: React.FC<{ posts: Post[] }> = (props) => {
@@ -11,9 +11,10 @@ const PostsList: React.FC<{ posts: Post[] }> = (props) => {
 
   if (!posts.length) return <Layout title="No posts found" />
 
+  const chipsItems = prepRecentYearChips()
+
   return (
-    <Layout title="Latest">
-      <PostsYearsNavList />
+    <Layout title="Latest" chipsItems={chipsItems}>
       {posts.map((post) => {
         const { date, title, uri, excerpt, customExcerpt } = post || {}
 

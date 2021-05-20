@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import { Hero, HeroProps } from 'components/Hero'
+import { Hero } from 'components/Hero'
 import { PostsItem } from 'components/latest/PostsItem'
-import { Page } from 'gql-ts/wp-graphql'
 import styles from './Layout.module.css'
 import { Footer } from './footer'
+import { LayoutProps } from './types'
 import Header from './header'
 import { YouTubePlaylist } from './video/YouTubePlaylist'
 
@@ -21,14 +21,8 @@ const queryClient = new QueryClient({
   },
 })
 
-type LayoutProps = HeroProps & {
-  tweenerContent?: React.ReactNode
-  youTubePlaylistId?: string | null
-  childPages?: Page[] | null
-}
-
 export const Layout: React.FC<LayoutProps> = (props) => {
-  const { title, children, summary, subtitle } = props
+  const { title, children, summary, subtitle, chipsItems } = props
   const { tweenerContent, youTubePlaylistId, childPages } = props
   const titlePrefix = title ? `${title} - ` : ''
 
@@ -42,11 +36,16 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       <div className={styles.page}>
         <Header />
         <main className={`${styles.container} ${styles.main}`}>
-          <Hero title={title} summary={summary} subtitle={subtitle} />
-          {tweenerContent}
+          <Hero
+            title={title}
+            summary={summary}
+            subtitle={subtitle}
+            chipsItems={chipsItems}
+          />
           {youTubePlaylistId && (
             <YouTubePlaylist playlistId={youTubePlaylistId} />
           )}
+          {tweenerContent}
           <div className={styles.content}>
             {childPages?.map((childPage) => (
               <PostsItem

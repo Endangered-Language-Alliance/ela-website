@@ -37,12 +37,15 @@
   );
   --linkColor: var(--secondary);
 
-  /* Borders */
+  /* Border radii */
   --borderRad1: 2px;
   --borderRad2: 4px;
   --borderRad3: 8px;
+  --borderRad4: 12px;
+  --borderRad5: 18px;
 
   /* Elevation */
+  /* TODO: from MUI */
   --elev1: 0 2px 8px rgba(0, 0, 0, 0.25);
   --elev2: 0 2px 10px rgba(0, 0, 0, 0.35);
   --elev3: 0 3px 15px rgba(0, 0, 0, 0.45);

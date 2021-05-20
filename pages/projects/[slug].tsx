@@ -6,7 +6,7 @@ import { Project, Language } from 'gql-ts/wp-graphql'
 import { getCitiesCoords } from 'components/map/utils'
 import mapStyles from 'components/map/Map.module.css'
 import { Map } from 'components/map/Map'
-import { LanguagesList } from 'components/languages/LanguagesList'
+import { ChipProps } from 'components/buttons/types'
 
 type ProjectInstanceProps = {
   project?: Project
@@ -29,19 +29,23 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
     (lang) => lang?.customInfo?.project?.uri === uri
   )
   const preppedData = getCitiesCoords(langsInThisProject)
+  const preppedChips: ChipProps[] = langsInThisProject.map((lang) => ({
+    text: lang.title || '',
+    uri: lang.uri || '',
+  }))
 
   return (
     <Layout
       title={title}
       summary={customExcerpt?.excerpt}
       youTubePlaylistId={youTubePlaylist?.id}
+      chipsItems={preppedChips}
       tweenerContent={
         <div className={mapStyles.fullWidthMap}>
           <Map preppedData={preppedData} />
         </div>
       }
     >
-      <LanguagesList languages={langsInThisProject} />
       <div dangerouslySetInnerHTML={{ __html: content || '' }} />
     </Layout>
   )

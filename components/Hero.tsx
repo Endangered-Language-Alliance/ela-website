@@ -1,14 +1,10 @@
 import { Breadcrumbs } from 'components/breadcrumbs/Breadcrumbs'
+import { ChipsList } from './buttons/Chips'
 import styles from './Hero.module.css'
-
-export type HeroProps = {
-  title?: string | null
-  subtitle?: string | null // e.g. endonym
-  summary?: string | null // e.g. excerpt
-}
+import { HeroProps } from './types'
 
 export const Hero: React.FC<HeroProps> = (props) => {
-  const { title, subtitle, children, summary } = props
+  const { title, subtitle, children, summary, chipsItems } = props
 
   return (
     <div className={styles.root}>
@@ -26,6 +22,7 @@ export const Hero: React.FC<HeroProps> = (props) => {
       ) : (
         <h1 className={styles.title}>{title}</h1>
       )}
+      {chipsItems && <ChipsList items={chipsItems} />}
       {summary && (
         <div
           dangerouslySetInnerHTML={{ __html: summary || '' }}

@@ -1,8 +1,8 @@
 .list {
   display: flex;
   overflow-x: auto;
-  padding-bottom: var(--padding1);
   margin-bottom: var(--padding4);
+  /* TODO: sweet custom scrollbar */
   /* TODO: padding-left or other way to obviate scrollability on mobile */
   /* LIKE: last-child margin-right + an overlay mask on parent's right side */
 }
@@ -14,6 +14,7 @@
   flex-shrink: 0;
   border-radius: var(--borderRad2);
   box-shadow: var(--elev1);
+  margin-bottom: var(--padding0); /* prevents overflow-y scrollbar */
   z-index: 0;
 }
 
