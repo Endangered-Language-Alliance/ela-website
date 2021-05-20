@@ -9,7 +9,7 @@ export const Chip: React.FC<ChipProps> = (props) => {
 
   if (external) {
     return (
-      <a className={classes} target="_blank">
+      <a className={classes} target="_blank" href={uri} rel="noreferrer">
         {text}
       </a>
     )

@@ -5,14 +5,14 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 import '@reach/tabs/styles.css'
 
 import btnStyles from 'components/buttons/Button.module.css'
-import langStyles from 'components/languages/Languages.module.css'
+import tabStyles from 'components/languages/Tabs.module.css'
 import sharedStyles from 'components/Layout.module.css'
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
 import { Language as LanguageType } from 'gql-ts/wp-graphql'
-import { LangInstanceLinksList } from 'components/languages/LangInstanceLinksList'
 import { getCitiesCoords } from 'components/map/utils'
 import { Map } from 'components/map/Map'
+import { prepLangInstanceChips } from 'components/languages/utils'
 
 const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { data } = props
@@ -36,6 +36,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { elaWork, inNewYork } = customInfo || {}
   const { glottologId, gDriveDocId } = external || {}
   const preppedData = getCitiesCoords([data])
+  const preppedChips = prepLangInstanceChips({ external, project })
 
   return (
     <Layout
@@ -43,17 +44,15 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
       subtitle={customInfo?.endonym}
       summary={customExcerpt?.excerpt}
       youTubePlaylistId={youTubePlaylist?.id}
+      chipsItems={preppedChips}
       tweenerContent={
-        <div>
-          <LangInstanceLinksList external={external} project={project} />
-          <div style={{ height: 300, width: '100%' }}>
-            <Map excludePopupLinkBtn preppedData={preppedData} />
-          </div>
+        <div style={{ height: 300, width: '100%' }}>
+          <Map excludePopupLinkBtn preppedData={preppedData} />
         </div>
       }
     >
       <article>
-        <Tabs className={langStyles.tabStyles}>
+        <Tabs className={tabStyles.tabs}>
           <TabList>
             <Tab>Background</Tab>
             {langStructure && <Tab>Language Structure</Tab>}
@@ -64,7 +63,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
           </TabList>
           <TabPanels>
             <TabPanel>
-              {background}
+              <div dangerouslySetInnerHTML={{ __html: background || '' }} />
               {affiliation && (
                 <div>
                   <h3>Affiliation</h3>
@@ -85,17 +84,18 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
             )}
             {(glottologId || prevResearch) && (
               <TabPanel>
+                {prevResearch && (
+                  <div dangerouslySetInnerHTML={{ __html: prevResearch }} />
+                )}
                 {glottologId && (
                   <a
                     target="_blank"
                     href={`https://glottolog.org/resource/languoid/id/${glottologId}`}
                     rel="noreferrer"
+                    className={`${btnStyles.button} ${btnStyles.primary}`}
                   >
                     Glottolog
                   </a>
-                )}
-                {prevResearch && (
-                  <div dangerouslySetInnerHTML={{ __html: prevResearch }} />
                 )}
               </TabPanel>
             )}

@@ -5,6 +5,7 @@
   box-shadow: var(--elev3);
   color: var(--linkColor);
   display: flex;
+  font-size: var(--font-nav);
   min-height: 55px;
   position: sticky;
   text-transform: uppercase;
@@ -74,6 +75,7 @@
   border: solid var(--secondaryLight) 1px;
   box-shadow: var(--elev2);
   display: grid;
+  font-size: var(--font-nav);
   grid-column-gap: var(--p2);
   grid-row-gap: var(--p1);
   grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 1fr);
@@ -85,7 +87,6 @@
 
 .menuList a {
   font-weight: bold;
-  font-size: var(--font-body);
 }
 
 @media screen and (min-width: 801px) {

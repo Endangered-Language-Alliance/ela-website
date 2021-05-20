@@ -5,7 +5,7 @@ import { getAllLanguages } from 'lib/api/api.languages'
 import { Map } from 'components/map/Map'
 import { getCitiesCoords } from 'components/map/utils'
 import { LanguagesProps } from 'components/languages/types'
-import { LanguagesList } from 'components/languages/LanguagesList'
+import { CardList, Card } from 'components/cards/Card'
 
 import mapStyles from 'components/map/Map.module.css'
 
@@ -27,7 +27,22 @@ const Languages: React.FC<LanguagesProps> = (props) => {
         </div>
       }
     >
-      <LanguagesList languages={languages} />
+      <CardList>
+        {languages.map((node) => {
+          const { uri, customExcerpt, title, customInfo } = node
+          const { endonym } = customInfo || {}
+
+          return (
+            <Card
+              key={uri}
+              title={title || ''}
+              uri={uri || ''}
+              summary={customExcerpt?.excerpt || ''}
+              subtitle={endonym || ''}
+            />
+          )
+        })}
+      </CardList>
     </Layout>
   )
 }

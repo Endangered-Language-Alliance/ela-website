@@ -27,7 +27,6 @@ export const Hero: React.FC<HeroProps> = (props) => {
         />
       )}
       {children}
-      <hr className={styles.divider} />
     </div>
   )
 }

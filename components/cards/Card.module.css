@@ -1,38 +1,60 @@
-/* TODO: rename everything to just CARD */
-.root {
-  --cardGutter: var(--p2) var(--p3);
+.list {
+  display: grid;
+  grid-gap: var(--p2);
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  margin-bottom: var(--p2);
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* TODO: */
+  /* height: 40vh;
+  max-height: 20vh; */
+  /* width: 100%; */
+}
+
+.card {
+  --cardGutter: var(--p1) var(--p1);
   border-radius: var(--rad3);
   border: 1px solid var(--gr1);
   box-shadow: var(--elev1);
+  display: block;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   padding: var(--cardGutter);
-  min-height: 100px;
-  width: 100%;
 }
 
-.link {
-  display: block;
+.card:hover {
+  cursor: pointer;
+  background-color: greenyellow;
 }
 
 .header {
   line-height: var(--headingLineHt);
-  border-bottom: solid 1px var(--gr2);
+  align-items: center;
   margin-bottom: var(--p1);
+  /* TODO: restore if using icon */
+  /* display: flex; */
 }
 
 .title {
   font-size: var(--font-h5);
   line-height: inherit;
-  margin-bottom: var(--p0);
-  margin-top: 0;
+  margin: 0 var(--p0) var(--p0) 0;
 }
 
 .subtitle {
-  color: var(--gr2);
+  color: var(--gr4);
   font-size: var(--font-h5);
   line-height: var(--font-h5);
   margin-bottom: var(--p0);
   vertical-align: middle;
+  margin-right: var(--p0);
+}
+
+.title,
+.subtitle {
+  flex-grow: 1;
+  flex-shrink: 0;
 }
 
 .inner {

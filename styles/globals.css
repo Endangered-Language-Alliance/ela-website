@@ -63,11 +63,12 @@
   --font-h3: 1.953rem;
   --font-h4: 1.563rem;
   --font-h5: 1.25rem;
-  --font-body: 1rem;
   --font-sm: 0.8rem;
   --font-md: 1rem;
   --font-xs: 0.64rem;
   --font-tiny: 0.512rem;
+  --font-body: var(--font-md);
+  --font-nav: var(--font-md);
 
   /* Layout */
   --maxWidth: 1100px;
@@ -178,15 +179,19 @@ h1 {
   margin-top: 2rem;
   font-size: var(--font-h1);
 }
+
 h2 {
   font-size: var(--font-h2);
 }
+
 h3 {
   font-size: var(--font-h3);
 }
+
 h4 {
   font-size: var(--font-h4);
 }
+
 h5 {
   font-size: var(--font-h5);
 }
@@ -198,11 +203,11 @@ iframe {
   max-width: 100%;
 }
 
-p {
+p,
+ul,
+figure {
   margin-bottom: 1.38rem;
   margin-top: 0;
-  font-size: 1.15rem;
-  font-family: var(--paraFontFam);
 }
 
 small {
@@ -214,7 +219,12 @@ button {
 }
 
 figure {
-  margin: 0 0 var(--p4);
+  /* TODO: rm all unneeded */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 99%;
+  display: block;
+  outline: solid gold 1px;
 }
 
 figure img {
@@ -226,17 +236,16 @@ figure img {
     --maxWidth: 1300px;
   }
 
-  /* 
   html {
     font-size: 20px;
   }
-  */
 }
 
 @media screen and (min-width: 600px) {
   :root {
     --font-h1: var(--font-monster);
     --gutter: var(--p4);
+    --font-nav: var(--font-sm);
   }
 }
 

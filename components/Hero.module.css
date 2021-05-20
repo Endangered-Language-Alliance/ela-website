@@ -59,8 +59,3 @@ TODO: rm if not using
   );
 }
 */
-
-.divider {
-  border-color: rgba(255, 255, 255, 0.45); /* TODO: var seems useful */
-  max-width: 85%;
-}

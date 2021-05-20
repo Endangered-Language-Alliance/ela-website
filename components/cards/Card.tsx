@@ -7,17 +7,31 @@ export const Card: React.FC<CardProps> = (props) => {
   const { title, uri, summary, subtitle } = props
 
   return (
-    <Link href={uri || ''}>
-      <a className={styles.root}>
-        <header className={styles.header}>
-          <h2 className={styles.title}>{title}</h2>
-          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-        </header>
-        <div
-          dangerouslySetInnerHTML={{ __html: summary?.trim() || '' }}
-          className={styles.summary}
-        />
-      </a>
-    </Link>
+    <article>
+      <Link href={uri || ''}>
+        <a className={styles.card}>
+          <header className={styles.header}>
+            <h2 className={styles.title}>{title}</h2>
+            {subtitle && (
+              <div role="doc-subtitle" className={styles.subtitle}>
+                {subtitle}
+              </div>
+            )}
+          </header>
+          {summary && (
+            <div
+              dangerouslySetInnerHTML={{ __html: summary.trim() || '' }}
+              className={styles.summary}
+            />
+          )}
+        </a>
+      </Link>
+    </article>
   )
+}
+
+export const CardList: React.FC = (props) => {
+  const { children } = props
+
+  return <div className={styles.list}>{children}</div>
 }

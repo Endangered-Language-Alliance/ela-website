@@ -20,6 +20,10 @@ query AllProjects {
         project {
           ... on Project {
             uri
+            # TODO
+            # projectMeta {
+            #   iconColor
+            # }
           }
         }
       }

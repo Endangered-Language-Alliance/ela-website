@@ -7,9 +7,6 @@ query AllLanguages {
     nodes {
       title
       uri
-      customExcerpt {
-        excerpt
-      }
       contentType {
         node {
           description
