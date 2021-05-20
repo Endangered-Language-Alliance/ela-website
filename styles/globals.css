@@ -50,9 +50,8 @@
   /* Typography */
   --headingFontFam: 'Libre Franklin', sans-serif;
   --bodyFontFam: var(--headingFontFam);
-  --paraFontFam: 'Tinos', serif;
+  --paraFontFam: var(--headingFontFam);
   --btnFontFam: var(--headingFontFam);
-  /* TODO: Noto serif */
 
   /* Font sizes */
   --font-monster: 3.815rem;

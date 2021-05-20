@@ -3,11 +3,11 @@
   margin-bottom: var(--padding0);
   overflow-x: auto; /* just in case on mobile */
   width: 100%;
-  font-size: var(--font-h5);
 }
 
 .list {
   display: flex;
+  font-size: var(--font-md);
   margin: 0;
   text-transform: capitalize;
 }

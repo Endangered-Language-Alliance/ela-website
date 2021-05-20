@@ -19,20 +19,20 @@ class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
-          {/* Note that the `preload` suggestion did not work */}
+          {/* NOTE: the `preload` suggestion did not work */}
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap"
           />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap"
             media="print"
           />
           <noscript>
             <link
               rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap"
+              href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap"
             />
           </noscript>
         </Head>
