@@ -2,7 +2,8 @@ query ProjectBySlug($id: ID!) {
   project(id: $id, idType: SLUG) {
     ...ProjectFields
   }
-  languages {
+  # 🤮 SO GROSS
+  languages(first: 2000) {
     nodes {
       title
       slug

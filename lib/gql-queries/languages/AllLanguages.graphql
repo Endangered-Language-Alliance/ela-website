@@ -3,7 +3,7 @@ query AllLanguages {
   contentType(id: "language", idType: NAME) {
     description
   }
-  languages {
+  languages(first: 2000) {
     nodes {
       title
       uri

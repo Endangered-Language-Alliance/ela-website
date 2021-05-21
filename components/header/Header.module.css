@@ -95,7 +95,7 @@
   .root {
     --gutter: var(--p2);
     --navItemFontSize: var(--font-md);
-    min-height: 75px;
+    min-height: 65px;
   }
 
   .root nav {

@@ -3,7 +3,7 @@ query AllProjects {
   contentType(id: "project", idType: NAME) {
     description
   }
-  projects {
+  projects(first: 2000) {
     nodes {
       title
       uri
@@ -12,7 +12,7 @@ query AllProjects {
       }
     }
   }
-  languages {
+  languages(first: 2000) {
     nodes {
       title
       uri

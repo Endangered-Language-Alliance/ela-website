@@ -1,14 +1,12 @@
 .list {
   display: grid;
   grid-gap: var(--p2);
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(175px, auto));
   margin-bottom: var(--p2);
   overflow-x: hidden;
   overflow-y: auto;
-  /* TODO: */
-  /* height: 40vh;
-  max-height: 20vh; */
-  /* width: 100%; */
+  height: 40vh;
+  grid-auto-rows: max-content;
 }
 
 .card {
@@ -35,7 +33,7 @@
 }
 
 .title {
-  font-size: var(--font-md);
+  font-size: var(--font-h5);
   line-height: inherit;
   margin: 0 var(--p0) var(--p0) 0;
 }

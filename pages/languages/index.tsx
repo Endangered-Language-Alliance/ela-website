@@ -37,7 +37,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
               key={uri}
               title={title || ''}
               uri={uri || ''}
-              subtitle={endonym || ''}
+              subtitle={endonym || title || ''}
             >
               {langLocations?.nodes && (
                 <div className={mapStyles.markersList}>
