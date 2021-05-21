@@ -1,16 +1,30 @@
-.list {
+.listGroup {
   display: grid;
-  grid-gap: var(--p2);
-  grid-template-columns: repeat(auto-fill, minmax(175px, auto));
+  grid-gap: var(--p3);
+  grid-template-columns: 1fr 1fr;
+  height: 50vh;
   margin-bottom: var(--p2);
   overflow-x: hidden;
   overflow-y: auto;
-  height: 40vh;
-  grid-auto-rows: max-content;
+}
+
+.groupHeader {
+  font-size: var(--font-h4);
+  margin-bottom: var(--p1);
+}
+
+.list {
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-gap: var(--p1);
+  grid-template-columns: repeat(auto-fill, minmax(150px, auto));
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: var(--p2);
+  overflow-x: hidden;
 }
 
 .card {
-  --cardGutter: var(--p1) var(--p1);
+  --cardGutter: var(--p0) var(--p1);
   border-radius: var(--rad3);
   border: 1px solid var(--gr1);
   box-shadow: var(--elev1);

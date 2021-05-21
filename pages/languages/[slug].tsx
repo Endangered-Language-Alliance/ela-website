@@ -6,14 +6,15 @@ import '@reach/tabs/styles.css'
 import btnStyles from 'components/buttons/Button.module.css'
 import tabStyles from 'components/languages/Tabs.module.css'
 import sharedStyles from 'components/Layout.module.css'
+
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
-import { Language as LanguageType } from 'gql-ts/wp-graphql'
 import { getCitiesCoords } from 'components/map/utils'
 import { Map } from 'components/map/Map'
 import { prepLangInstanceChips } from 'components/languages/utils'
+import { LangInstancePageProps } from 'components/languages/types'
 
-const Language: React.FC<{ data?: LanguageType }> = (props) => {
+const Language: React.FC<LangInstancePageProps> = (props) => {
   const { data } = props
   const router = useRouter()
 

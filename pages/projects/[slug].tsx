@@ -28,6 +28,8 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
   const langsInThisProject = (languages || []).filter(
     (lang) => lang?.customInfo?.project?.uri === uri
   )
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const preppedData = getCitiesCoords(langsInThisProject)
   const preppedChips: ChipProps[] = langsInThisProject.map((lang) => ({
     text: lang.title || '',

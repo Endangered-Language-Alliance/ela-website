@@ -4,11 +4,8 @@ import { request } from 'graphql-request'
 import allLanguages from 'lib/gql-queries/languages/AllLanguages.graphql'
 import languageBySlug from 'lib/gql-queries/languages/LanguageBySlug.graphql'
 import allLangsWithSlug from 'lib/gql-queries/languages/AllLangsWithSlug.graphql'
-import {
-  Language,
-  RootQuery,
-  RootQueryToLanguageConnection,
-} from 'gql-ts/wp-graphql'
+import { RootQuery, RootQueryToLanguageConnection } from 'gql-ts/wp-graphql'
+import { LangWithKnownContinent } from 'components/languages/types'
 
 const { publicRuntimeConfig } = getConfig()
 const { wpGqlEndpoint } = publicRuntimeConfig
@@ -21,7 +18,7 @@ export async function getAllLanguages() {
 
 export const getLanguage = async (
   slug: string | string[]
-): Promise<Language> => {
+): Promise<LangWithKnownContinent> => {
   const data = await request(wpGqlEndpoint, languageBySlug, { id: slug })
 
   return data?.language

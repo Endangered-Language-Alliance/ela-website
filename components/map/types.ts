@@ -1,7 +1,8 @@
 import { ViewportProps } from 'react-map-gl'
-import { LangLocation_Languagelocation } from 'gql-ts/wp-graphql'
 
-export type PreppedMarker = LangLocation_Languagelocation & {
+import { KnownLangLocation } from 'components/languages/types'
+
+export type PreppedMarker = KnownLangLocation & {
   uri: string
   iconColor?: string
 }

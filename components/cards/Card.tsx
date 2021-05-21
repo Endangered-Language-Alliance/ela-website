@@ -11,7 +11,7 @@ export const Card: React.FC<CardProps> = (props) => {
       <Link href={uri || ''}>
         <a className={styles.card}>
           <header className={styles.header}>
-            <h2 className={styles.title}>{title}</h2>
+            <h3 className={styles.title}>{title}</h3>
             {subtitle && (
               <div role="doc-subtitle" className={styles.subtitle}>
                 {subtitle}
