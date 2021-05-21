@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Marker } from 'react-map-gl'
 
-import { MarkerIcon } from './MarkerIcon'
+import { ClickableMarkerIcon } from './MarkerIcon'
 import { PreppedMarker, MapMarkersProps } from './types'
 
 // Important for perf (???): the markers never change, avoid rerender when the
@@ -14,7 +14,7 @@ function MapMarkers(props: MapMarkersProps): React.ReactNode | null {
 
     return (
       <Marker key={`marker-${city}`} longitude={lon || 0} latitude={lat || 0}>
-        <MarkerIcon onClick={onClick} {...marker} tabIndex={i} />
+        <ClickableMarkerIcon onClick={onClick} {...marker} tabIndex={i} />
       </Marker>
     )
   })

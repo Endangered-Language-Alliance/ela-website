@@ -2,7 +2,6 @@ import { ViewportProps } from 'react-map-gl'
 import { LangLocation_Languagelocation } from 'gql-ts/wp-graphql'
 
 export type PreppedMarker = LangLocation_Languagelocation & {
-  title: string
   uri: string
   iconColor?: string
 }
@@ -20,6 +19,13 @@ export type PopupState = {
 
 export type MapMarkersProps = {
   markers: PreppedMarker[]
+  onClick: React.Dispatch<PopupState>
+}
+
+export type MarkerIconProps = Pick<PreppedMarker, 'iconColor' | 'city'>
+
+export type ClickableMarkerIconProps = PreppedMarker & {
+  tabIndex: number
   onClick: React.Dispatch<PopupState>
 }
 

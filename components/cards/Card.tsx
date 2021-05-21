@@ -4,7 +4,7 @@ import styles from './Card.module.css'
 import { CardProps } from './types'
 
 export const Card: React.FC<CardProps> = (props) => {
-  const { title, uri, summary, subtitle } = props
+  const { children, title, uri, summary, subtitle } = props
 
   return (
     <article>
@@ -24,6 +24,7 @@ export const Card: React.FC<CardProps> = (props) => {
               className={styles.summary}
             />
           )}
+          {children}
         </a>
       </Link>
     </article>
