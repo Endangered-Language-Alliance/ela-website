@@ -16,7 +16,6 @@
 .tabs [data-reach-tab-panels] {
   padding: var(--gutter);
   overflow-y: auto;
-  font-size: var(--font-sm);
   flex: 1;
 }
 

@@ -12,7 +12,7 @@ export const mapConfig = {
   mapboxApiAccessToken: mbToken,
   width: '100%',
   height: '100%',
-  maxZoom: 10,
+  maxZoom: 9,
 }
 
 export const initialState = {

@@ -22,13 +22,35 @@
 }
 
 .marker {
-  --size: 20px;
+  --size: 32px;
   --offset: calc(var(--size) * -1);
-  height: var(--size);
-  cursor: pointer;
-  fill: var(--primary);
-  stroke: none;
+  --strokeWidth: 2px;
+  color: var(--white);
+  display: block;
+  position: relative;
   transform: translate(calc(var(--offset) / 2), var(--offset));
+  height: var(--size);
+  width: var(--size);
+}
+
+.markerLabel {
+  font-size: calc(0.42 * var(--size));
+  font-weight: bold;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  top: 2px;
+  width: 100%;
+}
+
+.markerIcon {
+  height: 100%;
+  width: 100%;
+}
+
+.markerIcon path {
+  stroke-width: var(--strokeWidth);
+  stroke: currentColor;
 }
 
 .content {

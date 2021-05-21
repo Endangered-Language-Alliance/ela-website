@@ -25,27 +25,25 @@
 
 .card:hover {
   cursor: pointer;
-  background-color: greenyellow;
+  background-color: var(--gr1);
 }
 
 .header {
   line-height: var(--headingLineHt);
   align-items: center;
   margin-bottom: var(--p1);
-  /* TODO: restore if using icon */
-  /* display: flex; */
 }
 
 .title {
-  font-size: var(--font-h5);
+  font-size: var(--font-md);
   line-height: inherit;
   margin: 0 var(--p0) var(--p0) 0;
 }
 
 .subtitle {
   color: var(--gr4);
-  font-size: var(--font-h5);
-  line-height: var(--font-h5);
+  font-size: var(--font-md);
+  line-height: var(--font-md);
   margin-bottom: var(--p0);
   vertical-align: middle;
   margin-right: var(--p0);

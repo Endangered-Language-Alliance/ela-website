@@ -15,7 +15,6 @@ const Languages: React.FC<LanguagesProps> = (props) => {
   const { data } = props || {}
   const { contentType, languages } = data
   const preppedData = getCitiesCoords(languages)
-  // const more = [...languages, ...languages, ...languages, ...languages]
 
   return (
     <Layout

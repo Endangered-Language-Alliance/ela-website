@@ -10,7 +10,7 @@ export const MapPopup: React.FC<MapPopupProps> = (props) => {
 
   if (!popupInfo) return null // ughhh already know it's not null
 
-  const { lat, lon, heading, subtitle, linkUri, linkText } = popupInfo
+  const { lat, lon, title, subtitle, uri, linkText } = popupInfo
 
   return (
     <Popup
@@ -21,13 +21,13 @@ export const MapPopup: React.FC<MapPopupProps> = (props) => {
       closeOnClick={false}
       onClose={setPopupInfo}
     >
-      <h3 className={styles.popupHeading}>{heading}</h3>
+      <h3 className={styles.popupHeading}>{title}</h3>
       {/* CRED: https://css-tricks.com/html-for-subheadings-and-headings/ */}
       <div role="doc-subtitle" className={styles.popupSubtitle}>
         {subtitle}
       </div>
-      {!excludePopupLinkBtn && linkUri && (
-        <Link href={linkUri}>
+      {!excludePopupLinkBtn && uri && (
+        <Link href={uri}>
           <a
             className={`${btnStyles.button} ${btnStyles.primary} ${btnStyles.contentOnly} ${btnStyles.small}`}
           >

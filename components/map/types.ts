@@ -2,8 +2,9 @@ import { ViewportProps } from 'react-map-gl'
 import { LangLocation_Languagelocation } from 'gql-ts/wp-graphql'
 
 export type PreppedMarker = LangLocation_Languagelocation & {
-  langName: string
-  langUri: string
+  title: string
+  uri: string
+  iconColor?: string
 }
 
 export type ViewportState = Partial<ViewportProps>
@@ -11,14 +12,14 @@ export type ViewportState = Partial<ViewportProps>
 export type PopupState = {
   lat: number
   lon: number
-  heading: string
+  title: string
   subtitle?: string // e.g. country name
-  linkUri?: string
+  uri?: string
   linkText?: string
 } | null
 
 export type MapMarkersProps = {
-  markers: LangLocation_Languagelocation[]
+  markers: PreppedMarker[]
   onClick: React.Dispatch<PopupState>
 }
 
