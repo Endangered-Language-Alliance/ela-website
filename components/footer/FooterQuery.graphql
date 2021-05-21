@@ -3,7 +3,7 @@ query FooterQuery {
   menuItems(where: { location: FOOTER, parentId: "" }) {
     nodes {
       ...MenuBits
-      childItems {
+      childItems(first: 200) {
         nodes {
           ...MenuBits
         }

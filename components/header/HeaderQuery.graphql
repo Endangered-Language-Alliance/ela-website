@@ -5,7 +5,7 @@ query MainMenuQuery {
   menuItems(where: { location: PRIMARY, parentId: "" }) {
     nodes {
       ...MenuBits
-      childItems {
+      childItems(first: 200) {
         nodes {
           ...MenuBits
         }

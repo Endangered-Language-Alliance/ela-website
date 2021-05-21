@@ -5885,7 +5885,7 @@ export type RootQuery = {
   langLocation?: Maybe<LangLocation>
   /** Connection between the RootQuery type and the LangLocation type */
   langLocations?: Maybe<RootQueryToLangLocationConnection>
-  /** An object of the Language Type. With ten current larger-scale projects and additional work on individual languages, ELA focuses on languages spoken by communities and individuals in the New York City area. */
+  /** An object of the Language Type. ELA has worked to different degrees on numerous projects with speakers of over a hundred languages spoken in New York City and beyond. More in-depth work continues on the several dozen featured here. */
   language?: Maybe<Language>
   /**
    * A Language object
@@ -5941,7 +5941,7 @@ export type RootQuery = {
   postFormats?: Maybe<RootQueryToPostFormatConnection>
   /** Connection between the RootQuery type and the post type */
   posts?: Maybe<RootQueryToPostConnection>
-  /** An object of the Project Type. HEY ROSS: edit this in the &quot;Post Type Description&quot; section of https://content.endangeredlanguagealliance.org/wp-admin/admin.php?page=cptui_manage_post_types&amp;action=edit (go to that page and select &quot;Projects&quot; from the &quot;Select&quot; dropdown at the top) */
+  /** An object of the Project Type. With ten current larger-scale projects and additional work on individual languages, ELA focuses on languages spoken by communities and individuals in the New York City area. */
   project?: Maybe<Project>
   /**
    * A Project object
