@@ -23,8 +23,8 @@ const queryClient = new QueryClient({
 
 export const Layout: React.FC<LayoutProps> = (props) => {
   const { title, children, summary, subtitle, chipsItems } = props
-  const { tweenerContent, youTubePlaylistId, childPages } = props
-  const titlePrefix = title ? `${title} - ` : ''
+  const { tweenerContent, youTubePlaylistId, childPages, titleTitle } = props
+  const titlePrefix = titleTitle || title ? `${titleTitle || title} - ` : ''
 
   return (
     <QueryClientProvider client={queryClient}>

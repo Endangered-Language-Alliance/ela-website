@@ -8,6 +8,7 @@ type ChipsItems = {
 export type LayoutProps = {
   tweenerContent?: React.ReactNode
   youTubePlaylistId?: string | null
+  titleTitle?: string // <title> content
   childPages?: Page[] | null
 } & HeroProps &
   ChipsItems

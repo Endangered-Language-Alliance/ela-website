@@ -24,13 +24,13 @@ export type HomeProps = {
 const Home: React.FC<HomeProps> = (props) => {
   const { data } = props || {}
   const { homePageContent, posts } = data
-  const { content, homePageSettings = {} } = homePageContent
+  const { content, title, homePageSettings = {} } = homePageContent
   const { fbFeedIframeHtml = '', featured1, numRecentPosts, youTubeUrl } =
     homePageSettings || {}
   const { description, heading, img, link } = featured1 || {}
 
   return (
-    <Layout title="Home" summary={content || ''}>
+    <Layout titleTitle="Home" title={title} summary={content || ''}>
       <iframe
         src={youTubeUrl || ''}
         title="TODO: add title"
