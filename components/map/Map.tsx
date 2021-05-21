@@ -65,7 +65,11 @@ export const Map: React.FC<MapProps> = (props) => {
       if (lon && lat) bounds.extend([lon, lat])
     })
 
-    map.fitBounds(bounds, { padding: 45 }, { forceViewportUpdate: true })
+    try {
+      map.fitBounds(bounds, { padding: 45 }, { forceViewportUpdate: true })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (
