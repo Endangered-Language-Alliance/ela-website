@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={`${sharedStyles.container} ${styles.footer__wrap}`}>
         <div>
-          <h3>Join our mailing list</h3>
+          <h3 className={styles.heading}>Join our mailing list</h3>
           <div dangerouslySetInnerHTML={{ __html: newsletter || '' }} />
         </div>
         <div className={styles.final}>
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
           {nodes?.map((node) => {
             return (
               <div key={node.label}>
-                <h3>{node.label}</h3>
+                <h3 className={styles.heading}>{node.label}</h3>
                 {node.childItems?.nodes && (
                   <ul className={styles.navList}>
                     {node.childItems.nodes.map((childItem) => (
@@ -57,20 +57,13 @@ export const Footer: React.FC = () => {
           })}
           {/* Sitemap internal so far */}
           {window?.location?.hostname !== prodHostName && (
-            <div>
-              <h3>Sanity Check</h3>
-              <p>
-                Currently this is for internal use only and will be excluded
-                from <code>{prodHostName}</code> if it's not useful to users.
-              </p>
-              <ul className={styles.navList}>
-                <li>
-                  <Link href={siteMapUri}>
-                    <a>Sitemap</a>
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <ul className={styles.navList}>
+              <li>
+                <Link href={siteMapUri}>
+                  <a>Sitemap (not seen in prod)</a>
+                </Link>
+              </li>
+            </ul>
           )}
         </nav>
       </div>

@@ -11,7 +11,7 @@ export const prepLangInstanceChips = (
 
   if (project) {
     chips.push({
-      text: `Project: ${project.title}`,
+      text: project.title || '',
       uri: project.uri || '/projects',
     })
   }
@@ -26,7 +26,7 @@ export const prepLangInstanceChips = (
 
   if (nycLangMap) {
     chips.push({
-      text: 'Languages of NYC Map',
+      text: 'NYC Map',
       uri: nycLangMap,
       external: true,
     })

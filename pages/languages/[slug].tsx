@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 import '@reach/tabs/styles.css'
@@ -34,7 +33,7 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
   const { project, external, affiliation, endangerment } = customInfo || {}
   const { langStructure, prevResearch, addlInfo, background } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
-  const { glottologId, gDriveDocId } = external || {}
+  const { glottologId, gDriveDocId, archiveOrgLink } = external || {}
   const preppedData = getCitiesCoords([data])
   const preppedChips = prepLangInstanceChips({ external, project })
 
@@ -88,14 +87,19 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
                   <div dangerouslySetInnerHTML={{ __html: prevResearch }} />
                 )}
                 {glottologId && (
-                  <a
-                    target="_blank"
-                    href={`https://glottolog.org/resource/languoid/id/${glottologId}`}
-                    rel="noreferrer"
-                    className={`${btnStyles.button} ${btnStyles.primary}`}
+                  <div
+                    className={sharedStyles.flexCenter}
+                    style={{ marginTop: 'var(--p2)' }} // dammit
                   >
-                    Glottolog
-                  </a>
+                    <a
+                      target="_blank"
+                      href="https://glottolog.org/resource/languoid/id/"
+                      rel="noreferrer"
+                      className={`${btnStyles.button} ${btnStyles.primary}`}
+                    >
+                      View on Glottolog
+                    </a>
+                  </div>
                 )}
               </TabPanel>
             )}
@@ -115,16 +119,17 @@ const Language: React.FC<{ data?: LanguageType }> = (props) => {
                     />
                   </>
                 )}
-                {project && (
+                {archiveOrgLink && (
                   <div
                     className={sharedStyles.flexCenter}
                     style={{ marginTop: 'var(--p2)' }} // dammit
                   >
-                    <Link href={project.uri || ''}>
-                      <a className={`${btnStyles.button} ${btnStyles.primary}`}>
-                        View project
-                      </a>
-                    </Link>
+                    <a
+                      href={archiveOrgLink}
+                      className={`${btnStyles.button} ${btnStyles.primary}`}
+                    >
+                      View on Archive.org
+                    </a>
                   </div>
                 )}
               </TabPanel>
