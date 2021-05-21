@@ -1,11 +1,13 @@
 .root {
   --gutter: var(--p0);
+  --navItemSpacing: var(--p2);
+  --navItemFontSize: var(--font-sm);
   background-color: var(--gr10);
   border-bottom: 2px solid var(--secondary);
   box-shadow: var(--elev3);
   color: var(--linkColor);
   display: flex;
-  font-size: var(--font-nav);
+  font-size: var(--navItemFontSize);
   min-height: 55px;
   position: sticky;
   text-transform: uppercase;
@@ -51,7 +53,7 @@
 
 .root li {
   list-style-type: none;
-  margin-right: var(--p3);
+  margin-right: var(--navItemSpacing);
 }
 
 .logo {
@@ -75,7 +77,7 @@
   border: solid var(--secondaryLight) 1px;
   box-shadow: var(--elev2);
   display: grid;
-  font-size: var(--font-nav);
+  font-size: var(--navItemFontSize);
   grid-column-gap: var(--p2);
   grid-row-gap: var(--p1);
   grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 1fr);
@@ -89,9 +91,10 @@
   font-weight: bold;
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 800px) {
   .root {
     --gutter: var(--p2);
+    --navItemFontSize: var(--font-md);
     min-height: 75px;
   }
 

@@ -1,41 +1,42 @@
 /* NOTE: some stuff is inherited from Header.module.css */
 .mobileNavModal[data-reach-dialog-overlay] {
-  background-color: transparent;
+  background-color: hsl(0 0% 0% / 95%);
   z-index: 3; /* above header */
 }
 
 .mobileNavModal [data-reach-dialog-content] {
   animation: fade-in 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-  background-color: hsl(0 0% 0% / 95%);
+  background-color: transparent;
   height: 100%;
   margin: 0;
   padding: var(--p5) var(--p2);
   width: 100vw;
 }
 
-.mobileNav {
+.nav {
   --verticalSpacer: var(--p3);
   z-index: 1;
 }
 
-.mobileNav ul {
+.nav ul {
   list-style-type: none;
-  margin-bottom: var(--verticalSpacer);
   padding: 0;
 }
 
-.mobileNav li {
-  margin-bottom: var(--p0);
+.link {
+  margin-bottom: var(--p1);
   line-height: var(--headingLineHt);
+  display: block;
 }
 
-.mobileNavHeading {
+.heading {
   color: var(--white);
-  margin-bottom: var(--p0);
+  margin-bottom: var(--p1);
   font-size: var(--font-h4);
+  margin-top: var(--verticalSpacer);
 }
 
-.mobileNavList {
+.nestedList {
   display: grid;
   grid-column-gap: var(--p1);
   grid-template-columns: 1fr 1fr;
@@ -56,8 +57,7 @@
   font-size: 1.5rem;
 }
 
-/* Might could do 800 */
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 800px) {
   .burger {
     display: none;
   }

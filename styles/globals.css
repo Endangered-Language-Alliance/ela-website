@@ -68,7 +68,6 @@
   --font-xs: 0.64rem;
   --font-tiny: 0.512rem;
   --font-body: var(--font-md);
-  --font-nav: var(--font-md);
 
   /* Layout */
   --maxWidth: 1100px;
@@ -245,7 +244,6 @@ figure img {
   :root {
     --font-h1: var(--font-monster);
     --gutter: var(--p4);
-    --font-nav: var(--font-sm);
   }
 }
 
