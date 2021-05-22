@@ -54,7 +54,7 @@
 }
 
 .markersList {
-  display: flex;
+  display: inline-flex;
 }
 
 .markersList .marker {

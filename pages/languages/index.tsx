@@ -3,16 +3,10 @@ import { GetStaticProps } from 'next'
 import { Layout } from 'components/Layout'
 import { getAllLanguages } from 'lib/api/api.languages'
 import { Map } from 'components/map/Map'
-import {
-  getCitiesCoords,
-  getIconColorByContinent,
-  getContinentGroups,
-} from 'components/map/utils'
-import { Continent, LanguagesProps } from 'components/languages/types'
-import { CardList, Card } from 'components/cards/Card'
-import { MarkerIcon } from 'components/map/MarkerIcon'
+import { getCitiesCoords, getContinentGroups } from 'components/map/utils'
+import { LanguagesProps } from 'components/languages/types'
+import { ContinentsGroups } from 'components/languages/ContinentsGroups'
 
-import cardStyles from 'components/cards/Card.module.css'
 import mapStyles from 'components/map/Map.module.css'
 
 // TODO: init clusters:
@@ -33,58 +27,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
         </div>
       }
     >
-      <div className={cardStyles.listGroup}>
-        {Object.keys(continentGroups).map((group) => {
-          const continentName = group as Continent
-
-          return (
-            <div key={group}>
-              <h2 className={cardStyles.groupHeader}>{continentName}</h2>
-              <CardList>
-                {continentGroups[continentName].map((node) => {
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
-                  const { uri, title, customInfo, langLocations } = node
-                  const { endonym } = customInfo || {}
-
-                  return (
-                    <Card
-                      key={uri}
-                      title={title || ''}
-                      uri={uri || ''}
-                      subtitle={endonym || title || ''}
-                    >
-                      {langLocations?.nodes && (
-                        <div className={mapStyles.markersList}>
-                          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                          {/* @ts-ignore */}
-                          {langLocations?.nodes.map((loc) => {
-                            return (
-                              <div
-                                className={mapStyles.marker}
-                                key={loc?.languageLocation?.city}
-                              >
-                                <MarkerIcon
-                                  city={loc?.languageLocation?.city}
-                                  iconColor={getIconColorByContinent(
-                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                                    // @ts-ignore
-                                    loc?.languageLocation?.continent
-                                  )}
-                                />
-                              </div>
-                            )
-                          })}
-                        </div>
-                      )}
-                    </Card>
-                  )
-                })}
-              </CardList>
-            </div>
-          )
-        })}
-      </div>
+      <ContinentsGroups continentGroups={continentGroups} />
     </Layout>
   )
 }

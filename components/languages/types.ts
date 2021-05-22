@@ -4,6 +4,7 @@ import {
   Project,
   ContentType,
   Language,
+  LangLocation,
 } from 'gql-ts/wp-graphql'
 
 import { PreppedMarker } from 'components/map/types'
@@ -41,10 +42,16 @@ export type KnownLangLocation = Omit<
   continent: Continent
 }
 
-export type LangWithKnownContinent = Omit<Language, 'langLocations'> & {
-  langLocations: {
-    nodes: KnownLangLocation[]
+export type LangInstancePageProps = { data?: LangWithKnownContinent }
+
+export type LangLocWithKnownContinent = LangLocation & {
+  languageLocation: LangLocation_Languagelocation & {
+    continent: Continent
   }
 }
 
-export type LangInstancePageProps = { data?: LangWithKnownContinent }
+export type LangWithKnownContinent = Omit<Language, 'langLocations'> & {
+  langLocations: {
+    nodes: LangLocWithKnownContinent[]
+  }
+}

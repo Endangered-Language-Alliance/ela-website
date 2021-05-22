@@ -1,6 +1,7 @@
 import {
   ContinentColors,
   ContinentGroup,
+  Continent,
   LangWithKnownContinent,
 } from 'components/languages/types'
 import { PreppedMarker } from './types'
@@ -12,10 +13,8 @@ const continentColors = {
   Europe: 'hsl(128, 36%, 29%)',
 } as ContinentColors
 
-export const getIconColorByContinent = (
-  continent?: null | keyof typeof continentColors
-): string => {
-  return continent ? continentColors[continent] || 'gray' : 'gray'
+export const getIconColorByContinent = (continent: Continent): string => {
+  return continentColors[continent] || 'gray'
 }
 
 export const getCitiesCoords = (
@@ -29,14 +28,12 @@ export const getCitiesCoords = (
 
     const locsMapped = nodes?.map((node) => {
       return {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         ...(node?.languageLocation || {}),
         title,
         uri,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        iconColor: getIconColorByContinent(node?.languageLocation?.continent),
+        iconColor: getIconColorByContinent(
+          node?.languageLocation?.continent || 'Africa'
+        ),
       }
     })
 
@@ -55,15 +52,11 @@ export const getContinentGroups = (
       const { langLocations } = thisOne
       const { nodes } = langLocations
       const firstOne = nodes[0]
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       const { languageLocation } = firstOne || {}
       const { continent } = languageLocation || {}
 
       if (!continent) return all
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       if (!all[continent]) {
         return {
           ...all,
@@ -73,8 +66,6 @@ export const getContinentGroups = (
 
       return {
         ...all,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         [continent]: [...all[continent], thisOne],
       }
     },
