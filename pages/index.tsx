@@ -62,7 +62,7 @@ const Home: React.FC<HomeProps> = (props) => {
         <Link
           href={link?.url?.replace(CONTENT_URL, '').replace(PROD_URL, '') || ''}
         >
-          <a className={`${btnStyles.button} ${btnStyles.primary}`}>
+          <a className={`${btnStyles.button} ${btnStyles.secondary}`}>
             Read More
           </a>
         </Link>

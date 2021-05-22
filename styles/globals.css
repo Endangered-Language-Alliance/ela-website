@@ -2,6 +2,7 @@
   /* Grayscale */
   --black: #000;
   --white: #fff;
+  --offWhite: rgba(255, 255, 255, 0.925);
   --gr1: rgb(222, 222, 222);
   --gr2: rgb(200, 200, 200);
   --gr3: rgb(180, 180, 180);
@@ -12,30 +13,16 @@
   --gr8: rgb(80, 80, 80);
   --gr9: rgb(60, 60, 60);
   --gr10: rgb(40, 40, 40);
+  --gr11: rgb(30, 30, 30);
 
   /* Colors */
-  --purple: hsl(255, 46%, 40%);
-  --primary-h: 255;
-  --primary-s: 46%;
-  --primary-l: 40%;
-  --primary--light-l: 55%;
-  --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
-  --primaryLight: hsl(
-    var(--primary-h),
-    var(--primary-s),
-    var(--primary--light-l)
-  );
-  --secondary-h: 49;
-  --secondary-s: 100%;
-  --secondary-l: 56%;
-  --secondary--light-l: 65%;
-  --secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l));
-  --secondaryLight: hsl(
-    var(--secondary-h),
-    var(--secondary-s),
-    var(--secondary--light-l)
-  );
-  --linkColor: var(--secondary);
+  --secondaryDark: #6e2419;
+  --secondary: #bb4735;
+  --secondaryLight: #db988b;
+  --primaryDark: #16115a;
+  --primary: #373298;
+  --primaryLight: #756fef;
+  --linkColor: var(--primaryLight);
 
   /* Border radii */
   --rad1: 2px;

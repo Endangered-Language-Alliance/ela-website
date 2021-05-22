@@ -15,7 +15,9 @@ const Header: React.FC = () => {
 
   const GetInvolvedCta = (
     <Link href="/get-involved">
-      <a className={`${btnStyles.button} ${btnStyles.primary}`}>Get involved</a>
+      <a className={`${btnStyles.button} ${btnStyles.secondary}`}>
+        Get involved
+      </a>
     </Link>
   )
 

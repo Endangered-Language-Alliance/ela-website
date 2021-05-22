@@ -1,4 +1,5 @@
 .root {
+  --linkColor: var(--offWhite);
   font-family: var(--paraFontFam);
   margin-bottom: var(--p0);
   overflow-x: auto; /* just in case on mobile */
@@ -12,9 +13,12 @@
   text-transform: capitalize;
 }
 
+.list a {
+  text-decoration: underline;
+}
+
 .list > *:not(:first-child):before {
   margin: 0 6px;
-  color: var(--secondaryLight);
-  opacity: 0.5;
+  opacity: 0.75;
   content: '/';
 }

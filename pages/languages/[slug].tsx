@@ -96,7 +96,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                       target="_blank"
                       href="https://glottolog.org/resource/languoid/id/"
                       rel="noreferrer"
-                      className={`${btnStyles.button} ${btnStyles.primary}`}
+                      className={`${btnStyles.button} ${btnStyles.secondary}`}
                     >
                       View on Glottolog
                     </a>
@@ -127,7 +127,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                   >
                     <a
                       href={archiveOrgLink}
-                      className={`${btnStyles.button} ${btnStyles.primary}`}
+                      className={`${btnStyles.button} ${btnStyles.secondary}`}
                     >
                       View on Archive.org
                     </a>
@@ -144,7 +144,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                       href={external?.nycLangMap}
                       target="_blank"
                       rel="noreferrer"
-                      className={`${btnStyles.button} ${btnStyles.primary}`}
+                      className={`${btnStyles.button} ${btnStyles.secondary}`}
                     >
                       View NYC map
                     </a>

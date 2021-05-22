@@ -2,8 +2,9 @@
   --gutter: var(--p0);
   --navItemSpacing: var(--p2);
   --navItemFontSize: var(--font-sm);
-  background-color: var(--gr10);
-  border-bottom: 2px solid var(--secondary);
+  --linkColor: var(--offWhite);
+  background-color: var(--gr11);
+  background-color: var(--primaryDark);
   box-shadow: var(--elev3);
   color: var(--linkColor);
   display: flex;
@@ -23,7 +24,7 @@
 
 .root nav a {
   font-weight: bold;
-  color: var(--secondary);
+  color: var(--linkColor);
 }
 
 .root nav a:hover {
@@ -71,11 +72,11 @@
 }
 
 .menuList[data-reach-menu-list][data-reach-menu-items] {
+  --linkColor: var(--offWhite);
   animation: slide-down 0.2s ease;
   background-color: hsl(0 0% 0% / 85%);
   border-radius: var(--rad2);
-  border: solid var(--secondaryLight) 1px;
-  box-shadow: var(--elev2);
+  box-shadow: var(--elev3);
   display: grid;
   font-size: var(--navItemFontSize);
   grid-column-gap: var(--p2);

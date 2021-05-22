@@ -11,7 +11,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
     <button
       type="button"
       onClick={onClick}
-      className={`${styles.button} ${styles.primary}`}
+      className={`${styles.button} ${styles.secondary}`}
     >
       {children}
     </button>
