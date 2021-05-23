@@ -16,12 +16,19 @@
   --gr11: rgb(30, 30, 30);
 
   /* Colors */
-  --secondaryDark: #6e2419;
-  --secondary: #bb4735;
-  --secondaryLight: #db988b;
-  --primaryDark: #16115a;
-  --primary: #373298;
-  --primaryLight: #756fef;
+  --secondaryDark: hsl(8, 63%, 26%);
+  /* --secondaryDarker: hsl(8, 60%, 37%); */
+  --secondaryDarker: hsl(8, 60%, 40%);
+  --secondary: hsl(8, 56%, 47%);
+  --secondaryLighter: hsl(8, 55%, 59%);
+  --secondaryLight: hsl(10, 53%, 70%);
+
+  --primaryDark: hsl(244, 68%, 21%);
+  --primaryDarker: hsl(244, 59%, 31%);
+  --primary: hsl(243, 50%, 40%);
+  --primaryLighter: hsl(243, 65%, 55%);
+  --primaryLight: hsl(243, 80%, 69%);
+
   --linkColor: var(--primaryLight);
 
   /* Border radii */
@@ -203,6 +210,10 @@ a:hover,
 a:focus,
 a:active {
   text-decoration: none;
+}
+
+a:hover {
+  color: var(--primaryLighter);
 }
 
 h1,

@@ -92,6 +92,10 @@
   font-weight: bold;
 }
 
+.menuList a:hover {
+  color: var(--primaryLight);
+}
+
 @media screen and (min-width: 800px) {
   .root {
     --gutter: var(--p2);
