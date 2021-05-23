@@ -1,6 +1,9 @@
-export type CardProps = {
-  title?: string | null
-  uri?: string | null
-  summary?: string | null
-  subtitle?: string | null
+export type FeaturedCardProps = {
+  imgSrc: string
+  summary: string
+  title: string
+  uri: string
+  btnText?: string
+  altText?: string
+  subtitle?: string
 }

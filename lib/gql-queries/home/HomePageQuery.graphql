@@ -7,7 +7,8 @@ query HomePageQuery {
         excerpt
       }
       homePageSettings {
-        fbFeedIframeHtml
+        # TODO: rm if def not using
+        # fbFeedIframeHtml
         featured1 {
           description
           heading
