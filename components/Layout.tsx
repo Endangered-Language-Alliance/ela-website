@@ -3,11 +3,14 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { Hero } from 'components/Hero'
 import { PostsItem } from 'components/latest/PostsItem'
-import styles from './Layout.module.css'
+import { FeaturedCardList, FeaturedCard } from 'components/cards/FeaturedCard'
+
 import { Footer } from './footer'
 import { LayoutProps } from './types'
 import Header from './header'
 import { YouTubePlaylist } from './video/YouTubePlaylist'
+
+import styles from './Layout.module.css'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,14 +51,30 @@ export const Layout: React.FC<LayoutProps> = (props) => {
           {tweenerContent}
           <div className={styles.content}>
             {children}
-            {childPages?.map((childPage) => (
-              <PostsItem
-                key={childPage.uri}
-                title={childPage.title || ''}
-                uri={childPage.uri}
-                summary={childPage.customExcerpt?.excerpt || ''}
-              />
-            ))}
+            {childPages?.map((childPage, i) => {
+              if (i === 0 && childPage.featuredImage?.node?.sourceUrl) {
+                return (
+                  <FeaturedCardList key={childPage.uri}>
+                    <FeaturedCard
+                      altText={childPage.featuredImage.node?.altText || ''}
+                      imgSrc={childPage.featuredImage.node?.sourceUrl || ''}
+                      summary={childPage.customExcerpt?.excerpt || ''}
+                      title={childPage.title || ''}
+                      uri={childPage.uri || ''}
+                    />
+                  </FeaturedCardList>
+                )
+              }
+
+              return (
+                <PostsItem
+                  key={childPage.uri}
+                  title={childPage.title || ''}
+                  uri={childPage.uri}
+                  summary={childPage.customExcerpt?.excerpt || ''}
+                />
+              )
+            })}
           </div>
         </main>
         <Footer />

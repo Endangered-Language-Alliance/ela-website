@@ -1,5 +1,5 @@
 .listitem {
-  padding: var(--p2) 0 0;
+  padding: var(--p2) 0;
   margin: 1em auto 0.5em;
   display: flex;
   max-width: var(--maxWidth);
