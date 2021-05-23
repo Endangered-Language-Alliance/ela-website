@@ -13,7 +13,7 @@ fragment LanguageFields on Language {
   youTubePlaylist {
     id
   }
-  langLocations {
+  langLocations(where: { orderby: NAME }) {
     nodes {
       name
       languageLocation {

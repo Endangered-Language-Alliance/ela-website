@@ -3,7 +3,7 @@ query ProjectBySlug($id: ID!) {
     ...ProjectFields
   }
   # 🤮 SO GROSS
-  languages(first: 2000) {
+  languages(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
     nodes {
       title
       slug

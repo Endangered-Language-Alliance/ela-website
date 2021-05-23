@@ -23,3 +23,17 @@ export const prepRecentYearChips = (): ChipProps[] => {
     })
   )
 }
+
+// CRED: NYC Langs
+type Compare<T> = (a: T, b: T) => number
+
+export const sortArrOfObjects = <T>(key: keyof T): Compare<T> => {
+  return (a: T, b: T): number => {
+    let comparison = 0
+
+    if (a[key] > b[key]) comparison = 1
+    else if (a[key] < b[key]) comparison = -1
+
+    return comparison
+  }
+}

@@ -3,7 +3,7 @@ query AllProjects {
   contentType(id: "project", idType: NAME) {
     description
   }
-  projects(first: 2000) {
+  projects(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
     nodes {
       title
       uri
@@ -12,7 +12,7 @@ query AllProjects {
       }
     }
   }
-  languages(first: 2000) {
+  languages(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
     nodes {
       title
       uri
@@ -20,14 +20,13 @@ query AllProjects {
         project {
           ... on Project {
             uri
-            # TODO
-            # projectMeta {
-            #   iconColor
-            # }
+            projectMeta {
+              iconColor
+            }
           }
         }
       }
-      langLocations {
+      langLocations(where: { orderby: NAME }) {
         nodes {
           languageLocation {
             city
