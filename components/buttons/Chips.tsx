@@ -4,8 +4,8 @@ import styles from './Button.module.css'
 import { ChipProps, ChipsListProps } from './types'
 
 export const Chip: React.FC<ChipProps> = (props) => {
-  const { text, uri, external, color = 'primary' } = props
-  const classes = `${styles.button} ${chipStyles.chip} ${styles[color]}`
+  const { text, uri, external } = props
+  const classes = `${styles.button} ${chipStyles.chip} ${styles.secondary}`
 
   if (external) {
     return (

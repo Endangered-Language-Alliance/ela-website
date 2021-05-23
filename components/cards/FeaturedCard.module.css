@@ -6,7 +6,7 @@
 }
 
 .card {
-  --borderRadius: var(--rad3) var(--rad3) 0 0;
+  --borderRadius: var(--rad3);
   border-radius: var(--borderRadius);
   box-shadow: var(--elev10);
 }
