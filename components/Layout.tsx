@@ -47,6 +47,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
           )}
           {tweenerContent}
           <div className={styles.content}>
+            {children}
             {childPages?.map((childPage) => (
               <PostsItem
                 key={childPage.uri}
@@ -55,7 +56,6 @@ export const Layout: React.FC<LayoutProps> = (props) => {
                 summary={childPage.customExcerpt?.excerpt || ''}
               />
             ))}
-            {children}
           </div>
         </main>
         <Footer />

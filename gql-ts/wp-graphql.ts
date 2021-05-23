@@ -4039,6 +4039,7 @@ export type Page_Homepagesettings = AcfFieldGroup & {
    */
   fbFeedIframeHtml?: Maybe<Scalars['String']>
   featured1?: Maybe<Page_Homepagesettings_Featured1>
+  featured2?: Maybe<Page_Homepagesettings_Featured2>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
   numRecentPosts?: Maybe<Scalars['Float']>
@@ -4049,6 +4050,19 @@ export type Page_Homepagesettings = AcfFieldGroup & {
 /** Field Group */
 export type Page_Homepagesettings_Featured1 = AcfFieldGroup & {
   __typename?: 'Page_Homepagesettings_Featured1'
+  /** The body/summary text. */
+  description?: Maybe<Scalars['String']>
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+  heading?: Maybe<Scalars['String']>
+  img?: Maybe<MediaItem>
+  link?: Maybe<AcfLink>
+  linkType?: Maybe<Scalars['String']>
+}
+
+/** Field Group */
+export type Page_Homepagesettings_Featured2 = AcfFieldGroup & {
+  __typename?: 'Page_Homepagesettings_Featured2'
   /** The body/summary text. */
   description?: Maybe<Scalars['String']>
   /** The name of the ACF Field Group */

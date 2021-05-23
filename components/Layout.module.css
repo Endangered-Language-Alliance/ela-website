@@ -17,11 +17,11 @@
 .content {
   --linkColor: var(--primary);
   background-color: var(--white);
-  color: var(--black);
   border-radius: var(--rad2);
-  padding: var(--p6) var(--gutter);
-  margin-bottom: var(--p4);
   box-shadow: var(--elev3);
+  color: var(--black);
+  margin-bottom: var(--p4);
+  padding: var(--gutter);
 }
 
 /* Deal with the few stragglers, e.g. Garifuna has some complexities */

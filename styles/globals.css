@@ -216,6 +216,10 @@ figure img {
   height: auto;
 }
 
+address {
+  font-style: normal;
+}
+
 @media screen and (min-width: 1921px) {
   :root {
     --maxWidth: 1300px;

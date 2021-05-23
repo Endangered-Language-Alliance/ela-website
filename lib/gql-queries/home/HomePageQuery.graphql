@@ -3,6 +3,9 @@ query HomePageQuery {
     ... on Page {
       content
       title
+      customExcerpt {
+        excerpt
+      }
       homePageSettings {
         fbFeedIframeHtml
         featured1 {
@@ -15,6 +18,20 @@ query HomePageQuery {
           linkType
           link {
             url
+            title
+          }
+        }
+        featured2 {
+          description
+          heading
+          img {
+            altText
+            sourceUrl
+          }
+          linkType
+          link {
+            url
+            title
           }
         }
         numRecentPosts
