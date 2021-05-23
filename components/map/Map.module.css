@@ -37,6 +37,10 @@
   width: var(--size);
 }
 
+.marker:hover {
+  color: var(--white);
+}
+
 .markerLabel {
   font-size: calc(0.42 * var(--size));
   font-weight: bold;
@@ -83,24 +87,27 @@
   width: 100%;
 }
 
-.contentItem {
-  grid-column: span 3;
+.popupContent {
+  min-width: 175px;
+  padding: 0 var(--pTiniest);
 }
 
 .popupHeading {
-  font-size: var(--font-h4);
-  margin-bottom: var(--p0);
+  font-size: var(--font-h5);
+  margin-bottom: 0;
 }
 
 .popupSubtitle {
   font-size: var(--font-md);
   color: var(--gr8);
-  margin-bottom: var(--p2);
+  margin-bottom: var(--p0);
 }
 
 .mapCtrlBtnStyle {
   padding: 10px;
 }
+
+/* .contentItem { grid-column: span 3; padding: var(--p3) var(--p4); } */
 
 /* CRED: 
 themeover.com/alternating-columns-3-2-using-css-grid-and-nth-child-formulas */

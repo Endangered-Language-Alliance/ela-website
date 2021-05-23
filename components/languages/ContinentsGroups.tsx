@@ -20,6 +20,7 @@ export const ContinentsGroups: React.FC<ContinentsGroupsProps> = (props) => {
         .sort()
         .map((group) => {
           const continentName = group as Continent
+          let locsCount = 0
 
           return (
             <div key={group} className={cardStyles.fourSquaresItem}>
@@ -51,13 +52,15 @@ export const ContinentsGroups: React.FC<ContinentsGroupsProps> = (props) => {
                           <div className={mapStyles.markersList}>
                             {/* @ts-ignore */}
                             {langLocations?.nodes.map((loc) => {
+                              locsCount += 1
+
                               return (
                                 <div
                                   className={mapStyles.marker}
                                   key={loc?.languageLocation?.city}
                                 >
                                   <MarkerIcon
-                                    city={loc?.languageLocation?.city}
+                                    markerLabel={locsCount}
                                     iconColor={getIconColorByContinent(
                                       // @ts-ignore
                                       loc?.languageLocation?.continent

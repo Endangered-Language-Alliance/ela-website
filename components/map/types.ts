@@ -2,10 +2,10 @@ import { ViewportProps } from 'react-map-gl'
 
 import { KnownLangLocation } from 'components/languages/types'
 
-export type PreppedMarker = KnownLangLocation & {
-  uri: string
-  iconColor?: string
-}
+export type PreppedMarker = KnownLangLocation &
+  MarkerIconProps & {
+    uri: string
+  }
 
 export type ViewportState = Partial<ViewportProps>
 
@@ -23,11 +23,15 @@ export type MapMarkersProps = {
   onClick: React.Dispatch<PopupState>
 }
 
-export type MarkerIconProps = Pick<PreppedMarker, 'iconColor' | 'city'>
+export type MarkerIconProps = {
+  iconColor?: string
+  markerLabel?: string | number
+}
 
-export type ClickableMarkerIconProps = PreppedMarker & {
+export type ClickableMarkerProps = PreppedMarker & {
   tabIndex: number
   onClick: React.Dispatch<PopupState>
+  title?: string
 }
 
 // Custom data at end of MB event, e.g. moveend

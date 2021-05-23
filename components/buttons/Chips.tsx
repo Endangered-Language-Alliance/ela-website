@@ -1,7 +1,9 @@
 import Link from 'next/link'
+
 import chipStyles from 'components/buttons/Chip.module.css'
-import styles from './Button.module.css'
+
 import { ChipProps, ChipsListProps } from './types'
+import styles from './Button.module.css'
 
 export const Chip: React.FC<ChipProps> = (props) => {
   const { text, uri, external } = props

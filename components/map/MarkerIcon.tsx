@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 
 import styles from './Map.module.css'
 import { MARKER_SVG_PATH } from './config'
-import { MarkerIconProps, ClickableMarkerIconProps } from './types'
+import { MarkerIconProps, ClickableMarkerProps } from './types'
 
 export const MarkerIcon: FC<MarkerIconProps> = (props) => {
-  const { iconColor, city } = props
+  const { iconColor, markerLabel } = props
 
   return (
     <>
@@ -16,19 +16,19 @@ export const MarkerIcon: FC<MarkerIconProps> = (props) => {
       >
         <path d={MARKER_SVG_PATH} />
       </svg>
-      <div className={styles.markerLabel}>{city?.slice(0, 2)}</div>
+      <div className={styles.markerLabel}>{markerLabel}</div>
     </>
   )
 }
 
-export const ClickableMarkerIcon: FC<ClickableMarkerIconProps> = (props) => {
-  const { city, iconColor } = props // bare min for non-clickable
-  const { onClick, lat, lon, country, uri, tabIndex } = props
-
+export const ClickableMarker: FC<ClickableMarkerProps> = (props) => {
+  const { tabIndex, city, children, title } = props
+  const { onClick, lat, lon, country, uri } = props
   const interact = (): void => {
     onClick({
       uri,
       title: city || '',
+      linkText: `View ${title || ''}`,
       subtitle: country || '',
       lat: lat || 0,
       lon: lon || 0,
@@ -44,7 +44,7 @@ export const ClickableMarkerIcon: FC<ClickableMarkerIconProps> = (props) => {
       onClick={interact}
       onKeyDown={interact}
     >
-      <MarkerIcon city={city} iconColor={iconColor} />
+      {children}
     </a>
   )
 }

@@ -21,20 +21,26 @@ export const MapPopup: React.FC<MapPopupProps> = (props) => {
       closeOnClick={false}
       onClose={setPopupInfo}
     >
-      <h3 className={styles.popupHeading}>{title}</h3>
-      {/* CRED: https://css-tricks.com/html-for-subheadings-and-headings/ */}
-      <div role="doc-subtitle" className={styles.popupSubtitle}>
-        {subtitle}
+      <div className={styles.popupContent}>
+        <header>
+          <h3 className={styles.popupHeading}>{title}</h3>
+          {/* CRED: https://css-tricks.com/html-for-subheadings-and-headings/ */}
+          {subtitle && (
+            <div role="doc-subtitle" className={styles.popupSubtitle}>
+              {subtitle}
+            </div>
+          )}
+        </header>
+        {!excludePopupLinkBtn && uri && (
+          <Link href={uri}>
+            <a
+              className={`${btnStyles.button} ${btnStyles.secondary} ${btnStyles.small}`}
+            >
+              {linkText}
+            </a>
+          </Link>
+        )}
       </div>
-      {!excludePopupLinkBtn && uri && (
-        <Link href={uri}>
-          <a
-            className={`${btnStyles.button} ${btnStyles.primary} ${btnStyles.contentOnly} ${btnStyles.small}`}
-          >
-            {linkText}
-          </a>
-        </Link>
-      )}
     </Popup>
   )
 }

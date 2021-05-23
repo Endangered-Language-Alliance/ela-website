@@ -33,13 +33,13 @@
 }
 
 .button a {
-  color: inherit;
+  color: var(--white);
   display: block;
 }
 
 a.button:hover,
 .button a:hover {
-  color: inherit;
+  color: var(--white);
 }
 
 .primary {
@@ -71,8 +71,8 @@ a.button:hover,
 }
 
 .small {
-  padding: 3px 6px;
-  font-size: var(--font-sm);
+  padding: 0.25em 0.85em;
+  font-size: var(--font-xs);
 }
 
 /* .large { } */

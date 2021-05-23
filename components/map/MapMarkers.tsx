@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Marker } from 'react-map-gl'
 
-import { ClickableMarkerIcon } from './MarkerIcon'
+import { ClickableMarker, MarkerIcon } from './MarkerIcon'
 import { PreppedMarker, MapMarkersProps } from './types'
 
 // Important for perf (???): the markers never change, avoid rerender when the
@@ -10,11 +10,13 @@ function MapMarkers(props: MapMarkersProps): React.ReactNode | null {
   const { markers, onClick } = props
 
   return markers.map((marker, i) => {
-    const { lat, lon, city } = marker as PreppedMarker
+    const { lat, lon, city, iconColor, markerLabel } = marker as PreppedMarker
 
     return (
       <Marker key={`marker-${city}`} longitude={lon || 0} latitude={lat || 0}>
-        <ClickableMarkerIcon onClick={onClick} {...marker} tabIndex={i} />
+        <ClickableMarker onClick={onClick} {...marker} tabIndex={i}>
+          <MarkerIcon markerLabel={markerLabel} iconColor={iconColor} />
+        </ClickableMarker>
       </Marker>
     )
   })
