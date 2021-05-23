@@ -45,13 +45,9 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
       summary={customExcerpt?.excerpt}
       youTubePlaylistId={youTubePlaylist?.id}
       chipsItems={preppedChips}
-      tweenerContent={
-        <div style={{ height: 300, width: '100%' }}>
-          <Map excludePopupLinkBtn preppedData={preppedData} />
-        </div>
-      }
     >
       <article>
+        <Map excludePopupLinkBtn preppedData={preppedData} />
         <Tabs className={tabStyles.tabs}>
           <TabList>
             <Tab>Background</Tab>

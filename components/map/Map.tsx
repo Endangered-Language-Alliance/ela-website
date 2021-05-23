@@ -73,28 +73,30 @@ export const Map: React.FC<MapProps> = (props) => {
   }
 
   return (
-    <ReactMapGL
-      {...viewport}
-      {...mapConfig}
-      onViewportChange={setViewport}
-      onLoad={onLoad}
-      className={styles.map}
-    >
-      {!mapIsMoving && (
-        <MapMarkers
-          markers={preppedData || ([] as PreppedMarker[])}
-          onClick={setPopupInfo}
-        />
-      )}
-      {popupInfo && (
-        <MapPopup
-          excludePopupLinkBtn={excludePopupLinkBtn}
-          popupInfo={popupInfo}
-          setPopupInfo={setPopupInfo}
-        />
-      )}
-      <FullscreenControl className={styles.mapCtrlBtnStyle} />
-      <NavigationControl className={styles.mapCtrlBtnStyle} />
-    </ReactMapGL>
+    <div className={styles.fullWidthMap}>
+      <ReactMapGL
+        {...viewport}
+        {...mapConfig}
+        onViewportChange={setViewport}
+        onLoad={onLoad}
+        className={styles.map}
+      >
+        {!mapIsMoving && (
+          <MapMarkers
+            markers={preppedData || ([] as PreppedMarker[])}
+            onClick={setPopupInfo}
+          />
+        )}
+        {popupInfo && (
+          <MapPopup
+            excludePopupLinkBtn={excludePopupLinkBtn}
+            popupInfo={popupInfo}
+            setPopupInfo={setPopupInfo}
+          />
+        )}
+        <FullscreenControl className={styles.mapCtrlBtnStyle} />
+        <NavigationControl className={styles.mapCtrlBtnStyle} />
+      </ReactMapGL>
+    </div>
   )
 }

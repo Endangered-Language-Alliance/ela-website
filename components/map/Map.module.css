@@ -7,13 +7,17 @@
 
 .fullWidthMap {
   height: 300px;
+  margin-bottom: var(--p5);
+  margin-left: calc(-1 * var(--gutter));
+  margin-right: calc(-1 * var(--gutter));
+  margin-top: calc(-1 * var(--gutter));
   width: calc(100% + 2 * var(--gutter));
-  width: 100%;
 }
 
 .fullWidthMap .map {
   border-radius: var(--rad3) var(--rad3) 0 0;
   box-shadow: var(--elev2);
+  width: 100%;
 }
 
 .gridContentList {

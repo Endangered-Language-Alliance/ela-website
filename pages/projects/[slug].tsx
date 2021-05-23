@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { getAllProjectsWithSlug, getProject } from 'lib/api/api.projects'
-import { Layout } from 'components/Layout'
 import { Project, Language } from 'gql-ts/wp-graphql'
+
+import { Layout } from 'components/Layout'
 import { getCitiesCoords } from 'components/map/utils'
-import mapStyles from 'components/map/Map.module.css'
 import { Map } from 'components/map/Map'
 import { ChipProps } from 'components/buttons/types'
 
@@ -28,13 +28,14 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
   const langsInThisProject = (languages || []).filter(
     (lang) => lang?.customInfo?.project?.uri === uri
   )
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  /* eslint-disable @typescript-eslint/ban-ts-comment */
   // @ts-ignore
   const preppedData = getCitiesCoords(langsInThisProject)
   const preppedChips: ChipProps[] = langsInThisProject.map((lang) => ({
     text: lang.title || '',
     uri: lang.uri || '',
   }))
+  /* eslint-enable @typescript-eslint/ban-ts-comment */
 
   return (
     <Layout
@@ -42,12 +43,8 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
       summary={customExcerpt?.excerpt}
       youTubePlaylistId={youTubePlaylist?.id}
       chipsItems={preppedChips}
-      tweenerContent={
-        <div className={mapStyles.fullWidthMap}>
-          <Map preppedData={preppedData} />
-        </div>
-      }
     >
+      <Map preppedData={preppedData} />
       <div dangerouslySetInnerHTML={{ __html: content || '' }} />
     </Layout>
   )
