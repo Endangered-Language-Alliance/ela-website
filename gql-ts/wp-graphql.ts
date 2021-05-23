@@ -3727,7 +3727,7 @@ export type Page = Node &
     featuredImageId?: Maybe<Scalars['ID']>
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Maybe<Scalars['String']>
-    /** Added to the GraphQL Schema because the ACF Field Group &quot;Home Page Settings&quot; was set to Show in GraphQL. */
+    /** Things that apply only to the Home page | Added to the GraphQL Schema because the ACF Field Group &quot;Home Page Settings&quot; was set to Show in GraphQL. */
     homePageSettings?: Maybe<Page_Homepagesettings>
     /** The globally unique identifier of the page object. */
     id: Scalars['ID']
@@ -4030,7 +4030,7 @@ export type Page_Customexcerpt = AcfFieldGroup & {
 export type Page_Homepagesettings = AcfFieldGroup & {
   __typename?: 'Page_Homepagesettings'
   /**
-   * Pretty much used same format as old site with some other additions. Decent chance this code will never change, but here are some tips:
+   * THIS HAS BEEN COMMENTED OUT IN THE CODE as we decided to axe the FB feed. If that decision changes, let The Jason know. In that event, we pretty much used same format as old site with some other additions. Decent chance this code will never change, but here are some tips:
    *
    * 1. Can use this page to generate it: https://developers.facebook.com/docs/plugins/page-plugin/
    * 2. Paste in the path to your FB profile
@@ -4077,6 +4077,8 @@ export type Page_Homepagesettings_Featured2 = AcfFieldGroup & {
 export type Page_Sitewidesettings = AcfFieldGroup & {
   __typename?: 'Page_Sitewidesettings'
   contactInfo?: Maybe<Page_Sitewidesettings_ContactInfo>
+  /** Page, Post, Language, or Project */
+  ctaButton?: Maybe<AcfLink>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
   logo?: Maybe<MediaItem>

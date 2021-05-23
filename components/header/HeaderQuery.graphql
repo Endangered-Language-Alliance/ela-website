@@ -12,9 +12,13 @@ query MainMenuQuery {
       }
     }
   }
-  logo: nodeByUri(uri: "/") {
+  siteWideStuff: nodeByUri(uri: "/") {
     ... on Page {
       siteWideSettings {
+        ctaButton {
+          title
+          url
+        }
         logo {
           sourceUrl
         }
