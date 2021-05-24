@@ -19,9 +19,6 @@ query MainMenuQuery {
           title
           url
         }
-        logo {
-          sourceUrl
-        }
       }
     }
   }

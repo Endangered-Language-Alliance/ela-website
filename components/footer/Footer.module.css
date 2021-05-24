@@ -46,6 +46,18 @@
   text-align: center;
 }
 
+/* TODO: .logo instead */
+.final > svg {
+  width: 120px;
+  margin-bottom: var(--p2);
+}
+
+.logo {
+  width: 100px;
+  height: 83.5px;
+  display: inline-block;
+}
+
 .copyright {
   display: block;
   margin-bottom: var(--p1);
@@ -59,12 +71,6 @@
   grid-column-gap: var(--p4);
   margin: 0;
   padding: 0;
-}
-
-.logo {
-  width: 100px;
-  height: 83.5px;
-  display: inline-block;
 }
 
 .navList {

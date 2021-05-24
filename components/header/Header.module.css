@@ -58,10 +58,16 @@
 }
 
 .logo {
-  height: 40px;
+  height: var(--headerHt);
+  display: inline-flex;
+  padding: var(--p1) var(--p0);
+  line-height: var(--headerHt);
   margin-right: auto;
   position: relative;
-  width: 45px;
+}
+
+.logo svg {
+  height: 100%;
 }
 
 .inner {

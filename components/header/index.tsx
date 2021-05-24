@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 import { CONTENT_URL, PROD_URL } from 'lib/config'
 
@@ -9,6 +8,7 @@ import btnStyles from 'components/buttons/Button.module.css'
 import { CtaButtonProps } from './types'
 import { Burger } from './Burger'
 import { NavMenu } from './NavMenu'
+import { Logo } from './Logo'
 import { MobileNavMenu } from './MobileNavMenu'
 import { useHeaderQuery } from './hooks'
 
@@ -40,22 +40,13 @@ const Header: React.FC = () => {
 
   const { menuItems, siteWideStuff } = data || {}
   const { siteWideSettings } = siteWideStuff || {}
-  const src = siteWideSettings?.logo?.sourceUrl || ''
 
   return (
     <header className={styles.root}>
       <div className={`${sharedStyles.container} ${styles.inner}`}>
         <Link href="/">
           <a className={styles.logo}>
-            {src && (
-              // TODO: stop using Image
-              <Image
-                src={src}
-                alt="organization logo"
-                layout="fill"
-                objectFit="contain"
-              />
-            )}
+            <Logo />
           </a>
         </Link>
         {menuItems?.nodes && (

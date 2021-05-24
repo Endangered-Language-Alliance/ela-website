@@ -18,9 +18,6 @@ query FooterQuery {
       title
       siteWideSettings {
         newsletter
-        logo {
-          sourceUrl
-        }
         social {
           archiveOrg
           facebook

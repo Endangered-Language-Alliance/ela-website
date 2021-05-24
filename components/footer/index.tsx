@@ -1,10 +1,13 @@
 import Link from 'next/link'
 
 import sharedStyles from 'components/Layout.module.css'
+import { Logo } from 'components/header/Logo'
 import { prodHostName, siteMapUri } from 'lib/config'
+
 import { useFooterQuery } from './hooks'
 import { SocialIcons } from './SocialIcons'
 import { ContactInfo } from './ContactInfo'
+
 import styles from './Footer.module.css'
 
 export const Footer: React.FC = () => {
@@ -15,9 +18,8 @@ export const Footer: React.FC = () => {
 
   const { nodeByUri, generalSettings, menuItems } = data
   const { siteWideSettings } = nodeByUri
-  const { newsletter, contactInfo, social, logo } = siteWideSettings || {}
+  const { newsletter, contactInfo, social } = siteWideSettings || {}
   const { title } = generalSettings
-  const { sourceUrl } = logo || {}
   const { nodes } = menuItems || {}
 
   return (
@@ -28,7 +30,7 @@ export const Footer: React.FC = () => {
           <div dangerouslySetInnerHTML={{ __html: newsletter || '' }} />
         </div>
         <div className={styles.final}>
-          <img src={sourceUrl || ''} alt="ELA logo" className={styles.logo} />
+          <Logo />
           <small className={styles.copyright}>
             &copy; Copyright {new Date().getFullYear()}, {title}
           </small>
