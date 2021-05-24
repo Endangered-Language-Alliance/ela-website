@@ -18,7 +18,8 @@ export const getIconColorByContinent = (continent: Continent): string => {
 }
 
 export const getCitiesCoords = (
-  languages: LangWithKnownContinent[]
+  languages: LangWithKnownContinent[],
+  plainAndSimple?: boolean
 ): PreppedMarker[] => {
   const locsCounts = {} as { [key in Continent]: number }
 
@@ -35,14 +36,22 @@ export const getCitiesCoords = (
         locsCounts[node.languageLocation.continent] = 1
       }
 
+      /* eslint-disable operator-linebreak */
+      const markerLabel = plainAndSimple
+        ? ''
+        : locsCounts[node.languageLocation.continent]
+
+      const iconColor = plainAndSimple
+        ? 'var(--gr7)'
+        : getIconColorByContinent(node?.languageLocation?.continent || 'Africa')
+      /* eslint-enable operator-linebreak */
+
       return {
         ...(node?.languageLocation || {}),
         title,
         uri,
-        markerLabel: locsCounts[node.languageLocation.continent],
-        iconColor: getIconColorByContinent(
-          node?.languageLocation?.continent || 'Africa'
-        ),
+        markerLabel,
+        iconColor,
       }
     })
 

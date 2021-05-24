@@ -30,7 +30,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
   )
   /* eslint-disable @typescript-eslint/ban-ts-comment */
   // @ts-ignore
-  const preppedData = getCitiesCoords(langsInThisProject)
+  const preppedData = getCitiesCoords(langsInThisProject, true)
   const preppedChips: ChipProps[] = langsInThisProject.map((lang) => ({
     text: lang.title || '',
     uri: lang.uri || '',

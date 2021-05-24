@@ -35,7 +35,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
   const { langStructure, prevResearch, addlInfo, background } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
   const { glottologId, gDriveDocId, archiveOrgLink } = external || {}
-  const preppedData = getCitiesCoords([data])
+  const preppedData = getCitiesCoords([data], true)
   const preppedChips = prepLangInstanceChips({ external, project })
 
   return (
