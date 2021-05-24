@@ -1,8 +1,9 @@
 import Link from 'next/link'
 
 import { formatDate } from 'lib/utils'
-import styles from './Blog.module.css'
 import { PostsItemProps } from './types'
+
+import styles from './Blog.module.css'
 
 export const PostsItem: React.FC<PostsItemProps> = (props) => {
   const { title, date, summary, uri } = props

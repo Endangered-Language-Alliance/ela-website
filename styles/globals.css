@@ -117,6 +117,7 @@
 
   /* Layout */
   --maxWidth: 1100px;
+  --headerHt: 55px;
 
   /* Spacing */
   /* TODO: rename all these to --p0, etc. */

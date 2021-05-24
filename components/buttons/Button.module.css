@@ -87,3 +87,27 @@ a.button:hover,
 .dialogCloseBtn svg {
   font-size: var(--font-h4);
 }
+
+.backToTopBtn {
+  --size: 40px;
+  --offset: calc(var(--p1) + var(--size));
+  border-radius: 100%;
+  bottom: 0;
+  box-shadow: var(--elev5);
+  font-size: var(--font-h5);
+  height: var(--size);
+  margin-bottom: var(--p1);
+  margin-right: var(--p1);
+  min-height: unset;
+  min-width: unset;
+  padding: var(--p0);
+  position: fixed;
+  right: 1vw;
+  transform: translateY(0);
+  width: var(--size);
+  z-index: 1;
+}
+
+.offScreenBottom {
+  transform: translateY(var(--offset));
+}

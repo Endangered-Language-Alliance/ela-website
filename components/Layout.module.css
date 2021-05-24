@@ -1,6 +1,10 @@
 .page {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  justify-content: space-between;
   overflow-x: hidden;
+  width: 100%;
 }
 
 .container {
@@ -10,8 +14,22 @@
 }
 
 .main {
-  padding-top: var(--p4);
+  overflow-x: hidden;
   padding-bottom: var(--p3);
+  padding-top: var(--p2);
+  width: 100%;
+}
+
+.scrollWrap {
+  overflow-y: auto;
+}
+
+/* CRED: https://stackoverflow.com/a/49968820/1048518 */
+.scrollTarget {
+  height: 1px;
+  left: 0;
+  position: absolute;
+  top: 0;
 }
 
 .content {
@@ -22,6 +40,7 @@
   color: var(--black);
   margin-bottom: var(--p4);
   padding: var(--gutter);
+  position: relative; /* for scrollTarget */
 }
 
 /* Deal with the few stragglers, e.g. Garifuna has some complexities */

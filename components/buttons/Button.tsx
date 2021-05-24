@@ -1,17 +1,20 @@
 import styles from './Button.module.css'
 
 type ButtonProps = {
-  onClick: () => void
+  onClick: (stuff?: unknown) => void
+  ariaLabel?: string
+  classes?: string
 }
 
 export const Button: React.FC<ButtonProps> = (props) => {
-  const { children, onClick } = props
+  const { children, onClick, ariaLabel, classes } = props
 
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`${styles.button} ${styles.secondary}`}
+      aria-label={ariaLabel}
+      className={`${styles.button} ${styles.secondary} ${classes}`}
     >
       {children}
     </button>

@@ -1,9 +1,8 @@
 .listitem {
-  padding: var(--p2) 0;
-  margin: 1em auto 0.5em;
-  display: flex;
-  max-width: var(--maxWidth);
   border-bottom: 1px solid hsl(0, 0%, 89%);
+  border-radius: var(--rad2);
+  box-shadow: var(--elev3);
+  padding: var(--p2);
 }
 
 .listitem__content h2 {
@@ -12,7 +11,8 @@
 
 .listItemTitle {
   margin-bottom: var(--p0);
-  font-size: var(--font-h3);
+  margin-top: 0;
+  font-size: var(--font-h4);
 }
 
 .subtitle {
@@ -21,6 +21,7 @@
   display: block;
 }
 
+.summary,
 .summary p {
-  font-size: var(--font-body);
+  font-size: var(--font-sm);
 }

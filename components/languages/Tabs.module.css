@@ -1,20 +1,14 @@
-.tabs {
-  height: 50vh;
-  outline: solid var(--gr2) 1px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--elev2);
-  margin-bottom: var(--p4);
-}
+/* The root <Tabs> node */
+/* .tabs { } */
 
 .tabs [data-reach-tab-list] {
   overflow-x: auto;
   flex-shrink: 0;
   box-shadow: var(--elev2);
+  margin-bottom: var(--p4);
 }
 
 .tabs [data-reach-tab-panels] {
-  padding: var(--gutter);
   overflow-y: auto;
   flex: 1;
 }

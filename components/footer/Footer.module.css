@@ -1,11 +1,12 @@
 .footer {
+  --linkColor: var(--primaryLight);
   background-color: var(--gr10);
   border-top: 2px solid var(--primaryLight);
   color: var(--white);
+  flex: 1;
   padding-bottom: var(--p3);
   padding-top: var(--p6);
   width: 100%;
-  --linkColor: var(--primaryLight);
 }
 
 .footer li {

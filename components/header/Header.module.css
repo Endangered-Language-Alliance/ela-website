@@ -3,18 +3,18 @@
   --navItemSpacing: var(--p2);
   --navItemFontSize: var(--font-sm);
   --linkColor: var(--offWhite);
-  background-color: var(--gr11);
   background-color: var(--primaryDark);
-  box-shadow: var(--elev3);
+  box-shadow: var(--elev12);
   color: var(--linkColor);
   display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
   font-size: var(--navItemFontSize);
-  min-height: 55px;
-  position: sticky;
+  min-height: var(--headerHt);
   text-transform: uppercase;
-  top: 0;
   width: 100%;
-  z-index: 3; /* above MB attribs */
+  position: relative;
+  z-index: 1;
 }
 
 .root nav {
@@ -79,10 +79,9 @@
   box-shadow: var(--elev3);
   display: grid;
   font-size: var(--navItemFontSize);
-  grid-column-gap: var(--p2);
+  grid-column-gap: var(--p3);
   grid-row-gap: var(--p1);
-  grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 1fr);
-  max-width: 345px;
+  grid-template-columns: auto auto;
   padding: var(--p2) var(--p3);
   position: relative;
   z-index: 3; /* my goodness */
@@ -100,7 +99,7 @@
   .root {
     --gutter: var(--p2);
     --navItemFontSize: var(--font-md);
-    min-height: 65px;
+    --headerHt: 65px;
   }
 
   .root nav {

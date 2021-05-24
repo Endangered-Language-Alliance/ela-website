@@ -1,8 +1,8 @@
 .list {
-  display: grid;
-  grid-gap: var(--p5);
-  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+  grid-gap: var(--p4);
   margin-bottom: var(--p5);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .card {
