@@ -11,7 +11,7 @@
 .thumb {
   border: solid rgba(0, 0, 0, 0.125) 1px;
   border-radius: var(--rad2);
-  box-shadow: var(--elev2);
+  box-shadow: var(--elev6);
   cursor: pointer;
   flex-grow: 1;
   flex-shrink: 0;

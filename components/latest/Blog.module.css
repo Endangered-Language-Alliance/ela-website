@@ -1,8 +1,8 @@
 .listitem {
-  border-bottom: 1px solid hsl(0, 0%, 89%);
   border-radius: var(--rad2);
   box-shadow: var(--elev3);
   padding: var(--p2);
+  margin-bottom: var(--p3);
 }
 
 .listitem__content h2 {
@@ -17,11 +17,12 @@
 
 .subtitle {
   color: var(--gr6);
-  margin-bottom: var(--p2);
+  margin-bottom: var(--p1);
   display: block;
 }
 
 .summary,
 .summary p {
   font-size: var(--font-sm);
+  margin-bottom: 0;
 }

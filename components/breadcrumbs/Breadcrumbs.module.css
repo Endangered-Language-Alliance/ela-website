@@ -21,4 +21,6 @@
   margin: 0 6px;
   opacity: 0.75;
   content: '/';
+  /* TODO: separate out into a <span> instead, can't override here */
+  /* text-decoration: none !important; */
 }
