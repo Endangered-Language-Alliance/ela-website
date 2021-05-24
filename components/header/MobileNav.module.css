@@ -23,6 +23,14 @@
   padding: 0;
 }
 
+.childless {
+  display: inline-flex;
+}
+
+.childless:first-of-type {
+  margin-right: var(--p2);
+}
+
 .link {
   margin-bottom: var(--p1);
   line-height: var(--headingLineHt);

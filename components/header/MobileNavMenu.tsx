@@ -3,6 +3,7 @@ import '@reach/menu-button/styles.css'
 
 import { MenuItem } from 'gql-ts/wp-graphql'
 
+import btnStyles from 'components/buttons/Button.module.css'
 import styles from './MobileNav.module.css'
 
 export type MobileNavMenuProps = {
@@ -21,9 +22,11 @@ export const MobileNavMenu: React.FC<MobileNavMenuProps> = (props) => {
 
           if (!parentId && !childItems?.nodes?.length) {
             return (
-              <li key={path}>
+              <li key={path} className={styles.childless}>
                 <Link href={path || ''}>
-                  <a className={styles.link}>{label}</a>
+                  <a className={`${btnStyles.button} ${btnStyles.secondary}`}>
+                    {label}
+                  </a>
                 </Link>
               </li>
             )
