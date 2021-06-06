@@ -7,7 +7,7 @@ import {
   LangLocation,
 } from 'gql-ts/wp-graphql'
 
-import { PreppedMarker } from 'components/map/types'
+import { PreppedMarker, MarkerIconReqd } from 'components/map/types'
 
 export type LanguagesProps = {
   data: {
@@ -33,6 +33,36 @@ export type ContinentColors = {
 
 export type ContinentGroup = {
   [key in Continent]: PreppedMarker[]
+}
+
+export type GroupProps = {
+  name: string
+  color: string
+}
+
+export type GroupConfig = {
+  name: string
+  color: string
+  items: GroupConfigItem[]
+}
+
+export type GroupConfigItem = ItemProps & {
+  markers: MarkerIconReqd[]
+}
+
+export type GroupsProps = {
+  groups: GroupConfig[]
+}
+
+export type ItemProps = {
+  title: string
+  subtitle: string
+  href: string
+}
+
+export type ItemIconProps = {
+  label: string | number
+  color: string
 }
 
 export type KnownLangLocation = Omit<

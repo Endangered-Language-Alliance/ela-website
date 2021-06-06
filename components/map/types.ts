@@ -28,6 +28,8 @@ export type MarkerIconProps = {
   markerLabel?: string | number
 }
 
+export type MarkerIconReqd = Required<MarkerIconProps>
+
 export type ClickableMarkerProps = PreppedMarker & {
   tabIndex: number
   onClick: React.Dispatch<PopupState>

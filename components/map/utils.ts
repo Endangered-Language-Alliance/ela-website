@@ -1,10 +1,11 @@
 import {
   ContinentColors,
-  ContinentGroup,
   Continent,
   LangWithKnownContinent,
+  GroupConfig,
+  GroupConfigItem,
 } from 'components/languages/types'
-import { PreppedMarker } from './types'
+import { MarkerIconReqd, PreppedMarker } from './types'
 
 const continentColors = {
   Africa: 'hsl(302, 47%, 37%)',
@@ -62,31 +63,43 @@ export const getCitiesCoords = (
   return allOfEm
 }
 
-export const getContinentGroups = (
+const continents: Continent[] = ['Africa', 'Americas', 'Asia', 'Europe']
+
+export const prepContinentGroups = (
   languages: LangWithKnownContinent[]
-): ContinentGroup => {
-  return languages.reduce(
-    (all: ContinentGroup, thisOne: LangWithKnownContinent) => {
-      const { langLocations } = thisOne
-      const { nodes } = langLocations
-      const firstOne = nodes[0]
-      const { languageLocation } = firstOne || {}
-      const { continent } = languageLocation || {}
+): GroupConfig[] => {
+  return continents.map((name) => {
+    let locsCount = 0
+    const color = getIconColorByContinent(name)
 
-      if (!continent) return all
+    const corresponding = languages.filter((language) => {
+      const firstOne = language.langLocations.nodes[0]
 
-      if (!all[continent]) {
-        return {
-          ...all,
-          [continent]: [thisOne],
+      return firstOne?.languageLocation.continent === name
+    })
+
+    function getItems(language: LangWithKnownContinent): GroupConfigItem {
+      const { uri, title, customInfo, langLocations } = language
+      const { endonym } = customInfo || {}
+
+      const markers = langLocations.nodes.map(
+        (): MarkerIconReqd => {
+          locsCount += 1
+
+          return { iconColor: color, markerLabel: locsCount }
         }
-      }
+      )
 
       return {
-        ...all,
-        [continent]: [...all[continent], thisOne],
+        title: title || '',
+        subtitle: endonym || '',
+        href: uri,
+        markers,
       }
-    },
-    {} as ContinentGroup
-  )
+    }
+
+    const items = corresponding.map(getItems)
+
+    return { name, color, items }
+  })
 }

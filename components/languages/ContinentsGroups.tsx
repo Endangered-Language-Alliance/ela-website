@@ -1,41 +1,33 @@
 import Link from 'next/link'
 
-import { getIconColorByContinent } from 'components/map/utils'
-import { Continent, ContinentGroup } from 'components/languages/types'
 import { MarkerIcon } from 'components/map/MarkerIcon'
 
 import cardStyles from 'components/cards/Card.module.css'
 import mapStyles from 'components/map/Map.module.css'
 
-export type ContinentsGroupsProps = {
-  groups: ContinentGroup
-}
+import {
+  GroupConfig,
+  GroupProps,
+  GroupsProps,
+  ItemProps,
+  ItemIconProps,
+} from './types'
 
-export type ItemHeaderProps = {
-  href: string
-  title: string
-  subtitle: string
-}
-
-export type ItemIconProps = {
-  label: string | number
-  color: string
-}
-
-const ItemHeader: React.FC<ItemHeaderProps> = (props) => {
-  const { href, title, subtitle } = props
+const Item: React.FC<ItemProps> = (props) => {
+  const { title, subtitle, href, children } = props
 
   return (
-    <header className={cardStyles.itemHeader}>
-      <Link href={href}>
-        <h4 className={cardStyles.itemTitle}>
-          <a>{title}</a>
-        </h4>
-      </Link>
-      <div role="doc-subtitle" className={cardStyles.itemSubtitle}>
-        {subtitle}
-      </div>
-    </header>
+    <Link href={href}>
+      <a className={cardStyles.item}>
+        <header className={cardStyles.itemHeader}>
+          <h4 className={cardStyles.itemTitle}>{title}</h4>
+          <div role="doc-subtitle" className={cardStyles.itemSubtitle}>
+            {subtitle}
+          </div>
+        </header>
+        <div className={mapStyles.markersList}>{children}</div>
+      </a>
+    </Link>
   )
 }
 
@@ -51,69 +43,38 @@ const ItemIcon: React.FC<ItemIconProps> = (props) => {
   )
 }
 
-export const ContinentsGroups: React.FC<ContinentsGroupsProps> = (props) => {
-  const { groups } = props
+const Group: React.FC<GroupProps> = (props) => {
+  const { name, color, children } = props
 
   return (
-    <div className={cardStyles.root}>
-      {Object.keys(groups)
-        .sort()
-        .map((groupName) => {
-          let locsCount = 0
-
-          const groupItems = groups[groupName as Continent].map((node) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            const { uri, title, customInfo, langLocations } = node
-            const { endonym } = customInfo || {}
-
-            const markersList = langLocations?.nodes && (
-              <div className={mapStyles.markersList}>
-                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                {/* @ts-ignore */}
-                {langLocations?.nodes.map(({ languageLocation }) => {
-                  const { city, continent } = languageLocation
-                  const color = getIconColorByContinent(continent)
-
-                  locsCount += 1
-
-                  return <ItemIcon key={city} label={locsCount} color={color} />
-                })}
-              </div>
-            )
-
-            return (
-              <article key={uri} className={cardStyles.item}>
-                <ItemHeader
-                  href={uri || ''}
-                  title={title || ''}
-                  subtitle={endonym || title || ''}
-                />
-                {markersList}
-              </article>
-            )
-          })
-
-          const backgroundColor = getIconColorByContinent(
-            groupName as Continent
-          )
-
-          return (
-            <div
-              key={groupName}
-              className={cardStyles.group}
-              style={{ borderBottomColor: backgroundColor }}
-            >
-              <div
-                className={cardStyles.groupTitleWrap}
-                style={{ backgroundColor }}
-              >
-                <h3 className={cardStyles.groupTitle}>{groupName}</h3>
-              </div>
-              <div className={cardStyles.itemList}>{groupItems}</div>
-            </div>
-          )
-        })}
+    <div className={cardStyles.group} style={{ borderBottomColor: color }}>
+      <div
+        className={cardStyles.groupTitleWrap}
+        style={{ backgroundColor: color }}
+      >
+        <h3 className={cardStyles.groupTitle}>{name}</h3>
+      </div>
+      <div className={cardStyles.itemList}>{children}</div>
     </div>
   )
+}
+
+export const Groups: React.FC<GroupsProps> = (props) => {
+  const { groups } = props
+
+  function getGroups({ name, color, items }: GroupConfig): React.ReactNode {
+    return (
+      <Group key={name} name={name} color={color}>
+        {items.map(({ href, title, subtitle, markers }) => (
+          <Item key={href} href={href} title={title} subtitle={subtitle}>
+            {markers.map(({ markerLabel }) => (
+              <ItemIcon key={markerLabel} label={markerLabel} color={color} />
+            ))}
+          </Item>
+        ))}
+      </Group>
+    )
+  }
+
+  return <div className={cardStyles.root}>{groups.map(getGroups)}</div>
 }
