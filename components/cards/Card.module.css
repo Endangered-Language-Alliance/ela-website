@@ -1,84 +1,73 @@
-.fourSquares {
+.root {
   display: grid;
   grid-column-gap: var(--p3);
-  grid-row-gap: var(--p1);
+  grid-row-gap: var(--p3);
   grid-template-columns: repeat(auto-fill, minmax(325px, auto));
 }
 
-/* .fourSquaresItem { } */
-
-.groupHeader {
-  font-size: var(--font-h4);
-  margin-bottom: var(--p1);
+.group {
+  border-top-left-radius: var(--rad2);
+  border-bottom-left-radius: var(--rad2);
+  display: flex;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
-.list {
-  display: grid;
-  grid-auto-flow: column;
-  grid-column-gap: var(--p2);
-  overflow-x: auto;
+.groupTitleWrap {
+  align-items: center;
+  display: flex;
+  flex: 0 0 25px;
+  justify-content: center;
+  min-width: 0;
+  border-radius: var(--rad2) 0 0 var(--rad2);
+  padding: var(--p0) var(--p2);
 }
 
-.card {
-  --cardGutter: var(--p0) var(--p0);
-  border-radius: var(--rad3);
-  border: 1px solid var(--gr1);
-  box-shadow: var(--elev1);
-  display: block;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  padding: var(--cardGutter);
-  margin-left: var(--p1);
-}
-
-.card:hover {
-  cursor: pointer;
-  background-color: var(--gr1);
-}
-
-.header {
-  line-height: var(--headingLineHt);
-  margin-bottom: var(--p1);
-  margin-bottom: 0;
-  width: 100%;
-}
-
-.title {
-  font-size: var(--font-md);
-  line-height: inherit;
-  margin: 0 var(--p0) 0.15em 0;
-  word-wrap: none;
+/* CRED: for rotation: https://stackoverflow.com/a/41428599/1048518 */
+.groupTitle {
+  color: var(--white);
+  font-size: var(--font-h5);
+  margin: 0;
+  transform: rotate(-90deg);
   white-space: nowrap;
 }
 
-.subtitle {
+.itemList {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: var(--p0);
+  grid-template-columns: repeat(auto-fill, 125px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-left: var(--p0);
+}
+
+.item {
+  border-radius: var(--rad2);
+  box-shadow: var(--elev1);
+  margin-bottom: var(--p0);
+  padding: var(--p0);
+  width: 125px;
+}
+
+.itemHeader {
+  line-height: var(--headingLineHt);
+  margin-bottom: 0;
+}
+
+.itemTitle {
+  font-size: var(--font-md);
+  line-height: inherit;
+  margin: 0 var(--p0) 0.15em 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: none;
+}
+
+.itemSubtitle {
   color: var(--gr4);
   font-size: var(--font-sm);
   line-height: var(--font-md);
   margin-bottom: 0.35em;
-  vertical-align: middle;
-  margin-right: var(--p0);
-  word-wrap: none;
-  white-space: nowrap;
-}
-
-.inner {
-  font-size: var(--font-md);
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-/* e.g. excerpt or background */
-/* TODO: follow the rest of this: https://css-tricks.com/line-clampin/ */
-.inner p {
-  font-size: inherit;
-  color: var(--gr7);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-.summary:hover {
-  background-color: red;
 }

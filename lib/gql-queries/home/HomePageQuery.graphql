@@ -45,6 +45,9 @@ query HomePageQuery {
       title
       slug
       excerpt
+      customExcerpt {
+        excerpt
+      }
     }
   }
   # Site title, tagline, etc.

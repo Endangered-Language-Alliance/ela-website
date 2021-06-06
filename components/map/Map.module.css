@@ -28,7 +28,7 @@
 .marker {
   --size: 32px;
   --offset: calc(var(--size) * -1);
-  --strokeWidth: 2px;
+  --strokeWidth: 1px;
   color: var(--white);
   display: inline-block;
   position: relative;

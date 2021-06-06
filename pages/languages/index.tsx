@@ -16,7 +16,7 @@ const Languages: React.FC<LanguagesProps> = (props) => {
   return (
     <Layout title="Languages" summary={contentType?.description}>
       <Map preppedData={preppedMapData} />
-      <ContinentsGroups continentGroups={continentGroups} />
+      <ContinentsGroups groups={continentGroups} />
     </Layout>
   )
 }

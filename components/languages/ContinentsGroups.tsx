@@ -8,7 +8,7 @@ import cardStyles from 'components/cards/Card.module.css'
 import mapStyles from 'components/map/Map.module.css'
 
 export type ContinentsGroupsProps = {
-  continentGroups: ContinentGroup
+  groups: ContinentGroup
 }
 
 export type ItemHeaderProps = {
@@ -26,13 +26,13 @@ const ItemHeader: React.FC<ItemHeaderProps> = (props) => {
   const { href, title, subtitle } = props
 
   return (
-    <header className={cardStyles.header}>
+    <header className={cardStyles.itemHeader}>
       <Link href={href}>
-        <h4 className={cardStyles.title}>
+        <h4 className={cardStyles.itemTitle}>
           <a>{title}</a>
         </h4>
       </Link>
-      <div role="doc-subtitle" className={cardStyles.subtitle}>
+      <div role="doc-subtitle" className={cardStyles.itemSubtitle}>
         {subtitle}
       </div>
     </header>
@@ -43,24 +43,25 @@ const ItemIcon: React.FC<ItemIconProps> = (props) => {
   const { color, label } = props
 
   return (
-    <div className={mapStyles.marker}>
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    <div className={mapStyles.marker} style={{ '--size': '24px' }}>
       <MarkerIcon markerLabel={label} iconColor={color} />
     </div>
   )
 }
 
 export const ContinentsGroups: React.FC<ContinentsGroupsProps> = (props) => {
-  const { continentGroups } = props
+  const { groups } = props
 
   return (
-    <div className={cardStyles.fourSquares}>
-      {Object.keys(continentGroups)
+    <div className={cardStyles.root}>
+      {Object.keys(groups)
         .sort()
-        .map((group) => {
-          const continentName = group as Continent
+        .map((groupName) => {
           let locsCount = 0
 
-          const continentGroup = continentGroups[continentName].map((node) => {
+          const groupItems = groups[groupName as Continent].map((node) => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             const { uri, title, customInfo, langLocations } = node
@@ -72,22 +73,17 @@ export const ContinentsGroups: React.FC<ContinentsGroupsProps> = (props) => {
                 {/* @ts-ignore */}
                 {langLocations?.nodes.map(({ languageLocation }) => {
                   const { city, continent } = languageLocation
+                  const color = getIconColorByContinent(continent)
 
                   locsCount += 1
 
-                  return (
-                    <ItemIcon
-                      key={city}
-                      label={locsCount}
-                      color={getIconColorByContinent(continent)}
-                    />
-                  )
+                  return <ItemIcon key={city} label={locsCount} color={color} />
                 })}
               </div>
             )
 
             return (
-              <article key={uri}>
+              <article key={uri} className={cardStyles.item}>
                 <ItemHeader
                   href={uri || ''}
                   title={title || ''}
@@ -98,10 +94,23 @@ export const ContinentsGroups: React.FC<ContinentsGroupsProps> = (props) => {
             )
           })
 
+          const backgroundColor = getIconColorByContinent(
+            groupName as Continent
+          )
+
           return (
-            <div key={group} className={cardStyles.fourSquaresItem}>
-              <h3 className={cardStyles.groupHeader}>{continentName}</h3>
-              <div className={cardStyles.list}>{continentGroup}</div>
+            <div
+              key={groupName}
+              className={cardStyles.group}
+              style={{ borderBottomColor: backgroundColor }}
+            >
+              <div
+                className={cardStyles.groupTitleWrap}
+                style={{ backgroundColor }}
+              >
+                <h3 className={cardStyles.groupTitle}>{groupName}</h3>
+              </div>
+              <div className={cardStyles.itemList}>{groupItems}</div>
             </div>
           )
         })}
