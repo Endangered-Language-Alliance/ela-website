@@ -5,6 +5,7 @@ import {
   GroupConfig,
   GroupConfigItem,
 } from 'components/languages/types'
+import { Language, Project } from 'gql-ts/wp-graphql'
 import { MarkerIconReqd, PreppedMarker } from './types'
 
 const continentColors = {
@@ -101,5 +102,44 @@ export const prepContinentGroups = (
     const items = corresponding.map(getItems)
 
     return { name, color, items }
+  })
+}
+
+export const prepProjectsGroups = (
+  projects: Project[],
+  languages: Language[]
+): GroupConfig[] => {
+  return projects.map(({ title: projectTitle, uri, projectMeta }) => {
+    let locsCount = 0
+
+    const childLangs = languages.filter(
+      (language) => language.customInfo?.project?.uri === uri
+    )
+    const color = projectMeta?.iconColor || ''
+
+    return {
+      name: projectTitle?.replace(' Languages', '') || '',
+      href: uri || '',
+      color,
+      items: childLangs.map(
+        ({ title, langLocations, customInfo }): GroupConfigItem => {
+          const markers =
+            langLocations?.nodes?.map(
+              (): MarkerIconReqd => {
+                locsCount += 1
+
+                return { iconColor: color, markerLabel: locsCount }
+              }
+            ) || ([] as MarkerIconReqd[])
+
+          return {
+            title: title || '',
+            subtitle: customInfo?.endonym || title || '',
+            href: uri,
+            markers,
+          }
+        }
+      ),
+    }
   })
 }

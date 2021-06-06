@@ -1,9 +1,10 @@
-import Link from 'next/link'
 import { GetStaticProps } from 'next'
 
 import { Layout } from 'components/Layout'
 import { getAllProjects } from 'lib/api/api.projects'
 import { Project, Language, ContentType } from 'gql-ts/wp-graphql'
+import { prepProjectsGroups } from 'components/map/utils'
+import { Groups } from 'components/languages/ContinentsGroups'
 
 type ProjectsProps = {
   projects?: Project[]
@@ -13,52 +14,14 @@ type ProjectsProps = {
 
 const Projects: React.FC<ProjectsProps> = (props) => {
   const { projects, languages, contentType } = props
+  const projectsGroups = prepProjectsGroups(
+    projects || ([] as Project[]),
+    languages || ([] as Language[])
+  )
 
   return (
     <Layout title="Projects" summary={contentType?.description}>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gridGap: 'calc(var(--p1) * 2)',
-        }}
-      >
-        {projects?.map((node) => {
-          const { uri, title, excerpt } = node
-
-          return (
-            <article
-              key={uri}
-              style={{
-                border: 'solid 1px var(--gr2)',
-                borderRadius: 'var(--rad2)',
-                padding: 'var(--p1)',
-                boxShadow: 'var(--elev1)',
-              }}
-            >
-              <Link href={uri || ''}>
-                <h2>
-                  <a>{title}</a>
-                </h2>
-              </Link>
-              <div dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
-              {languages && (
-                <ul>
-                  {languages
-                    .filter((lang) => lang?.customInfo?.project?.uri === uri)
-                    .map((lang) => (
-                      <li key={lang?.title}>
-                        <Link href={lang?.uri || ''}>
-                          <a>{lang?.title}</a>
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </article>
-          )
-        })}
-      </div>
+      <Groups groups={projectsGroups} />
     </Layout>
   )
 }
