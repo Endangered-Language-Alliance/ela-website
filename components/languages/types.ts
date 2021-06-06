@@ -52,6 +52,7 @@ export type GroupConfigItem = ItemProps & {
 
 export type GroupsProps = {
   groups: GroupConfig[]
+  widerGrid?: boolean
 }
 
 export type ItemProps = {

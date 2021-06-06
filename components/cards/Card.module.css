@@ -1,53 +1,72 @@
 .root {
+  --rad: var(--rad2);
   display: grid;
-  grid-column-gap: var(--p3);
-  grid-row-gap: var(--p3);
-  grid-template-columns: repeat(auto-fill, minmax(325px, auto));
+  grid-gap: var(--p2);
+  grid-template-columns: repeat(auto-fill, minmax(275px, auto));
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media screen and (min-width: 800px) {
+  .root {
+    max-height: unset;
+    overflow-y: visible;
+  }
+
+  .widerGrid {
+    grid-template-columns: repeat(auto-fill, minmax(325px, auto));
+  }
 }
 
 .group {
-  border-top-left-radius: var(--rad2);
-  border-bottom-left-radius: var(--rad2);
   display: flex;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--rad);
 }
 
 .groupTitleWrap {
+  --size: 28px;
   align-items: center;
   display: flex;
-  flex: 0 0 25px;
+  flex: 0 0 var(--size);
   justify-content: center;
   min-width: 0;
-  border-radius: var(--rad2) 0 0 var(--rad2);
-  padding: var(--p0) var(--p2);
+  padding-top: var(--p5);
+  padding-bottom: var(--p5);
 }
 
 /* CRED: for rotation: https://stackoverflow.com/a/41428599/1048518 */
 .groupTitle {
   color: var(--white);
-  font-size: var(--font-h5);
-  margin: 0;
+  font-size: var(--font-h6);
+  line-height: 1;
+  margin-top: 2ch;
+  margin-bottom: 2ch;
   transform: rotate(-90deg);
   white-space: nowrap;
 }
 
 .itemList {
+  --col-width: 115px;
+  --gap: var(--p1);
+  align-content: center;
   display: grid;
   grid-auto-flow: column;
-  grid-column-gap: var(--p0);
-  grid-template-columns: repeat(auto-fill, 125px);
+  grid-column-gap: var(--gap);
+  grid-template-columns: repeat(auto-fill, var(--col-width));
   overflow-x: auto;
   overflow-y: hidden;
-  padding-left: var(--p0);
+  padding: 0 var(--gap);
 }
 
 .item {
-  border-radius: var(--rad2);
+  border-radius: var(--rad);
   box-shadow: var(--elev1);
-  margin-bottom: var(--p0);
   padding: var(--p0);
-  width: 125px;
+  width: var(--col-width);
+  height: 85px;
 }
 
 .itemHeader {
@@ -56,7 +75,7 @@
 }
 
 .itemTitle {
-  font-size: var(--font-md);
+  font-size: var(--font-sm);
   line-height: inherit;
   margin: 0 var(--p0) 0.15em 0;
   overflow: hidden;
@@ -67,7 +86,10 @@
 
 .itemSubtitle {
   color: var(--gr4);
-  font-size: var(--font-sm);
+  font-size: var(--font-xs);
   line-height: var(--font-md);
-  margin-bottom: 0.35em;
+  margin-bottom: 0.35rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: none;
 }

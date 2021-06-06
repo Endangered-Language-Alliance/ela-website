@@ -47,7 +47,7 @@ const Group: React.FC<GroupProps> = (props) => {
   const { name, color, children } = props
 
   return (
-    <div className={cardStyles.group} style={{ borderBottomColor: color }}>
+    <div className={cardStyles.group} style={{ borderColor: color }}>
       <div
         className={cardStyles.groupTitleWrap}
         style={{ backgroundColor: color }}
@@ -60,7 +60,10 @@ const Group: React.FC<GroupProps> = (props) => {
 }
 
 export const Groups: React.FC<GroupsProps> = (props) => {
-  const { groups } = props
+  const { groups, widerGrid } = props
+  const classes = `${cardStyles.root} ${
+    widerGrid && ` ${cardStyles.widerGrid}`
+  }`
 
   function getGroups({ name, color, items }: GroupConfig): React.ReactNode {
     return (
@@ -76,5 +79,5 @@ export const Groups: React.FC<GroupsProps> = (props) => {
     )
   }
 
-  return <div className={cardStyles.root}>{groups.map(getGroups)}</div>
+  return <div className={classes}>{groups.map(getGroups)}</div>
 }
