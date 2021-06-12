@@ -2,7 +2,7 @@
   margin-bottom: var(--p3);
   width: 100%;
   box-shadow: var(--elev2);
-  border-radius: var(--rad3);
+  border-radius: var(--corner);
 }
 
 .fullWidthMap {
@@ -15,7 +15,7 @@
 }
 
 .fullWidthMap .map {
-  border-radius: var(--rad3) var(--rad3) 0 0;
+  border-radius: var(--corner) var(--corner) 0 0;
   box-shadow: var(--elev2);
   width: 100%;
 }

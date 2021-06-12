@@ -19,7 +19,7 @@ export const getIconColorByContinent = (continent: Continent): string => {
   return continentColors[continent] || 'gray'
 }
 
-export const getCitiesCoords = (
+export const prepCitiesMarkers = (
   languages: LangWithKnownContinent[],
   plainAndSimple?: boolean
 ): PreppedMarker[] => {

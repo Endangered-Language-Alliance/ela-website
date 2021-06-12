@@ -9,7 +9,7 @@ import sharedStyles from 'components/Layout.module.css'
 
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
-import { getCitiesCoords } from 'components/map/utils'
+import { prepCitiesMarkers } from 'components/map/utils'
 import { Map } from 'components/map/Map'
 import { prepLangInstanceChips } from 'components/languages/utils'
 import { LangInstancePageProps } from 'components/languages/types'
@@ -35,7 +35,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
   const { langStructure, prevResearch, addlInfo, background } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
   const { glottologId, gDriveDocId, archiveOrgLink } = external || {}
-  const preppedData = getCitiesCoords([data], true)
+  const preppedData = prepCitiesMarkers([data], true)
   const preppedChips = prepLangInstanceChips({ external, project })
 
   return (

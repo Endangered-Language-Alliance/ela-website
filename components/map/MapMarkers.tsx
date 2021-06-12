@@ -6,7 +6,7 @@ import { PreppedMarker, MapMarkersProps } from './types'
 
 // Important for perf (???): the markers never change, avoid rerender when the
 // map viewport changes
-function MapMarkers(props: MapMarkersProps): React.ReactNode | null {
+function MapMarkers(props: MapMarkersProps): React.ReactNode {
   const { markers, onClick } = props
 
   return markers.map((marker, i) => {

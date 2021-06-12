@@ -4,7 +4,7 @@ import { getAllProjectsWithSlug, getProject } from 'lib/api/api.projects'
 import { Project, Language } from 'gql-ts/wp-graphql'
 
 import { Layout } from 'components/Layout'
-import { getCitiesCoords } from 'components/map/utils'
+import { prepCitiesMarkers } from 'components/map/utils'
 import { Map } from 'components/map/Map'
 import { ChipProps } from 'components/buttons/types'
 
@@ -30,7 +30,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
   )
   /* eslint-disable @typescript-eslint/ban-ts-comment */
   // @ts-ignore
-  const preppedData = getCitiesCoords(langsInThisProject, true)
+  const preppedData = prepCitiesMarkers(langsInThisProject, true)
   const preppedChips: ChipProps[] = langsInThisProject.map((lang) => ({
     text: lang.title || '',
     uri: lang.uri || '',

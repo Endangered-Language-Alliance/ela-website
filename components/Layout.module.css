@@ -34,8 +34,9 @@
 
 .content {
   --linkColor: var(--primary);
+  --corner: var(--rad2);
   background-color: var(--white);
-  border-radius: var(--rad2);
+  border-radius: var(--corner);
   box-shadow: var(--elev3);
   color: var(--black);
   margin-bottom: var(--p4);

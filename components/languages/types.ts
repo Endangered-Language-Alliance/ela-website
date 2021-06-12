@@ -38,12 +38,14 @@ export type ContinentGroup = {
 export type GroupProps = {
   name: string
   color: string
+  noGrid?: boolean
 }
 
 export type GroupConfig = {
   name: string
   color: string
   items: GroupConfigItem[]
+  href?: string
 }
 
 export type GroupConfigItem = ItemProps & {
@@ -52,7 +54,6 @@ export type GroupConfigItem = ItemProps & {
 
 export type GroupsProps = {
   groups: GroupConfig[]
-  widerGrid?: boolean
 }
 
 export type ItemProps = {
@@ -64,13 +65,15 @@ export type ItemProps = {
 export type ItemIconProps = {
   label: string | number
   color: string
+  /** Crappy override to make it useful in non-map scenario */
+  noTransform?: boolean
 }
 
 export type KnownLangLocation = Omit<
   LangLocation_Languagelocation,
   'continent'
 > & {
-  continent: Continent
+  continent: Continent | string
 }
 
 export type LangInstancePageProps = { data?: LangWithKnownContinent }
