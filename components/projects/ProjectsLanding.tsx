@@ -18,7 +18,7 @@ const ProjectLangItem: React.FC<Omit<ItemProps, 'href'>> = (props) => {
         {subtitle !== title && (
           <div
             role="doc-subtitle"
-            className={cardStyles.itemSubtitle}
+            className={`${cardStyles.itemSubtitle} ${styles.itemSubTitle}`}
             style={{ marginBottom: 0 }}
           >
             {subtitle}
@@ -34,10 +34,20 @@ const ProjectGroup: React.FC<GroupProps> = (props) => {
   const { name, color, children } = props
 
   return (
-    <div className={styles.group}>
-      <h3 className={styles.groupTitle} style={{ backgroundColor: color }}>
-        {name}
-      </h3>
+    <div
+      className={styles.group}
+      style={{
+        backgroundColor: color,
+        backgroundImage: `linear-gradient(
+          -45deg,
+          hsl(0deg 0% 0% / 40%) 5%,
+          hsl(0deg 0% 0% / 32%) 40%,
+          hsl(0deg 0% 0% / 15%), 75%,
+          hsl(0deg 0% 0% / 25%)
+        )`,
+      }}
+    >
+      <h3 className={styles.groupTitle}>{name}</h3>
       <div className={styles.groupInner}>{children}</div>
     </div>
   )

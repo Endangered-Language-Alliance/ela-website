@@ -30,9 +30,11 @@
   border-top-left-radius: var(--corner);
   border-top-right-radius: var(--corner);
   color: var(--white);
-  font-size: var(--font-h5);
+  font-size: var(--font-h4);
   margin: 0;
-  padding: var(--p0) var(--p2);
+  padding-left: var(--p2);
+  padding-right: var(--p2);
+  padding-top: var(--p2);
   text-align: center;
 }
 
@@ -43,7 +45,7 @@
 }
 
 .item {
-  --border: dashed var(--gr2) 1px;
+  --border: dashed rgba(255, 255, 255, 0.325) 1px;
   align-items: center;
   display: flex;
   flex-grow: 1;
@@ -81,7 +83,11 @@
   font-size: var(--font-md);
   margin-bottom: 0;
   margin-right: 4px;
-  color: var(--gr11);
+  color: rgba(255, 255, 255, 0.875);
+}
+
+.itemSubTitle {
+  color: rgba(255, 255, 255, 0.825);
 }
 
 .ctaBtn {
