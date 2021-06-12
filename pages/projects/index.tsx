@@ -5,7 +5,7 @@ import { Map } from 'components/map/Map'
 import { getAllProjects } from 'lib/api/api.projects'
 import { Project, ContentType } from 'gql-ts/wp-graphql'
 import { prepProjectsGroups, prepCitiesMarkers } from 'components/map/utils'
-import { ProjectGroups } from 'components/languages/LandingGroups'
+import { ProjectGroups } from 'components/projects/ProjectsLanding'
 import { LangWithKnownContinent } from 'components/languages/types'
 
 type ProjectsProps = {
