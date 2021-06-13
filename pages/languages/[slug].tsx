@@ -35,7 +35,14 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
   const { langStructure, prevResearch, addlInfo, background } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
   const { glottologId, gDriveDocId, archiveOrgLink } = external || {}
-  const preppedData = prepCitiesMarkers([data], true)
+  const { projectMeta } = project || {}
+
+  const preppedData = prepCitiesMarkers(
+    [data],
+    true,
+    true,
+    projectMeta?.iconColor || ''
+  )
   const preppedChips = prepLangInstanceChips({ external, project })
 
   return (
@@ -47,7 +54,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
       chipsItems={preppedChips}
     >
       <article>
-        <Map excludePopupLinkBtn preppedMarkers={preppedData} />
+        <Map excludePopupLinkBtn preppedMarkerData={preppedData} />
         <Tabs className={tabStyles.tabs}>
           <TabList>
             <Tab>Background</Tab>

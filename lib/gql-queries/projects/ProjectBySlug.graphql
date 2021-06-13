@@ -36,6 +36,9 @@ fragment ProjectFields on Project {
   title
   uri
   content
+  projectMeta {
+    iconColor
+  }
   customExcerpt {
     excerpt
   }

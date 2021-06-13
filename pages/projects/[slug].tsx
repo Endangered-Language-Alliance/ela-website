@@ -24,13 +24,19 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
       />
     )
 
-  const { title, content, uri, customExcerpt, youTubePlaylist } = project || {}
+  const { title, content, uri } = project || {}
+  const { customExcerpt, youTubePlaylist, projectMeta } = project || {}
   const langsInThisProject = (languages || []).filter(
     (lang) => lang?.customInfo?.project?.uri === uri
   )
-  /* eslint-disable @typescript-eslint/ban-ts-comment */
-  // @ts-ignore
-  const preppedData = prepCitiesMarkers(langsInThisProject, true)
+  const preppedData = prepCitiesMarkers(
+    /* eslint-disable @typescript-eslint/ban-ts-comment */
+    // @ts-ignore
+    langsInThisProject,
+    true,
+    undefined,
+    projectMeta?.iconColor || ''
+  )
   const preppedChips: ChipProps[] = langsInThisProject.map((lang) => ({
     text: lang.title || '',
     uri: lang.uri || '',
@@ -44,7 +50,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
       youTubePlaylistId={youTubePlaylist?.id}
       chipsItems={preppedChips}
     >
-      <Map preppedMarkers={preppedData} />
+      <Map preppedMarkerData={preppedData} />
       <div dangerouslySetInnerHTML={{ __html: content || '' }} />
     </Layout>
   )

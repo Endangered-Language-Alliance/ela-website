@@ -31,6 +31,9 @@ fragment LanguageFields on Language {
       ... on Project {
         title
         uri
+        projectMeta {
+          iconColor
+        }
       }
     }
     external {

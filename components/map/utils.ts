@@ -15,12 +15,23 @@ const continentColors = {
   Europe: 'hsl(128, 36%, 29%)',
 } as ContinentColors
 
-const getIconColorByContinent = (continent: Continent): string =>
+const getColorByContinent = (continent: Continent): string =>
   continentColors[continent] || 'gray'
 
+// TODO: 1) improve logic, 2) don't have a million arguments
+/**
+ * Prepare map markers with city/country/etc. info
+ * @param languages Languages (with a known continent)
+ * @param omitMarkerLabel Don't show any value in the markers
+ * @param usePlainColor Use a simple gray marker fill
+ * @param markerColor Total color override, e.g. projects instance
+ * @returns Array of map markers with optional colors and labels
+ */
 export const prepCitiesMarkers = (
-  languages: LangWithKnownContinent[],
-  plainAndSimple?: boolean
+  languages: LangWithKnownContinent[], // wrong TS for projects landing...
+  omitMarkerLabel?: boolean,
+  usePlainColor?: boolean,
+  markerColor?: string
 ): MapMarker[] => {
   const locsCounts = {} as { [key in Continent]: number }
 
@@ -44,9 +55,11 @@ export const prepCitiesMarkers = (
         let label: string | number = ''
         let color = 'var(--gr7)'
 
-        if (!plainAndSimple) {
-          label = locsCounts[continent]
-          color = getIconColorByContinent(continent || 'Africa')
+        if (!omitMarkerLabel) label = locsCounts[continent]
+
+        if (markerColor) color = markerColor
+        else if (!usePlainColor) {
+          color = getColorByContinent(continent || 'Africa')
         }
 
         const marker = { lat: lat || 0, lon: lon || 0, color, label }
@@ -74,7 +87,7 @@ export const prepContinentGroups = (
 ): GroupConfig[] => {
   return continents.map((name) => {
     let locsCount = 0
-    const color = getIconColorByContinent(name)
+    const color = getColorByContinent(name)
 
     const corresponding = languages.filter((language) => {
       const firstOne = language.langLocations.nodes[0]
