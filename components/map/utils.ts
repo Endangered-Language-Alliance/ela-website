@@ -36,7 +36,7 @@ export const prepCitiesMarkers = (
   const locsCounts = {} as { [key in Continent]: number }
 
   const allOfEm = languages.reduce((all, thisOne): MapMarker[] => {
-    const { langLocations, uri } = thisOne || {}
+    const { langLocations, uri, title } = thisOne || {}
     const { nodes } = langLocations || {}
 
     if (!nodes?.length) return all
@@ -64,8 +64,8 @@ export const prepCitiesMarkers = (
 
         const marker = { lat: lat || 0, lon: lon || 0, color, label }
         const popup = {
-          title: city || '',
-          subtitle: country || '',
+          title: title || '',
+          subtitle: `${city}, ${country}`,
           uri,
           linkText: 'Language',
         }
