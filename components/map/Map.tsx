@@ -17,9 +17,9 @@ import {
 import styles from './Map.module.css'
 
 export const Map: React.FC<MapProps> = (props) => {
-  const { preppedData, excludePopupLinkBtn } = props
+  const { preppedMarkerData = [], excludePopupLinkBtn } = props
   const [viewport, setViewport] = useState<ViewportState>(initialState)
-  const [popupInfo, setPopupInfo] = useState<PopupState>(null)
+  const [popupInfo, setPopupInfo] = useState<PopupState | null>(null)
   const [mapIsMoving, setMapIsMoving] = useState<boolean>(true)
 
   function onLoad(mapLoadEvent: { target: MbMap }): void {
@@ -47,10 +47,13 @@ export const Map: React.FC<MapProps> = (props) => {
     })
 
     // Avoid crazy zoom if only one marker
-    if (preppedData.length === 1) {
+    if (preppedMarkerData.length === 1) {
       map.easeTo(
         {
-          center: [preppedData[0]?.lon || 0, preppedData[0]?.lat || 0],
+          center: [
+            preppedMarkerData[0]?.lon || 0,
+            preppedMarkerData[0]?.lat || 0,
+          ],
           zoom: 4,
         },
         { forceViewportUpdate: true }
@@ -61,11 +64,12 @@ export const Map: React.FC<MapProps> = (props) => {
 
     const bounds = new LngLatBounds()
 
-    preppedData.forEach(({ lon, lat }) => {
+    preppedMarkerData.forEach(({ lon, lat }) => {
       if (lon && lat) bounds.extend([lon, lat])
     })
 
     try {
+      // TODO: 1. Zoom from center of bounds, 2. don't zoom full globe on mobile
       map.fitBounds(bounds, { padding: 45 }, { forceViewportUpdate: true })
     } catch (e) {
       console.error(e)
@@ -83,7 +87,7 @@ export const Map: React.FC<MapProps> = (props) => {
       >
         {!mapIsMoving && (
           <MapMarkers
-            markers={preppedData || ([] as PreppedMarker[])}
+            markers={preppedMarkerData || ([] as PreppedMarker[])}
             onClick={setPopupInfo}
           />
         )}

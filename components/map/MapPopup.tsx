@@ -35,6 +35,7 @@ export const MapPopup: React.FC<MapPopupProps> = (props) => {
           <Link href={uri}>
             <a
               className={`${btnStyles.button} ${btnStyles.secondary} ${btnStyles.small}`}
+              style={{ float: 'right' }}
             >
               {linkText}
             </a>

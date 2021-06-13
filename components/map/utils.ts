@@ -6,7 +6,7 @@ import {
   GroupConfigItem,
 } from 'components/languages/types'
 import { Language, Project } from 'gql-ts/wp-graphql'
-import { MarkerIconReqd, PreppedMarker } from './types'
+import { MarkerIconProps, MapMarker } from './types'
 
 const continentColors = {
   Africa: 'hsl(302, 47%, 37%)',
@@ -15,51 +15,54 @@ const continentColors = {
   Europe: 'hsl(128, 36%, 29%)',
 } as ContinentColors
 
-export const getIconColorByContinent = (continent: Continent): string => {
-  return continentColors[continent] || 'gray'
-}
+const getIconColorByContinent = (continent: Continent): string =>
+  continentColors[continent] || 'gray'
 
 export const prepCitiesMarkers = (
   languages: LangWithKnownContinent[],
   plainAndSimple?: boolean
-): PreppedMarker[] => {
+): MapMarker[] => {
   const locsCounts = {} as { [key in Continent]: number }
 
-  const allOfEm = languages.reduce((all, thisOne): PreppedMarker[] => {
-    const { langLocations, title, uri } = thisOne || {}
+  const allOfEm = languages.reduce((all, thisOne): MapMarker[] => {
+    const { langLocations, uri } = thisOne || {}
     const { nodes } = langLocations || {}
 
     if (!nodes?.length) return all
 
-    const locsMapped = nodes?.map((node) => {
-      if (locsCounts[node.languageLocation.continent]) {
-        locsCounts[node.languageLocation.continent] += 1
-      } else {
-        locsCounts[node.languageLocation.continent] = 1
+    const locsMapped = nodes?.map(
+      (node): MapMarker => {
+        const { languageLocation } = node
+        const { continent, lat, lon, city, country } = languageLocation
+
+        if (locsCounts[continent]) {
+          locsCounts[continent] += 1
+        } else {
+          locsCounts[continent] = 1
+        }
+
+        let label: string | number = ''
+        let color = 'var(--gr7)'
+
+        if (!plainAndSimple) {
+          label = locsCounts[continent]
+          color = getIconColorByContinent(continent || 'Africa')
+        }
+
+        const marker = { lat: lat || 0, lon: lon || 0, color, label }
+        const popup = {
+          title: city || '',
+          subtitle: country || '',
+          uri,
+          linkText: 'Language',
+        }
+
+        return { ...marker, ...popup }
       }
+    )
 
-      /* eslint-disable operator-linebreak */
-      const markerLabel = plainAndSimple
-        ? ''
-        : locsCounts[node.languageLocation.continent]
-
-      const iconColor = plainAndSimple
-        ? 'var(--gr7)'
-        : getIconColorByContinent(node?.languageLocation?.continent || 'Africa')
-      /* eslint-enable operator-linebreak */
-
-      return {
-        ...(node?.languageLocation || {}),
-        title,
-        uri,
-        markerLabel,
-        iconColor,
-      }
-    })
-
-    // TODO: reduce to get all of them
-    return [...all, ...locsMapped] as PreppedMarker[]
-  }, [] as PreppedMarker[])
+    return [...all, ...locsMapped] as MapMarker[] // TODO: reduce to get all
+  }, [] as MapMarker[])
 
   return allOfEm
 }
@@ -84,10 +87,10 @@ export const prepContinentGroups = (
       const { endonym } = customInfo || {}
 
       const markers = langLocations.nodes.map(
-        (): MarkerIconReqd => {
+        (): MarkerIconProps => {
           locsCount += 1
 
-          return { iconColor: color, markerLabel: locsCount }
+          return { color, label: locsCount }
         }
       )
 
@@ -125,12 +128,12 @@ export const prepProjectsGroups = (
         ({ title, langLocations, customInfo }): GroupConfigItem => {
           const markers =
             langLocations?.nodes?.map(
-              (): MarkerIconReqd => {
+              (): MarkerIconProps => {
                 locsCount += 1
 
-                return { iconColor: color, markerLabel: locsCount }
+                return { color, label: locsCount }
               }
-            ) || ([] as MarkerIconReqd[])
+            ) || ([] as MarkerIconProps[])
 
           return {
             title: title || '',
@@ -142,4 +145,67 @@ export const prepProjectsGroups = (
       ),
     }
   })
+}
+
+export const prepProjectsMarkers = (
+  languages: Language[],
+  projects: Project[],
+  plainAndSimple?: boolean
+): MapMarker[] => {
+  const locsCounts = {} as { [key: string]: number }
+  const colors = {} as { [key: string]: string }
+
+  const allOfEm = languages.reduce((all, thisOne): MapMarker[] => {
+    const { langLocations, customInfo, title: langTitle } = thisOne || {}
+    const { nodes } = langLocations || {}
+
+    if (!nodes?.length) return all
+
+    const { project } = customInfo || {}
+    const { title: projectTitle, uri: projUri } =
+      (project as { title: keyof typeof locsCounts; uri: string }) ||
+      ({} as { title: keyof typeof locsCounts; uri: string })
+
+    const locsMapped = nodes?.map(
+      (node): MapMarker => {
+        const { languageLocation } = node || {}
+        const { lat, lon, city, country } = languageLocation || {}
+
+        if (locsCounts[projectTitle]) locsCounts[projectTitle] += 1
+        else locsCounts[projectTitle] = 1
+
+        let label: string | number = ''
+        let color = 'var(--gr7)'
+
+        if (!plainAndSimple) {
+          label = locsCounts[projectTitle]
+
+          if (colors[projectTitle]) color = colors[projectTitle]
+          else {
+            color =
+              projects.find(
+                ({ title: projTitle }) => projTitle === projectTitle
+              )?.projectMeta?.iconColor || color
+
+            colors[projectTitle] = color // cache the result
+          }
+        }
+
+        const marker = { lat: lat || 0, lon: lon || 0, color, label }
+
+        const popup = {
+          title: (projectTitle as string) || '',
+          subtitle: `Selected: ${langTitle} (${city}, ${country})`,
+          uri: projUri,
+          linkText: 'Project',
+        }
+
+        return { ...marker, ...popup }
+      }
+    )
+
+    return [...all, ...locsMapped] as MapMarker[] // TODO: reduce to get all
+  }, [] as MapMarker[])
+
+  return allOfEm
 }

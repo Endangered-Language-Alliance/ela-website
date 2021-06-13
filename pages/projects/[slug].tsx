@@ -44,7 +44,7 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
       youTubePlaylistId={youTubePlaylist?.id}
       chipsItems={preppedChips}
     >
-      <Map preppedData={preppedData} />
+      <Map preppedMarkers={preppedData} />
       <div dangerouslySetInnerHTML={{ __html: content || '' }} />
     </Layout>
   )

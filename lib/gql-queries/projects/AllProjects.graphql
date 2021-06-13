@@ -24,6 +24,7 @@ query AllProjects {
         project {
           ... on Project {
             uri
+            title
           }
         }
       }
@@ -31,7 +32,6 @@ query AllProjects {
         nodes {
           languageLocation {
             city
-            continent
             country
             lat
             lon

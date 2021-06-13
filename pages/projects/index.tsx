@@ -3,8 +3,8 @@ import { GetStaticProps } from 'next'
 import { Layout } from 'components/Layout'
 import { Map } from 'components/map/Map'
 import { getAllProjects } from 'lib/api/api.projects'
-import { Project, ContentType } from 'gql-ts/wp-graphql'
-import { prepProjectsGroups, prepCitiesMarkers } from 'components/map/utils'
+import { Project, ContentType, Language } from 'gql-ts/wp-graphql'
+import { prepProjectsGroups, prepProjectsMarkers } from 'components/map/utils'
 import { ProjectGroups } from 'components/projects/ProjectsLanding'
 import { LangWithKnownContinent } from 'components/languages/types'
 
@@ -16,17 +16,16 @@ type ProjectsProps = {
 
 const Projects: React.FC<ProjectsProps> = (props) => {
   const { projects, languages, contentType } = props
-  const preppedMapData = prepCitiesMarkers(
-    languages as LangWithKnownContinent[]
-  )
-  const projectsGroups = prepProjectsGroups(
-    projects || ([] as Project[]),
-    languages || ([] as LangWithKnownContinent[])
-  )
+
+  const langsTS = languages || ([] as Language[])
+  const projectsTS = projects || ([] as Project[])
+
+  const preppedMarkerData = prepProjectsMarkers(langsTS, projectsTS)
+  const projectsGroups = prepProjectsGroups(projectsTS, langsTS)
 
   return (
     <Layout title="Projects" summary={contentType?.description}>
-      <Map preppedData={preppedMapData} />
+      <Map preppedMarkerData={preppedMarkerData} />
       <ProjectGroups groups={projectsGroups} />
     </Layout>
   )

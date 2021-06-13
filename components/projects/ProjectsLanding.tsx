@@ -64,10 +64,10 @@ export const ProjectGroups: React.FC<GroupsProps> = (props) => {
           <div className={styles.itemsWrap}>
             {items.map(({ title, subtitle, markers }) => (
               <ProjectLangItem key={title} title={title} subtitle={subtitle}>
-                {markers.map(({ markerLabel }) => (
+                {markers.map(({ label }) => (
                   <GroupMarkerIcon
-                    key={markerLabel}
-                    label={markerLabel}
+                    key={label}
+                    label={label || ''}
                     color={color}
                     noTransform
                   />

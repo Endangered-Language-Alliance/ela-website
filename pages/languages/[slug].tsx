@@ -47,7 +47,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
       chipsItems={preppedChips}
     >
       <article>
-        <Map excludePopupLinkBtn preppedData={preppedData} />
+        <Map excludePopupLinkBtn preppedMarkers={preppedData} />
         <Tabs className={tabStyles.tabs}>
           <TabList>
             <Tab>Background</Tab>

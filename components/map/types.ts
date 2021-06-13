@@ -16,24 +16,23 @@ export type PopupState = {
   subtitle?: string // e.g. country name
   uri?: string
   linkText?: string
-} | null
+}
+
+export type MapMarker = MarkerIconProps & PopupState
 
 export type MapMarkersProps = {
-  markers: PreppedMarker[]
-  onClick: React.Dispatch<PopupState>
+  markers: MapMarker[]
+  onClick: React.Dispatch<PopupState | null>
 }
 
 export type MarkerIconProps = {
-  iconColor?: string
-  markerLabel?: string | number
+  color?: string
+  label?: string | number
 }
 
-export type MarkerIconReqd = Required<MarkerIconProps>
-
-export type ClickableMarkerProps = PreppedMarker & {
+export type ClickableMarkerProps = PopupState & {
   tabIndex: number
-  onClick: React.Dispatch<PopupState>
-  title?: string
+  onClick: React.Dispatch<PopupState | null>
 }
 
 // Custom data at end of MB event, e.g. moveend
@@ -46,11 +45,11 @@ type PopupOverrides = {
 }
 
 export type MapProps = PopupOverrides & {
-  preppedData: PreppedMarker[]
+  preppedMarkerData: MapMarker[]
 }
 
 export type MapPopupProps = PopupOverrides & {
   popupInfo: PopupState
-  setPopupInfo: React.Dispatch<PopupState>
+  setPopupInfo: React.Dispatch<PopupState | null>
   excludePopupLinkBtn?: boolean // avoid self-linking buttons on Lang instance
 }

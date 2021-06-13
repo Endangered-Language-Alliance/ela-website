@@ -89,7 +89,8 @@
 
 .popupContent {
   min-width: 175px;
-  padding: 0 var(--pTiniest);
+  max-width: 275px;
+  padding: var(--pTiniest);
 }
 
 .popupHeading {
@@ -98,9 +99,9 @@
 }
 
 .popupSubtitle {
-  font-size: var(--font-md);
-  color: var(--gr8);
-  margin-bottom: var(--p0);
+  font-size: var(--font-xs);
+  color: var(--gr6);
+  margin-bottom: var(--p1);
 }
 
 .mapCtrlBtnStyle {

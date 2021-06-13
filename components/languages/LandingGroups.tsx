@@ -1,17 +1,11 @@
 import Link from 'next/link'
 
-import { MarkerIcon } from 'components/map/MarkerIcon'
+import { MarkerIcon } from 'components/map/MapMarkers'
 
 import cardStyles from 'components/cards/Card.module.css'
 import mapStyles from 'components/map/Map.module.css'
 
-import {
-  GroupConfig,
-  GroupProps,
-  GroupsProps,
-  ItemProps,
-  ItemIconProps,
-} from './types'
+import { GroupProps, GroupsProps, ItemProps, ItemIconProps } from './types'
 
 const GroupCardItem: React.FC<ItemProps> = (props) => {
   const { title, subtitle, href, children } = props
@@ -42,7 +36,7 @@ export const GroupMarkerIcon: React.FC<ItemIconProps> = (props) => {
       // @ts-ignore
       style={{ '--size': '24px', ...transform }}
     >
-      <MarkerIcon markerLabel={label} iconColor={color} />
+      <MarkerIcon label={label} color={color} />
     </div>
   )
 }
@@ -67,28 +61,21 @@ export const ContinentGroups: React.FC<GroupsProps> = (props) => {
   const { groups } = props
   const classes = `${cardStyles.root} ${cardStyles.widerGrid}`
 
-  function getGroups({ name, color, items }: GroupConfig): React.ReactNode {
-    return (
-      <Group key={name} name={name} color={color}>
-        {items.map(({ href, title, subtitle, markers }) => (
-          <GroupCardItem
-            key={href}
-            href={href}
-            title={title}
-            subtitle={subtitle}
-          >
-            {markers.map(({ markerLabel }) => (
-              <GroupMarkerIcon
-                key={markerLabel}
-                label={markerLabel}
-                color={color}
-              />
-            ))}
-          </GroupCardItem>
-        ))}
-      </Group>
-    )
-  }
+  const Grupos = groups.map(({ name, color, items }) => (
+    <Group key={name} name={name} color={color}>
+      {items.map(({ href, title, subtitle, markers }) => (
+        <GroupCardItem key={href} href={href} title={title} subtitle={subtitle}>
+          {markers.map(({ label }) => (
+            <GroupMarkerIcon
+              key={title + subtitle}
+              label={label || ''}
+              color={color}
+            />
+          ))}
+        </GroupCardItem>
+      ))}
+    </Group>
+  ))
 
-  return <div className={classes}>{groups.map(getGroups)}</div>
+  return <div className={classes}>{Grupos}</div>
 }

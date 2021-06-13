@@ -7,7 +7,7 @@ import {
   LangLocation,
 } from 'gql-ts/wp-graphql'
 
-import { PreppedMarker, MarkerIconReqd } from 'components/map/types'
+import { PreppedMarker, MarkerIconProps } from 'components/map/types'
 
 export type LanguagesProps = {
   data: {
@@ -49,7 +49,7 @@ export type GroupConfig = {
 }
 
 export type GroupConfigItem = ItemProps & {
-  markers: MarkerIconReqd[]
+  markers: MarkerIconProps[]
 }
 
 export type GroupsProps = {
