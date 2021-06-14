@@ -1,15 +1,29 @@
-query LanguageBySlug($id: ID!, $idType: LanguageIdType!) {
-  language(id: $id, idType: $idType) {
+query LanguageBySlug($id: ID!) {
+  language(id: $id, idType: SLUG) {
     ...LanguageFields
   }
 }
 
 fragment LanguageFields on Language {
   title
-  excerpt
   uri
+  customExcerpt {
+    excerpt
+  }
   youTubePlaylist {
     id
+  }
+  langLocations(where: { orderby: NAME }) {
+    nodes {
+      name
+      languageLocation {
+        city
+        country
+        continent
+        lat
+        lon
+      }
+    }
   }
   customInfo {
     endonym
@@ -17,6 +31,9 @@ fragment LanguageFields on Language {
       ... on Project {
         title
         uri
+        projectMeta {
+          iconColor
+        }
       }
     }
     external {

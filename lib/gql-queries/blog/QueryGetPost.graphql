@@ -11,9 +11,7 @@ fragment PostFields on Post {
   slug
   uri
   date
-  featuredImage {
-    node {
-      sourceUrl
-    }
+  customExcerpt {
+    excerpt
   }
 }

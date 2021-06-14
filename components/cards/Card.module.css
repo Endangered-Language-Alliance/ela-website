@@ -1,0 +1,97 @@
+.root {
+  --corner: var(--rad2);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(275px, auto));
+  gap: var(--p2);
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Subtle border on mobile */
+@media screen and (max-width: 799px) {
+  .root {
+    box-shadow: inset 0px -5px 8px 0px hsl(0deg 0% 86% / 74%);
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .widerGrid {
+    grid-template-columns: repeat(auto-fill, minmax(325px, auto));
+  }
+}
+
+.group {
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--corner);
+}
+
+.groupTitleWrap {
+  --size: 28px;
+  align-items: center;
+  display: flex;
+  flex: 0 0 var(--size);
+  justify-content: center;
+  min-width: 0;
+  padding-top: var(--p5);
+  padding-bottom: var(--p5);
+}
+
+/* CRED: for rotation: https://stackoverflow.com/a/41428599/1048518 */
+.groupTitle {
+  color: var(--white);
+  font-size: var(--font-h6);
+  line-height: 1;
+  margin-top: 2ch;
+  margin-bottom: 2ch;
+  transform: rotate(-90deg);
+  white-space: nowrap;
+}
+
+.itemList {
+  --col-width: 115px;
+  --gap: var(--p1);
+  align-content: center;
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: var(--gap);
+  grid-template-columns: repeat(auto-fill, var(--col-width));
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 var(--gap);
+}
+
+.item {
+  border-radius: var(--corner);
+  box-shadow: var(--elev1);
+  padding: var(--p0);
+  width: var(--col-width);
+  height: 85px;
+}
+
+.itemHeader {
+  line-height: var(--headingLineHt);
+  margin-bottom: 0;
+}
+
+.itemTitle {
+  font-size: var(--font-sm);
+  line-height: inherit;
+  margin: 0 var(--p0) 0.15em 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: none;
+}
+
+.itemSubtitle {
+  color: var(--gr4);
+  font-size: var(--font-xs);
+  line-height: var(--font-md);
+  margin-bottom: 0.35rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: none;
+}

@@ -1,57 +1,33 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
 
 import { Layout } from 'components/Layout'
-import { Hero } from 'components/Hero'
-import { createMarkup } from 'lib/utils'
 import { getAllPostsWithSlug, getPostsByYear } from 'lib/api/api.latest'
 import { Post } from 'gql-ts/wp-graphql'
+import { PostsItem } from 'components/latest/PostsItem'
 
-import styles from 'styles/Home.module.css'
-import blogStyles from 'styles/Blog.module.css'
+type PostsListProps = { posts: Post[]; year: string }
 
-type BlogProps = { posts: Post[]; year: string }
-
-const Latest: React.FC<BlogProps> = (props) => {
+const PostsListByYear: React.FC<PostsListProps> = (props) => {
   const { posts = [], year } = props
 
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Latest articles</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  if (!posts.length) return <Layout title={`No ${year} posts found`} />
 
-      <Layout>
-        <Hero title={year} />
-        <section>
-          {(posts.length &&
-            posts.map(({ title, date, excerpt, uri }) => {
-              return (
-                <div className={blogStyles.listitem} key={uri}>
-                  <div className={blogStyles.listitem__content}>
-                    <h2>
-                      <Link href={uri || ''}>
-                        <a>{title}</a>
-                      </Link>
-                    </h2>
-                    <time
-                      className={blogStyles.listitem__date}
-                      dateTime={date || ''}
-                    >
-                      {date}
-                    </time>
-                    <div
-                      dangerouslySetInnerHTML={createMarkup(excerpt || '')}
-                    />
-                  </div>
-                </div>
-              )
-            })) || <p>No posts found.</p>}
-        </section>
-      </Layout>
-    </div>
+  return (
+    <Layout title={`${year} posts`}>
+      {posts.map((post) => {
+        const { date, title, uri, excerpt, customExcerpt } = post || {}
+
+        return (
+          <PostsItem
+            key={date}
+            date={date || ''}
+            title={title || ''}
+            uri={uri}
+            summary={customExcerpt?.excerpt || excerpt || ''}
+          />
+        )
+      })}
+    </Layout>
   )
 }
 
@@ -82,4 +58,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export default Latest
+export default PostsListByYear

@@ -3,8 +3,12 @@ query HomePageQuery {
     ... on Page {
       content
       title
+      customExcerpt {
+        excerpt
+      }
       homePageSettings {
-        fbFeedIframeHtml
+        # TODO: rm if def not using
+        # fbFeedIframeHtml
         featured1 {
           description
           heading
@@ -15,6 +19,20 @@ query HomePageQuery {
           linkType
           link {
             url
+            title
+          }
+        }
+        featured2 {
+          description
+          heading
+          img {
+            altText
+            sourceUrl
+          }
+          linkType
+          link {
+            url
+            title
           }
         }
         numRecentPosts
@@ -27,10 +45,8 @@ query HomePageQuery {
       title
       slug
       excerpt
-      featuredImage {
-        node {
-          id
-        }
+      customExcerpt {
+        excerpt
       }
     }
   }

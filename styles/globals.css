@@ -1,41 +1,199 @@
-/* CRED: (fonts): https://type-scale.com/ */
-html {
-  font-size: 100%;
-} /*16px*/
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: 'Libre Franklin', sans-serif;
-}
-
-body {
-  min-height: 100vh;
-  line-height: 1.75;
-  --primaryColor: #503896;
-  --primaryColorLight: hsl(255, 46%, 65%);
-  --secondaryColor: #ffd520;
-  --white: #fff;
+:root {
+  /* Grayscale */
   --black: #000;
-  --darkGray: #222;
-  --lightGray: #ddd;
-  --elev1: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --elev2: 0 2px 10px rgba(0, 0, 0, 0.45);
-  --padding1: 0.75rem;
-  --padding2: 1rem;
-  --padding3: 1.25rem;
-  --padding4: 1.5rem;
+  --white: #fff;
+  --offWhite: rgba(255, 255, 255, 0.925);
+  --gr1: rgb(222, 222, 222);
+  --gr2: rgb(200, 200, 200);
+  --gr3: rgb(180, 180, 180);
+  --gr4: rgb(160, 160, 160);
+  --gr5: rgb(140, 140, 140);
+  --gr6: rgb(120, 120, 120);
+  --gr7: rgb(100, 100, 100);
+  --gr8: rgb(80, 80, 80);
+  --gr9: rgb(60, 60, 60);
+  --gr10: rgb(40, 40, 40);
+  --gr11: rgb(30, 30, 30);
+
+  /* Colors */
+  --secondaryDark: hsl(8, 63%, 26%);
+  /* --secondaryDarker: hsl(8, 60%, 37%); */
+  --secondaryDarker: hsl(8, 60%, 40%);
+  --secondary: hsl(8, 56%, 47%);
+  --secondaryLighter: hsl(8, 55%, 59%);
+  --secondaryLight: hsl(10, 53%, 70%);
+
+  --primaryDark: hsl(244, 68%, 21%);
+  --primaryDarker: hsl(244, 59%, 31%);
+  --primary: hsl(243, 50%, 40%);
+  --primaryLighter: hsl(243, 65%, 55%);
+  --primaryLight: hsl(243, 80%, 69%);
+
+  --linkColor: var(--primaryLight);
+
+  /* Border radii */
+  --rad1: 2px;
+  --rad2: 4px;
+  --rad3: 8px;
+  --rad4: 12px;
+  --rad5: 18px;
+
+  /* Elevation */
+  /* CRED: https://material-ui.com/customization/default-theme/#explore */
+  /* --elev1: 0 2px 8px rgba(0, 0, 0, 0.25); */
+  /* --elev2: 0 2px 10px rgba(0, 0, 0, 0.35); */
+  /* --elev3: 0 3px 15px rgba(0, 0, 0, 0.45); */
+  --shadow1: rgba(0, 0, 0, 0.2);
+  --shadow2: rgba(0, 0, 0, 0.14);
+  --shadow3: rgba(0, 0, 0, 0.12);
+
+  --elev1: 0px 2px 1px -1px var(--shadow1), 0px 1px 1px 0px var(--shadow2),
+    0px 1px 3px 0px var(--shadow3);
+  --elev2: 0px 3px 1px -2px var(--shadow1), 0px 2px 2px 0px var(--shadow2),
+    0px 1px 5px 0px var(--shadow3);
+  --elev3: 0px 3px 3px -2px var(--shadow1), 0px 3px 4px 0px var(--shadow2),
+    0px 1px 8px 0px var(--shadow3);
+  --elev4: 0px 2px 4px -1px var(--shadow1), 0px 4px 5px 0px var(--shadow2),
+    0px 1px 10px 0px var(--shadow3);
+  --elev5: 0px 3px 5px -1px var(--shadow1), 0px 5px 8px 0px var(--shadow2),
+    0px 1px 14px 0px var(--shadow3);
+  --elev6: 0px 3px 5px -1px var(--shadow1), 0px 6px 10px 0px var(--shadow2),
+    0px 1px 18px 0px var(--shadow3);
+  --elev7: 0px 4px 5px -2px var(--shadow1), 0px 7px 10px 1px var(--shadow2),
+    0px 2px 16px 1px var(--shadow3);
+  --elev8: 0px 5px 5px -3px var(--shadow1), 0px 8px 10px 1px var(--shadow2),
+    0px 3px 14px 2px var(--shadow3);
+  --elev9: 0px 5px 6px -3px var(--shadow1), 0px 9px 12px 1px var(--shadow2),
+    0px 3px 16px 2px var(--shadow3);
+  --elev10: 0px 6px 6px -3px var(--shadow1), 0px 10px 14px 1px var(--shadow2),
+    0px 4px 18px 3px var(--shadow3);
+  --elev11: 0px 6px 7px -4px var(--shadow1), 0px 11px 15px 1px var(--shadow2),
+    0px 4px 20px 3px var(--shadow3);
+  --elev12: 0px 7px 8px -4px var(--shadow1), 0px 12px 17px 2px var(--shadow2),
+    0px 5px 22px 4px var(--shadow3);
+  --elev13: 0px 7px 8px -4px var(--shadow1), 0px 13px 19px 2px var(--shadow2),
+    0px 5px 24px 4px var(--shadow3);
+  --elev14: 0px 7px 9px -4px var(--shadow1), 0px 14px 21px 2px var(--shadow2),
+    0px 5px 26px 4px var(--shadow3);
+  --elev15: 0px 8px 9px -5px var(--shadow1), 0px 15px 22px 2px var(--shadow2),
+    0px 6px 28px 5px var(--shadow3);
+  --elev16: 0px 8px 10px -5px var(--shadow1), 0px 16px 24px 2px var(--shadow2),
+    0px 6px 30px 5px var(--shadow3);
+  --elev17: 0px 8px 11px -5px var(--shadow1), 0px 17px 26px 2px var(--shadow2),
+    0px 6px 32px 5px var(--shadow3);
+  --elev18: 0px 9px 11px -5px var(--shadow1), 0px 18px 28px 2px var(--shadow2),
+    0px 7px 34px 6px var(--shadow3);
+  --elev19: 0px 9px 12px -6px var(--shadow1), 0px 19px 29px 2px var(--shadow2),
+    0px 7px 36px 6px var(--shadow3);
+  --elev20: 0px 10px 13px -6px var(--shadow1), 0px 20px 31px 3px var(--shadow2),
+    0px 8px 38px 7px var(--shadow3);
+  --elev21: 0px 10px 13px -6px var(--shadow1), 0px 21px 33px 3px var(--shadow2),
+    0px 8px 40px 7px var(--shadow3);
+  --elev22: 0px 10px 14px -6px var(--shadow1), 0px 22px 35px 3px var(--shadow2),
+    0px 8px 42px 7px var(--shadow3);
+  --elev23: 0px 11px 14px -7px var(--shadow1), 0px 23px 36px 3px var(--shadow2),
+    0px 9px 44px 8px var(--shadow3);
+  --elev24: 0px 11px 15px -7px var(--shadow1), 0px 24px 38px 3px var(--shadow2),
+    0px 9px 46px 8px var(--shadow3);
+
+  /* Typography */
+  --headingFontFam: 'Libre Franklin', sans-serif;
+  --bodyFontFam: var(--headingFontFam);
+  --paraFontFam: var(--headingFontFam);
+  --btnFontFam: var(--headingFontFam);
+
+  /* Font sizes */
+  --font-monster: 3.815rem;
   --font-h1: 3.052rem;
   --font-h2: 2.441rem;
   --font-h3: 1.953rem;
   --font-h4: 1.563rem;
   --font-h5: 1.25rem;
   --font-sm: 0.8rem;
-  --maxWidth: 1200px;
-  --borderRad1: 2px;
-  --borderRad2: 4px;
-  --borderRad3: 8px;
+  --font-md: 1rem;
+  --font-xs: 0.64rem;
+  --font-tiny: 0.512rem;
+  --font-body: var(--font-md);
+
+  /* Layout */
+  --maxWidth: 1100px;
+  --headerHt: 55px;
+
+  /* Spacing */
+  /* TODO: rename all these to --p0, etc. */
+  --pTiniest: 4px;
+  --p0: 0.512rem;
+  --p1: 0.8rem;
+  --p2: 1rem;
+  --p3: 1.25rem;
+  --p4: 1.563rem;
+  --p5: 1.953rem;
+  --p6: 2.441rem;
+  --p7: 3.052rem;
+  --gutter: var(--p1);
+
+  /* 
+    Breakpoints (surrrre):
+    --phone: 400px;
+    --phablet: 600px;
+    --tablet: 768px;
+    --laptop: 1200px;
+    --monster: 1500px;
+  */
+
+  /* Transition/s */
+  /* --btnTrans: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; */
+  --transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  --btnTrans: var(--transition);
+
+  /* Line heights */
+  --headingLineHt: 1.3;
+}
+
+/* CRED: (fonts): https://type-scale.com/ */
+html {
+  font-size: 16px;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* CRED: BG img */
+/*
+  Photo by <a href="https://unsplash.com/@thkelley?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Thomas Kelley</a> on <a href="https://unsplash.com/s/photos/languages?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+*/
+body {
+  font-family: var(--bodyFontFam);
+  font-size: var(--font-body);
+  line-height: 1.75;
+  /* TODO: improve, obvi */
+  /*
+  background-image: linear-gradient(
+      10deg,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.75)
+    ),
+    -webkit-image-set(url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-300x200.jpg')
+          1x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1024x683.jpg')
+          3x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-768x512.jpg')
+          2x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1536x1024.jpg')
+          4x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-2048x1365.jpg')
+          5x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1568x1045.jpg')
+          6x);
+          */
+  background-image: linear-gradient(
+      10deg,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.75)
+    ),
+    /* url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-2048x1365.jpg'); */
+      url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/nyc-map-screenshot-1536x847.png');
+  background-size: cover;
 }
 
 * {
@@ -43,14 +201,20 @@ body {
 }
 
 a {
-  color: var(--primaryColor);
+  color: var(--linkColor);
   text-decoration: none;
+  transition: var(--transition);
+  /* TODO: nice chubby underline */
 }
 
 a:hover,
 a:focus,
 a:active {
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primaryLighter);
 }
 
 h1,
@@ -58,32 +222,94 @@ h2,
 h3,
 h4,
 h5 {
-  margin: 3rem 0 1.38rem;
+  font-family: var(--headingFontFam);
+  margin: 0 0 1.38rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: var(--headingLineHt);
+  margin-top: 0;
 }
 
 h1 {
-  margin-top: 0;
+  margin-top: 2rem;
   font-size: var(--font-h1);
 }
+
 h2 {
   font-size: var(--font-h2);
 }
+
 h3 {
   font-size: var(--font-h3);
 }
+
 h4 {
   font-size: var(--font-h4);
 }
+
 h5 {
   font-size: var(--font-h5);
 }
 
-p {
-  margin-bottom: 1rem;
+/* Somehow still overrides inline styles from WP */
+img,
+iframe {
+  /* TODO: careful w/iframe! */
+  max-width: 100%;
+}
+
+p,
+ul,
+figure {
+  margin-bottom: 1.38rem;
+  margin-top: 0;
 }
 
 small {
   font-size: var(--font-sm);
+}
+
+button {
+  cursor: pointer;
+}
+
+figure {
+  /* TODO: rm all unneeded */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 99%;
+  display: block;
+}
+
+figure img {
+  height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+@media screen and (min-width: 1921px) {
+  :root {
+    --maxWidth: 1300px;
+  }
+
+  html {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  :root {
+    --font-h1: var(--font-monster);
+    --gutter: var(--p4);
+  }
+}
+
+/* Hate to put this in this file, but it works */
+[data-reach-dialog-overlay] {
+  cursor: pointer;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

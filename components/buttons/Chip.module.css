@@ -1,0 +1,29 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: var(--p0);
+  justify-content: center;
+  list-style-type: none;
+  margin: 0 0 var(--p2);
+  padding: 0;
+}
+
+.list > * {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+/* GROSS. But otherwise `.button` wins every time */
+.list .chip {
+  border-radius: var(--rad5);
+  font-size: var(--font-sm);
+  padding: 0.15em 1em;
+  text-transform: none;
+}
+
+.listWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto var(--p1);
+  max-width: 99%;
+}

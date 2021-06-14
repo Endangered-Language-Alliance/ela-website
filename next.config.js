@@ -3,6 +3,11 @@ module.exports = {
     domains: ['content.endangeredlanguagealliance.org', 'ealliance.org'],
   },
   target: 'serverless', // Netlify plugin might handle it, but had problems
+  publicRuntimeConfig: {
+    mbToken: process.env.MB_TOKEN,
+    youTubeKey: process.env.YOUTUBE_KEY,
+    wpGqlEndpoint: process.env.WP_API_URL,
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,

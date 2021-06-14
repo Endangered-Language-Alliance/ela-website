@@ -1,5 +1,28 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Documentation for CMSing
+
+### Plugins
+
+In addition to built-in WP features, these plugins are doing the bulk of the work:
+
+- ACF (Advanced Custom Fields)
+- CPT (Custom Post Type)
+- Anything to do with those or GraphQL
+
+With the exception of `Post Type Description` the Projects or Languages CPT,
+**avoid messing with the plugin stuff unless you're Jason**. The `Post Type Description` field is an easy hack to allow content managers to control the
+Projects and Languages landing "hero" summary text in lieu of an Excerpt since
+those pages don't actually exist anywhere in WP.
+
+### How/where to edit content??
+
+- The `Custom Fields > Field Groups` is a good place to get aquainted/oriented
+  with how the super-custom stuff is dished out. Again, **don't edit these**,
+  but feel free to browse.
+- In addition to the built-in Posts and Pages, the `Languages` and `Projects`
+  links in the WP sidebar will contain everything you can edit.
+
 ## Usage
 
 ### Development
@@ -77,6 +100,14 @@ Client ID (from Gmail API): `256431451400-0jdqi29q1es4d7lelci9r8hdm8qn2o99.apps.
 
 Client secret: `ZSiwBfchD-XSBRDGTeAZDFJx`
 
+### When Lightsail Crashes
+
+...or at least when _Apache_ crashes? SSH in via web UI, then:
+
+```bash
+sudo /opt/bitnami/ctlscript.sh restart
+```
+
 ## Tuts to Consider
 
 [https://codepen.io/the_ruther4d/post/custom-query-string-vars-in-wordpress](https://codepen.io/the_ruther4d/post/custom-query-string-vars-in-wordpress)
@@ -103,80 +134,3 @@ Our Work (formerly Programs)
 ```
 
 (Move Yugacure and Garifuna Nursery Rhymes to be tabs under Garifuna?)
-
-### URLs to replace
-
-```
-https://elalliance.org/" target="
-https://elalliance.org/">
-https://elalliance.org/2012/projects/circassian
-https://elalliance.org/2012/projects/languages
-https://elalliance.org/2012/projects/meso
-https://elalliance.org/2013/01/rebirth
-https://elalliance.org/2013/03/breton
-https://elalliance.org/2014/07/this
-https://elalliance.org/2015/05/two
-https://elalliance.org/2015/10/bering
-https://elalliance.org/2015/10/ela
-https://elalliance.org/2016/06/hawaiian
-https://elalliance.org/2017/03/conozca
-https://elalliance.org/how/
-https://elalliance.org/koda/" target
-https://elalliance.org/kratylos/" target
-https://elalliance.org/languages-2/languages
-https://elalliance.org/languages-2/meso
-https://elalliance.org/languages/
-https://elalliance.org/languages/caribbean/garifuna
-https://elalliance.org/languages/celtic/breton
-https://elalliance.org/languages/celtic/irish
-https://elalliance.org/languages/central-asia
-https://elalliance.org/languages/circassian/">
-https://elalliance.org/languages/himalaya/">
-https://elalliance.org/languages/himalaya/gurung
-https://elalliance.org/languages/himalaya/loke
-https://elalliance.org/languages/himalaya/seke
-https://elalliance.org/languages/himalayas/">
-https://elalliance.org/languages/himalayas/"><
-https://elalliance.org/languages/himalayas/gurung
-https://elalliance.org/languages/ikota/">
-https://elalliance.org/languages/ikota/"><
-https://elalliance.org/languages/italian/neapolitan
-https://elalliance.org/languages/italian/sicilian
-https://elalliance.org/languages/languages-of
-https://elalliance.org/languages/meso-america
-https://elalliance.org/languages/meso-american
-https://elalliance.org/languages/other/tsou
-https://elalliance.org/languages/tsou/">
-https://elalliance.org/programs/artsandculture/">
-https://elalliance.org/programs/culture/"><
-https://elalliance.org/programs/documentation/">
-https://elalliance.org/programs/documentation/"><
-https://elalliance.org/programs/documentation/#
-https://elalliance.org/programs/interpretation/">
-https://elalliance.org/programs/interpretation/"><
-https://elalliance.org/programs/kratylos/">
-https://elalliance.org/programs/maps/"
-https://elalliance.org/programs/maps/">
-https://elalliance.org/programs/maps/"><
-https://elalliance.org/programs/outreach/">
-https://elalliance.org/programs/outreach/"><
-https://elalliance.org/programs/outreach/mother
-https://elalliance.org/programs/outreach/radio
-https://elalliance.org/programs/policy/">
-https://elalliance.org/programs/policy/"><
-https://elalliance.org/programs/policy/#
-https://elalliance.org/programs/policy/language
-https://elalliance.org/programs/revitalization/">
-https://elalliance.org/programs/technology/kratylos
-https://elalliance.org/projects/celtic/breton
-https://elalliance.org/projects/circassian/abzakh
-https://elalliance.org/projects/circassian/kabardian
-https://elalliance.org/projects/darfur/beria
-https://elalliance.org/projects/darfur/masalit
-https://elalliance.org/projects/jewish-languages
-https://elalliance.org/projects/languages-of
-https://elalliance.org/projects/meso-american
-https://elalliance.org/tibetan">Tibetan
-https://elalliance.org/who/#volunteers
-https://elalliance.org/why/">Learn
-```

@@ -1,28 +1,28 @@
 query AllLanguages {
-  languages {
-    edges {
-      node {
-        title
-        excerpt
-        uri
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
+  # A bit fragile, but easy way to populate the hero summary
+  contentType(id: "language", idType: NAME) {
+    description
+  }
+  languages(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
+    nodes {
+      title
+      uri
+      contentType {
+        node {
+          description
         }
-        langLocations {
-          edges {
-            node {
-              name
-              languageLocation {
-                city
-                country
-                continent
-                lat
-                lon
-              }
-            }
+      }
+      customInfo {
+        endonym
+      }
+      langLocations(where: { orderby: NAME }) {
+        nodes {
+          languageLocation {
+            city
+            country
+            continent
+            lat
+            lon
           }
         }
       }

@@ -1,176 +1,169 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@reach/tabs'
 import '@reach/tabs/styles.css'
 
+import btnStyles from 'components/buttons/Button.module.css'
+import tabStyles from 'components/languages/Tabs.module.css'
+import sharedStyles from 'components/Layout.module.css'
+
 import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
-import { LoadingLayout } from 'components/LoadingLayout'
-import { Language as LanguageType } from 'gql-ts/wp-graphql'
+import { prepCitiesMarkers } from 'components/map/utils'
+import { Map } from 'components/map/Map'
+import { prepLangInstanceChips } from 'components/languages/utils'
+import { LangInstancePageProps } from 'components/languages/types'
 
-import styles from 'styles/Home.module.css'
-import Link from 'next/link'
-
-const Language: React.FC<{ data?: LanguageType }> = (props) => {
+const Language: React.FC<LangInstancePageProps> = (props) => {
   const { data } = props
   const router = useRouter()
 
   // Not sure if necessary. Docs:
   // https://nextjs.org/docs/basic-features/data-fetching#fallback-pages
-  if (router.isFallback) return <LoadingLayout />
+  if (router.isFallback) return <Layout title="Loading..." />
 
-  if (!data) return <p>No data could be found for this language...</p>
+  if (!data)
+    return (
+      <Layout
+        title="Not found"
+        summary="No data could be found for this language..."
+      />
+    )
 
-  const { title, excerpt, customInfo, youTubePlaylist } = data || {}
-  const { project, external, background, affiliation, endangerment } =
-    customInfo || {}
-  const { langStructure, prevResearch, addlInfo } = customInfo || {}
+  const { title, customInfo, youTubePlaylist, customExcerpt } = data || {}
+  const { project, external, affiliation, endangerment } = customInfo || {}
+  const { langStructure, prevResearch, addlInfo, background } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
-  const { archiveOrgLink, glottologId, nycLangMap } = external || {}
-  const { gDriveDocId } = external || {}
+  const { glottologId, gDriveDocId, archiveOrgLink } = external || {}
+  const { projectMeta } = project || {}
+
+  const preppedData = prepCitiesMarkers(
+    [data],
+    true,
+    true,
+    projectMeta?.iconColor || ''
+  )
+  const preppedChips = prepLangInstanceChips({ external, project })
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>{title}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <article style={{ textAlign: 'center' }}>
-          <h1 className={styles.title}>{title}</h1>
-          {customInfo?.endonym && <p>{customInfo.endonym}</p>}
-          <div dangerouslySetInnerHTML={{ __html: excerpt || '' }} />
-          <p>Pretend it's a map...</p>
-          <hr />
-          {youTubePlaylist?.id && (
-            <p>
-              YouTube playlist ID (will be used in tandem with YouTube API to
-              create thumbs): <code>{youTubePlaylist.id}</code>
-            </p>
-          )}
-          <ul
-            style={{
-              listStyle: 'none',
-              display: 'grid',
-              gridColumnGap: 'var(--padding1)',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, auto))',
-              justifyContent: 'center',
-            }}
-          >
-            {project && (
-              <li>
-                <Link href={project.uri || ''}>
-                  <a>Project: {project.title}</a>
-                </Link>
-              </li>
-            )}
-            {archiveOrgLink && (
-              <li>
-                <a href={archiveOrgLink}>Archive.org</a>
-              </li>
-            )}
-            {nycLangMap && (
-              <li>
-                <a href={nycLangMap}>Languages of NYC Map</a>
-              </li>
-            )}
-          </ul>
-          <Tabs>
-            <TabList>
-              <Tab>Background</Tab>
-              {langStructure && <Tab>Language Structure</Tab>}
-              {(glottologId || prevResearch) && <Tab>Previous Research</Tab>}
-              {elaWork && <Tab>ELA's Work</Tab>}
-              {inNewYork && <Tab>In New York</Tab>}
-              {addlInfo && <Tab>More Info</Tab>}
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-                <div dangerouslySetInnerHTML={{ __html: background || '' }} />
-                {affiliation && (
-                  <section>
-                    <h3>Affiliation</h3>
-                    <div dangerouslySetInnerHTML={{ __html: affiliation }} />
-                  </section>
-                )}
-                {endangerment && (
-                  <section>
-                    <h3>Endangerment</h3>
-                    <div dangerouslySetInnerHTML={{ __html: endangerment }} />
-                  </section>
-                )}
-              </TabPanel>
-              {langStructure && (
-                <TabPanel>
-                  <div dangerouslySetInnerHTML={{ __html: langStructure }} />
-                </TabPanel>
+    <Layout
+      title={title}
+      subtitle={customInfo?.endonym}
+      summary={customExcerpt?.excerpt}
+      youTubePlaylistId={youTubePlaylist?.id}
+      chipsItems={preppedChips}
+    >
+      <article>
+        <Map excludePopupLinkBtn preppedMarkerData={preppedData} />
+        <Tabs className={tabStyles.tabs}>
+          <TabList>
+            <Tab>Background</Tab>
+            {langStructure && <Tab>Language Structure</Tab>}
+            {(glottologId || prevResearch) && <Tab>Previous Research</Tab>}
+            {elaWork && <Tab>ELA's Work</Tab>}
+            {inNewYork && <Tab>In New York</Tab>}
+            {addlInfo && <Tab>More Info</Tab>}
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <div dangerouslySetInnerHTML={{ __html: background || '' }} />
+              {affiliation && (
+                <div>
+                  <h3>Affiliation</h3>
+                  <div dangerouslySetInnerHTML={{ __html: affiliation }} />
+                </div>
               )}
-              {(glottologId || prevResearch) && (
-                <TabPanel>
-                  {glottologId && (
+              {endangerment && (
+                <div>
+                  <h3>Endangerment</h3>
+                  <div dangerouslySetInnerHTML={{ __html: endangerment }} />
+                </div>
+              )}
+            </TabPanel>
+            {langStructure && (
+              <TabPanel>
+                <div dangerouslySetInnerHTML={{ __html: langStructure }} />
+              </TabPanel>
+            )}
+            {(glottologId || prevResearch) && (
+              <TabPanel>
+                {prevResearch && (
+                  <div dangerouslySetInnerHTML={{ __html: prevResearch }} />
+                )}
+                {glottologId && (
+                  <div
+                    className={sharedStyles.flexCenter}
+                    style={{ marginTop: 'var(--p2)' }} // dammit
+                  >
                     <a
                       target="_blank"
-                      href={`https://glottolog.org/resource/languoid/id/${glottologId}`}
+                      href="https://glottolog.org/resource/languoid/id/"
                       rel="noreferrer"
+                      className={`${btnStyles.button} ${btnStyles.secondary}`}
                     >
-                      Glottolog
+                      View on Glottolog
                     </a>
-                  )}
-                  {prevResearch && (
-                    <div dangerouslySetInnerHTML={{ __html: prevResearch }} />
-                  )}
-                </TabPanel>
-              )}
-              {(elaWork || gDriveDocId) && (
-                <TabPanel>
-                  <p>
-                    <b>
-                      @Ross would this maybe be a better spot for the Project
-                      link? Or BOTH spots perhaps, since it's important?
-                    </b>
-                  </p>
-                  {elaWork && (
-                    <div dangerouslySetInnerHTML={{ __html: elaWork }} />
-                  )}
-                  {gDriveDocId && (
-                    <>
-                      <h4>Texts</h4>
-                      <iframe
-                        src={`https://drive.google.com/file/d/${gDriveDocId}/preview`}
-                        width="100%"
-                        height={480}
-                        title="Google Drive Embedded Preview"
-                      />
-                    </>
-                  )}
-                </TabPanel>
-              )}
-              {inNewYork && (
-                <TabPanel>
-                  <section>
-                    <h3>In New York</h3>
-                    <p>
-                      <b>
-                        @Ross would this maybe be a better spot for the NYC map
-                        link? Or are there scenarios where this section doesn't
-                        exist but a link does?
-                      </b>
-                    </p>
-                    <div dangerouslySetInnerHTML={{ __html: inNewYork }} />
-                  </section>
-                </TabPanel>
-              )}
-              {addlInfo && (
-                <TabPanel>
-                  <div dangerouslySetInnerHTML={{ __html: addlInfo }} />
-                </TabPanel>
-              )}
-            </TabPanels>
-          </Tabs>
-        </article>
-      </Layout>
-    </div>
+                  </div>
+                )}
+              </TabPanel>
+            )}
+            {(elaWork || gDriveDocId) && (
+              <TabPanel>
+                {elaWork && (
+                  <div dangerouslySetInnerHTML={{ __html: elaWork }} />
+                )}
+                {gDriveDocId && (
+                  <>
+                    <h4>Texts</h4>
+                    <iframe
+                      src={`https://drive.google.com/file/d/${gDriveDocId}/preview`}
+                      width="100%"
+                      height={480}
+                      title="Google Drive Embedded Preview"
+                    />
+                  </>
+                )}
+                {archiveOrgLink && (
+                  <div
+                    className={sharedStyles.flexCenter}
+                    style={{ marginTop: 'var(--p2)' }} // dammit
+                  >
+                    <a
+                      href={archiveOrgLink}
+                      className={`${btnStyles.button} ${btnStyles.secondary}`}
+                    >
+                      View on Archive.org
+                    </a>
+                  </div>
+                )}
+              </TabPanel>
+            )}
+            {inNewYork && (
+              <TabPanel>
+                <div dangerouslySetInnerHTML={{ __html: inNewYork }} />
+                {external?.nycLangMap && (
+                  <div className={sharedStyles.flexCenter}>
+                    <a
+                      href={external?.nycLangMap}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`${btnStyles.button} ${btnStyles.secondary}`}
+                    >
+                      View NYC map
+                    </a>
+                  </div>
+                )}
+              </TabPanel>
+            )}
+            {addlInfo && (
+              <TabPanel>
+                <div dangerouslySetInnerHTML={{ __html: addlInfo }} />
+              </TabPanel>
+            )}
+          </TabPanels>
+        </Tabs>
+      </article>
+    </Layout>
   )
 }
 

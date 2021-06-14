@@ -4,7 +4,7 @@ export type HeaderResponse = {
   menuItems: {
     nodes: MenuItem[]
   }
-  logo: {
+  siteWideStuff: {
     siteWideSettings: Page_Sitewidesettings
   }
 }
@@ -16,3 +16,12 @@ export type UseQuery = {
 }
 
 export type UseHeaderQuery = () => UseQuery
+
+export type BurgerProps = {
+  id: string
+}
+
+export type CtaButtonProps = {
+  url?: null | string
+  text?: null | string
+}

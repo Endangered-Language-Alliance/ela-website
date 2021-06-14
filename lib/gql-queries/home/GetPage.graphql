@@ -2,5 +2,27 @@ query GetPage($id: ID!) {
   page(id: $id, idType: URI) {
     title
     content
+    youTubePlaylist {
+      id
+    }
+    customExcerpt {
+      excerpt
+    }
+    children(where: { orderby: { field: MENU_ORDER, order: ASC } }) {
+      nodes {
+        uri
+        ... on Page {
+          title
+          customExcerpt {
+            excerpt
+          }
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
   }
 }

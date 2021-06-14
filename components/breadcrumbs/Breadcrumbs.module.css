@@ -1,0 +1,26 @@
+.root {
+  --linkColor: var(--offWhite);
+  font-family: var(--paraFontFam);
+  margin-bottom: var(--p0);
+  overflow-x: auto; /* just in case on mobile */
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  font-size: var(--font-md);
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.list a {
+  text-decoration: underline;
+}
+
+.list > *:not(:first-child):before {
+  margin: 0 6px;
+  opacity: 0.75;
+  content: '/';
+  /* TODO: separate out into a <span> instead, can't override here */
+  /* text-decoration: none !important; */
+}

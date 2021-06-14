@@ -1,0 +1,73 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: var(--maxWidth);
+  padding: 0 var(--gutter);
+}
+
+.main {
+  overflow-x: hidden;
+  padding-bottom: var(--p3);
+  padding-top: var(--p2);
+  width: 100%;
+}
+
+.scrollWrap {
+  overflow-y: auto;
+}
+
+/* CRED: https://stackoverflow.com/a/49968820/1048518 */
+.scrollTarget {
+  height: 1px;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.content {
+  --linkColor: var(--primary);
+  --corner: var(--rad2);
+  background-color: var(--white);
+  border-radius: var(--corner);
+  box-shadow: var(--elev3);
+  color: var(--black);
+  margin-bottom: var(--p4);
+  padding: var(--gutter);
+  position: relative; /* for scrollTarget */
+}
+
+/* Deal with the few stragglers, e.g. Garifuna has some complexities */
+.content table {
+  margin-bottom: var(--p4);
+}
+
+.content table,
+.content table th,
+.content table td {
+  border: 1px solid #d4e0ee;
+  border-collapse: collapse;
+  color: #555;
+}
+
+.content table th,
+.content table td {
+  padding: var(--p0);
+}
+
+/* Helpers */
+.flexCenter {
+  justify-content: center;
+  display: flex;
+}
+
+.flexCenter > * {
+  flex-grow: 0;
+}

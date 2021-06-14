@@ -1,0 +1,28 @@
+.listitem {
+  border-radius: var(--rad2);
+  box-shadow: var(--elev3);
+  padding: var(--p2);
+  margin-bottom: var(--p3);
+}
+
+.listitem__content h2 {
+  margin-top: 0;
+}
+
+.listItemTitle {
+  margin-bottom: var(--p0);
+  margin-top: 0;
+  font-size: var(--font-h4);
+}
+
+.subtitle {
+  color: var(--gr6);
+  margin-bottom: var(--p1);
+  display: block;
+}
+
+.summary,
+.summary p {
+  font-size: var(--font-sm);
+  margin-bottom: 0;
+}

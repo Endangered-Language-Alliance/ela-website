@@ -1,85 +1,68 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { Menu, MenuList, MenuButton, MenuLink } from '@reach/menu-button'
-import '@reach/menu-button/styles.css'
 
-import sharedStyles from 'styles/Shared.module.css'
+import { CONTENT_URL, PROD_URL } from 'lib/config'
+
+import sharedStyles from 'components/Layout.module.css'
+import btnStyles from 'components/buttons/Button.module.css'
+
+import { CtaButtonProps } from './types'
+import { Burger } from './Burger'
+import { NavMenu } from './NavMenu'
+import { Logo } from './Logo'
+import { MobileNavMenu } from './MobileNavMenu'
+import { useHeaderQuery } from './hooks'
+
 import styles from './Header.module.css'
 
-import { useHeaderQuery } from './hooks'
+const CtaButton: React.FC<CtaButtonProps> = (props) => {
+  const { url, text } = props
+
+  return (
+    <Link href={url?.replace(CONTENT_URL, '').replace(PROD_URL, '') || ''}>
+      <a className={`${btnStyles.button} ${btnStyles.secondary}`}>{text}</a>
+    </Link>
+  )
+}
 
 const Header: React.FC = () => {
   const { data, error, isLoading } = useHeaderQuery()
 
-  if (isLoading) return <span>Loading...</span>
-  if (error) return <span>Error!</span>
+  if (isLoading || error) {
+    return (
+      <header className={styles.root}>
+        <div className={`${sharedStyles.container} ${styles.inner}`}>
+          <div className={styles.logo} />
+          {error ? <div>Problems loading nav</div> : <div />}
+        </div>
+      </header>
+    )
+  }
 
-  const { menuItems, logo } = data || {}
-  const src = logo?.siteWideSettings?.logo?.sourceUrl || ''
+  const { menuItems, siteWideStuff } = data || {}
+  const { siteWideSettings } = siteWideStuff || {}
 
   return (
-    <nav className={styles.root}>
+    <header className={styles.root}>
       <div className={`${sharedStyles.container} ${styles.inner}`}>
         <Link href="/">
           <a className={styles.logo}>
-            {src && (
-              <Image
-                src={src}
-                alt="organization logo"
-                layout="fill"
-                objectFit="contain"
-              />
-            )}
+            <Logo />
           </a>
         </Link>
-        <ul>
-          {/* Manually link to Home so we can use different Home title */}
-          <li>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li>
-          {menuItems?.nodes?.map((node) => {
-            const { label, path, childItems, parentId } = node || {}
-            if (!parentId && !childItems?.nodes?.length) {
-              return (
-                <li key={path}>
-                  <Link href={path || ''}>
-                    <a>{label}</a>
-                  </Link>
-                </li>
-              )
-            }
-
-            return (
-              <li key={path}>
-                <Menu>
-                  <MenuButton>
-                    {label} <span aria-hidden>▾</span>
-                  </MenuButton>
-                  <MenuList className={styles.ahhhh}>
-                    {childItems?.nodes?.map((item) => {
-                      return (
-                        <MenuLink
-                          key={item?.path}
-                          as={Link}
-                          href={item?.path || '/'}
-                        >
-                          {item?.label}
-                        </MenuLink>
-                      )
-                    })}
-                  </MenuList>
-                </Menu>
-              </li>
-            )
-          })}
-        </ul>
-        <Link href="/get-involved">
-          <a className={styles.cta}>GET INVOLVED</a>
-        </Link>
+        {menuItems?.nodes && (
+          <>
+            <NavMenu data={menuItems.nodes} />
+            <Burger id="menu-label">
+              <MobileNavMenu data={menuItems.nodes} id="menu-label" />
+            </Burger>
+          </>
+        )}
+        <CtaButton
+          url={siteWideSettings?.ctaButton?.url}
+          text={siteWideSettings?.ctaButton?.title}
+        />
       </div>
-    </nav>
+    </header>
   )
 }
 

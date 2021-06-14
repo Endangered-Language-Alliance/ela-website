@@ -1,0 +1,113 @@
+/* CRED: Material UI */
+.button {
+  align-items: center;
+  background-color: transparent;
+  border-radius: 4px;
+  box-shadow: var(--elev2);
+  border: 0;
+  box-sizing: border-box;
+  color: var(--white);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--btnFontFam);
+  font-size: var(--font-sm);
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: 0.02857em;
+  line-height: 1.75;
+  margin: 0;
+  min-width: 64px;
+  outline: 0;
+  padding: 6px 16px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: var(--btnTrans);
+  user-select: none;
+  vertical-align: middle;
+}
+
+.button:hover {
+  box-shadow: var(--elev4);
+  text-decoration: none;
+}
+
+.button a {
+  color: var(--white);
+  display: block;
+}
+
+a.button:hover,
+.button a:hover {
+  color: var(--white);
+}
+
+.primary {
+  background-color: var(--primary);
+}
+
+.primary:hover {
+  background-color: var(--primaryDark);
+}
+
+.secondary {
+  background-color: var(--secondary);
+}
+
+.secondary:hover {
+  background-color: var(--secondaryDarker);
+}
+
+/* e.g. just icon */
+.contentOnly {
+  padding: 6px 8px;
+  min-width: unset;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.contentOnly:hover {
+  background-color: transparent;
+}
+
+.small {
+  padding: 0.25em 0.85em;
+  font-size: var(--font-xs);
+}
+
+/* .large { } */
+
+.dialogCloseBtn {
+  position: absolute;
+  top: var(--p1);
+  right: var(--p1);
+  padding: 0;
+}
+
+.dialogCloseBtn svg {
+  font-size: var(--font-h4);
+}
+
+.backToTopBtn {
+  --size: 40px;
+  --offset: calc(var(--p1) + var(--size));
+  border-radius: 100%;
+  bottom: 0;
+  box-shadow: var(--elev5);
+  font-size: var(--font-h5);
+  height: var(--size);
+  margin-bottom: var(--p1);
+  margin-right: var(--p1);
+  min-height: unset;
+  min-width: unset;
+  padding: var(--p0);
+  position: fixed;
+  right: 1vw;
+  transform: translateY(0);
+  width: var(--size);
+  z-index: 1;
+}
+
+.offScreenBottom {
+  transform: translateY(var(--offset));
+}

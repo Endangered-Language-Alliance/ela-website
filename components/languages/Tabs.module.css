@@ -1,0 +1,33 @@
+/* The root <Tabs> node */
+/* .tabs { } */
+
+.tabs [data-reach-tab-list] {
+  overflow-x: auto;
+  flex-shrink: 0;
+  box-shadow: var(--elev2);
+  margin-bottom: var(--p4);
+}
+
+.tabs [data-reach-tab-panels] {
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* .tabs [data-reach-tab-panel] { } */
+
+.tabs [data-reach-tab] {
+  flex-shrink: 0;
+  color: var(--white);
+  padding-left: var(--p1);
+  padding-right: var(--p1);
+  background-color: var(--primaryLight);
+}
+
+.tabs [data-reach-tab] + [data-reach-tab] {
+  border-left: solid rgba(255, 255, 255, 0.15) 1px;
+}
+
+.tabs [data-reach-tab][data-selected] {
+  font-weight: bold;
+  background-color: var(--primary);
+}

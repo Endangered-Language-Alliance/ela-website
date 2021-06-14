@@ -1,0 +1,83 @@
+/* NOTE: some stuff is inherited from Header.module.css */
+.mobileNavModal[data-reach-dialog-overlay] {
+  background-color: hsl(0 0% 0% / 95%);
+  z-index: 3; /* above header */
+}
+
+.mobileNavModal [data-reach-dialog-content] {
+  animation: fade-in 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: transparent;
+  height: 100%;
+  margin: 0;
+  padding: var(--p5) var(--p2);
+  width: 100vw;
+}
+
+.nav {
+  --verticalSpacer: var(--p3);
+  z-index: 1;
+}
+
+.nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.childless {
+  display: inline-flex;
+}
+
+.childless:first-of-type {
+  margin-right: var(--p2);
+}
+
+.link {
+  margin-bottom: var(--p1);
+  line-height: var(--headingLineHt);
+  display: block;
+}
+
+.heading {
+  color: var(--white);
+  margin-bottom: var(--p1);
+  font-size: var(--font-h4);
+  margin-top: var(--verticalSpacer);
+}
+
+.nestedList {
+  display: grid;
+  grid-column-gap: var(--p1);
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  padding: var(--p2) var(--p3);
+}
+
+.burger {
+  display: flex;
+  order: 3; /* after cta */
+}
+
+.burger:focus {
+  outline: 2px solid;
+}
+
+.burger button {
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 800px) {
+  .burger {
+    display: none;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(125px);
+  }
+  100% {
+    opacity: 1;
+    transform: 0;
+  }
+}

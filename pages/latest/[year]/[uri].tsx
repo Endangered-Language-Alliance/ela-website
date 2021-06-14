@@ -1,49 +1,13 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Head from 'next/head'
 
 import { getAllPostsWithSlug, getPost } from 'lib/api/api.latest'
-import { Layout } from 'components/Layout'
+import { BlogPost } from 'components/latest/BlogPost'
 import { Post } from 'gql-ts/wp-graphql'
-
-import styles from 'styles/Home.module.css'
-import blogStyles from 'styles/Blog.module.css'
-
-const formatDate = (date: string): string => {
-  const newDate = new Date(date)
-
-  return `${newDate.getDate()}/${
-    newDate.getMonth() + 1
-  }/${newDate.getFullYear()}`
-}
 
 const PostByYear: React.FC<{ postData?: Post }> = (props) => {
   const { postData } = props
 
-  if (!postData) <p>No data could be found for the post...</p>
-
-  const { title, date, content } = postData || {}
-
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>{title}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Layout>
-        <article className={blogStyles.article}>
-          <div className={blogStyles.postmeta}>
-            <h1 className={styles.title}>{title}</h1>
-            <p>{formatDate(date || '')}</p>
-          </div>
-          <div
-            className="post-content content"
-            dangerouslySetInnerHTML={{ __html: content || '' }}
-          />
-        </article>
-      </Layout>
-    </div>
-  )
+  return <BlogPost postData={postData} />
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

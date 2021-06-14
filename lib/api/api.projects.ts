@@ -1,3 +1,4 @@
+import getConfig from 'next/config'
 import { request } from 'graphql-request'
 
 import allProjects from 'lib/gql-queries/projects/AllProjects.graphql'
@@ -10,10 +11,11 @@ import {
   RootQueryToLanguageConnection,
 } from 'gql-ts/wp-graphql'
 
-const API_URL = process.env.WP_API_URL as string
+const { publicRuntimeConfig } = getConfig()
+const { wpGqlEndpoint } = publicRuntimeConfig
 
 export async function getAllProjects() {
-  const data = await request(API_URL, allProjects)
+  const data = await request(wpGqlEndpoint, allProjects)
 
   return data
 }
@@ -21,16 +23,13 @@ export async function getAllProjects() {
 export const getProject = async (
   slug: string | string[]
 ): Promise<{ project: Project; languages: RootQueryToLanguageConnection }> => {
-  const data = await request(API_URL, projectBySlug, {
-    id: slug,
-    idType: 'SLUG',
-  })
+  const data = await request(wpGqlEndpoint, projectBySlug, { id: slug })
 
   return data
 }
 
 export const getAllProjectsWithSlug = async (): Promise<RootQueryToProjectConnection | null> => {
-  const data: RootQuery = await request(API_URL, allProjectsWithSlug)
+  const data: RootQuery = await request(wpGqlEndpoint, allProjectsWithSlug)
 
   return data.projects || null
 }

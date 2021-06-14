@@ -1,3 +1,4 @@
+import getConfig from 'next/config'
 import { request } from 'graphql-request'
 
 import { Post, RootQuery, RootQueryToPostConnection } from 'gql-ts/wp-graphql'
@@ -7,16 +8,17 @@ import postsByYear from 'lib/gql-queries/blog/PostsByYear.graphql'
 import queryGetPost from 'lib/gql-queries/blog/QueryGetPost.graphql'
 import allPostsWithSlug from 'lib/gql-queries/blog/QueryAllPostsWithSlug.graphql'
 
-const API_URL = process.env.WP_API_URL as string
+const { publicRuntimeConfig } = getConfig()
+const { wpGqlEndpoint } = publicRuntimeConfig
 
 export async function getAllPosts() {
-  const data = await request(API_URL, allPosts)
+  const data = await request(wpGqlEndpoint, allPosts)
 
   return data?.posts
 }
 
 export const getPost = async (partialURI: string | string[]): Promise<Post> => {
-  const data = await request(API_URL, queryGetPost, {
+  const data = await request(wpGqlEndpoint, queryGetPost, {
     id: partialURI,
     idType: 'URI',
   })
@@ -27,7 +29,7 @@ export const getPost = async (partialURI: string | string[]): Promise<Post> => {
 export const getPostsByYear = async (
   year: number
 ): Promise<RootQueryToPostConnection | null> => {
-  const data = await request(API_URL, postsByYear, {
+  const data = await request(wpGqlEndpoint, postsByYear, {
     year,
   })
 
@@ -35,7 +37,7 @@ export const getPostsByYear = async (
 }
 
 export const getAllPostsWithSlug = async (): Promise<RootQueryToPostConnection | null> => {
-  const data: RootQuery = await request(API_URL, allPostsWithSlug)
+  const data: RootQuery = await request(wpGqlEndpoint, allPostsWithSlug)
 
   return data.posts || null
 }

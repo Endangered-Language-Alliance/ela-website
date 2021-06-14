@@ -1,33 +1,37 @@
 query AllProjects {
-  projects {
+  # A bit fragile, but easy way to populate the hero summary
+  contentType(id: "project", idType: NAME) {
+    description
+  }
+  projects(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
     nodes {
       title
-      excerpt
       uri
-      featuredImage {
-        node {
-          sourceUrl
-          altText
-        }
+      projectMeta {
+        iconColor
+      }
+      customExcerpt {
+        excerpt
       }
     }
   }
-  languages {
+  languages(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
     nodes {
       title
       uri
       customInfo {
+        endonym
         project {
           ... on Project {
             uri
+            title
           }
         }
       }
-      langLocations {
+      langLocations(where: { orderby: NAME }) {
         nodes {
           languageLocation {
             city
-            continent
             country
             lat
             lon

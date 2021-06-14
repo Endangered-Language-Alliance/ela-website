@@ -5,18 +5,19 @@ query MainMenuQuery {
   menuItems(where: { location: PRIMARY, parentId: "" }) {
     nodes {
       ...MenuBits
-      childItems {
+      childItems(first: 200) {
         nodes {
           ...MenuBits
         }
       }
     }
   }
-  logo: nodeByUri(uri: "/") {
+  siteWideStuff: nodeByUri(uri: "/") {
     ... on Page {
       siteWideSettings {
-        logo {
-          sourceUrl
+        ctaButton {
+          title
+          url
         }
       }
     }

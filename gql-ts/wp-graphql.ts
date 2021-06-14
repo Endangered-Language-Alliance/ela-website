@@ -2341,6 +2341,8 @@ export type Language = Node &
     languageId: Scalars['Int']
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
+    customExcerpt?: Maybe<Language_Customexcerpt>
     /** Individual language instance | Added to the GraphQL Schema because the ACF Field Group &quot;Language Instance Info&quot; was set to Show in GraphQL. */
     customInfo?: Maybe<Language_Custominfo>
     /** The ID of the node in the database. */
@@ -2694,6 +2696,15 @@ export type LanguageToTermNodeConnectionWhereArgs = {
 }
 
 /** Field Group */
+export type Language_Customexcerpt = AcfFieldGroup & {
+  __typename?: 'Language_Customexcerpt'
+  /** This is the workaround for Pages not having excerpts in WP. For blog Posts and Project instances, continue to use the built-in Excerpt or leave it blank and WP will just grab the first bit of Editor content, although a hand-crafted Excerpt is preferable though since the first paragraph of Editor stuff may not be ideal as an excerpt. For Language instances, use Background. */
+  excerpt?: Maybe<Scalars['String']>
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+}
+
+/** Field Group */
 export type Language_Custominfo = AcfFieldGroup & {
   __typename?: 'Language_Custominfo'
   /** Catch-all for anything extra and non-standardized, e.g. Garifuna nursery rhymes */
@@ -2737,7 +2748,7 @@ export type Language_Youtubeplaylist = AcfFieldGroup & {
   fieldGroupName?: Maybe<Scalars['String']>
   /** Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. &quot;PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX&quot; sans quotes, obtained from the  full URL of https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
   id?: Maybe<Scalars['String']>
-  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). */
+  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). Just paste the whole URL in, e.g. https://www.youtube.com/playlist?list=PLcXFPx-z7B0pC_zM4V0Tjbie76ObfAR5E */
   url?: Maybe<Scalars['String']>
 }
 
@@ -3690,6 +3701,8 @@ export type Page = Node &
     content?: Maybe<Scalars['String']>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
+    customExcerpt?: Maybe<Page_Customexcerpt>
     /** The ID of the node in the database. */
     databaseId: Scalars['Int']
     /** Post publishing date. */
@@ -3714,7 +3727,7 @@ export type Page = Node &
     featuredImageId?: Maybe<Scalars['ID']>
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Maybe<Scalars['String']>
-    /** Added to the GraphQL Schema because the ACF Field Group &quot;Home Page Settings&quot; was set to Show in GraphQL. */
+    /** Things that apply only to the Home page | Added to the GraphQL Schema because the ACF Field Group &quot;Home Page Settings&quot; was set to Show in GraphQL. */
     homePageSettings?: Maybe<Page_Homepagesettings>
     /** The globally unique identifier of the page object. */
     id: Scalars['ID']
@@ -4005,10 +4018,19 @@ export type PageToRevisionConnectionWhereArgs = {
 }
 
 /** Field Group */
+export type Page_Customexcerpt = AcfFieldGroup & {
+  __typename?: 'Page_Customexcerpt'
+  /** This is the workaround for Pages not having excerpts in WP. For blog Posts and Project instances, continue to use the built-in Excerpt or leave it blank and WP will just grab the first bit of Editor content, although a hand-crafted Excerpt is preferable though since the first paragraph of Editor stuff may not be ideal as an excerpt. For Language instances, use Background. */
+  excerpt?: Maybe<Scalars['String']>
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+}
+
+/** Field Group */
 export type Page_Homepagesettings = AcfFieldGroup & {
   __typename?: 'Page_Homepagesettings'
   /**
-   * Pretty much used same format as old site with some other additions. Decent chance this code will never change, but here are some tips:
+   * THIS HAS BEEN COMMENTED OUT IN THE CODE as we decided to axe the FB feed. If that decision changes, let The Jason know. In that event, we pretty much used same format as old site with some other additions. Decent chance this code will never change, but here are some tips:
    *
    * 1. Can use this page to generate it: https://developers.facebook.com/docs/plugins/page-plugin/
    * 2. Paste in the path to your FB profile
@@ -4017,6 +4039,7 @@ export type Page_Homepagesettings = AcfFieldGroup & {
    */
   fbFeedIframeHtml?: Maybe<Scalars['String']>
   featured1?: Maybe<Page_Homepagesettings_Featured1>
+  featured2?: Maybe<Page_Homepagesettings_Featured2>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
   numRecentPosts?: Maybe<Scalars['Float']>
@@ -4038,9 +4061,24 @@ export type Page_Homepagesettings_Featured1 = AcfFieldGroup & {
 }
 
 /** Field Group */
+export type Page_Homepagesettings_Featured2 = AcfFieldGroup & {
+  __typename?: 'Page_Homepagesettings_Featured2'
+  /** The body/summary text. */
+  description?: Maybe<Scalars['String']>
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+  heading?: Maybe<Scalars['String']>
+  img?: Maybe<MediaItem>
+  link?: Maybe<AcfLink>
+  linkType?: Maybe<Scalars['String']>
+}
+
+/** Field Group */
 export type Page_Sitewidesettings = AcfFieldGroup & {
   __typename?: 'Page_Sitewidesettings'
   contactInfo?: Maybe<Page_Sitewidesettings_ContactInfo>
+  /** Page, Post, Language, or Project */
+  ctaButton?: Maybe<AcfLink>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
   logo?: Maybe<MediaItem>
@@ -4077,7 +4115,7 @@ export type Page_Youtubeplaylist = AcfFieldGroup & {
   fieldGroupName?: Maybe<Scalars['String']>
   /** Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. &quot;PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX&quot; sans quotes, obtained from the  full URL of https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
   id?: Maybe<Scalars['String']>
-  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). */
+  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). Just paste the whole URL in, e.g. https://www.youtube.com/playlist?list=PLcXFPx-z7B0pC_zM4V0Tjbie76ObfAR5E */
   url?: Maybe<Scalars['String']>
 }
 
@@ -4138,6 +4176,8 @@ export type Post = Node &
     content?: Maybe<Scalars['String']>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
+    customExcerpt?: Maybe<Post_Customexcerpt>
     /** The ID of the node in the database. */
     databaseId: Scalars['Int']
     /** Post publishing date. */
@@ -5195,13 +5235,22 @@ export type PostTypeLabelDetails = {
 }
 
 /** Field Group */
+export type Post_Customexcerpt = AcfFieldGroup & {
+  __typename?: 'Post_Customexcerpt'
+  /** This is the workaround for Pages not having excerpts in WP. For blog Posts and Project instances, continue to use the built-in Excerpt or leave it blank and WP will just grab the first bit of Editor content, although a hand-crafted Excerpt is preferable though since the first paragraph of Editor stuff may not be ideal as an excerpt. For Language instances, use Background. */
+  excerpt?: Maybe<Scalars['String']>
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+}
+
+/** Field Group */
 export type Post_Youtubeplaylist = AcfFieldGroup & {
   __typename?: 'Post_Youtubeplaylist'
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
   /** Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. &quot;PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX&quot; sans quotes, obtained from the  full URL of https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
   id?: Maybe<Scalars['String']>
-  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). */
+  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). Just paste the whole URL in, e.g. https://www.youtube.com/playlist?list=PLcXFPx-z7B0pC_zM4V0Tjbie76ObfAR5E */
   url?: Maybe<Scalars['String']>
 }
 
@@ -5227,6 +5276,8 @@ export type Project = Node &
     content?: Maybe<Scalars['String']>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
+    customExcerpt?: Maybe<Project_Customexcerpt>
     /** The ID of the node in the database. */
     databaseId: Scalars['Int']
     /** Post publishing date. */
@@ -5413,6 +5464,15 @@ export type ProjectToRevisionConnectionWhereArgs = {
 }
 
 /** Field Group */
+export type Project_Customexcerpt = AcfFieldGroup & {
+  __typename?: 'Project_Customexcerpt'
+  /** This is the workaround for Pages not having excerpts in WP. For blog Posts and Project instances, continue to use the built-in Excerpt or leave it blank and WP will just grab the first bit of Editor content, although a hand-crafted Excerpt is preferable though since the first paragraph of Editor stuff may not be ideal as an excerpt. For Language instances, use Background. */
+  excerpt?: Maybe<Scalars['String']>
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']>
+}
+
+/** Field Group */
 export type Project_Projectmeta = AcfFieldGroup & {
   __typename?: 'Project_Projectmeta'
   /** The name of the ACF Field Group */
@@ -5428,7 +5488,7 @@ export type Project_Youtubeplaylist = AcfFieldGroup & {
   fieldGroupName?: Maybe<Scalars['String']>
   /** Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. &quot;PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX&quot; sans quotes, obtained from the  full URL of https://www.youtube.com/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX */
   id?: Maybe<Scalars['String']>
-  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). */
+  /** This field is just a convenience QC check to make sure you&#039;ve got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the &quot;YouTube Playlist ID&quot; field (assuming the ID was copied properly!). Just paste the whole URL in, e.g. https://www.youtube.com/playlist?list=PLcXFPx-z7B0pC_zM4V0Tjbie76ObfAR5E */
   url?: Maybe<Scalars['String']>
 }
 
@@ -5841,7 +5901,7 @@ export type RootQuery = {
   langLocation?: Maybe<LangLocation>
   /** Connection between the RootQuery type and the LangLocation type */
   langLocations?: Maybe<RootQueryToLangLocationConnection>
-  /** An object of the Language Type.  */
+  /** An object of the Language Type. ELA has worked to different degrees on numerous projects with speakers of over a hundred languages spoken in New York City and beyond. More in-depth work continues on the several dozen featured here. */
   language?: Maybe<Language>
   /**
    * A Language object
@@ -5897,7 +5957,7 @@ export type RootQuery = {
   postFormats?: Maybe<RootQueryToPostFormatConnection>
   /** Connection between the RootQuery type and the post type */
   posts?: Maybe<RootQueryToPostConnection>
-  /** An object of the Project Type.  */
+  /** An object of the Project Type. With ten current larger-scale projects and additional work on individual languages, ELA focuses on languages spoken by communities and individuals in the New York City area. */
   project?: Maybe<Project>
   /**
    * A Project object
@@ -10008,15 +10068,4 @@ export type WritingSettings = {
 export type PostPreviewFragment = { __typename?: 'Post' } & Pick<
   Post,
   'title' | 'excerpt' | 'slug'
-> & {
-    featuredImage?: Maybe<
-      { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge' } & {
-        node?: Maybe<
-          { __typename?: 'MediaItem' } & Pick<
-            MediaItem,
-            'sourceUrl' | 'altText' | 'description' | 'srcSet'
-          >
-        >
-      }
-    >
-  }
+>
