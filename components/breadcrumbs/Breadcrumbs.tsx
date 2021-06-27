@@ -1,6 +1,6 @@
 // CRED: for much of this file:
 // https://github.com/NiklasMencke/nextjs-breadcrumbs/blob/main/src/index.js
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -50,7 +50,12 @@ export const Breadcrumbs: React.FC = () => {
           const lastOne = i === breadcrumbs.length - 1
 
           return lastOne ? null : (
-            <Crumb key={href} href={lastOne ? '' : href} text={text} />
+            <Fragment key={href}>
+              <span className={styles.separator} aria-hidden="true">
+                /
+              </span>
+              <Crumb href={lastOne ? '' : href} text={text} />
+            </Fragment>
           )
         })}
       </p>

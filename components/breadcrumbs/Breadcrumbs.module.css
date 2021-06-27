@@ -9,18 +9,24 @@
 .list {
   display: flex;
   font-size: var(--font-md);
+  gap: 0.45rem;
   margin: 0;
   text-transform: capitalize;
 }
 
 .list a {
-  text-decoration: underline;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: transparent;
 }
 
-.list > *:not(:first-child):before {
-  margin: 0 6px;
+.list a:hover {
+  border-bottom-color: currentColor;
+  color: var(--white);
+}
+
+.separator:before {
   opacity: 0.75;
-  content: '/';
-  /* TODO: separate out into a <span> instead, can't override here */
-  /* text-decoration: none !important; */
 }

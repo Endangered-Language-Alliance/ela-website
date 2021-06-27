@@ -120,7 +120,6 @@
   --headerHt: 55px;
 
   /* Spacing */
-  /* TODO: rename all these to --p0, etc. */
   --pTiniest: 4px;
   --p0: 0.512rem;
   --p1: 0.8rem;
