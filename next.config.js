@@ -1,6 +1,10 @@
 module.exports = {
   images: {
-    domains: ['content.endangeredlanguagealliance.org', 'ealliance.org'],
+    domains: [
+      'content.endangeredlanguagealliance.org',
+      'ealliance.org',
+      'netlify.app',
+    ],
   },
   target: 'serverless', // Netlify plugin might handle it, but had problems
   publicRuntimeConfig: {
