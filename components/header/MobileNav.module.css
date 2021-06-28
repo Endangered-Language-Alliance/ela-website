@@ -9,7 +9,7 @@
   background-color: transparent;
   height: 100%;
   margin: 0;
-  padding: var(--p5) var(--p2);
+  padding: var(--p6) var(--p2) var(--p5);
   width: 100vw;
 }
 
@@ -21,10 +21,17 @@
 .nav ul {
   list-style-type: none;
   padding: 0;
+  text-align: center;
 }
 
 .childless {
-  display: inline-flex;
+  display: inline-block;
+  width: max(100px, 33%);
+  margin-bottom: var(--p2);
+}
+
+.childless a {
+  display: flex;
 }
 
 .childless:first-of-type {
