@@ -3,9 +3,15 @@
 
 .tabs [data-reach-tab-list] {
   overflow-x: auto;
-  flex-shrink: 0;
-  box-shadow: var(--elev2);
   margin-bottom: var(--p4);
+  display: flex;
+  background: none;
+}
+
+.tabs [data-reach-tab-list]:after {
+  content: '';
+  border-bottom: solid var(--gr1) 1px;
+  width: 100%;
 }
 
 .tabs [data-reach-tab-panels] {
@@ -16,11 +22,28 @@
 /* .tabs [data-reach-tab-panel] { } */
 
 .tabs [data-reach-tab] {
-  flex-shrink: 0;
-  color: var(--white);
-  padding-left: var(--p1);
-  padding-right: var(--p1);
   background-color: var(--primaryLight);
+  border-bottom-width: 2px;
+  border-color: transparent;
+  border-top-color: transparent;
+  border-top-style: solid;
+  border-top-width: 2px;
+  box-shadow: var(--elev2);
+  color: var(--offWhite);
+  flex-shrink: 0;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  padding-left: var(--p3);
+  padding-right: var(--p3);
+  transition: var(--transition);
+}
+
+.tabs [data-reach-tab]:first-child {
+  border-top-left-radius: var(--rad2);
+}
+
+.tabs [data-reach-tab]:last-child {
+  border-top-right-radius: var(--rad2);
 }
 
 .tabs [data-reach-tab] + [data-reach-tab] {
@@ -28,6 +51,7 @@
 }
 
 .tabs [data-reach-tab][data-selected] {
-  font-weight: bold;
-  background-color: var(--primary);
+  background-color: var(--primaryLighter);
+  border-bottom-color: rgba(255, 255, 255, 0.725);
+  color: var(--white);
 }

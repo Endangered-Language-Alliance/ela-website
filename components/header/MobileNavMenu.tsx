@@ -20,6 +20,7 @@ export const MobileNavMenu: React.FC<MobileNavMenuProps> = (props) => {
         {data.map((node) => {
           const { label, path, childItems, parentId } = node || {}
 
+          // Sloppy way to get Languages and Latest links on mobile menu
           if (!parentId && !childItems?.nodes?.length) {
             return (
               <li key={path} className={styles.childless}>

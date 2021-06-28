@@ -44,6 +44,14 @@
   position: relative; /* for scrollTarget */
 }
 
+@media screen and (max-width: 600px) {
+  .content {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    border-radius: 0;
+  }
+}
+
 /* Deal with the few stragglers, e.g. Garifuna has some complexities */
 .content table {
   margin-bottom: var(--p4);
