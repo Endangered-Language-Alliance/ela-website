@@ -1,15 +1,15 @@
-.listitem {
+.root {
   background-color: var(--offWhite);
   box-shadow: var(--elev10);
   padding: var(--p4);
+  gap: var(--p2);
   border-radius: var(--rad3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.listitem__content h2 {
-  margin-top: 0;
-}
-
-.listItemTitle {
+.title {
   margin-bottom: var(--p0);
   margin-top: 0;
   font-size: var(--font-h4);

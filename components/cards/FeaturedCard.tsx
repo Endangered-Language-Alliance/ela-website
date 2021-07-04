@@ -24,9 +24,11 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = (props) => {
         </div>
       </header>
       <div className={styles.inner}>
-        <div role="doc-subtitle" className={styles.subtitle}>
-          {subtitle}
-        </div>
+        {subtitle && (
+          <div role="doc-subtitle" className={styles.subtitle}>
+            {subtitle}
+          </div>
+        )}
         <p>{summary}</p>
         <div className={styles.link}>
           <Link href={uri}>

@@ -16,6 +16,7 @@
 .nav {
   --verticalSpacer: var(--p3);
   z-index: 1;
+  padding-bottom: var(--p3);
 }
 
 .nav ul {
@@ -27,7 +28,7 @@
 .childless {
   display: inline-block;
   width: max(100px, 33%);
-  margin-bottom: var(--p2);
+  margin-bottom: var(--p1);
 }
 
 .childless a {
@@ -35,7 +36,7 @@
 }
 
 .childless:first-of-type {
-  margin-right: var(--p2);
+  margin-right: var(--p3);
 }
 
 .link {
@@ -59,11 +60,20 @@
 
 @media screen and (min-width: 600px) {
   .nestedList {
+    gap: var(--p2);
     grid-template-columns: 1fr 1fr 1fr;
   }
 
+  .childless {
+    margin-bottom: var(--p3);
+  }
+
+  .heading {
+    margin-bottom: var(--p2);
+  }
+
   .link {
-    font-size: var(--font-h5);
+    font-size: 1.15rem; /* sloppy, no global */
   }
 }
 
