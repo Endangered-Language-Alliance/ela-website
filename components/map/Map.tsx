@@ -69,8 +69,12 @@ export const Map: React.FC<MapProps> = (props) => {
     })
 
     try {
-      // TODO: 1. Zoom from center of bounds, 2. don't zoom full globe on mobile
-      map.fitBounds(bounds, { padding: 45 }, { forceViewportUpdate: true })
+      // TODO: make it work for 320px and under
+      map.fitBounds(
+        bounds,
+        { padding: 25, center: bounds.getCenter() },
+        { forceViewportUpdate: true }
+      )
     } catch (e) {
       console.error(e)
     }

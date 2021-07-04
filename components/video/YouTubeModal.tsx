@@ -53,7 +53,7 @@ export const YouTubeModal: React.FC<YouTubeModalProps> = (props) => {
         onDismiss={close}
         className={styles.dialogOverlay}
       >
-        <DialogContent>
+        <DialogContent aria-label="No items found">
           {DialogCloseBtn}
           <h2>No items found for video {videoOrPlaylistId}</h2>
         </DialogContent>
@@ -70,7 +70,7 @@ export const YouTubeModal: React.FC<YouTubeModalProps> = (props) => {
       onDismiss={close}
       className={styles.dialogOverlay}
     >
-      <DialogContent>
+      <DialogContent aria-label="Video and sometimes description">
         {DialogCloseBtn}
         <h2 className={styles.dialogTitle}>{title}</h2>
         <div className={styles.videoContainer}>

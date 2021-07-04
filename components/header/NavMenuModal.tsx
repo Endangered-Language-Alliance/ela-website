@@ -21,7 +21,7 @@ export const NavMenuModal: React.FC<NavMenuModalProps> = (props) => {
       onDismiss={close}
       className={mobileNavStyles.mobileNavModal}
     >
-      <DialogContent>
+      <DialogContent aria-label="Site navigation">
         <div className={btnStyles.dialogCloseBtnWrap}>
           <button
             className={`${btn} ${primary} ${contentOnly} ${dialogCloseBtn}`}
