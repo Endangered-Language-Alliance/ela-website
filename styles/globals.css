@@ -101,6 +101,8 @@
   --bodyFontFam: var(--headingFontFam);
   --paraFontFam: var(--headingFontFam);
   --btnFontFam: var(--headingFontFam);
+  --toughEndoFontFam: 'Libre Franklin', 'Noto Sans Syriac Estrangela',
+    sans-serif;
 
   /* Font sizes */
   --font-monster: 3.815rem;

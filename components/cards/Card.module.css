@@ -87,6 +87,7 @@
 }
 
 .itemSubtitle {
+  font-family: var(--toughEndoFontFam);
   color: var(--gr4);
   font-size: var(--font-xs);
   line-height: var(--font-md);

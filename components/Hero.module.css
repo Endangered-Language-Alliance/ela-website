@@ -16,7 +16,7 @@
 
 .subtitle {
   color: var(--gr2);
-  font-family: var(--bodyFontFam);
+  font-family: var(--toughEndoFontFam);
   font-size: var(--font-h3);
   line-height: 1;
   margin: 0 0 var(--p4);
