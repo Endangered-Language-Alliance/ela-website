@@ -8,12 +8,19 @@
   padding-bottom: var(--p2);
 }
 
+@media screen and (min-width: 1190px) {
+  .groups {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+  }
+}
+
 .group {
   border-radius: var(--corner);
   box-shadow: var(--elev3);
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  flex: 1;
+  flex-grow: 1;
 }
 
 .groupInner {

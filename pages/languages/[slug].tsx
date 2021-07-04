@@ -54,7 +54,9 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
       chipsItems={preppedChips}
     >
       <article>
-        <Map excludePopupLinkBtn preppedMarkerData={preppedData} />
+        <div style={{ margin: '0 calc(-1 * var(--gutter))' }}>
+          <Map excludePopupLinkBtn preppedMarkerData={preppedData} />
+        </div>
         <Tabs className={tabStyles.tabs}>
           <TabList>
             <Tab>Background</Tab>

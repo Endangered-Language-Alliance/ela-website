@@ -15,7 +15,13 @@ const PostsList: React.FC<{ posts: Post[] }> = (props) => {
 
   return (
     <Layout title="Latest" chipsItems={chipsItems} noContentWrap>
-      <div style={{ display: 'grid', gap: 'var(--p4)' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 'var(--p4)',
+          flexDirection: 'column',
+        }}
+      >
         {posts.map((post) => {
           const { date, title, uri, excerpt, customExcerpt } = post || {}
 

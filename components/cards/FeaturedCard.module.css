@@ -2,8 +2,6 @@
   gap: var(--p4);
   margin-bottom: var(--p5);
   display: grid;
-  margin-left: var(--gutter);
-  margin-right: var(--gutter);
 }
 
 .card {

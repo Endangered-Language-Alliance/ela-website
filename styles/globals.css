@@ -116,7 +116,7 @@
   --font-body: var(--font-md);
 
   /* Layout */
-  --maxWidth: 1100px;
+  --maxWidth: 1150px;
   --headerHt: 55px;
 
   /* Spacing */
@@ -289,7 +289,7 @@ address {
 
 @media screen and (min-width: 1921px) {
   :root {
-    --maxWidth: 1300px;
+    --maxWidth: 1400px;
   }
 
   html {

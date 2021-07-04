@@ -28,6 +28,7 @@ const Home: React.FC<HomeProps> = (props) => {
 
   return (
     <Layout
+      noContentWrap
       titleTitle="Home"
       title={title}
       summary={customExcerpt?.excerpt || ''}

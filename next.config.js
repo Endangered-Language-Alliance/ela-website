@@ -1,4 +1,6 @@
 module.exports = {
+  // This doesn't seem to do anything. Set NEXT_IMAGE_ALLOWED_DOMAINS instead:
+  // github.com/netlify/netlify-plugin-nextjs/blob/main/docs/image-handling.md
   images: {
     domains: [
       'content.endangeredlanguagealliance.org',
