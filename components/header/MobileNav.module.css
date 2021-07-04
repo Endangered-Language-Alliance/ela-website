@@ -16,7 +16,7 @@
 .nav {
   --verticalSpacer: var(--p3);
   z-index: 1;
-  padding-bottom: var(--p3);
+  padding-bottom: var(--p3); /* prevent cut-off bottom on mobile */
 }
 
 .nav ul {

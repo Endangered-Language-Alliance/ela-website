@@ -6,6 +6,8 @@ import { Layout } from 'components/Layout'
 import { PostsItem } from 'components/latest/PostsItem'
 import { Post } from 'gql-ts/wp-graphql'
 
+import featCardStyles from 'components/cards/FeaturedCard.module.css'
+
 const PostsList: React.FC<{ posts: Post[] }> = (props) => {
   const { posts = [] } = props
 
@@ -15,13 +17,7 @@ const PostsList: React.FC<{ posts: Post[] }> = (props) => {
 
   return (
     <Layout title="Latest" chipsItems={chipsItems} noContentWrap>
-      <div
-        style={{
-          display: 'flex',
-          gap: 'var(--p4)',
-          flexDirection: 'column',
-        }}
-      >
+      <div className={featCardStyles.list}>
         {posts.map((post) => {
           const { date, title, uri, excerpt, customExcerpt } = post || {}
 
