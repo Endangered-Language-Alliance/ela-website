@@ -28,7 +28,8 @@ const queryClient = new QueryClient({
 })
 
 export const Layout: React.FC<LayoutProps> = (props) => {
-  const { title, children, summary, subtitle, chipsItems } = props
+  const { title, children, summary } = props
+  const { subtitle, chipsItems, noContentWrap } = props
   const { tweenerContent, youTubePlaylistId, childPages, titleTitle } = props
   const titlePrefix = titleTitle || title ? `${titleTitle || title} - ` : ''
   const targetElemID = 'back-to-top-anchor'
@@ -57,9 +58,18 @@ export const Layout: React.FC<LayoutProps> = (props) => {
               <YouTubePlaylist playlistId={youTubePlaylistId} />
             )}
             {tweenerContent}
-            <div className={styles.content}>
+            <div className={styles.afterTweener}>
               <div className={styles.scrollTarget} id={targetElemID} />
-              {children}
+              <div
+                className={
+                  (!noContentWrap &&
+                    typeof children !== 'undefined' &&
+                    styles.content) ||
+                  ''
+                }
+              >
+                {children}
+              </div>
               <FeaturedCardList>
                 {childPages?.map((childPage, i) => {
                   if (i === 0 && childPage.featuredImage?.node?.sourceUrl) {

@@ -1,7 +1,7 @@
 .listitem {
   background-color: var(--offWhite);
   box-shadow: var(--elev10);
-  padding: var(--p4) var(--p3);
+  padding: var(--p4);
   border-radius: var(--rad3);
 }
 

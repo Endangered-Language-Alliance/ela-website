@@ -14,20 +14,22 @@ const PostsList: React.FC<{ posts: Post[] }> = (props) => {
   const chipsItems = prepRecentYearChips()
 
   return (
-    <Layout title="Latest" chipsItems={chipsItems}>
-      {posts.map((post) => {
-        const { date, title, uri, excerpt, customExcerpt } = post || {}
+    <Layout title="Latest" chipsItems={chipsItems} noContentWrap>
+      <div style={{ display: 'grid', gap: 'var(--p4)' }}>
+        {posts.map((post) => {
+          const { date, title, uri, excerpt, customExcerpt } = post || {}
 
-        return (
-          <PostsItem
-            key={date}
-            date={date || ''}
-            title={title || ''}
-            uri={uri}
-            summary={customExcerpt?.excerpt || excerpt || ''}
-          />
-        )
-      })}
+          return (
+            <PostsItem
+              key={date}
+              date={date || ''}
+              title={title || ''}
+              uri={uri}
+              summary={customExcerpt?.excerpt || excerpt || ''}
+            />
+          )
+        })}
+      </div>
     </Layout>
   )
 }
