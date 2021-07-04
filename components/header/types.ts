@@ -19,6 +19,8 @@ export type UseHeaderQuery = () => UseQuery
 
 export type BurgerProps = {
   id: string
+  isOpen: boolean
+  setIsOpen: React.Dispatch<boolean>
 }
 
 export type CtaButtonProps = {

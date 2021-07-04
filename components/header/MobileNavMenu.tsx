@@ -9,15 +9,16 @@ import styles from './MobileNav.module.css'
 export type MobileNavMenuProps = {
   id: string
   data: MenuItem[]
+  setIsOpen: React.Dispatch<boolean>
 }
 
 export const MobileNavMenu: React.FC<MobileNavMenuProps> = (props) => {
-  const { id, data } = props
+  const { id, data, setIsOpen } = props
 
   return (
     <nav aria-labelledby={id} className={styles.nav}>
       <ul>
-        {data.map((node) => {
+        {data.map((node, i) => {
           const { label, path, childItems, parentId } = node || {}
 
           // Sloppy way to get Languages and Latest links on mobile menu
@@ -25,7 +26,13 @@ export const MobileNavMenu: React.FC<MobileNavMenuProps> = (props) => {
             return (
               <li key={path} className={styles.childless}>
                 <Link href={path || ''}>
-                  <a className={`${btnStyles.button} ${btnStyles.secondary}`}>
+                  <a
+                    role="link"
+                    tabIndex={i}
+                    onKeyPress={() => setIsOpen(false)}
+                    onClick={() => setIsOpen(false)}
+                    className={`${btnStyles.button} ${btnStyles.secondary}`}
+                  >
                     {label}
                   </a>
                 </Link>
@@ -41,7 +48,15 @@ export const MobileNavMenu: React.FC<MobileNavMenuProps> = (props) => {
                   return (
                     <li key={item?.path}>
                       <Link href={item?.path || '/'}>
-                        <a className={styles.link}>{item?.label}</a>
+                        <a
+                          role="link"
+                          tabIndex={i}
+                          onKeyPress={() => setIsOpen(false)}
+                          onClick={() => setIsOpen(false)}
+                          className={styles.link}
+                        >
+                          {item?.label}
+                        </a>
                       </Link>
                     </li>
                   )

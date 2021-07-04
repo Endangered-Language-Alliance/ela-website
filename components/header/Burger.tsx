@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { HiOutlineMenu } from 'react-icons/hi'
 
 import btnStyles from 'components/buttons/Button.module.css'
@@ -9,8 +8,7 @@ import { BurgerProps } from './types'
 // CRED: (partial):
 // http://www.ashleysheridan.co.uk/blog/Making+an+Accessible+Hamburger+Menu
 export const Burger: React.FC<BurgerProps> = (props) => {
-  const { id, children } = props
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { id, children, isOpen, setIsOpen } = props
 
   return (
     <div className={mobileNavStyles.burger}>
