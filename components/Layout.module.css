@@ -35,12 +35,12 @@
 .content {
   --linkColor: var(--primary);
   --corner: var(--rad2);
-  background-color: var(--white);
+  /* background-color: var(--white); */
+  /* box-shadow: var(--elev3); */
+  /* padding: var(--gutter); */
   border-radius: var(--corner);
-  box-shadow: var(--elev3);
   color: var(--black);
   margin-bottom: var(--p4);
-  padding: var(--gutter);
   position: relative; /* for scrollTarget */
 }
 
@@ -48,6 +48,7 @@
   .content {
     margin-left: calc(-1 * var(--gutter));
     margin-right: calc(-1 * var(--gutter));
+    padding: var(--gutter);
     border-radius: 0;
   }
 }

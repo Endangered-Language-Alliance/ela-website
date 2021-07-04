@@ -27,7 +27,7 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = (props) => {
         <div role="doc-subtitle" className={styles.subtitle}>
           {subtitle}
         </div>
-        <p className={styles.summary}>{summary}</p>
+        <p>{summary}</p>
         <div className={styles.link}>
           <Link href={uri}>
             <a className={`${btnSyles.button} ${btnSyles.secondary}`}>
