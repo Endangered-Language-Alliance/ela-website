@@ -307,7 +307,7 @@ address {
 /* Hate to put this in this file, but it works */
 [data-reach-dialog-overlay] {
   cursor: pointer;
-  z-index: 1;
+  z-index: 2; /* above MB logo */
   display: flex;
   flex-direction: column;
   justify-content: center;

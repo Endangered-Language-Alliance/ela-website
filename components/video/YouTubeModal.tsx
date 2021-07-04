@@ -32,16 +32,18 @@ export const YouTubeModal: React.FC<YouTubeModalProps> = (props) => {
   }
 
   const DialogCloseBtn = (
-    <button
-      className={`${btn} ${primary} ${contentOnly} ${dialogCloseBtn}`}
-      onClick={close}
-      type="button"
-    >
-      <VisuallyHidden>Close</VisuallyHidden>
-      <span aria-hidden>
-        <AiOutlineClose />
-      </span>
-    </button>
+    <div className={btnStyles.dialogCloseBtnWrap}>
+      <button
+        className={`${btn} ${primary} ${contentOnly} ${dialogCloseBtn}`}
+        onClick={close}
+        type="button"
+      >
+        <VisuallyHidden>Close</VisuallyHidden>
+        <span aria-hidden>
+          <AiOutlineClose />
+        </span>
+      </button>
+    </div>
   )
 
   if (!data || !data.items || !data.items.length) {

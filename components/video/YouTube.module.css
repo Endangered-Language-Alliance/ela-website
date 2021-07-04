@@ -57,20 +57,26 @@
 
 /* Won't beat the specificity w/just .dialog */
 .dialogOverlay [data-reach-dialog-content] {
-  width: 100vw;
-  max-width: 800px;
-  padding: var(--p5) var(--p2);
-  position: relative;
-  overflow-y: auto;
   background: hsl(0 0% 0% / 75%);
   cursor: default; /* weird */
+  max-width: 800px;
+  overflow-y: auto;
+  padding: 0 var(--p2) var(--p4);
+  position: relative;
+  width: 100vw;
 }
 
 @media screen and (min-width: 600px) {
   .dialogOverlay [data-reach-dialog-content] {
+    margin: var(--p4) var(--gutter);
     width: unset;
-    padding: var(--p5);
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .dialogOverlay [data-reach-dialog-content] {
     margin: var(--p4) auto;
+    padding: 0 var(--p4) var(--p4);
   }
 }
 
@@ -79,6 +85,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  font-size: var(--font-h3);
   color: var(--white);
 }
 

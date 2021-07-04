@@ -22,16 +22,18 @@ export const NavMenuModal: React.FC<NavMenuModalProps> = (props) => {
       className={mobileNavStyles.mobileNavModal}
     >
       <DialogContent>
-        <button
-          className={`${btn} ${primary} ${contentOnly} ${dialogCloseBtn}`}
-          onClick={close}
-          type="button"
-        >
-          <VisuallyHidden>Close</VisuallyHidden>
-          <span aria-hidden>
-            <AiOutlineClose />
-          </span>
-        </button>
+        <div className={btnStyles.dialogCloseBtnWrap}>
+          <button
+            className={`${btn} ${primary} ${contentOnly} ${dialogCloseBtn}`}
+            onClick={close}
+            type="button"
+          >
+            <VisuallyHidden>Close</VisuallyHidden>
+            <span aria-hidden>
+              <AiOutlineClose />
+            </span>
+          </button>
+        </div>
         {children}
       </DialogContent>
     </DialogOverlay>

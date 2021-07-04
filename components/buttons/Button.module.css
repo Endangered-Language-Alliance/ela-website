@@ -75,12 +75,15 @@ a.button:hover,
   font-size: var(--font-xs);
 }
 
-/* .large { } */
+.dialogCloseBtnWrap {
+  display: flex;
+  position: sticky;
+  top: 0;
+}
 
 .dialogCloseBtn {
-  position: absolute;
-  top: var(--p1);
-  right: var(--p1);
+  margin-left: auto;
+  margin-top: var(--gutter);
   padding: 0;
 }
 

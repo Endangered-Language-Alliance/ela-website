@@ -9,7 +9,7 @@
   background-color: transparent;
   height: 100%;
   margin: 0;
-  padding: var(--p6) var(--p2) var(--p5);
+  padding: 0 var(--p2) var(--p5);
   width: 100vw;
 }
 
@@ -39,24 +39,32 @@
 }
 
 .link {
-  margin-bottom: var(--p1);
-  line-height: var(--headingLineHt);
-  display: block;
+  line-height: var(--headingLineHt); /* otherwise looks like a new row */
 }
 
 .heading {
   color: var(--white);
   margin-bottom: var(--p1);
-  font-size: var(--font-h4);
+  font-size: var(--font-h3);
   margin-top: var(--verticalSpacer);
 }
 
 .nestedList {
   display: grid;
-  grid-column-gap: var(--p1);
+  gap: var(--p0) var(--p2);
   grid-template-columns: 1fr 1fr;
-  margin: 0;
+  margin: 0 0 var(--p5);
   padding: var(--p2) var(--p3);
+}
+
+@media screen and (min-width: 600px) {
+  .nestedList {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .link {
+    font-size: var(--font-h5);
+  }
 }
 
 .burger {
