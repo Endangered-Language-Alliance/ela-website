@@ -98,8 +98,8 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                     style={{ marginTop: 'var(--p2)' }} // dammit
                   >
                     <a
-                      target="_blank"
                       href="https://glottolog.org/resource/languoid/id/"
+                      target="_blank"
                       rel="noreferrer"
                       className={`${btnStyles.button} ${btnStyles.secondary}`}
                     >
@@ -132,6 +132,8 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                   >
                     <a
                       href={archiveOrgLink}
+                      target="_blank"
+                      rel="noreferrer"
                       className={`${btnStyles.button} ${btnStyles.secondary}`}
                     >
                       View on Archive.org

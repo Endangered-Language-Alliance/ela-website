@@ -72,7 +72,7 @@ export const Map: React.FC<MapProps> = (props) => {
       // TODO: make it work for 320px and under
       map.fitBounds(
         bounds,
-        { padding: 25, center: bounds.getCenter() },
+        { padding: 25, around: bounds.getCenter(), center: bounds.getCenter() },
         { forceViewportUpdate: true }
       )
     } catch (e) {

@@ -66,6 +66,13 @@
   width: 100vw;
 }
 
+@media screen and (max-width: 600px) {
+  .dialogOverlay [data-reach-dialog-content] {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
 @media screen and (min-width: 600px) {
   .dialogOverlay [data-reach-dialog-content] {
     margin: var(--p4) var(--gutter);
@@ -82,9 +89,6 @@
 
 .dialogTitle {
   text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 1;
   font-size: var(--font-h3);
   color: var(--white);
 }
