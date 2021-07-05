@@ -9,47 +9,72 @@
   background-color: transparent;
   height: 100%;
   margin: 0;
-  padding: var(--p5) var(--p2);
+  padding: 0 var(--p2) var(--p5);
   width: 100vw;
 }
 
 .nav {
   --verticalSpacer: var(--p3);
   z-index: 1;
+  padding-bottom: var(--p3); /* prevent cut-off bottom on mobile */
 }
 
 .nav ul {
   list-style-type: none;
   padding: 0;
+  text-align: center;
 }
 
 .childless {
-  display: inline-flex;
+  display: inline-block;
+  width: max(100px, 33%);
+  margin-bottom: var(--p1);
+}
+
+.childless a {
+  display: flex;
 }
 
 .childless:first-of-type {
-  margin-right: var(--p2);
+  margin-right: var(--p3);
 }
 
 .link {
-  margin-bottom: var(--p1);
-  line-height: var(--headingLineHt);
-  display: block;
+  line-height: var(--headingLineHt); /* otherwise looks like a new row */
 }
 
 .heading {
   color: var(--white);
   margin-bottom: var(--p1);
-  font-size: var(--font-h4);
+  font-size: var(--font-h3);
   margin-top: var(--verticalSpacer);
 }
 
 .nestedList {
   display: grid;
-  grid-column-gap: var(--p1);
+  gap: var(--p0) var(--p2);
   grid-template-columns: 1fr 1fr;
-  margin: 0;
+  margin: 0 0 var(--p5);
   padding: var(--p2) var(--p3);
+}
+
+@media screen and (min-width: 600px) {
+  .nestedList {
+    gap: var(--p2);
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .childless {
+    margin-bottom: var(--p3);
+  }
+
+  .heading {
+    margin-bottom: var(--p2);
+  }
+
+  .link {
+    font-size: 1.15rem; /* sloppy, no global */
+  }
 }
 
 .burger {
@@ -63,6 +88,7 @@
 
 .burger button {
   font-size: 1.5rem;
+  padding-right: 0; /* root or parent elem has horiz. padding already */
 }
 
 @media screen and (min-width: 800px) {

@@ -22,7 +22,9 @@ const AllOtherPages: React.FC<AllOtherPagesProps> = (props) => {
       // @ts-ignore
       childPages={children?.nodes} // not today, TS. Careful though!
     >
-      <div dangerouslySetInnerHTML={{ __html: content || '' }} />
+      {content ? (
+        <div dangerouslySetInnerHTML={{ __html: content || '' }} />
+      ) : undefined}
     </Layout>
   )
 }

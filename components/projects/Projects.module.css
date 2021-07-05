@@ -4,18 +4,23 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--p3);
-  margin-left: -8px;
-  margin-right: -8px;
   overflow-x: unset;
-  padding: 0 var(--p0) var(--p2);
+  padding-bottom: var(--p2);
+}
+
+@media screen and (min-width: 1190px) {
+  .groups {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+  }
 }
 
 .group {
   border-radius: var(--corner);
   box-shadow: var(--elev3);
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  flex: 1;
+  flex-grow: 1;
 }
 
 .groupInner {

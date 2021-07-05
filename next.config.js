@@ -1,6 +1,12 @@
 module.exports = {
+  // This doesn't seem to do anything. Set NEXT_IMAGE_ALLOWED_DOMAINS instead:
+  // github.com/netlify/netlify-plugin-nextjs/blob/main/docs/image-handling.md
   images: {
-    domains: ['content.endangeredlanguagealliance.org', 'ealliance.org'],
+    domains: [
+      'content.endangeredlanguagealliance.org',
+      'ealliance.org',
+      'netlify.app',
+    ],
   },
   target: 'serverless', // Netlify plugin might handle it, but had problems
   publicRuntimeConfig: {

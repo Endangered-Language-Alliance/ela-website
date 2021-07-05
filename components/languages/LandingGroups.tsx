@@ -45,7 +45,10 @@ export const Group: React.FC<GroupProps> = (props) => {
   const { name, color, children } = props
 
   return (
-    <div className={cardStyles.group} style={{ borderColor: color }}>
+    <div
+      className={cardStyles.group}
+      style={{ borderColor: color, backgroundColor: 'var(--white)' }}
+    >
       <div
         className={cardStyles.groupTitleWrap}
         style={{ backgroundColor: color }}

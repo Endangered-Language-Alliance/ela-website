@@ -24,6 +24,11 @@
   overflow-y: auto;
 }
 
+.afterTweener {
+  --linkColor: var(--primary);
+  position: relative; /* for scrollTarget */
+}
+
 /* CRED: https://stackoverflow.com/a/49968820/1048518 */
 .scrollTarget {
   height: 1px;
@@ -33,15 +38,22 @@
 }
 
 .content {
-  --linkColor: var(--primary);
   --corner: var(--rad2);
   background-color: var(--white);
-  border-radius: var(--corner);
   box-shadow: var(--elev3);
+  padding: var(--gutter);
+  border-radius: var(--corner);
   color: var(--black);
   margin-bottom: var(--p4);
-  padding: var(--gutter);
-  position: relative; /* for scrollTarget */
+}
+
+@media screen and (max-width: 600px) {
+  .content {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    padding: var(--gutter);
+    border-radius: 0;
+  }
 }
 
 /* Deal with the few stragglers, e.g. Garifuna has some complexities */

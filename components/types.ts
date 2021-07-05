@@ -6,6 +6,7 @@ type ChipsItems = {
 }
 
 export type LayoutProps = {
+  noContentWrap?: boolean
   tweenerContent?: React.ReactNode
   youTubePlaylistId?: string | null
   titleTitle?: string // <title> content

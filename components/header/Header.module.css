@@ -1,5 +1,4 @@
 .root {
-  --gutter: var(--p0);
   --navItemSpacing: var(--p2);
   --navItemFontSize: var(--font-sm);
   --linkColor: var(--offWhite);
@@ -60,7 +59,7 @@
 .logo {
   height: var(--headerHt);
   display: inline-flex;
-  padding: var(--p1) var(--p0);
+  padding: var(--p1) 0;
   line-height: var(--headerHt);
   margin-right: auto;
   position: relative;
@@ -103,7 +102,6 @@
 
 @media screen and (min-width: 800px) {
   .root {
-    --gutter: var(--p2);
     --navItemFontSize: var(--font-md);
     --headerHt: 65px;
   }

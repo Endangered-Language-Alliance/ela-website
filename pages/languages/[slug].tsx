@@ -54,7 +54,9 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
       chipsItems={preppedChips}
     >
       <article>
-        <Map excludePopupLinkBtn preppedMarkerData={preppedData} />
+        <div style={{ margin: '0 calc(-1 * var(--gutter))' }}>
+          <Map excludePopupLinkBtn preppedMarkerData={preppedData} />
+        </div>
         <Tabs className={tabStyles.tabs}>
           <TabList>
             <Tab>Background</Tab>
@@ -96,8 +98,8 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                     style={{ marginTop: 'var(--p2)' }} // dammit
                   >
                     <a
-                      target="_blank"
                       href="https://glottolog.org/resource/languoid/id/"
+                      target="_blank"
                       rel="noreferrer"
                       className={`${btnStyles.button} ${btnStyles.secondary}`}
                     >
@@ -130,6 +132,8 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                   >
                     <a
                       href={archiveOrgLink}
+                      target="_blank"
+                      rel="noreferrer"
                       className={`${btnStyles.button} ${btnStyles.secondary}`}
                     >
                       View on Archive.org

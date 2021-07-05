@@ -13,10 +13,11 @@ export const mapConfig = {
   width: '100%',
   height: '100%',
   maxZoom: 9,
+  minZoom: 0.25,
 }
 
 export const initialState = {
   latitude: 0,
   longitude: 0,
-  zoom: 0.5,
+  zoom: 0.25,
 }

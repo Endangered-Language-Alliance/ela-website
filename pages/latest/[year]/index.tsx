@@ -5,6 +5,8 @@ import { getAllPostsWithSlug, getPostsByYear } from 'lib/api/api.latest'
 import { Post } from 'gql-ts/wp-graphql'
 import { PostsItem } from 'components/latest/PostsItem'
 
+import featCardStyles from 'components/cards/FeaturedCard.module.css'
+
 type PostsListProps = { posts: Post[]; year: string }
 
 const PostsListByYear: React.FC<PostsListProps> = (props) => {
@@ -13,20 +15,22 @@ const PostsListByYear: React.FC<PostsListProps> = (props) => {
   if (!posts.length) return <Layout title={`No ${year} posts found`} />
 
   return (
-    <Layout title={`${year} posts`}>
-      {posts.map((post) => {
-        const { date, title, uri, excerpt, customExcerpt } = post || {}
+    <Layout title={`${year} posts`} noContentWrap>
+      <div className={featCardStyles.list}>
+        {posts.map((post) => {
+          const { date, title, uri, excerpt, customExcerpt } = post || {}
 
-        return (
-          <PostsItem
-            key={date}
-            date={date || ''}
-            title={title || ''}
-            uri={uri}
-            summary={customExcerpt?.excerpt || excerpt || ''}
-          />
-        )
-      })}
+          return (
+            <PostsItem
+              key={date}
+              date={date || ''}
+              title={title || ''}
+              uri={uri}
+              summary={customExcerpt?.excerpt || excerpt || ''}
+            />
+          )
+        })}
+      </div>
     </Layout>
   )
 }

@@ -25,19 +25,11 @@ export const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={`${sharedStyles.container} ${styles.footer__wrap}`}>
-        <div>
+        <div className={styles.newsletter}>
           <h3 className={styles.heading}>Join our mailing list</h3>
           <div dangerouslySetInnerHTML={{ __html: newsletter || '' }} />
         </div>
-        <div className={styles.final}>
-          <Logo />
-          <small className={styles.copyright}>
-            &copy; Copyright {new Date().getFullYear()}, {title}
-          </small>
-          <ContactInfo {...(contactInfo || {})} />
-          <SocialIcons {...(contactInfo || {})} {...(social || {})} />
-        </div>
-        <nav>
+        <nav className={styles.nav}>
           {/* TODO: allow standalone links w/o a heading and child items? */}
           {nodes?.map((node) => {
             return (
@@ -68,6 +60,14 @@ export const Footer: React.FC = () => {
             </ul>
           )}
         </nav>
+        <div className={styles.final}>
+          <Logo />
+          <small className={styles.copyright}>
+            &copy; Copyright {new Date().getFullYear()}, {title}
+          </small>
+          <ContactInfo {...(contactInfo || {})} />
+          <SocialIcons {...(contactInfo || {})} {...(social || {})} />
+        </div>
       </div>
     </footer>
   )

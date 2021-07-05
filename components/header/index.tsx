@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Link from 'next/link'
 
 import { CONTENT_URL, PROD_URL } from 'lib/config'
@@ -26,6 +27,7 @@ const CtaButton: React.FC<CtaButtonProps> = (props) => {
 
 const Header: React.FC = () => {
   const { data, error, isLoading } = useHeaderQuery()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   if (isLoading || error) {
     return (
@@ -52,8 +54,12 @@ const Header: React.FC = () => {
         {menuItems?.nodes && (
           <>
             <NavMenu data={menuItems.nodes} />
-            <Burger id="menu-label">
-              <MobileNavMenu data={menuItems.nodes} id="menu-label" />
+            <Burger id="menu-label" isOpen={isOpen} setIsOpen={setIsOpen}>
+              <MobileNavMenu
+                setIsOpen={setIsOpen}
+                data={menuItems.nodes}
+                id="menu-label"
+              />
             </Burger>
           </>
         )}

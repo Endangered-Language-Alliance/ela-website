@@ -101,6 +101,8 @@
   --bodyFontFam: var(--headingFontFam);
   --paraFontFam: var(--headingFontFam);
   --btnFontFam: var(--headingFontFam);
+  --toughEndoFontFam: 'Libre Franklin', 'Noto Sans Syriac Estrangela',
+    sans-serif;
 
   /* Font sizes */
   --font-monster: 3.815rem;
@@ -116,11 +118,10 @@
   --font-body: var(--font-md);
 
   /* Layout */
-  --maxWidth: 1100px;
+  --maxWidth: 1150px;
   --headerHt: 55px;
 
   /* Spacing */
-  /* TODO: rename all these to --p0, etc. */
   --pTiniest: 4px;
   --p0: 0.512rem;
   --p1: 0.8rem;
@@ -290,7 +291,7 @@ address {
 
 @media screen and (min-width: 1921px) {
   :root {
-    --maxWidth: 1300px;
+    --maxWidth: 1400px;
   }
 
   html {
@@ -308,7 +309,7 @@ address {
 /* Hate to put this in this file, but it works */
 [data-reach-dialog-overlay] {
   cursor: pointer;
-  z-index: 1;
+  z-index: 2; /* above MB logo */
   display: flex;
   flex-direction: column;
   justify-content: center;
