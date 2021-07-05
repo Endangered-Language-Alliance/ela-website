@@ -46,7 +46,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allPublishedPages = await getPublishedPages()
 
   return {
-    paths: allPublishedPages?.nodes?.map((node) => node?.uri || '') || [],
+    paths:
+      allPublishedPages?.nodes
+        ?.filter((node) => node?.uri !== '/') // 🤮 but having Home === errors
+        .map((node) => node?.uri || '') || [],
     fallback: true,
   }
 }

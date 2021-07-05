@@ -2,7 +2,6 @@ query AllPostsWithSlug {
   posts(first: 10000) {
     edges {
       node {
-        slug
         uri
       }
     }

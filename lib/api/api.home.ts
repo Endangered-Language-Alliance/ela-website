@@ -18,11 +18,12 @@ export async function getHomePageContent() {
 }
 
 export async function getPublishedPages(): Promise<RootQueryToPageConnection> {
-  const response = await request<{
-    data: { pages: RootQueryToPageConnection }
-  }>(wpGqlEndpoint, publishedPagesQuery)
+  const response = await request<{ pages: RootQueryToPageConnection }>(
+    wpGqlEndpoint,
+    publishedPagesQuery
+  )
 
-  return response?.data?.pages
+  return response?.pages // super important to TYPE THE RIGHT CODE
 }
 
 export const getPage = async (

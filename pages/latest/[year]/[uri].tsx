@@ -10,20 +10,6 @@ const PostByYear: React.FC<{ postData?: Post }> = (props) => {
   return <BlogPost postData={postData} />
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const allPosts = await getAllPostsWithSlug()
-
-  return {
-    paths:
-      allPosts?.edges?.map((edge) => {
-        const { node } = edge || {}
-
-        return node?.uri || ''
-      }) || [],
-    fallback: true,
-  }
-}
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await getPost(`/latest/${params?.year}/${params?.uri}` || '')
   const yearOfPost = parseInt(params?.year as string, 10)
@@ -38,6 +24,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       params,
     },
     revalidate,
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allPosts = await getAllPostsWithSlug()
+
+  return {
+    paths:
+      allPosts?.edges?.map((edge) => {
+        const { node } = edge || {}
+
+        return node?.uri || ''
+      }) || [],
+    fallback: true,
   }
 }
 
