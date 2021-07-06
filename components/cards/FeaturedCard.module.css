@@ -1,6 +1,6 @@
 .list {
   gap: var(--p4);
-  margin-bottom: var(--p5);
+  margin-bottom: var(--p7);
   display: grid;
 }
 

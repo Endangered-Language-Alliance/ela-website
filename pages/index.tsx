@@ -9,6 +9,9 @@ import {
   RootQueryToPostConnection,
 } from 'gql-ts/wp-graphql'
 import { FeaturedCardList, FeaturedCard } from 'components/cards/FeaturedCard'
+import featCardStyles from 'components/cards/FeaturedCard.module.css'
+import { PostsItem } from 'components/latest/PostsItem'
+import { Showcase } from 'components/Showcase'
 
 export type HomeProps = {
   data: {
@@ -23,6 +26,7 @@ const Home: React.FC<HomeProps> = (props) => {
   const { data } = props || {}
   const { homePageContent, posts } = data
   const { title, homePageSettings = {}, customExcerpt } = homePageContent
+  // const { featured1, featured2, numRecentPosts, youTubeUrl, fbFeedIframeHtml } =
   const { featured1, featured2, numRecentPosts, youTubeUrl } =
     homePageSettings || {}
 
@@ -70,16 +74,39 @@ const Home: React.FC<HomeProps> = (props) => {
           uri={featured2?.link?.url || ''}
         />
       </FeaturedCardList>
-      <h2>Recent Updates</h2>
-      {/* TODO: rm from here and gql if def not using */}
-      {/* {fbFeedIframeHtml && ( <div dangerouslySetInnerHTML={{ __html: fbFeedIframeHtml || '' }} /> )} */}
-      <nav>
-        <ul>
-          {posts?.nodes?.slice(0, numRecentPosts || 5).map((node) => {
-            return <li key={node?.title}>{node?.title}</li>
+      <h2 style={{ color: 'var(--white)' }}>ELA at a Glance</h2>
+      <Showcase />
+      <h2 style={{ color: 'var(--white)' }}>Recent Updates</h2>
+      <div style={{ display: 'flex', gap: '1rem' }}>
+        {/* TODO: rm from here and gql if def not using */}
+        {/* {fbFeedIframeHtml && (
+          <div
+            style={{ flex: 1 }}
+            dangerouslySetInnerHTML={{ __html: fbFeedIframeHtml || '' }}
+          />
+        )} */}
+        <div style={{ flex: 1 }} className={featCardStyles.list}>
+          {posts?.nodes?.slice(0, numRecentPosts || 5).map((post) => {
+            const {
+              date,
+              title: postTitle,
+              uri,
+              excerpt,
+              customExcerpt: customPostExcerpt,
+            } = post || {}
+
+            return (
+              <PostsItem
+                key={date}
+                date={date || ''}
+                title={postTitle || ''}
+                uri={uri || ''}
+                summary={customPostExcerpt?.excerpt || excerpt || ''}
+              />
+            )
           })}
-        </ul>
-      </nav>
+        </div>
+      </div>
     </Layout>
   )
 }

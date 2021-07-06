@@ -187,14 +187,13 @@ body {
           5x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1568x1045.jpg')
           6x);
           */
+  /* linear-gradient( 10deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75) ) */
   background-image: linear-gradient(
       10deg,
       rgba(0, 0, 0, 0.25),
       rgba(0, 0, 0, 0.75)
     ),
-    /* url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-2048x1365.jpg'); */
-      url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/nyc-map-screenshot-1536x847.png');
-  background-size: cover;
+    url('/wheat.png');
 }
 
 * {
