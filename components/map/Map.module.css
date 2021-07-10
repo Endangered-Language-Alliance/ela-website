@@ -7,7 +7,6 @@
 
 .fullWidthMap {
   height: 300px;
-  margin-bottom: var(--p5);
   margin-left: calc(-1 * var(--gutter));
   margin-right: calc(-1 * var(--gutter));
   margin-top: calc(-1 * var(--gutter));
@@ -16,7 +15,6 @@
 
 .fullWidthMap .map {
   border-radius: var(--corner) var(--corner) 0 0;
-  box-shadow: var(--elev2);
   width: 100%;
 }
 

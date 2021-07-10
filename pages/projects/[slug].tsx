@@ -50,10 +50,11 @@ const ProjectInstance: React.FC<ProjectInstanceProps> = (props) => {
       youTubePlaylistId={youTubePlaylist?.id}
       chipsItems={preppedChips}
     >
-      <div style={{ margin: '0 calc(-1 * var(--gutter))' }}>
-        <Map preppedMarkerData={preppedData} />
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: content || '' }} />
+      <Map preppedMarkerData={preppedData} />
+      <div
+        style={{ paddingTop: 'var(--p4)' }}
+        dangerouslySetInnerHTML={{ __html: content || '' }}
+      />
     </Layout>
   )
 }
