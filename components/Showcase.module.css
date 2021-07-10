@@ -8,16 +8,16 @@
 
 .item {
   align-items: center;
-  background-color: hsl(0 0% 0% / 25%);
-  border-color: var(--gr5);
+  background-color: var(--primaryDark);
+  border-color: var(--gr3);
   border-radius: var(--rad5);
   border-style: solid;
   border-width: 2px;
-  color: var(--primaryLighter);
+  color: var(--primaryLight);
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: var(--p4) var(--p3);
+  padding: var(--p4) var(--p4);
   text-align: center;
 }
 
@@ -28,7 +28,7 @@
 .spacer {
   height: 2px;
   width: 32px;
-  background-color: var(--gr5);
+  background-color: var(--gr3);
 }
 
 @media screen and (max-width: 1000px) {
@@ -68,15 +68,15 @@
 
 .title {
   font-size: var(--font-h3);
-  margin-bottom: var(--p2);
+  margin-bottom: var(--p1);
 }
 
 .icon {
-  color: rgba(235, 235, 235, 0.85);
+  color: rgba(235, 235, 235, 0.8);
   display: inline-flex;
   font-size: 4rem;
   padding: 0 var(--p2);
-  margin-bottom: var(--p1);
+  margin-bottom: var(--p0);
 }
 
 .icon svg {

@@ -40,6 +40,24 @@ query HomePageQuery {
       }
     }
   }
+  # Just need the count for Showcase values
+  projects(first: 1000) {
+    nodes {
+      id
+    }
+  }
+  # Just need the count for Showcase values
+  languages(first: 1000) {
+    nodes {
+      id
+    }
+  }
+  projectContentType: contentType(id: "project", idType: NAME) {
+    description
+  }
+  langContentType: contentType(id: "language", idType: NAME) {
+    description
+  }
   posts(first: 10, where: { orderby: { field: DATE, order: DESC } }) {
     nodes {
       title

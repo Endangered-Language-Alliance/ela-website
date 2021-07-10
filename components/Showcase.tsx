@@ -5,6 +5,13 @@ import { AiOutlineFundProjectionScreen } from 'react-icons/ai'
 
 import styles from 'components/Showcase.module.css'
 
+export type ShowcaseProps = {
+  projectsCount: number
+  langsCount: number
+  projectsBody: string
+  langsBody: string
+}
+
 export type ShowcaseItemProps = {
   icon: React.ReactNode
   title: string
@@ -28,20 +35,22 @@ export const ShowcaseItem: React.FC<ShowcaseItemProps> = (props) => {
   )
 }
 
-export const Showcase: React.FC = () => {
+export const Showcase: React.FC<ShowcaseProps> = (props) => {
+  const { projectsCount, langsCount, projectsBody, langsBody } = props
+
   return (
     <div className={styles.list}>
       <ShowcaseItem
         icon={<AiOutlineFundProjectionScreen />}
-        title="10 Projects"
-        body="With ten current larger-scale projects and additional work on individual languages, ELA focuses on languages spoken by communities and individuals in the New York City area."
+        title={`${projectsCount} Projects`}
+        body={projectsBody}
         href="/projects"
       />
       <div className={styles.spacer} />
       <ShowcaseItem
         icon={<GiSoundWaves />}
-        title="43 Languages"
-        body="ELA has worked to different degrees on numerous projects with speakers of over a hundred languages spoken in New York City and beyond. More in-depth work continues on the several dozen featured here."
+        title={`${langsCount} Languages`}
+        body={langsBody}
         href="/languages"
       />
       <div className={styles.spacer} />

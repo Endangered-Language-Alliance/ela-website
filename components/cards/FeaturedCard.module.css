@@ -1,5 +1,5 @@
 .list {
-  gap: var(--p4);
+  gap: var(--p5);
   margin-bottom: var(--p7);
   display: grid;
 }
@@ -30,7 +30,7 @@
   margin: 0;
   position: absolute;
   z-index: 1;
-  padding: var(--p1) var(--p3);
+  padding: var(--p0) var(--p3);
   bottom: 0;
   width: 100%;
   margin-top: auto;
@@ -62,7 +62,8 @@
 }
 
 .img img {
-  border-radius: var(--borderRadius);
+  border-top-left-radius: var(--borderRadius);
+  border-top-right-radius: var(--borderRadius);
 }
 
 .link {

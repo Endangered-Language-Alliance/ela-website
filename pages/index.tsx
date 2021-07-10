@@ -6,7 +6,10 @@ import { getHomePageContent } from 'lib/api/api.home'
 import {
   GeneralSettings,
   Page,
+  RootQueryToLanguageConnection,
   RootQueryToPostConnection,
+  RootQueryToProjectConnection,
+  ContentType,
 } from 'gql-ts/wp-graphql'
 import { FeaturedCardList, FeaturedCard } from 'components/cards/FeaturedCard'
 import featCardStyles from 'components/cards/FeaturedCard.module.css'
@@ -19,16 +22,68 @@ export type HomeProps = {
     generalSettings: GeneralSettings
     homePageContent: Page
     posts: RootQueryToPostConnection
+    projects: RootQueryToProjectConnection
+    languages: RootQueryToLanguageConnection
+    projectContentType: ContentType
+    langContentType: ContentType
   }
 }
 
 const Home: React.FC<HomeProps> = (props) => {
   const { data } = props || {}
   const { homePageContent, posts } = data
+  const { projects, languages, projectContentType, langContentType } = data
   const { title, homePageSettings = {}, customExcerpt } = homePageContent
-  // const { featured1, featured2, numRecentPosts, youTubeUrl, fbFeedIframeHtml } =
+
+  // TODO: rm from here and gql if def not using
+  // const { fbFeedIframeHtml } = homePageSettings
   const { featured1, featured2, numRecentPosts, youTubeUrl } =
     homePageSettings || {}
+
+  const Video = youTubeUrl !== undefined && (
+    <div
+      className={layoutStyles.flexCenter}
+      style={{ marginBottom: 'var(--p4)' }}
+    >
+      <iframe
+        style={{ margin: '0 auto 1rem' }}
+        width="840"
+        height="473"
+        src={youTubeUrl || 'https://www.youtube.com/embed/eiW59UUivc0'}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  )
+
+  const RecentPosts = (
+    // TODO: standardize
+    <div style={{ display: 'flex', gap: '1rem' }}>
+      <div style={{ flex: 1 }} className={featCardStyles.list}>
+        {posts?.nodes?.slice(0, numRecentPosts || 5).map((post) => {
+          const {
+            date,
+            title: postTitle,
+            uri,
+            excerpt,
+            customExcerpt: customPostExcerpt,
+          } = post || {}
+
+          return (
+            <PostsItem
+              key={date}
+              date={date || ''}
+              title={postTitle || ''}
+              uri={uri || ''}
+              summary={customPostExcerpt?.excerpt || excerpt || ''}
+            />
+          )
+        })}
+      </div>
+    </div>
+  )
 
   return (
     <Layout
@@ -36,25 +91,6 @@ const Home: React.FC<HomeProps> = (props) => {
       titleTitle="Home"
       title={title}
       summary={customExcerpt?.excerpt || ''}
-      tweenerContent={
-        youTubeUrl && (
-          <div
-            className={layoutStyles.flexCenter}
-            style={{ marginBottom: 'var(--p4)' }}
-          >
-            <iframe
-              style={{ margin: '0 auto 1rem' }}
-              width="840"
-              height="473"
-              src="https://www.youtube.com/embed/eiW59UUivc0"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        )
-      }
     >
       <FeaturedCardList>
         <FeaturedCard
@@ -75,38 +111,16 @@ const Home: React.FC<HomeProps> = (props) => {
         />
       </FeaturedCardList>
       <h2 style={{ color: 'var(--white)' }}>ELA at a Glance</h2>
-      <Showcase />
+      <Showcase
+        projectsCount={projects.nodes?.length || 0}
+        langsCount={languages.nodes?.length || 0}
+        projectsBody={projectContentType?.description || ''}
+        langsBody={langContentType?.description || ''}
+      />
+      <h2 style={{ color: 'var(--white)' }}>In the News</h2>
+      {Video}
       <h2 style={{ color: 'var(--white)' }}>Recent Updates</h2>
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        {/* TODO: rm from here and gql if def not using */}
-        {/* {fbFeedIframeHtml && (
-          <div
-            style={{ flex: 1 }}
-            dangerouslySetInnerHTML={{ __html: fbFeedIframeHtml || '' }}
-          />
-        )} */}
-        <div style={{ flex: 1 }} className={featCardStyles.list}>
-          {posts?.nodes?.slice(0, numRecentPosts || 5).map((post) => {
-            const {
-              date,
-              title: postTitle,
-              uri,
-              excerpt,
-              customExcerpt: customPostExcerpt,
-            } = post || {}
-
-            return (
-              <PostsItem
-                key={date}
-                date={date || ''}
-                title={postTitle || ''}
-                uri={uri || ''}
-                summary={customPostExcerpt?.excerpt || excerpt || ''}
-              />
-            )
-          })}
-        </div>
-      </div>
+      {RecentPosts}
     </Layout>
   )
 }
