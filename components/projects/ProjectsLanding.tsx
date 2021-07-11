@@ -55,10 +55,10 @@ const ProjectGroup: React.FC<GroupProps> = (props) => {
 
 export const ProjectGroups: React.FC<GroupsProps> = (props) => {
   const { groups } = props
-  const rootClasses = `${cardStyles.root} ${styles.groups}`
+  const groupsClasses = `${cardStyles.groupsWrap} ${styles.projectGroupsRoot}`
 
-  return (
-    <div className={rootClasses}>
+  const Inner = (
+    <div className={groupsClasses}>
       {groups.map(({ name, color, items, href }) => (
         <ProjectGroup key={name} name={name} color={color}>
           <div className={styles.itemsWrap}>
@@ -84,6 +84,13 @@ export const ProjectGroups: React.FC<GroupsProps> = (props) => {
           </Link>
         </ProjectGroup>
       ))}
+    </div>
+  )
+
+  return (
+    <div className={cardStyles.root}>
+      {Inner}
+      <div className={cardStyles.mask} />
     </div>
   )
 }

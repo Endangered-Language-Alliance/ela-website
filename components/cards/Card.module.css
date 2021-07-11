@@ -1,22 +1,32 @@
 .root {
   --corner: var(--rad2);
-  display: flex;
-  grid-template-columns: repeat(auto-fill, 400px);
-  flex-wrap: wrap;
-  gap: var(--p3);
   max-height: 50vh;
   margin-bottom: var(--p3);
   margin-top: var(--p3);
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* Subtle border on mobile */ /* TODO */
-/* @media screen and (max-width: 799px) { */
-/* .root { */
-/* box-shadow: inset 0px -5px 8px 0px hsl(0deg 0% 26% / 74%); */
-/* } */
-/* } */
+.groupsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--p3);
+  grid-template-columns: repeat(auto-fill, 400px);
+}
+
+.mask {
+  bottom: 0px;
+  height: 64px;
+  width: 100%;
+  position: sticky;
+  background-image: linear-gradient(
+    to bottom,
+    hsl(0deg 0% 0% / 1%),
+    hsl(0deg 0% 0% / 3%) 8%,
+    hsl(0deg 0% 0% / 54%) 85%
+  );
+}
 
 .group {
   display: flex;
@@ -26,7 +36,11 @@
 }
 
 @media screen and (min-width: 800px) {
-  .root {
+  .mask {
+    height: 20px;
+  }
+
+  .groupsWrap {
     display: grid;
   }
 

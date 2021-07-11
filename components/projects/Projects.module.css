@@ -1,16 +1,6 @@
-/* PROJECTS LANDING */
-.groups {
+.projectGroupsRoot {
   display: flex;
   overflow-x: unset;
-  padding-bottom: var(--p2);
-  position: relative;
-}
-
-@media screen and (min-width: 1190px) {
-  .groups {
-    margin-left: calc(-1 * var(--gutter));
-    margin-right: calc(-1 * var(--gutter));
-  }
 }
 
 .group {

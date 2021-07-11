@@ -59,7 +59,7 @@ export const Group: React.FC<GroupProps> = (props) => {
 
 export const ContinentGroups: React.FC<GroupsProps> = (props) => {
   const { groups } = props
-  const classes = `${cardStyles.root} ${cardStyles.langLandingGroups}`
+  const classes = `${cardStyles.root} ${cardStyles.langLandingGroups} ${cardStyles.groupsWrap}`
 
   const Grupos = groups.map(({ name, color, items }) => (
     <Group key={name} name={name} color={color}>
