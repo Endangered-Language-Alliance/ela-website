@@ -110,8 +110,12 @@ export const Map: React.FC<MapProps> = (props) => {
             setPopupInfo={setPopupInfo}
           />
         )}
-        <FullscreenControl className={styles.mapCtrlBtnStyle} />
-        <NavigationControl className={styles.mapCtrlBtnStyle} />
+        <FullscreenControl
+          className={`${styles.mapBtns} ${styles.mapFullscreenBtn}`}
+        />
+        <NavigationControl
+          className={`${styles.mapBtns} ${styles.mapNavBtns}`}
+        />
       </ReactMapGL>
     </div>
   )

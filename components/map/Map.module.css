@@ -115,16 +115,29 @@
   margin-bottom: var(--p1);
 }
 
-.mapCtrlBtnStyle {
+.mapBtns {
   padding: 10px;
+  right: 0;
 }
 
-/* .contentItem { grid-column: span 3; padding: var(--p3) var(--p4); } */
+/* Doesn't show up on touch devices evidently */
+.mapFullscreenBtn {
+  top: 96px;
+}
 
-/* CRED: 
-themeover.com/alternating-columns-3-2-using-css-grid-and-nth-child-formulas */
-/* .contentItem:nth-child(5n) { } */
-/* .contentItem:nth-child(5n-2) { grid-column: span 6; } */
+@media screen and (max-width: 600px) {
+  /* Just not enough room to have mercator padding */
+  .mapNavBtns {
+    display: none;
+  }
+}
+
+/* Hide pitch reset btn on iPad and down */
+@media screen and (max-width: 801px) {
+  .mapNavBtns > div > :last-child {
+    display: none;
+  }
+}
 
 @media screen and (min-width: 769px) {
   .root {
