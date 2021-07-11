@@ -35,14 +35,16 @@ export const Map: React.FC<MapProps> = (props) => {
     map.on('moveend', function onMoveEnd(zoomEndEvent: ZoomEndEvent): void {
       setMapIsMoving(false)
 
-      // No custom event data, regular move event
       if (zoomEndEvent.forceViewportUpdate) {
+        const zoom = map.getZoom()
+
         setViewport({
           ...viewport, // spreading just in case bearing or pitch are added
           latitude: map.getCenter().lat,
           longitude: map.getCenter().lng,
           pitch: map.getPitch(),
-          zoom: map.getZoom(),
+          // Prevent empty map at global extent on small screens
+          zoom: zoom < 0 ? 0 : zoom,
         })
       }
     })
@@ -73,24 +75,14 @@ export const Map: React.FC<MapProps> = (props) => {
       if (lon && lat) bounds.extend([lon, lat])
     })
 
-    const settings = {
+    const boundsSettings = {
       // Prevent top markers from getting cut off on mobile
       padding: { top: 35, bottom: 25, left: 25, right: 25 },
       around: bounds.getCenter(),
     }
 
     try {
-      // Let it do its thing w/o setting the viewport
-      map.fitBounds(bounds, settings)
-
-      // Not sure how much of this is needed, but it works so DON'T TOUCH
-      if (map.getZoom() <= 0) {
-        map.setMinZoom(0)
-        map.flyTo(
-          { zoom: 0.1, center: bounds.getCenter() },
-          { forceViewportUpdate: true }
-        )
-      } else map.fitBounds(bounds, settings, { forceViewportUpdate: true })
+      map.fitBounds(bounds, boundsSettings, { forceViewportUpdate: true })
     } catch (e) {
       console.log(e)
     }
