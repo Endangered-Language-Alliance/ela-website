@@ -172,9 +172,10 @@ export const prepProjectsMarkers = (
     const { langLocations, customInfo, title: langTitle } = thisOne || {}
     const { nodes } = langLocations || {}
 
-    if (!nodes?.length) return all
+    if (!nodes?.length || !customInfo?.project) return all
 
     const { project } = customInfo || {}
+
     const { title: projectTitle, uri: projUri } =
       (project as { title: keyof typeof locsCounts; uri: string }) ||
       ({} as { title: keyof typeof locsCounts; uri: string })
