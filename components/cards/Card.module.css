@@ -1,10 +1,12 @@
 .root {
   --corner: var(--rad2);
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fill, 400px);
-  gap: var(--p2);
+  flex-wrap: wrap;
+  gap: var(--p3);
   max-height: 50vh;
-  margin-top: var(--p2);
+  margin-bottom: var(--p3);
+  margin-top: var(--p3);
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -20,26 +22,20 @@
   display: flex;
   border-radius: var(--corner);
   height: 7.5rem;
-  flex: 1 1 45%;
   overflow-x: auto;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (min-width: 800px) {
   .root {
-    display: flex;
-    flex-wrap: wrap;
-    grid-template-columns: 1fr;
+    display: grid;
   }
 
   .group {
-    flex: unset;
+    flex: 1 1 45%;
   }
-}
 
-@media screen and (min-width: 800px) {
-  .widerGrid {
+  .langLandingGroups {
     display: flex;
-    flex-wrap: wrap;
   }
 }
 
@@ -75,7 +71,6 @@
   grid-column-gap: var(--gap);
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 0 var(--p0);
 }
 
 .item {

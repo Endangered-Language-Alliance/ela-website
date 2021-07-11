@@ -17,10 +17,15 @@ import {
 import styles from './Map.module.css'
 
 export const Map: React.FC<MapProps> = (props) => {
-  const { preppedMarkerData = [], excludePopupLinkBtn } = props
+  const {
+    preppedMarkerData = [],
+    excludePopupLinkBtn,
+    noNegativeMargin,
+  } = props
   const [viewport, setViewport] = useState<ViewportState>(initialState)
   const [popupInfo, setPopupInfo] = useState<PopupState | null>(null)
   const [mapIsMoving, setMapIsMoving] = useState<boolean>(true)
+  const rootClasses = noNegativeMargin ? '' : styles.fullWidthMap
 
   function onLoad(mapLoadEvent: { target: MbMap }): void {
     const { target: map } = mapLoadEvent
@@ -81,7 +86,10 @@ export const Map: React.FC<MapProps> = (props) => {
   }
 
   return (
-    <div className={styles.fullWidthMap}>
+    <div
+      style={{ height: 'max(300px, 20vh)' }}
+      className={`${styles.mapRoot} ${rootClasses}`}
+    >
       <ReactMapGL
         {...viewport}
         {...mapConfig}

@@ -45,6 +45,7 @@ type PopupOverrides = {
 }
 
 export type MapProps = PopupOverrides & {
+  noNegativeMargin?: boolean
   preppedMarkerData: MapMarker[]
 }
 

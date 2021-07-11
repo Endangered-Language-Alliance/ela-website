@@ -6,14 +6,27 @@
 }
 
 .fullWidthMap {
-  height: 300px;
+  margin-top: calc(-1 * var(--gutter));
   margin-left: calc(-1 * var(--gutter));
   margin-right: calc(-1 * var(--gutter));
-  margin-top: calc(-1 * var(--gutter));
   width: calc(100% + 2 * var(--gutter));
 }
 
-.fullWidthMap .map {
+@media screen and (max-width: 600px) {
+  .mapRoot {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    width: calc(100% + 2 * var(--gutter));
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .fullWidthMap {
+    margin-top: calc(-1 * var(--gutter));
+  }
+}
+
+.mapRoot .map {
   border-radius: var(--corner) var(--corner) 0 0;
   width: 100%;
 }

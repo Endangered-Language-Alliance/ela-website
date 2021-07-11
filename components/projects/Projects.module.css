@@ -1,11 +1,9 @@
 /* PROJECTS LANDING */
 .groups {
-  box-shadow: inset 0px -5px 8px 0px hsl(0deg 0% 86% / 74%);
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--p3);
   overflow-x: unset;
   padding-bottom: var(--p2);
+  position: relative;
 }
 
 @media screen and (min-width: 1190px) {
@@ -17,7 +15,7 @@
 
 .group {
   border-radius: var(--corner);
-  box-shadow: var(--elev3);
+  box-shadow: var(--elev10);
   display: inline-flex;
   flex-direction: column;
   flex-grow: 1;
