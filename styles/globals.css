@@ -299,3 +299,8 @@ address {
   flex-direction: column;
   justify-content: center;
 }
+
+/* UGGHHHH */
+.mapboxgl-popup-content {
+  padding: 10px !important;
+}

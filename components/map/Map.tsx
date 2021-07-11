@@ -73,21 +73,32 @@ export const Map: React.FC<MapProps> = (props) => {
       if (lon && lat) bounds.extend([lon, lat])
     })
 
+    const settings = {
+      // Prevent top markers from getting cut off on mobile
+      padding: { top: 35, bottom: 25, left: 25, right: 25 },
+      around: bounds.getCenter(),
+    }
+
     try {
-      // TODO: make it work for 320px and under
-      map.fitBounds(
-        bounds,
-        { padding: 25, around: bounds.getCenter(), center: bounds.getCenter() },
-        { forceViewportUpdate: true }
-      )
+      // Let it do its thing w/o setting the viewport
+      map.fitBounds(bounds, settings)
+
+      // Not sure how much of this is needed, but it works so DON'T TOUCH
+      if (map.getZoom() <= 0) {
+        map.setMinZoom(0)
+        map.flyTo(
+          { zoom: 0.1, center: bounds.getCenter() },
+          { forceViewportUpdate: true }
+        )
+      } else map.fitBounds(bounds, settings, { forceViewportUpdate: true })
     } catch (e) {
-      console.error(e)
+      console.log(e)
     }
   }
 
   return (
     <div
-      style={{ height: 'max(300px, 20vh)' }}
+      style={{ height: 'max(285px, 22vh)' }}
       className={`${styles.mapRoot} ${rootClasses}`}
     >
       <ReactMapGL

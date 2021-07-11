@@ -98,10 +98,21 @@
   width: 100%;
 }
 
+.popupRoot {
+  --popupGutter: var(--pTiniest);
+  z-index: 2; /* above MB logo and attribution */
+}
+
+/* Shabby way of getting the X close btn */
+.popupRoot button {
+  color: var(--gr5);
+  font-size: 1.25rem;
+  /* MB default for .mapboxgl-popup-content padding: 10px 10px 15px */
+  padding: 2px 10px 2px 0; /* iOS Safari weirdness */
+}
+
 .popupContent {
-  min-width: 175px;
-  max-width: 275px;
-  padding: var(--pTiniest);
+  min-width: 150px;
 }
 
 .popupHeading {
@@ -112,7 +123,6 @@
 .popupSubtitle {
   font-size: var(--font-xs);
   color: var(--gr6);
-  margin-bottom: var(--p1);
 }
 
 .mapBtns {
@@ -136,16 +146,5 @@
 @media screen and (max-width: 801px) {
   .mapNavBtns > div > :last-child {
     display: none;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .root {
-    display: flex;
-    height: 65vh;
-  }
-
-  .content {
-    height: 100%;
   }
 }
