@@ -57,6 +57,7 @@ export type GroupsProps = {
 }
 
 export type ItemProps = {
+  color: string
   title: string
   subtitle: string
   href: string

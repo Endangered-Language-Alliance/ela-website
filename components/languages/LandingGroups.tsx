@@ -8,15 +8,15 @@ import mapStyles from 'components/map/Map.module.css'
 import { GroupProps, GroupsProps, ItemProps, ItemIconProps } from './types'
 
 const GroupCardItem: React.FC<ItemProps> = (props) => {
-  const { title, subtitle, href, children } = props
+  const { title, subtitle, href, color, children } = props
 
   return (
     <Link href={href}>
-      <a className={cardStyles.item}>
+      <a className={cardStyles.item} style={{ borderColor: color }}>
         <header className={cardStyles.itemHeader}>
           <h4 className={cardStyles.itemTitle}>{title}</h4>
           <div role="doc-subtitle" className={cardStyles.itemSubtitle}>
-            {subtitle}
+            {subtitle || title}
           </div>
         </header>
         <div className={mapStyles.markersList}>{children}</div>
@@ -45,10 +45,7 @@ export const Group: React.FC<GroupProps> = (props) => {
   const { name, color, children } = props
 
   return (
-    <div
-      className={cardStyles.group}
-      style={{ borderColor: color, backgroundColor: 'var(--white)' }}
-    >
+    <div className={cardStyles.group} style={{ borderColor: color }}>
       <div
         className={cardStyles.groupTitleWrap}
         style={{ backgroundColor: color }}
@@ -67,7 +64,13 @@ export const ContinentGroups: React.FC<GroupsProps> = (props) => {
   const Grupos = groups.map(({ name, color, items }) => (
     <Group key={name} name={name} color={color}>
       {items.map(({ href, title, subtitle, markers }) => (
-        <GroupCardItem key={href} href={href} title={title} subtitle={subtitle}>
+        <GroupCardItem
+          key={href}
+          href={href}
+          title={title}
+          subtitle={subtitle}
+          color={color}
+        >
           {markers.map(({ label }) => (
             <GroupMarkerIcon
               key={title + subtitle}
