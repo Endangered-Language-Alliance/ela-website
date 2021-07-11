@@ -29,36 +29,36 @@ export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
     return <h2>No data found for playlist ID {playlistId}.</h2>
   }
 
-  return (
-    <div className={styles.list}>
-      {data.items.map((item) => {
-        const { contentDetails, snippet } = item
-        const { title, thumbnails } = snippet
+  const Thumbs = data.items.map((item) => {
+    const { contentDetails, snippet } = item
+    const { title, thumbnails } = snippet
 
-        return (
-          <div
-            key={contentDetails.videoId}
-            className={styles.thumb}
-            onClick={() => {
-              setModalVideoId(snippet?.resourceId?.videoId || '')
-            }}
-            onKeyDown={() => {
-              setModalVideoId(snippet?.resourceId?.videoId || '')
-            }}
-            role="button"
-            tabIndex={0}
-            style={{
-              width: thumbnails.medium?.width || 320,
-              height: thumbnails.medium?.height || 180,
-            }}
-          >
-            <img alt={title} src={thumbnails.medium?.url || ''} />
-            <div className={styles.mask}>
-              <BiPlay />
-            </div>
+    return (
+      <div
+        key={contentDetails.videoId}
+        className={styles.thumb}
+        onClick={() => setModalVideoId(snippet?.resourceId?.videoId || '')}
+        onKeyDown={() => setModalVideoId(snippet?.resourceId?.videoId || '')}
+        role="button"
+        tabIndex={0}
+        style={{
+          width: thumbnails.medium?.width || 320,
+          height: thumbnails.medium?.height || 180,
+        }}
+      >
+        <img alt={title} src={thumbnails.medium?.url || ''} />
+        <div className={styles.mask}>
+          <div className={styles.playBtnCircle}>
+            <BiPlay />
           </div>
-        )
-      })}
+        </div>
+      </div>
+    )
+  })
+
+  return (
+    <>
+      <div className={styles.list}>{Thumbs}</div>
       <YouTubeModal
         videoOrPlaylistId={modalVideoId}
         isOpen={modalVideoId !== ''}
@@ -66,6 +66,6 @@ export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
           setModalVideoId('')
         }}
       />
-    </div>
+    </>
   )
 }
