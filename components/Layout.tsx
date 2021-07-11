@@ -70,31 +70,33 @@ export const Layout: React.FC<LayoutProps> = (props) => {
               >
                 {children}
               </div>
-              <FeaturedCardList>
-                {childPages?.map((childPage, i) => {
-                  if (i === 0 && childPage.featuredImage?.node?.sourceUrl) {
+              {childPages?.length && (
+                <FeaturedCardList>
+                  {childPages.map((childPage, i) => {
+                    if (i === 0 && childPage.featuredImage?.node?.sourceUrl) {
+                      return (
+                        <FeaturedCard
+                          key={childPage.uri}
+                          altText={childPage.featuredImage.node?.altText || ''}
+                          imgSrc={childPage.featuredImage.node?.sourceUrl || ''}
+                          summary={childPage.customExcerpt?.excerpt || ''}
+                          title={childPage.title || ''}
+                          uri={childPage.uri || ''}
+                        />
+                      )
+                    }
+
                     return (
-                      <FeaturedCard
+                      <PostsItem
                         key={childPage.uri}
-                        altText={childPage.featuredImage.node?.altText || ''}
-                        imgSrc={childPage.featuredImage.node?.sourceUrl || ''}
-                        summary={childPage.customExcerpt?.excerpt || ''}
                         title={childPage.title || ''}
-                        uri={childPage.uri || ''}
+                        uri={childPage.uri}
+                        summary={childPage.customExcerpt?.excerpt || ''}
                       />
                     )
-                  }
-
-                  return (
-                    <PostsItem
-                      key={childPage.uri}
-                      title={childPage.title || ''}
-                      uri={childPage.uri}
-                      summary={childPage.customExcerpt?.excerpt || ''}
-                    />
-                  )
-                })}
-              </FeaturedCardList>
+                  })}
+                </FeaturedCardList>
+              )}
             </div>
           </main>
           <Footer />

@@ -103,11 +103,17 @@
 @media screen and (min-width: 800px) {
   .root {
     --navItemFontSize: var(--font-md);
-    --headerHt: 65px;
+    --headerHt: 55px;
   }
 
   .root nav {
     display: block;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .root {
+    --headerHt: 65px;
   }
 }
 
