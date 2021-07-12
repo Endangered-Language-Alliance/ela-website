@@ -1,0 +1,90 @@
+.list {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  justify-content: space-evenly;
+  margin-bottom: var(--p7);
+}
+
+.item {
+  align-items: center;
+  background-color: var(--primaryDark);
+  border-color: var(--gr3);
+  border-radius: var(--rad5);
+  border-style: solid;
+  border-width: 2px;
+  color: var(--primaryLight);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--p4) var(--p4);
+  text-align: center;
+}
+
+.item:hover {
+  border-color: currentColor;
+}
+
+.spacer {
+  height: 2px;
+  width: 32px;
+  background-color: var(--gr3);
+}
+
+@media screen and (max-width: 1000px) {
+  .list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .spacer {
+    width: 2px;
+    height: 32px;
+  }
+}
+
+/* Side by side icon/inner from fat phones up to 1000 */
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+  .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .item {
+    flex-direction: row;
+    gap: var(--p3);
+    text-align: left;
+  }
+
+  .title {
+    margin-bottom: var(--p0);
+  }
+
+  .spacer {
+    height: 48px;
+  }
+}
+
+.title {
+  font-size: var(--font-h3);
+  margin-bottom: var(--p1);
+}
+
+.icon {
+  color: rgba(235, 235, 235, 0.8);
+  display: inline-flex;
+  font-size: 4rem;
+  padding: 0 var(--p2);
+  margin-bottom: var(--p0);
+}
+
+.icon svg {
+  transition: var(--transition);
+}
+
+.body {
+  color: var(--offWhite);
+  font-size: var(--font-sm);
+  margin: 0;
+}

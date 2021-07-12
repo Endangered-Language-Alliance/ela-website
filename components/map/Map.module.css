@@ -6,17 +6,28 @@
 }
 
 .fullWidthMap {
-  height: 300px;
-  margin-bottom: var(--p5);
+  margin-top: calc(-1 * var(--gutter));
   margin-left: calc(-1 * var(--gutter));
   margin-right: calc(-1 * var(--gutter));
-  margin-top: calc(-1 * var(--gutter));
   width: calc(100% + 2 * var(--gutter));
 }
 
-.fullWidthMap .map {
+@media screen and (max-width: 600px) {
+  .mapRoot {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    width: calc(100% + 2 * var(--gutter));
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .fullWidthMap {
+    margin-top: calc(-1 * var(--gutter));
+  }
+}
+
+.mapRoot .map {
   border-radius: var(--corner) var(--corner) 0 0;
-  box-shadow: var(--elev2);
   width: 100%;
 }
 
@@ -87,10 +98,21 @@
   width: 100%;
 }
 
+.popupRoot {
+  --popupGutter: var(--pTiniest);
+  z-index: 2; /* above MB logo and attribution */
+}
+
+/* Shabby way of getting the X close btn */
+.popupRoot button {
+  color: var(--gr5);
+  font-size: 1.25rem;
+  /* MB default for .mapboxgl-popup-content padding: 10px 10px 15px */
+  padding: 2px 10px 2px 0; /* iOS Safari weirdness */
+}
+
 .popupContent {
-  min-width: 175px;
-  max-width: 275px;
-  padding: var(--pTiniest);
+  min-width: 150px;
 }
 
 .popupHeading {
@@ -101,27 +123,28 @@
 .popupSubtitle {
   font-size: var(--font-xs);
   color: var(--gr6);
-  margin-bottom: var(--p1);
 }
 
-.mapCtrlBtnStyle {
+.mapBtns {
   padding: 10px;
+  right: 0;
 }
 
-/* .contentItem { grid-column: span 3; padding: var(--p3) var(--p4); } */
+/* Doesn't show up on touch devices evidently */
+.mapFullscreenBtn {
+  top: 96px;
+}
 
-/* CRED: 
-themeover.com/alternating-columns-3-2-using-css-grid-and-nth-child-formulas */
-/* .contentItem:nth-child(5n) { } */
-/* .contentItem:nth-child(5n-2) { grid-column: span 6; } */
-
-@media screen and (min-width: 769px) {
-  .root {
-    display: flex;
-    height: 65vh;
+@media screen and (max-width: 600px) {
+  /* Just not enough room to have mercator padding */
+  .mapNavBtns {
+    display: none;
   }
+}
 
-  .content {
-    height: 100%;
+/* Hide pitch reset btn on iPad and down */
+@media screen and (max-width: 801px) {
+  .mapNavBtns > div > :last-child {
+    display: none;
   }
 }

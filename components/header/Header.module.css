@@ -26,8 +26,9 @@
   color: var(--linkColor);
 }
 
-.root nav a:hover {
-  color: var(--secondaryLight);
+.root nav a:hover,
+.root [data-reach-menu-button]:hover {
+  color: var(--primaryLight);
 }
 
 /* .root [data-reach-menu-button][aria-expanded='true'] {} */
@@ -41,6 +42,7 @@
   font-weight: bold;
   padding: 0;
   text-transform: inherit;
+  transition: var(--transition);
 }
 
 .root ul {
@@ -103,11 +105,17 @@
 @media screen and (min-width: 800px) {
   .root {
     --navItemFontSize: var(--font-md);
-    --headerHt: 65px;
+    --headerHt: 55px;
   }
 
   .root nav {
     display: block;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .root {
+    --headerHt: 65px;
   }
 }
 

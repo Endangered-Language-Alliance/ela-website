@@ -54,118 +54,118 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
       chipsItems={preppedChips}
     >
       <article>
-        <div style={{ margin: '0 calc(-1 * var(--gutter))' }}>
-          <Map excludePopupLinkBtn preppedMarkerData={preppedData} />
+        <Map excludePopupLinkBtn preppedMarkerData={preppedData} />
+        <div className={tabStyles.contentRoot}>
+          <Tabs className={tabStyles.tabs}>
+            <TabList>
+              <Tab>Background</Tab>
+              {langStructure && <Tab>Language Structure</Tab>}
+              {(glottologId || prevResearch) && <Tab>Previous Research</Tab>}
+              {elaWork && <Tab>ELA's Work</Tab>}
+              {inNewYork && <Tab>In New York</Tab>}
+              {addlInfo && <Tab>More Info</Tab>}
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <div dangerouslySetInnerHTML={{ __html: background || '' }} />
+                {affiliation && (
+                  <div>
+                    <h3>Affiliation</h3>
+                    <div dangerouslySetInnerHTML={{ __html: affiliation }} />
+                  </div>
+                )}
+                {endangerment && (
+                  <div>
+                    <h3>Endangerment</h3>
+                    <div dangerouslySetInnerHTML={{ __html: endangerment }} />
+                  </div>
+                )}
+              </TabPanel>
+              {langStructure && (
+                <TabPanel>
+                  <div dangerouslySetInnerHTML={{ __html: langStructure }} />
+                </TabPanel>
+              )}
+              {(glottologId || prevResearch) && (
+                <TabPanel>
+                  {prevResearch && (
+                    <div dangerouslySetInnerHTML={{ __html: prevResearch }} />
+                  )}
+                  {glottologId && (
+                    <div
+                      className={sharedStyles.flexCenter}
+                      style={{ marginTop: 'var(--p2)' }} // dammit
+                    >
+                      <a
+                        href="https://glottolog.org/resource/languoid/id/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`${btnStyles.button} ${btnStyles.secondary}`}
+                      >
+                        View on Glottolog
+                      </a>
+                    </div>
+                  )}
+                </TabPanel>
+              )}
+              {(elaWork || gDriveDocId) && (
+                <TabPanel>
+                  {elaWork && (
+                    <div dangerouslySetInnerHTML={{ __html: elaWork }} />
+                  )}
+                  {gDriveDocId && (
+                    <>
+                      <h4>Texts</h4>
+                      <iframe
+                        src={`https://drive.google.com/file/d/${gDriveDocId}/preview`}
+                        width="100%"
+                        height={480}
+                        title="Google Drive Embedded Preview"
+                      />
+                    </>
+                  )}
+                  {archiveOrgLink && (
+                    <div
+                      className={sharedStyles.flexCenter}
+                      style={{ marginTop: 'var(--p2)' }} // dammit
+                    >
+                      <a
+                        href={archiveOrgLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`${btnStyles.button} ${btnStyles.secondary}`}
+                      >
+                        View on Archive.org
+                      </a>
+                    </div>
+                  )}
+                </TabPanel>
+              )}
+              {inNewYork && (
+                <TabPanel>
+                  <div dangerouslySetInnerHTML={{ __html: inNewYork }} />
+                  {external?.nycLangMap && (
+                    <div className={sharedStyles.flexCenter}>
+                      <a
+                        href={external?.nycLangMap}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`${btnStyles.button} ${btnStyles.secondary}`}
+                      >
+                        View NYC map
+                      </a>
+                    </div>
+                  )}
+                </TabPanel>
+              )}
+              {addlInfo && (
+                <TabPanel>
+                  <div dangerouslySetInnerHTML={{ __html: addlInfo }} />
+                </TabPanel>
+              )}
+            </TabPanels>
+          </Tabs>
         </div>
-        <Tabs className={tabStyles.tabs}>
-          <TabList>
-            <Tab>Background</Tab>
-            {langStructure && <Tab>Language Structure</Tab>}
-            {(glottologId || prevResearch) && <Tab>Previous Research</Tab>}
-            {elaWork && <Tab>ELA's Work</Tab>}
-            {inNewYork && <Tab>In New York</Tab>}
-            {addlInfo && <Tab>More Info</Tab>}
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <div dangerouslySetInnerHTML={{ __html: background || '' }} />
-              {affiliation && (
-                <div>
-                  <h3>Affiliation</h3>
-                  <div dangerouslySetInnerHTML={{ __html: affiliation }} />
-                </div>
-              )}
-              {endangerment && (
-                <div>
-                  <h3>Endangerment</h3>
-                  <div dangerouslySetInnerHTML={{ __html: endangerment }} />
-                </div>
-              )}
-            </TabPanel>
-            {langStructure && (
-              <TabPanel>
-                <div dangerouslySetInnerHTML={{ __html: langStructure }} />
-              </TabPanel>
-            )}
-            {(glottologId || prevResearch) && (
-              <TabPanel>
-                {prevResearch && (
-                  <div dangerouslySetInnerHTML={{ __html: prevResearch }} />
-                )}
-                {glottologId && (
-                  <div
-                    className={sharedStyles.flexCenter}
-                    style={{ marginTop: 'var(--p2)' }} // dammit
-                  >
-                    <a
-                      href="https://glottolog.org/resource/languoid/id/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`${btnStyles.button} ${btnStyles.secondary}`}
-                    >
-                      View on Glottolog
-                    </a>
-                  </div>
-                )}
-              </TabPanel>
-            )}
-            {(elaWork || gDriveDocId) && (
-              <TabPanel>
-                {elaWork && (
-                  <div dangerouslySetInnerHTML={{ __html: elaWork }} />
-                )}
-                {gDriveDocId && (
-                  <>
-                    <h4>Texts</h4>
-                    <iframe
-                      src={`https://drive.google.com/file/d/${gDriveDocId}/preview`}
-                      width="100%"
-                      height={480}
-                      title="Google Drive Embedded Preview"
-                    />
-                  </>
-                )}
-                {archiveOrgLink && (
-                  <div
-                    className={sharedStyles.flexCenter}
-                    style={{ marginTop: 'var(--p2)' }} // dammit
-                  >
-                    <a
-                      href={archiveOrgLink}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`${btnStyles.button} ${btnStyles.secondary}`}
-                    >
-                      View on Archive.org
-                    </a>
-                  </div>
-                )}
-              </TabPanel>
-            )}
-            {inNewYork && (
-              <TabPanel>
-                <div dangerouslySetInnerHTML={{ __html: inNewYork }} />
-                {external?.nycLangMap && (
-                  <div className={sharedStyles.flexCenter}>
-                    <a
-                      href={external?.nycLangMap}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`${btnStyles.button} ${btnStyles.secondary}`}
-                    >
-                      View NYC map
-                    </a>
-                  </div>
-                )}
-              </TabPanel>
-            )}
-            {addlInfo && (
-              <TabPanel>
-                <div dangerouslySetInnerHTML={{ __html: addlInfo }} />
-              </TabPanel>
-            )}
-          </TabPanels>
-        </Tabs>
       </article>
     </Layout>
   )

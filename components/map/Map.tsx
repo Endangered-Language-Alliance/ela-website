@@ -17,10 +17,15 @@ import {
 import styles from './Map.module.css'
 
 export const Map: React.FC<MapProps> = (props) => {
-  const { preppedMarkerData = [], excludePopupLinkBtn } = props
+  const {
+    preppedMarkerData = [],
+    excludePopupLinkBtn,
+    noNegativeMargin,
+  } = props
   const [viewport, setViewport] = useState<ViewportState>(initialState)
   const [popupInfo, setPopupInfo] = useState<PopupState | null>(null)
   const [mapIsMoving, setMapIsMoving] = useState<boolean>(true)
+  const rootClasses = noNegativeMargin ? '' : styles.fullWidthMap
 
   function onLoad(mapLoadEvent: { target: MbMap }): void {
     const { target: map } = mapLoadEvent
@@ -30,14 +35,16 @@ export const Map: React.FC<MapProps> = (props) => {
     map.on('moveend', function onMoveEnd(zoomEndEvent: ZoomEndEvent): void {
       setMapIsMoving(false)
 
-      // No custom event data, regular move event
       if (zoomEndEvent.forceViewportUpdate) {
+        const zoom = map.getZoom()
+
         setViewport({
           ...viewport, // spreading just in case bearing or pitch are added
           latitude: map.getCenter().lat,
           longitude: map.getCenter().lng,
           pitch: map.getPitch(),
-          zoom: map.getZoom(),
+          // Prevent empty map at global extent on small screens
+          zoom: zoom < 0 ? 0 : zoom,
         })
       }
     })
@@ -68,20 +75,24 @@ export const Map: React.FC<MapProps> = (props) => {
       if (lon && lat) bounds.extend([lon, lat])
     })
 
+    const boundsSettings = {
+      // Prevent top markers from getting cut off on mobile
+      padding: { top: 35, bottom: 25, left: 25, right: 25 },
+      around: bounds.getCenter(),
+    }
+
     try {
-      // TODO: make it work for 320px and under
-      map.fitBounds(
-        bounds,
-        { padding: 25, around: bounds.getCenter(), center: bounds.getCenter() },
-        { forceViewportUpdate: true }
-      )
+      map.fitBounds(bounds, boundsSettings, { forceViewportUpdate: true })
     } catch (e) {
-      console.error(e)
+      console.log(e)
     }
   }
 
   return (
-    <div className={styles.fullWidthMap}>
+    <div
+      style={{ height: 'max(285px, 22vh)' }}
+      className={`${styles.mapRoot} ${rootClasses}`}
+    >
       <ReactMapGL
         {...viewport}
         {...mapConfig}
@@ -102,8 +113,12 @@ export const Map: React.FC<MapProps> = (props) => {
             setPopupInfo={setPopupInfo}
           />
         )}
-        <FullscreenControl className={styles.mapCtrlBtnStyle} />
-        <NavigationControl className={styles.mapCtrlBtnStyle} />
+        <FullscreenControl
+          className={`${styles.mapBtns} ${styles.mapFullscreenBtn}`}
+        />
+        <NavigationControl
+          className={`${styles.mapBtns} ${styles.mapNavBtns}`}
+        />
       </ReactMapGL>
     </div>
   )

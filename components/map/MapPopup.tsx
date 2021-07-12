@@ -7,6 +7,7 @@ import { MapPopupProps } from './types'
 
 export const MapPopup: React.FC<MapPopupProps> = (props) => {
   const { popupInfo, setPopupInfo, excludePopupLinkBtn } = props
+  const { button, secondary, small } = btnStyles
 
   if (!popupInfo) return null // ughhh already know it's not null
 
@@ -20,6 +21,7 @@ export const MapPopup: React.FC<MapPopupProps> = (props) => {
       latitude={lat}
       closeOnClick={false}
       onClose={setPopupInfo}
+      className={styles.popupRoot}
     >
       <div className={styles.popupContent}>
         <header>
@@ -34,8 +36,8 @@ export const MapPopup: React.FC<MapPopupProps> = (props) => {
         {!excludePopupLinkBtn && uri && (
           <Link href={uri}>
             <a
-              className={`${btnStyles.button} ${btnStyles.secondary} ${btnStyles.small}`}
-              style={{ float: 'right' }}
+              className={`${button} ${secondary} ${small}`}
+              style={{ float: 'right', marginTop: 'var(--p1)' }}
             >
               {linkText}
             </a>

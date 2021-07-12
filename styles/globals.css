@@ -111,6 +111,7 @@
   --font-h3: 1.953rem;
   --font-h4: 1.563rem;
   --font-h5: 1.25rem;
+  --font-h6: 1.15rem; /* not from typescale */
   --font-sm: 0.8rem;
   --font-md: 1rem;
   --font-xs: 0.64rem;
@@ -172,29 +173,13 @@ body {
   font-family: var(--bodyFontFam);
   font-size: var(--font-body);
   line-height: 1.75;
-  /* TODO: improve, obvi */
-  /*
+  /* TODO: try -webkit-image-set */
   background-image: linear-gradient(
-      10deg,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.75)
+      0deg,
+      hsl(207deg 50% 10%),
+      hsl(207deg 85% 5% / 15%)
     ),
-    -webkit-image-set(url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-300x200.jpg')
-          1x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1024x683.jpg')
-          3x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-768x512.jpg')
-          2x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1536x1024.jpg')
-          4x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-2048x1365.jpg')
-          5x, url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-1568x1045.jpg')
-          6x);
-          */
-  background-image: linear-gradient(
-      10deg,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.75)
-    ),
-    /* url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/thomas-kelley-hHL08lF7Ikc-unsplash-2048x1365.jpg'); */
-      url('https://content.endangeredlanguagealliance.org/wp-content/uploads/2021/05/nyc-map-screenshot-1536x847.png');
-  background-size: cover;
+    url('/leather-nunchuck.png');
 }
 
 * {
@@ -313,4 +298,9 @@ address {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* UGGHHHH */
+.mapboxgl-popup-content {
+  padding: 10px !important;
 }

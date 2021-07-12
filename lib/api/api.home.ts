@@ -9,6 +9,7 @@ import getPageQuery from 'lib/gql-queries/home/GetPage.graphql'
 const { publicRuntimeConfig } = getConfig()
 const { wpGqlEndpoint } = publicRuntimeConfig
 
+// TODO: type this out. Should match HomeProps in pages/index.tsx
 export async function getHomePageContent() {
   const data = await request<{
     data: { homePageContent: Page; posts: Post[] }
@@ -18,11 +19,12 @@ export async function getHomePageContent() {
 }
 
 export async function getPublishedPages(): Promise<RootQueryToPageConnection> {
-  const response = await request<{
-    data: { pages: RootQueryToPageConnection }
-  }>(wpGqlEndpoint, publishedPagesQuery)
+  const response = await request<{ pages: RootQueryToPageConnection }>(
+    wpGqlEndpoint,
+    publishedPagesQuery
+  )
 
-  return response?.data?.pages
+  return response?.pages // super important to TYPE THE RIGHT CODE
 }
 
 export const getPage = async (

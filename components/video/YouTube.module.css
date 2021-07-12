@@ -3,6 +3,8 @@
   overflow-x: auto;
   overflow-y: hidden;
   margin-bottom: var(--p4);
+  padding-bottom: var(--p0);
+  gap: var(--p2);
   /* TODO: sweet custom scrollbar */
   /* TODO: padding-left or other way to obviate scrollability on mobile */
   /* LIKE: last-child margin-right + an overlay mask on parent's right side */
@@ -12,30 +14,24 @@
   border: solid rgba(0, 0, 0, 0.125) 1px;
   border-radius: var(--rad2);
   box-shadow: var(--elev6);
+  box-shadow: 2px 2px 7px 0px rgb(0 0 0 / 63%);
   cursor: pointer;
-  flex-grow: 1;
   flex-shrink: 0;
-  margin-bottom: var(--p1);
   position: relative;
   z-index: 0;
 }
 
 .thumb img {
   border-radius: inherit;
-  width: 100%;
-}
-
-.thumb + .thumb {
-  margin-left: var(--p1);
 }
 
 .mask {
+  --size: 5rem;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
   border-radius: inherit;
   color: var(--white);
   display: flex;
-  font-size: 80px;
+  font-size: var(--size);
   height: 100%;
   justify-content: center;
   position: absolute;
@@ -45,8 +41,12 @@
   z-index: 0;
 }
 
-.mask:hover {
-  background-color: transparent;
+.playBtnCircle {
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  height: var(--size);
+  width: var(--size);
 }
 
 /* The root element */
@@ -81,6 +81,18 @@
 }
 
 @media screen and (min-width: 769px) {
+  .mask {
+    border-style: solid;
+    border-color: transparent;
+    border-width: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .mask:hover {
+    border-color: rgba(255, 255, 255, 0.825);
+    background-color: transparent;
+  }
+
   .dialogOverlay [data-reach-dialog-content] {
     margin: var(--p4) auto;
     padding: 0 var(--p4) var(--p4);

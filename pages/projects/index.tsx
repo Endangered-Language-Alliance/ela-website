@@ -25,7 +25,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
 
   return (
     <Layout noContentWrap title="Projects" summary={contentType?.description}>
-      <Map preppedMarkerData={preppedMarkerData} />
+      <Map noNegativeMargin preppedMarkerData={preppedMarkerData} />
       <ProjectGroups groups={projectsGroups} />
     </Layout>
   )

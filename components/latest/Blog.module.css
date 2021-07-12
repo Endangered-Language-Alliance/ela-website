@@ -1,5 +1,5 @@
 .root {
-  background-color: var(--offWhite);
+  background-color: var(--white);
   box-shadow: var(--elev10);
   padding: var(--p4);
   gap: var(--p2);

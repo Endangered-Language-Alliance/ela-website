@@ -1,5 +1,5 @@
 .root {
-  --linkColor: var(--offWhite);
+  --linkColor: var(--white);
   font-family: var(--paraFontFam);
   margin-bottom: var(--p0);
   overflow-x: auto; /* just in case on mobile */
