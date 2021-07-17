@@ -60,7 +60,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 [https://content.endangeredlanguagealliance.org/](https://content.endangeredlanguagealliance.org/)
 
-### HTTPS
+### HTTPS (SSL)
 
 Followed [this](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-enabling-https-on-wordpress) to enable it after pointing an `A` DNS record to AWS Lightsail instance IP address (MUST BE **STATIC** IP) [in GoDaddy](https://dcc.godaddy.com/manage/ENDANGEREDLANGUAGEALLIANCE.ORG/dns?plid=1) with `content` as the host (followed [this](https://www.godaddy.com/help/create-a-subdomain-4080)).
 
@@ -84,9 +84,24 @@ Backup files from `bncert` output:
 
 **bncert makes automatic renewals 👏**
 
+#### wp-config.php SSL
+
+Had to manually set the `WP_HOME` and `WP_SITEURL` settings
+[here](https://wordpress.org/support/article/changing-the-site-url/#edit-wp-config-php).
+
 ### SSH
 
-Followed [this](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-ssh-using-terminal) using default key.
+~~Followed
+[this](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-ssh-using-terminal)
+using default key.~~ _No longer works, need to use the browser/client SSH._ Once
+you're in, find the wordpress install here:
+
+```bash
+cd apps/wordpress/htdocs
+```
+
+...and note that the `<Esc>` key had to be remapped in _~/.vimrc_ because `ESC`
+does not work within the SSH window. 😠
 
 #### Permissions
 
