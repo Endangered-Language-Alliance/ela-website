@@ -243,6 +243,11 @@ iframe {
   max-width: 100%;
 }
 
+/* Avoid squished images in tables */
+td img {
+  max-width: unset;
+}
+
 p,
 ul,
 figure {
