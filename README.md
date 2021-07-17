@@ -1,10 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with
+[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Netlify
+
+[![Netlify
+Status](https://api.netlify.com/api/v1/badges/4f514d6e-8b4d-44fe-948a-6dfe835f40af/deploy-status)](https://app.netlify.com/sites/elalliance/deploys)
+
+The site is hosted on _Netlify_. Overview is
+[here](https://app.netlify.com/sites/elalliance/overview).
 
 ## Documentation for CMSing
 
 ### Plugins
 
-In addition to built-in WP features, these plugins are doing the bulk of the work:
+In addition to built-in WP features, these plugins are doing the bulk of the
+work:
 
 - ACF (Advanced Custom Fields)
 - CPT (Custom Post Type)
@@ -42,17 +52,19 @@ of React pages.
 
 ### Generate TS from WP GQL
 
-[Yusssss GraphQL/WP/TS Codegen magic](https://dev.to/shnydercom/the-headless-seo-middleman-or-wordpress-graphql-schema-org-and-typescript-combined-16gj)
+[Yusssss GraphQL/WP/TS Codegen
+magic](https://dev.to/shnydercom/the-headless-seo-middleman-or-wordpress-graphql-schema-org-and-typescript-combined-16gj)
 
 ```bash
 npm run create-wp-gql-ts
 ```
 
-### Deploy on Vercel
+## Sitemap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The _sitemap.xml_ is created post-build using _next-sitemap.js_ and the
+`next-sitemap` npm tool. Followed [this
+guide](https://www.v9digital.com/insights/sitemap-xml-why-changefreq-priority-are-important/)
+to obtain the settings.
 
 ## Setup Notes
 
@@ -62,9 +74,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ### HTTPS (SSL)
 
-Followed [this](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-enabling-https-on-wordpress) to enable it after pointing an `A` DNS record to AWS Lightsail instance IP address (MUST BE **STATIC** IP) [in GoDaddy](https://dcc.godaddy.com/manage/ENDANGEREDLANGUAGEALLIANCE.ORG/dns?plid=1) with `content` as the host (followed [this](https://www.godaddy.com/help/create-a-subdomain-4080)).
+Followed
+[this](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-enabling-https-on-wordpress)
+to enable it after pointing an `A` DNS record to AWS Lightsail instance IP
+address (MUST BE **STATIC** IP) [in
+GoDaddy](https://dcc.godaddy.com/manage/ENDANGEREDLANGUAGEALLIANCE.ORG/dns?plid=1)
+with `content` as the host (followed
+[this](https://www.godaddy.com/help/create-a-subdomain-4080)).
 
-Not sure if it was needed, probably not since never had to change GoDaddy nameservers, but did add [a DNS zone](https://lightsail.aws.amazon.com/ls/webapp/domains/content-endangeredlanguagealliance-org) in LightSail:
+Not sure if it was needed, probably not since never had to change GoDaddy
+nameservers, but did add [a DNS
+zone](https://lightsail.aws.amazon.com/ls/webapp/domains/content-endangeredlanguagealliance-org)
+in LightSail:
 
 - `ns-2029.awsdns-61.co.uk`
 - `ns-557.awsdns-05.net`
@@ -105,13 +126,17 @@ does not work within the SSH window. 😠
 
 #### Permissions
 
-Waaaaay too much trouble but followed [this](https://linuxize.com/post/chmod-recursive/) for media perms.
+Waaaaay too much trouble but followed
+[this](https://linuxize.com/post/chmod-recursive/) for media perms.
 
 ### Email
 
-Followed [this tutorial](https://www.wpbeginner.com/plugins/how-to-send-email-in-wordpress-using-the-gmail-smtp-server/) to set up OAuth.
+Followed [this
+tutorial](https://www.wpbeginner.com/plugins/how-to-send-email-in-wordpress-using-the-gmail-smtp-server/)
+to set up OAuth.
 
-Client ID (from Gmail API): `256431451400-0jdqi29q1es4d7lelci9r8hdm8qn2o99.apps.googleusercontent.com`
+Client ID (from Gmail API):
+`256431451400-0jdqi29q1es4d7lelci9r8hdm8qn2o99.apps.googleusercontent.com`
 
 Client secret: `ZSiwBfchD-XSBRDGTeAZDFJx`
 
