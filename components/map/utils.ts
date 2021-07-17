@@ -1,3 +1,4 @@
+import { Map as MbMap, LngLatBounds } from 'mapbox-gl'
 import {
   ContinentColors,
   Continent,
@@ -222,4 +223,43 @@ export const prepProjectsMarkers = (
   }, [] as MapMarker[])
 
   return allOfEm
+}
+
+export const zoomToMarkersExtent = (
+  map: MbMap,
+  preppedMarkerData: MapMarker[]
+): void => {
+  // Avoid crazy zoom if only one marker
+  if (preppedMarkerData.length === 1) {
+    map.easeTo(
+      {
+        center: [
+          preppedMarkerData[0]?.lon || 0,
+          preppedMarkerData[0]?.lat || 0,
+        ],
+        zoom: 4,
+      },
+      { forceViewportUpdate: true }
+    )
+
+    return
+  }
+
+  const bounds = new LngLatBounds()
+
+  preppedMarkerData.forEach(({ lon, lat }) => {
+    if (lon && lat) bounds.extend([lon, lat])
+  })
+
+  const boundsSettings = {
+    // Prevent top markers from getting cut off on mobile
+    padding: { top: 35, bottom: 25, left: 25, right: 25 },
+    around: bounds.getCenter(),
+  }
+
+  try {
+    map.fitBounds(bounds, boundsSettings, { forceViewportUpdate: true })
+  } catch (e) {
+    console.log(e)
+  }
 }
