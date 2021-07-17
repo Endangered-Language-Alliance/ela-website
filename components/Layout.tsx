@@ -90,7 +90,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
                       <PostsItem
                         key={childPage.uri}
                         title={childPage.title || ''}
-                        uri={childPage.uri}
+                        uri={childPage.uri || ''}
                         summary={childPage.customExcerpt?.excerpt || ''}
                       />
                     )

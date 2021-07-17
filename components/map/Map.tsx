@@ -1,10 +1,10 @@
 import { Map as MbMap } from 'mapbox-gl'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ReactMapGL, {
   NavigationControl,
   FullscreenControl,
-  InteractiveMap,
+  MapRef,
 } from 'react-map-gl'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -34,7 +34,7 @@ export const Map: React.FC<MapProps> = (props) => {
   const [mapLoaded, setMapLoaded] = useState(false)
   const rootClasses = noNegativeMargin ? '' : styles.fullWidthMap
 
-  const mapRef: React.RefObject<InteractiveMap> = useRef(null)
+  const mapRef: React.RefObject<MapRef> = React.useRef(null)
   const map: MbMap | undefined = mapRef.current?.getMap()
 
   function onLoad(mapLoadEvent: { target: MbMap }): void {

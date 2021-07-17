@@ -67,7 +67,7 @@ export const prepCitiesMarkers = (
         const popup = {
           title: title || '',
           subtitle: `${city}, ${country}`,
-          uri,
+          uri: uri || '',
           linkText: 'Language',
         }
 
@@ -111,7 +111,7 @@ export const prepContinentGroups = (
       return {
         title: title || '',
         subtitle: endonym || '',
-        href: uri,
+        href: uri || '',
         markers,
       }
     }
@@ -152,7 +152,7 @@ export const prepProjectsGroups = (
           return {
             title: title || '',
             subtitle: customInfo?.endonym || title || '',
-            href: uri,
+            href: uri || '',
             markers,
           }
         }

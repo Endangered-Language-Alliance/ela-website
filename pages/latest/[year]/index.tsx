@@ -25,7 +25,7 @@ const PostsListByYear: React.FC<PostsListProps> = (props) => {
               key={date}
               date={date || ''}
               title={title || ''}
-              uri={uri}
+              uri={uri || ''}
               summary={customExcerpt?.excerpt || excerpt || ''}
             />
           )

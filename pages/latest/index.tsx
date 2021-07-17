@@ -26,7 +26,7 @@ const PostsList: React.FC<{ posts: Post[] }> = (props) => {
               key={date}
               date={date || ''}
               title={title || ''}
-              uri={uri}
+              uri={uri || ''}
               summary={customExcerpt?.excerpt || excerpt || ''}
             />
           )
