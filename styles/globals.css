@@ -176,8 +176,8 @@ body {
   /* TODO: try -webkit-image-set */
   background-image: linear-gradient(
       0deg,
-      hsl(207deg 50% 10%),
-      hsl(207deg 85% 5% / 15%)
+      hsl(207deg 40% 9%),
+      hsl(207deg 85% 4% / 15%)
     ),
     url('/leather-nunchuck.png');
 }

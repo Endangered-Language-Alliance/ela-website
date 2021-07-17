@@ -73,7 +73,7 @@ const Home: React.FC<HomeProps> = (props) => {
 
           return (
             <PostsItem
-              key={date}
+              key={postTitle}
               date={date || ''}
               title={postTitle || ''}
               uri={uri || ''}
@@ -117,7 +117,7 @@ const Home: React.FC<HomeProps> = (props) => {
         projectsBody={projectContentType?.description || ''}
         langsBody={langContentType?.description || ''}
       />
-      <h2 style={{ color: 'var(--white)' }}>In the News</h2>
+      <h2 style={{ color: 'var(--white)' }}>Introducing ELA</h2>
       {Video}
       <h2 style={{ color: 'var(--white)' }}>Recent Updates</h2>
       {RecentPosts}
