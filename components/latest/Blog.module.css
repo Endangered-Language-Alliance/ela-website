@@ -1,7 +1,7 @@
 .root {
   background-color: var(--white);
   box-shadow: var(--elev10);
-  padding: var(--p4);
+  padding: var(--p3);
   gap: var(--p2);
   border-radius: var(--rad3);
   display: flex;
@@ -10,7 +10,7 @@
 }
 
 .title {
-  margin-bottom: var(--p0);
+  margin-bottom: var(--p1);
   margin-top: 0;
   font-size: var(--font-h4);
 }
@@ -23,5 +23,12 @@
 
 .summary,
 .summary p {
-  margin-bottom: 0;
+  margin-bottom: var(--p0);
+  font-size: var(--font-card-summary);
+}
+
+@media screen and (min-width: 600px) {
+  .root {
+    padding: var(--p4);
+  }
 }

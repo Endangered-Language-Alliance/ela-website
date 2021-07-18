@@ -81,7 +81,7 @@
 }
 
 p.summary {
-  font-size: var(--font-sm);
+  font-size: var(--font-card-summary);
   /* display: -webkit-box; */
   /* -webkit-line-clamp: 2; */
   /* -webkit-box-orient: vertical; */
