@@ -84,7 +84,8 @@ module.exports = {
       changefreq,
       priority,
       lastmod: undefined,
-      alternateRefs: config.alternateRefs ?? [],
+      alternateRefs: [],
+      // alternateRefs: config.alternateRefs ?? [], // original breaks things
     }
   },
 }
