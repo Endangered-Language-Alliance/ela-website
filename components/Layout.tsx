@@ -30,13 +30,15 @@ const queryClient = new QueryClient({
 const SITE_NAME = 'Endangered Language Alliance'
 const SITE_URL = 'https://elalliance.org/'
 const SITE_LOGO = 'https://elalliance.org/ela-logo-hq-black.png'
+const SITE_DESC =
+  'Founded in 2010, the Endangered Language Alliance (ELA) is a non-profit dedicated to documenting Indigenous, minority, and endangered languages, supporting linguistic diversity in New York City and beyond.'
 
 export const Layout: React.FC<LayoutProps> = (props) => {
   const { title, children, summary } = props
   const { subtitle, chipsItems, noContentWrap } = props
   const { tweenerContent, youTubePlaylistId, childPages, titleTitle } = props
   const pageTitle = titleTitle || title || ''
-  const pageSummary = summary || ''
+  const pageSummary = summary || SITE_DESC
 
   let pageImgUrl = SITE_LOGO
 
