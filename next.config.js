@@ -22,6 +22,7 @@ module.exports = {
     mbToken: process.env.MB_TOKEN,
     youTubeKey: process.env.YOUTUBE_KEY,
     wpGqlEndpoint: process.env.WP_API_URL,
+    gaTrackingID: process.env.GA_TRACKING_ID,
   },
   webpack: (config) => {
     config.module.rules.push({

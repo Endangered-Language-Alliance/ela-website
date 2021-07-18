@@ -1,4 +1,8 @@
+import getConfig from 'next/config'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+
+const { publicRuntimeConfig } = getConfig()
+const { gaTrackingID } = publicRuntimeConfig
 
 // TODO: nextjs.org/docs/api-reference/data-fetching/getInitialProps#typescript
 class MyDocument extends Document {
@@ -39,6 +43,22 @@ class MyDocument extends Document {
               href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,700;1,400&display=swap"
             />
           </noscript>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+
+              function gtag(){dataLayer.push(arguments);}
+              
+              gtag('js', new Date());
+              gtag('config', '${gaTrackingID}', { page_path: window.location.pathname });
+            `,
+            }}
+          />
         </Head>
         <body>
           <Main />

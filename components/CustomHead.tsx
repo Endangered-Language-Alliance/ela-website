@@ -22,7 +22,6 @@ export const CustomHead: React.FC<LayoutProps> = (props) => {
 
   const titlePrefix = pageTitle ? `${pageTitle} - ` : ''
 
-  // TODO: componentize and add GA/GTM
   return (
     <Head>
       <meta name="description" content={pageSummary} />
