@@ -1,0 +1,1562 @@
+[
+    {
+        "key": "group_60a3e707af7b9",
+        "title": "Excerpt",
+        "fields": [
+            {
+                "key": "field_60a3e7b5930f6",
+                "label": "",
+                "name": "excerpt",
+                "type": "textarea",
+                "instructions": "This is the workaround for Pages not having excerpts in WP. For blog Posts and Project instances, continue to use the built-in Excerpt or leave it blank and WP will just grab the first bit of Editor content, although a hand-crafted Excerpt is preferable though since the first paragraph of Editor stuff may not be ideal as an excerpt. For Language instances, use Background.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "placeholder": "1) No HTML please! Let's keep it simple since it will be used in places like the Page Hero summary\/intro, page landing lists or cards. 2) No newlines. I only added this field as Text Area instead of Text so that it's easier to read\/write. 3) I'm cutting it off at 255 chars. If this is a problem, let's discuss, but it will allow for some super-consistent styling and layouts.",
+                "maxlength": 500,
+                "rows": "",
+                "new_lines": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                }
+            ],
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "post"
+                }
+            ],
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "language"
+                }
+            ],
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "project"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "excerpt"
+        ],
+        "active": true,
+        "description": "Custom excerpt to override WP's (more info shown below the actual field you'll be editing)",
+        "show_in_graphql": 1,
+        "graphql_field_name": "customExcerpt",
+        "map_graphql_types_from_location_rules": 0,
+        "graphql_types": ""
+    },
+    {
+        "key": "group_60919cf410669",
+        "title": "Home Page Settings",
+        "fields": [
+            {
+                "key": "field_6092d3cc58761",
+                "label": "Explanation",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 0,
+                "message": "This stuff is specific to the Home page based on the 1-video, 2-image (card) layout we decided on. We can adjust slightly if needed, but without solid direction and concrete ideas on Home layout, this is what we'll have for this scope.",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_6092d0e25c664",
+                "label": "Video",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60919d1488176",
+                "label": "YouTube Single-video EMBED URL",
+                "name": "you_tube_url",
+                "type": "oembed",
+                "instructions": "Be sure to use the EMBED url, e.g. \"https:\/\/www.youtube.com\/embed\/eiW59UUivc0\" sans quotes. You can technically use a playlist for this one, but just note that it's not going to be fancy\/tiled via API like the other pages. We're going for \"Big Home Interesting ELA-reppin' Video\".",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "75",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "width": "",
+                "height": ""
+            },
+            {
+                "key": "field_6092d1db5c665",
+                "label": "Feeds",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60958660f2cac",
+                "label": "Number Of Recent Posts To Show",
+                "name": "num_recent_posts",
+                "type": "range",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": 3,
+                "min": 0,
+                "max": 10,
+                "step": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6092cc24d50a3",
+                "label": "DEPRECATED: FB Feed Iframe Code",
+                "name": "fb_feed_iframe_html",
+                "type": "textarea",
+                "instructions": "THIS HAS BEEN COMMENTED OUT IN THE CODE as we decided to axe the FB feed. If that decision changes, let The Jason know. In that event, we pretty much used same format as old site with some other additions. Decent chance this code will never change, but here are some tips:\r\n\r\n1. Can use this page to generate it: https:\/\/developers.facebook.com\/docs\/plugins\/page-plugin\/\r\n2. Paste in the path to your FB profile\r\n3. Click the iFrame tab\r\n4. remove the \"appId&########\" portion of the code, e.g. &appId=1156079591084825 (including the ampersand)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "<iframe src=\"https:\/\/www.facebook.com\/plugins\/page.php?href=https%3A%2F%2Fwww.facebook.com%2Felalliance&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false\" width=\"340\" height=\"500\" style=\"border:none;overflow:hidden\" scrolling=\"no\" frameborder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share\"><\/iframe>",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_6092d00b5765c",
+                "label": "Featured #1",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_6092ce50c747d",
+                "label": "Featured Item Info",
+                "name": "featured_1",
+                "type": "group",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_6092cf25c7481",
+                        "label": "Heading",
+                        "name": "heading",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "35",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "",
+                        "placeholder": "Heading text to show in card",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_60957c63fe701",
+                        "label": "Link Type (sorry you have to fill this out)",
+                        "name": "link_type",
+                        "type": "radio",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "choices": {
+                            "Language": "Language",
+                            "Page": "Page",
+                            "Post": "Post",
+                            "Project": "Project"
+                        },
+                        "allow_null": 0,
+                        "other_choice": 0,
+                        "default_value": "",
+                        "layout": "vertical",
+                        "return_format": "value",
+                        "save_other_choice": 0
+                    },
+                    {
+                        "key": "field_6095852ff00c6",
+                        "label": "Text",
+                        "name": "description",
+                        "type": "textarea",
+                        "instructions": "The body\/summary text.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "40",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "",
+                        "placeholder": "This is the workaround for WP not supporting Excerpts for Pages (without PHP or plugin steps), so type whatever you want instead of leaning on Excerpt for this. It will be Summary\/intro text that appears in the featured \"card\" or whatever we go with. Keep it simple as there won't be a ton of space, and we don't want to ellipsize something that's meant to brief in the first place. There's an ACF \"character limit\" option if we need to enforce that. Also be sure not to use new lines\/paragraphs.",
+                        "maxlength": "",
+                        "rows": 4,
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_609580639b44b",
+                        "label": "Page, Post, Language, or Project",
+                        "name": "link",
+                        "type": "link",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "return_format": "array"
+                    },
+                    {
+                        "key": "field_609589d131f69",
+                        "label": "Image (avoid portrait)",
+                        "name": "img",
+                        "type": "image",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "return_format": "array",
+                        "preview_size": "medium",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_60a988674718a",
+                "label": "Featured #2",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60a988754718b",
+                "label": "Featured Item Info",
+                "name": "featured_2",
+                "type": "group",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_60a988754718c",
+                        "label": "Heading",
+                        "name": "heading",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "35",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "",
+                        "placeholder": "Heading text to show in card",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_60a988754718d",
+                        "label": "Link Type (sorry you have to fill this out)",
+                        "name": "link_type",
+                        "type": "radio",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "choices": {
+                            "Language": "Language",
+                            "Page": "Page",
+                            "Post": "Post",
+                            "Project": "Project"
+                        },
+                        "allow_null": 0,
+                        "other_choice": 0,
+                        "save_other_choice": 0,
+                        "default_value": "",
+                        "layout": "vertical",
+                        "return_format": "value"
+                    },
+                    {
+                        "key": "field_60a988754718e",
+                        "label": "Text",
+                        "name": "description",
+                        "type": "textarea",
+                        "instructions": "The body\/summary text.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "40",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "",
+                        "placeholder": "This is the workaround for WP not supporting Excerpts for Pages (without PHP or plugin steps), so type whatever you want instead of leaning on Excerpt for this. It will be Summary\/intro text that appears in the featured \"card\" or whatever we go with. Keep it simple as there won't be a ton of space, and we don't want to ellipsize something that's meant to brief in the first place. There's an ACF \"character limit\" option if we need to enforce that. Also be sure not to use new lines\/paragraphs.",
+                        "maxlength": "",
+                        "rows": 4,
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_60a988754718f",
+                        "label": "Page, Post, Language, or Project",
+                        "name": "link",
+                        "type": "link",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "return_format": "array"
+                    },
+                    {
+                        "key": "field_60a9887547190",
+                        "label": "Image (avoid portrait)",
+                        "name": "img",
+                        "type": "image",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "return_format": "array",
+                        "preview_size": "medium",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_type",
+                    "operator": "==",
+                    "value": "front_page"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "permalink",
+            "discussion",
+            "comments",
+            "author",
+            "format",
+            "page_attributes",
+            "categories",
+            "tags"
+        ],
+        "active": true,
+        "description": "Things that apply only to the Home page",
+        "show_in_graphql": 1,
+        "graphql_field_name": "homePageSettings",
+        "map_graphql_types_from_location_rules": 0,
+        "graphql_types": ""
+    },
+    {
+        "key": "group_609162bb30868",
+        "title": "Location Info",
+        "fields": [
+            {
+                "key": "field_60919963f70e4",
+                "label": "Usage & Instructions",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "<h2>The fields above<\/h2>\r\n\r\n<ul>\r\n  <li><b>Name<\/b> is what you will see in the lists within the WP admin UI. <b>@Ross: small update:<\/b> in case you haven't been already, use the same \"Name\" as you do for City. I'm now using it for sorting.<\/li>\r\n  <li><b>Slug<\/b> is not used anywhere so far, but it basically should just be hypenated-lowercase variation of the Name, e.g. <em>al-hamdaniyah<\/em>.<\/li>\r\n  <li><b>Parent<\/b> should be set to None. The only reason for including it at all is so checkboxes will appear in a Language instance when adding Locations. Otherwise, it was a wide-open search with potential for problems. Long story!<\/li>\r\n  <li><b>Description<\/b> is another WP default, so far not being used, but again could feel useful in map popups.<\/li>\r\n<\/ul>\r\n\r\n<h2>Instructions<\/h2>\r\n\r\n<ol>\r\n  <li>Create and edit locations <b>here only<\/b>.<\/li>\r\n  <li><em>Use<\/em> them in Language instances, but <b>do not <em>create<\/em> them there.<\/b> Couldn't find a way to disable it!<\/li>\r\n<\/ol>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_609162cd33ebc",
+                "label": "Latitude",
+                "name": "lat",
+                "type": "number",
+                "instructions": "Enter latitude between -90 and 90.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "44",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": -90,
+                "max": 90,
+                "step": ""
+            },
+            {
+                "key": "field_6091633e33ebd",
+                "label": "Longitude",
+                "name": "lon",
+                "type": "number",
+                "instructions": "Enter longitude between -180 and 180.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "42",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": -180,
+                "max": 180,
+                "step": ""
+            },
+            {
+                "key": "field_60917578b70ba",
+                "label": "City",
+                "name": "city",
+                "type": "text",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "placeholder": "so far not using in UI but seems useful",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_60917562b70b8",
+                "label": "Country",
+                "name": "country",
+                "type": "text",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "placeholder": "so far not using in UI but seems useful",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_609168a388dda",
+                "label": "Continent",
+                "name": "continent",
+                "type": "select",
+                "instructions": "@Ross if you need more, let me know, they are easy to add. It was originally a full-on custom post type but there were problems and it was overkill anyway.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "55",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "choices": {
+                    "Africa": "Africa",
+                    "Americas": "Americas",
+                    "Asia": "Asia",
+                    "Europe": "Europe"
+                },
+                "default_value": false,
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "lang_locations"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "permalink",
+            "discussion",
+            "comments",
+            "slug",
+            "author",
+            "format",
+            "page_attributes",
+            "send-trackbacks"
+        ],
+        "active": true,
+        "description": "Lat, lon, city, etc. (used by language\/s)",
+        "show_in_graphql": 1,
+        "graphql_field_name": "languageLocation",
+        "map_graphql_types_from_location_rules": 0,
+        "graphql_types": ""
+    },
+    {
+        "key": "group_60902a360ad07",
+        "title": "Project Meta",
+        "fields": [
+            {
+                "key": "field_60902a4029685",
+                "label": "Icon Color",
+                "name": "icon_color",
+                "type": "color_picker",
+                "instructions": "The icon color for this project when shown on a projects map (at time of writing, just \/projects)",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "#FFA500"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "project"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "permalink",
+            "discussion",
+            "comments",
+            "author",
+            "format",
+            "page_attributes",
+            "send-trackbacks"
+        ],
+        "active": true,
+        "description": "Project-specific information",
+        "show_in_graphql": 1,
+        "graphql_field_name": "projectMeta",
+        "map_graphql_types_from_location_rules": 0,
+        "graphql_types": ""
+    },
+    {
+        "key": "group_6091a7826d12a",
+        "title": "Site-wide Settings",
+        "fields": [
+            {
+                "key": "field_6092d30a6c31f",
+                "label": "Explanation",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "At the time of writing, this stuff is intended to be used in the footer. Ideally it would not go into the Home page, but it seemed equally unintuitive to create a Custom Post Type for it. ACF Pro evidently has something like Site Settings, but not worth the $49\/yr, so here we are.",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_6092d2ac7bb35",
+                "label": "Social",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_6091a793ee442",
+                "label": "Social",
+                "name": "social",
+                "type": "group",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_6091a7cdee443",
+                        "label": "Facebook URL",
+                        "name": "facebook",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "https:\/\/www.facebook.com\/elalliance",
+                        "placeholder": "Profile URL"
+                    },
+                    {
+                        "key": "field_6091a832ee444",
+                        "label": "YouTube URL",
+                        "name": "you_tube",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "https:\/\/www.youtube.com\/user\/elalliance",
+                        "placeholder": "Profile URL"
+                    },
+                    {
+                        "key": "field_6091a85dee445",
+                        "label": "Instagram",
+                        "name": "instagram",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "https:\/\/www.instagram.com\/elalliance\/",
+                        "placeholder": "Profile URL"
+                    },
+                    {
+                        "key": "field_6091a885ee446",
+                        "label": "Archive.org",
+                        "name": "archive_org",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "https:\/\/archive.org\/details\/elalliance",
+                        "placeholder": "Profile URL"
+                    }
+                ]
+            },
+            {
+                "key": "field_6092d2c67bb36",
+                "label": "Contact Info",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_6091ab738c3da",
+                "label": "Contact Info",
+                "name": "contact_info",
+                "type": "group",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_6091ab8a8c3db",
+                        "label": "Phone",
+                        "name": "phone",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "1(646) 225-6613",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_6091abd78c3dc",
+                        "label": "Email",
+                        "name": "email",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "info@elalliance.org",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_6091abf18c3dd",
+                        "label": "Address",
+                        "name": "address",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "3 West 18th Street\r\nNew York, NY 10011",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": 4,
+                        "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_6092d2c87bb37",
+                "label": "Newsletter",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_6092c88597efb",
+                "label": "Newsletter Form",
+                "name": "newsletter",
+                "type": "textarea",
+                "instructions": "This is all HTML for the MailChip newsletter signup form, formerly its own page called \"Announcement Form\". Will likely need to style via CSS.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "<!-- Begin MailChimp Signup Form -->\r\n<style type=\"text\/css\">\r\n  #mc_embed_signup {\r\n    background: #fff;\r\n    clear: left;\r\n    font: 14px Helvetica, Arial, sans-serif;\r\n  }\r\n\r\n  <br \/>\r\n  \/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.<br \/>\r\n\t   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. *\/\r\n  <br \/>\r\n<\/style>\r\n<div id=\"mc_embed_signup\">\r\n  <form id=\"mc-embedded-subscribe-form\" class=\"validate\"\r\n    action=\"\/\/elalliance.us11.list-manage.com\/subscribe\/post?u=fb4f9ddc1e16375a12449d349&amp;id=af356c68e8\"\r\n    method=\"post\" name=\"mc-embedded-subscribe-form\" novalidate=\"\" target=\"_blank\">\r\n    <div id=\"mc_embed_signup_scroll\">\r\n      <h2>Subscribe to our mailing list<\/h2>\r\n      <div class=\"indicates-required\"><span class=\"asterisk\">*<\/span> indicates required<\/div>\r\n      <div class=\"mc-field-group\"><label for=\"mce-EMAIL\">Email Address <span class=\"asterisk\">*<\/span>\r\n        <\/label>\r\n        <input id=\"mce-EMAIL\" class=\"required email\" name=\"EMAIL\" type=\"email\" value=\"\" \/>\r\n      <\/div>\r\n      <div class=\"mc-field-group\"><label for=\"mce-FNAME\">First Name <\/label>\r\n        <input id=\"mce-FNAME\" class=\"\" name=\"FNAME\" type=\"text\" value=\"\" \/>\r\n      <\/div>\r\n      <div class=\"mc-field-group\"><label for=\"mce-LNAME\">Last Name <\/label>\r\n        <input id=\"mce-LNAME\" class=\"\" name=\"LNAME\" type=\"text\" value=\"\" \/>\r\n      <\/div>\r\n      <div id=\"mce-responses\" class=\"clear\">\r\n        <div id=\"mce-error-response\" class=\"response\" style=\"display: none;\"><\/div>\r\n        <div id=\"mce-success-response\" class=\"response\" style=\"display: none;\"><\/div>\r\n      <\/div>\r\n      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\r\n      <div style=\"position: absolute; left: -5000px;\" aria-hidden=\"true\"><input tabindex=\"-1\"\r\n          name=\"b_fb4f9ddc1e16375a12449d349_af356c68e8\" type=\"text\" value=\"\" \/><\/div>\r\n      <div class=\"clear\"><input id=\"mc-embedded-subscribe\" class=\"button\" name=\"subscribe\" type=\"submit\"\r\n          value=\"Subscribe\" \/><\/div>\r\n    <\/div>\r\n  <\/form>\r\n<\/div>\r\n<script type='text\/javascript' src='\/\/s3.amazonaws.com\/downloads.mailchimp.com\/js\/mc-validate.js'><\/script>\r\n<script\r\n  type='text\/javascript'>(function ($) { window.fnames = new Array(); window.ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text'; }(jQuery)); var $mcj = jQuery.noConflict(true);<\/script>\r\n<!--End mc_embed_signup-->",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 12,
+                "new_lines": ""
+            },
+            {
+                "key": "field_60aa920ebaf58",
+                "label": "CTA Button",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60aa9280baf5a",
+                "label": "Call-to-action button",
+                "name": "cta_button",
+                "type": "link",
+                "instructions": "Page, Post, Language, or Project",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "return_format": "array"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_type",
+                    "operator": "==",
+                    "value": "front_page"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "For things like contact info and other footer stuff, etc.",
+        "show_in_graphql": 1,
+        "graphql_field_name": "siteWideSettings",
+        "map_graphql_types_from_location_rules": 0,
+        "graphql_types": ""
+    },
+    {
+        "key": "group_608c77781eb6e",
+        "title": "Language Instance Info",
+        "fields": [
+            {
+                "key": "field_608ca27d0264d",
+                "label": "Basics",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_608f12a6aed32",
+                "label": "Endonym",
+                "name": "endonym",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "placeholder": "Language name to native speakers",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_608c86bed0d7f",
+                "label": "Associated Project",
+                "name": "project",
+                "type": "post_object",
+                "instructions": "Select an associated project if relevant",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "post_type": [
+                    "project"
+                ],
+                "taxonomy": "",
+                "allow_null": 1,
+                "multiple": 0,
+                "return_format": "object",
+                "ui": 1
+            },
+            {
+                "key": "field_6092cdb2f23f5",
+                "label": "External Links, etc.",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_608c7f67b234c",
+                "label": "External Links, Docs, Embeds",
+                "name": "external",
+                "type": "group",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_608c828ceb29f",
+                        "label": "Glottolog (ID only, not URL)",
+                        "name": "glottolog_id",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "",
+                        "placeholder": "e.g. uncl1507",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_608c8043b234f",
+                        "label": "Archive.org URL Outbound Link",
+                        "name": "archive_org_link",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "",
+                        "placeholder": "Link to archive.org page (not playlist)"
+                    },
+                    {
+                        "key": "field_608c8080b2351",
+                        "label": "NYC Language Map URL",
+                        "name": "nyc_lang_map",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "",
+                        "placeholder": "Link to something in the NYC Lang map"
+                    },
+                    {
+                        "key": "field_608f413b28ccf",
+                        "label": "Google Drive File ID",
+                        "name": "g_drive_doc_id",
+                        "type": "text",
+                        "instructions": "e.g. \"1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v\" sans quotes for file https:\/\/drive.google.com\/file\/d\/1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "show_in_graphql": 1,
+                        "default_value": "",
+                        "placeholder": "e.g. 1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_608c8e5e2edcd",
+                "label": "Background",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_608c7894a2266",
+                "label": "Background",
+                "name": "background",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_608c7e4f2381d",
+                "label": "Affiliation",
+                "name": "affiliation",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 1
+            },
+            {
+                "key": "field_608c7963a2267",
+                "label": "Endangerment",
+                "name": "endangerment",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 1
+            },
+            {
+                "key": "field_608c8fb7c754c",
+                "label": "Language Structure",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_608c7e092381c",
+                "label": "Language Structure",
+                "name": "lang_structure",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 1
+            },
+            {
+                "key": "field_608c8f57687c7",
+                "label": "Previous Research",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_609bef43eef63",
+                "label": "Previous Research",
+                "name": "prev_research",
+                "type": "wysiwyg",
+                "instructions": "An outbound link will be featured above the content to Glottolog page if there is one.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 1
+            },
+            {
+                "key": "field_608c92087feb0",
+                "label": "ELA's Work",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_608c7e752381e",
+                "label": "ELA's Work",
+                "name": "ela_work",
+                "type": "wysiwyg",
+                "instructions": "This content will be shown as a heading-less intro (same concept as Background) and will include a section called Texts if there is a Drive URL.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 1
+            },
+            {
+                "key": "field_609bef94eef64",
+                "label": "In New York",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_608c7e8c2381f",
+                "label": "In New York",
+                "name": "in_new_york",
+                "type": "wysiwyg",
+                "instructions": "NYC-specific info",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 1
+            },
+            {
+                "key": "field_608c926c7feb3",
+                "label": "Additional",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_608c7f3723820",
+                "label": "Additional Info",
+                "name": "addl_info",
+                "type": "wysiwyg",
+                "instructions": "Catch-all for anything extra and non-standardized, e.g. Garifuna nursery rhymes",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 1
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "language"
+                }
+            ]
+        ],
+        "menu_order": 1,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "discussion",
+            "comments",
+            "author",
+            "page_attributes",
+            "send-trackbacks"
+        ],
+        "active": true,
+        "description": "Individual language instance",
+        "show_in_graphql": 1,
+        "graphql_field_name": "customInfo",
+        "map_graphql_types_from_location_rules": 0,
+        "graphql_types": ""
+    },
+    {
+        "key": "group_60919e80df704",
+        "title": "YouTube Playlist ID",
+        "fields": [
+            {
+                "key": "field_60997a5c7032e",
+                "label": "YouTube Playlist ID",
+                "name": "id",
+                "type": "text",
+                "instructions": "Due to so many variations of YouTube URLs, we will use JUST the ID here, e.g. \"PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX\" sans quotes, obtained from the  full URL of https:\/\/www.youtube.com\/playlist?list=PLcXFPx-z7B0oRykn98F41QRn2xLA3TxRX",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "75",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "placeholder": "Enter JUST the YouTube playlist ID",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_60919e80e6e87",
+                "label": "(Internal, optional) YouTube Playlist Full URL",
+                "name": "url",
+                "type": "oembed",
+                "instructions": "This field is just a convenience QC check to make sure you've got the right playlist. It is not used in code and is entirely optional, but encouraged as it semi-validates the \"YouTube Playlist ID\" field (assuming the ID was copied properly!). Just paste the whole URL in, e.g. https:\/\/www.youtube.com\/playlist?list=PLcXFPx-z7B0pC_zM4V0Tjbie76ObfAR5E",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "75",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "width": "",
+                "height": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_type",
+                    "operator": "!=",
+                    "value": "front_page"
+                }
+            ]
+        ],
+        "menu_order": 5,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "permalink",
+            "discussion",
+            "comments",
+            "slug",
+            "author",
+            "format",
+            "page_attributes",
+            "send-trackbacks"
+        ],
+        "active": true,
+        "description": "YouTube playlist ID for this Post or Page",
+        "show_in_graphql": 1,
+        "graphql_field_name": "youTubePlaylist",
+        "map_graphql_types_from_location_rules": 1,
+        "graphql_types": [
+            "Language",
+            "Page",
+            "Post",
+            "Project"
+        ]
+    }
+]

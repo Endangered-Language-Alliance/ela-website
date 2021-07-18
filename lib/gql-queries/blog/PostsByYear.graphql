@@ -1,7 +1,11 @@
 query PostsByYear($year: Int!) {
   posts(
     first: 200
-    where: { dateQuery: { year: $year }, orderby: { field: DATE, order: DESC } }
+    where: {
+      dateQuery: { year: $year }
+      orderby: { field: DATE, order: DESC }
+      status: PUBLISH
+    }
   ) {
     nodes {
       title

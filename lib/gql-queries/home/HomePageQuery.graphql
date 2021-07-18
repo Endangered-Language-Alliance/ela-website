@@ -58,7 +58,10 @@ query HomePageQuery {
   langContentType: contentType(id: "language", idType: NAME) {
     description
   }
-  posts(first: 10, where: { orderby: { field: DATE, order: DESC } }) {
+  posts(
+    first: 10
+    where: { orderby: { field: DATE, order: DESC }, status: PUBLISH }
+  ) {
     nodes {
       title
       uri

@@ -1,6 +1,11 @@
-import { useState } from 'react'
-import { LngLatBounds, Map as MbMap } from 'mapbox-gl'
-import ReactMapGL, { NavigationControl, FullscreenControl } from 'react-map-gl'
+import { Map as MbMap } from 'mapbox-gl'
+import React, { useEffect, useState } from 'react'
+
+import ReactMapGL, {
+  NavigationControl,
+  FullscreenControl,
+  MapRef,
+} from 'react-map-gl'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -15,6 +20,7 @@ import {
   MapProps,
 } from './types'
 import styles from './Map.module.css'
+import { zoomToMarkersExtent } from './utils'
 
 export const Map: React.FC<MapProps> = (props) => {
   const {
@@ -24,69 +30,49 @@ export const Map: React.FC<MapProps> = (props) => {
   } = props
   const [viewport, setViewport] = useState<ViewportState>(initialState)
   const [popupInfo, setPopupInfo] = useState<PopupState | null>(null)
-  const [mapIsMoving, setMapIsMoving] = useState<boolean>(true)
+  const [mapIsMoving, setMapIsMoving] = useState(true)
+  const [mapLoaded, setMapLoaded] = useState(false)
   const rootClasses = noNegativeMargin ? '' : styles.fullWidthMap
 
+  const mapRef: React.RefObject<MapRef> = React.useRef(null)
+  const map: MbMap | undefined = mapRef.current?.getMap()
+
   function onLoad(mapLoadEvent: { target: MbMap }): void {
-    const { target: map } = mapLoadEvent
+    const { target: mapObj } = mapLoadEvent
 
     // Maintain viewport state sync if needed (e.g. after `flyTo`), otherwise
     // the map shifts back to previous position after panning or zooming.
-    map.on('moveend', function onMoveEnd(zoomEndEvent: ZoomEndEvent): void {
+    mapObj.on('moveend', function onMoveEnd(zoomEndEvent: ZoomEndEvent): void {
       setMapIsMoving(false)
 
       if (zoomEndEvent.forceViewportUpdate) {
-        const zoom = map.getZoom()
+        const zoom = mapObj.getZoom()
 
         setViewport({
           ...viewport, // spreading just in case bearing or pitch are added
-          latitude: map.getCenter().lat,
-          longitude: map.getCenter().lng,
-          pitch: map.getPitch(),
+          latitude: mapObj.getCenter().lat,
+          longitude: mapObj.getCenter().lng,
+          pitch: mapObj.getPitch(),
           // Prevent empty map at global extent on small screens
           zoom: zoom < 0 ? 0 : zoom,
         })
       }
     })
 
-    map.on('movestart', function onMoveStart(zoomEndEvent: ZoomEndEvent): void {
+    function onMoveStart(zoomEndEvent: ZoomEndEvent): void {
       if (zoomEndEvent.forceViewportUpdate) setMapIsMoving(true)
-    })
-
-    // Avoid crazy zoom if only one marker
-    if (preppedMarkerData.length === 1) {
-      map.easeTo(
-        {
-          center: [
-            preppedMarkerData[0]?.lon || 0,
-            preppedMarkerData[0]?.lat || 0,
-          ],
-          zoom: 4,
-        },
-        { forceViewportUpdate: true }
-      )
-
-      return
     }
 
-    const bounds = new LngLatBounds()
+    mapObj.on('movestart', onMoveStart)
 
-    preppedMarkerData.forEach(({ lon, lat }) => {
-      if (lon && lat) bounds.extend([lon, lat])
-    })
-
-    const boundsSettings = {
-      // Prevent top markers from getting cut off on mobile
-      padding: { top: 35, bottom: 25, left: 25, right: 25 },
-      around: bounds.getCenter(),
-    }
-
-    try {
-      map.fitBounds(bounds, boundsSettings, { forceViewportUpdate: true })
-    } catch (e) {
-      console.log(e)
-    }
+    setMapLoaded(true)
   }
+
+  useEffect(() => {
+    if (!map || !mapLoaded) return
+
+    zoomToMarkersExtent(map, preppedMarkerData)
+  }, [preppedMarkerData, map, mapLoaded])
 
   return (
     <div
@@ -96,6 +82,7 @@ export const Map: React.FC<MapProps> = (props) => {
       <ReactMapGL
         {...viewport}
         {...mapConfig}
+        ref={mapRef}
         onViewportChange={setViewport}
         onLoad={onLoad}
         className={styles.map}

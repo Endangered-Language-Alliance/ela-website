@@ -7,6 +7,15 @@ module.exports = {
       'ealliance.org',
       'netlify.app',
     ],
+    // Avoid making Next calculate all the srcset attributes. We only need these
+    // three since they are included in WP's optimized images already. Actually
+    // Next isn't using those and it's making its own, but in the future
+    // consider using <img srcset="stuff..." /> manually via GraphQL query
+    // responses rather than making Next do it. Might be faster. Either way, we
+    // currently only need these three sizes (which match the smallest 3 that WP
+    // sends back) since the widest image (in FeaturedCard) only takes up half
+    // the main content space, which has a max width smaller than 1024 anyway.
+    deviceSizes: [300, 768, 1024],
   },
   target: 'serverless', // Netlify plugin might handle it, but had problems
   publicRuntimeConfig: {

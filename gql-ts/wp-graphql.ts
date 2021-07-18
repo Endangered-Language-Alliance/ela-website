@@ -78,8 +78,8 @@ export enum AvatarRatingEnum {
 /** The category type */
 export type Category = Node &
   TermNode &
-  DatabaseIdentifier &
   UniformResourceIdentifiable &
+  DatabaseIdentifier &
   HierarchicalTermNode &
   MenuItemLinkable & {
     __typename?: 'Category'
@@ -96,7 +96,7 @@ export type Category = Node &
     contentNodes?: Maybe<CategoryToContentNodeConnection>
     /** The number of objects connected to the object */
     count?: Maybe<Scalars['Int']>
-    /** Identifies the primary key from the database. */
+    /** The unique resource identifier path */
     databaseId: Scalars['Int']
     /** The description of the object */
     description?: Maybe<Scalars['String']>
@@ -104,10 +104,14 @@ export type Category = Node &
     enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>
-    /** The globally unique ID for the object */
+    /** The unique resource identifier path */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** The link to the term */
     link?: Maybe<Scalars['String']>
     /** The human friendly name of the object. */
@@ -129,7 +133,7 @@ export type Category = Node &
     /** The taxonomy ID that the object is associated with */
     termTaxonomyId?: Maybe<Scalars['Int']>
     /** The unique resource identifier path */
-    uri: Scalars['String']
+    uri?: Maybe<Scalars['String']>
   }
 
 /** The category type */
@@ -303,6 +307,8 @@ export type CategoryToContentNodeConnectionEdge = {
 
 /** Arguments for filtering the CategoryToContentNodeConnection connection */
 export type CategoryToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypesOfCategoryEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -342,7 +348,7 @@ export type CategoryToContentNodeConnectionWhereArgs = {
 /** Connection between the category type and the category type */
 export type CategoryToParentCategoryConnectionEdge = {
   __typename?: 'CategoryToParentCategoryConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Category>
 }
 
@@ -435,7 +441,7 @@ export type CategoryToPostConnectionWhereArgs = {
 /** Connection between the category type and the Taxonomy type */
 export type CategoryToTaxonomyConnectionEdge = {
   __typename?: 'CategoryToTaxonomyConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Taxonomy>
 }
 
@@ -606,21 +612,21 @@ export type CommentToCommentConnectionWhereArgs = {
 /** Connection between the Comment type and the Commenter type */
 export type CommentToCommenterConnectionEdge = {
   __typename?: 'CommentToCommenterConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Commenter>
 }
 
 /** Connection between the Comment type and the ContentNode type */
 export type CommentToContentNodeConnectionEdge = {
   __typename?: 'CommentToContentNodeConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<ContentNode>
 }
 
 /** Connection between the Comment type and the Comment type */
 export type CommentToParentCommentConnectionEdge = {
   __typename?: 'CommentToParentCommentConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Comment>
 }
 
@@ -750,7 +756,7 @@ export type ContentNode = {
   dateGmt?: Maybe<Scalars['String']>
   /** The desired slug of the post */
   desiredSlug?: Maybe<Scalars['String']>
-  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn't exist or is greater than 15 seconds */
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
   editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>
   /** The RSS enclosure for the object */
   enclosure?: Maybe<Scalars['String']>
@@ -758,14 +764,18 @@ export type ContentNode = {
   enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>
   /** Connection between the ContentNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>
-  /** The global unique identifier for this post. This currently matches the value stored in WP_Post->guid and the guid column in the "post_objects" database table. */
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']>
-  /** The globally unique identifier of the node. */
+  /** The unique resource identifier path */
   id: Scalars['ID']
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']>
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']
   /** The user that most recently edited the node */
   lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>
   /** The permalink of the post */
@@ -778,14 +788,14 @@ export type ContentNode = {
   previewRevisionDatabaseId?: Maybe<Scalars['Int']>
   /** Whether the object is a node in the preview state */
   previewRevisionId?: Maybe<Scalars['ID']>
-  /** The uri slug for the post. This is equivalent to the WP_Post->post_name field and the post_name column in the database for the "post_objects" table. */
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
   slug?: Maybe<Scalars['String']>
   /** The current status of the object */
   status?: Maybe<Scalars['String']>
   /** The template assigned to a node of content */
   template?: Maybe<ContentTemplate>
-  /** URI path for the resource */
-  uri: Scalars['String']
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']>
 }
 
 /** Nodes used to manage content */
@@ -817,14 +827,14 @@ export enum ContentNodeIdTypeEnum {
 /** Connection between the ContentNode type and the ContentType type */
 export type ContentNodeToContentTypeConnectionEdge = {
   __typename?: 'ContentNodeToContentTypeConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<ContentType>
 }
 
 /** Connection between the ContentNode type and the User type */
 export type ContentNodeToEditLastConnectionEdge = {
   __typename?: 'ContentNodeToEditLastConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<User>
 }
 
@@ -833,7 +843,7 @@ export type ContentNodeToEditLockConnectionEdge = {
   __typename?: 'ContentNodeToEditLockConnectionEdge'
   /** The timestamp for when the node was last edited */
   lockTimestamp?: Maybe<Scalars['String']>
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<User>
 }
 
@@ -912,12 +922,16 @@ export type ContentType = Node &
     hierarchical?: Maybe<Scalars['Boolean']>
     /** The globally unique identifier of the post-type object. */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether this page is set to the static front page. */
     isFrontPage: Scalars['Boolean']
     /** Whether this page is set to the blog posts page. */
     isPostsPage: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** Display name of the content type. */
     label?: Maybe<Scalars['String']>
     /** Details about the content type labels. */
@@ -1013,6 +1027,8 @@ export type ContentTypeToContentNodeConnectionEdge = {
 
 /** Arguments for filtering the ContentTypeToContentNodeConnection connection */
 export type ContentTypeToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypeEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -1067,6 +1083,30 @@ export type ContentTypeToTaxonomyConnectionEdge = {
   cursor?: Maybe<Scalars['String']>
   /** The item at the end of the edge */
   node?: Maybe<Taxonomy>
+}
+
+/** Allowed Content Types of the Category taxonomy. */
+export enum ContentTypesOfCategoryEnum {
+  /** The Type of Content object */
+  Post = 'POST',
+}
+
+/** Allowed Content Types of the LangLocation taxonomy. */
+export enum ContentTypesOfLangLocationEnum {
+  /** The Type of Content object */
+  Language = 'LANGUAGE',
+}
+
+/** Allowed Content Types of the PostFormat taxonomy. */
+export enum ContentTypesOfPostFormatEnum {
+  /** The Type of Content object */
+  Post = 'POST',
+}
+
+/** Allowed Content Types of the Tag taxonomy. */
+export enum ContentTypesOfTagEnum {
+  /** The Type of Content object */
+  Post = 'POST',
 }
 
 /** Input for the createCategory mutation */
@@ -1751,7 +1791,7 @@ export type EnqueuedScript = Node &
     extra?: Maybe<Scalars['String']>
     /** The handle of the enqueued asset */
     handle?: Maybe<Scalars['String']>
-    /** The globally unique ID for the object */
+    /** The ID of the enqueued asset */
     id: Scalars['ID']
     /** The source of the asset */
     src?: Maybe<Scalars['String']>
@@ -1771,7 +1811,7 @@ export type EnqueuedStylesheet = Node &
     extra?: Maybe<Scalars['String']>
     /** The handle of the enqueued asset */
     handle?: Maybe<Scalars['String']>
-    /** The globally unique ID for the object */
+    /** The ID of the enqueued asset */
     id: Scalars['ID']
     /** The source of the asset */
     src?: Maybe<Scalars['String']>
@@ -1858,6 +1898,8 @@ export type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge = {
 
 /** Arguments for filtering the HierarchicalContentNodeToContentNodeAncestorsConnection connection */
 export type HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypeEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -1918,6 +1960,8 @@ export type HierarchicalContentNodeToContentNodeChildrenConnectionEdge = {
 
 /** Arguments for filtering the HierarchicalContentNodeToContentNodeChildrenConnection connection */
 export type HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypeEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -1957,7 +2001,7 @@ export type HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs = {
 /** Connection between the HierarchicalContentNode type and the ContentNode type */
 export type HierarchicalContentNodeToParentContentNodeConnectionEdge = {
   __typename?: 'HierarchicalContentNodeToParentContentNodeConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<ContentNode>
 }
 
@@ -1972,8 +2016,8 @@ export type HierarchicalTermNode = {
 /** The LangLocation type */
 export type LangLocation = Node &
   TermNode &
-  DatabaseIdentifier &
   UniformResourceIdentifiable &
+  DatabaseIdentifier &
   HierarchicalTermNode &
   MenuItemLinkable & {
     __typename?: 'LangLocation'
@@ -1990,7 +2034,7 @@ export type LangLocation = Node &
     contentNodes?: Maybe<LangLocationToContentNodeConnection>
     /** The number of objects connected to the object */
     count?: Maybe<Scalars['Int']>
-    /** Identifies the primary key from the database. */
+    /** The unique resource identifier path */
     databaseId: Scalars['Int']
     /** The description of the object */
     description?: Maybe<Scalars['String']>
@@ -1998,10 +2042,14 @@ export type LangLocation = Node &
     enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>
-    /** The globally unique ID for the object */
+    /** The unique resource identifier path */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** Lat, lon, city, etc. (used by language/s) | Added to the GraphQL Schema because the ACF Field Group &quot;Location Info&quot; was set to Show in GraphQL. */
     languageLocation?: Maybe<LangLocation_Languagelocation>
     /** Connection between the LangLocation type and the Language type */
@@ -2025,7 +2073,7 @@ export type LangLocation = Node &
     /** The taxonomy ID that the object is associated with */
     termTaxonomyId?: Maybe<Scalars['Int']>
     /** The unique resource identifier path */
-    uri: Scalars['String']
+    uri?: Maybe<Scalars['String']>
   }
 
 /** The LangLocation type */
@@ -2135,6 +2183,8 @@ export type LangLocationToContentNodeConnectionEdge = {
 
 /** Arguments for filtering the LangLocationToContentNodeConnection connection */
 export type LangLocationToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypesOfLangLocationEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -2296,14 +2346,14 @@ export type LangLocationToLanguageConnectionWhereArgs = {
 /** Connection between the LangLocation type and the LangLocation type */
 export type LangLocationToParentLangLocationConnectionEdge = {
   __typename?: 'LangLocationToParentLangLocationConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<LangLocation>
 }
 
 /** Connection between the LangLocation type and the Taxonomy type */
 export type LangLocationToTaxonomyConnectionEdge = {
   __typename?: 'LangLocationToTaxonomyConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Taxonomy>
 }
 
@@ -2325,9 +2375,9 @@ export type LangLocation_Languagelocation = AcfFieldGroup & {
 /** The Language type */
 export type Language = Node &
   ContentNode &
+  UniformResourceIdentifiable &
   DatabaseIdentifier &
   NodeWithTemplate &
-  UniformResourceIdentifiable &
   NodeWithTitle &
   NodeWithFeaturedImage &
   NodeWithExcerpt &
@@ -2345,7 +2395,7 @@ export type Language = Node &
     customExcerpt?: Maybe<Language_Customexcerpt>
     /** Individual language instance | Added to the GraphQL Schema because the ACF Field Group &quot;Language Instance Info&quot; was set to Show in GraphQL. */
     customInfo?: Maybe<Language_Custominfo>
-    /** The ID of the node in the database. */
+    /** The unique resource identifier path */
     databaseId: Scalars['Int']
     /** Post publishing date. */
     date?: Maybe<Scalars['String']>
@@ -2373,12 +2423,16 @@ export type Language = Node &
     guid?: Maybe<Scalars['String']>
     /** The globally unique identifier of the language object. */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']>
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
     /** True if the node is a revision of another node */
     isRevision?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** Connection between the Language type and the LangLocation type */
     langLocations?: Maybe<LanguageToLangLocationConnection>
     /** The user that most recently edited the node */
@@ -2403,14 +2457,14 @@ export type Language = Node &
     slug?: Maybe<Scalars['String']>
     /** The current status of the object */
     status?: Maybe<Scalars['String']>
-    /** The template assigned to a node of content */
+    /** The template assigned to the node */
     template?: Maybe<ContentTemplate>
     /** Connection between the Language type and the TermNode type */
     terms?: Maybe<LanguageToTermNodeConnection>
     /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
     title?: Maybe<Scalars['String']>
-    /** URI path for the resource */
-    uri: Scalars['String']
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']>
     /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist ID&quot; was set to Show in GraphQL. */
     youTubePlaylist?: Maybe<Language_Youtubeplaylist>
   }
@@ -2567,7 +2621,7 @@ export type LanguageToLangLocationConnectionWhereArgs = {
 /** Connection between the Language type and the Language type */
 export type LanguageToPreviewConnectionEdge = {
   __typename?: 'LanguageToPreviewConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Language>
 }
 
@@ -2770,9 +2824,9 @@ export type MediaDetails = {
 /** The mediaItem type */
 export type MediaItem = Node &
   ContentNode &
+  UniformResourceIdentifiable &
   DatabaseIdentifier &
   NodeWithTemplate &
-  UniformResourceIdentifiable &
   NodeWithTitle &
   NodeWithAuthor &
   NodeWithComments &
@@ -2800,7 +2854,7 @@ export type MediaItem = Node &
     comments?: Maybe<MediaItemToCommentConnection>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
-    /** The ID of the node in the database. */
+    /** The unique identifier stored in the database */
     databaseId: Scalars['Int']
     /** Post publishing date. */
     date?: Maybe<Scalars['String']>
@@ -2824,10 +2878,14 @@ export type MediaItem = Node &
     guid?: Maybe<Scalars['String']>
     /** The globally unique identifier of the attachment object. */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']>
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** The user that most recently edited the node */
     lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>
     /** The permalink of the post */
@@ -2869,12 +2927,12 @@ export type MediaItem = Node &
     srcSet?: Maybe<Scalars['String']>
     /** The current status of the object */
     status?: Maybe<Scalars['String']>
-    /** The template assigned to a node of content */
+    /** The template assigned to the node */
     template?: Maybe<ContentTemplate>
     /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
     title?: Maybe<Scalars['String']>
-    /** URI path for the resource */
-    uri: Scalars['String']
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']>
   }
 
 /** The mediaItem type */
@@ -3208,7 +3266,7 @@ export type MenuItem = Node &
     /** The globally unique identifier of the parent nav menu item object. */
     parentId?: Maybe<Scalars['ID']>
     /** Path for the resource. Relative path for internal resources. Absolute path for external resources. */
-    path: Scalars['String']
+    path?: Maybe<Scalars['String']>
     /** Target attribute for the menu item link. */
     target?: Maybe<Scalars['String']>
     /** Title attribute for the menu item link */
@@ -3233,7 +3291,7 @@ export type MenuItemLinkable = {
   /** The unique resource identifier path */
   id: Scalars['ID']
   /** The unique resource identifier path */
-  uri: Scalars['String']
+  uri?: Maybe<Scalars['String']>
 }
 
 /** The Type of Identifier used to fetch a single node. Default is "ID". To be used along with the "id" field. */
@@ -3258,7 +3316,7 @@ export type MenuItemObjectUnion =
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = {
   __typename?: 'MenuItemToMenuConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Menu>
 }
 
@@ -3297,7 +3355,7 @@ export type MenuItemToMenuItemConnectionWhereArgs = {
 /** Connection between the MenuItem type and the MenuItemLinkable type */
 export type MenuItemToMenuItemLinkableConnectionEdge = {
   __typename?: 'MenuItemToMenuItemLinkableConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<MenuItemLinkable>
 }
 
@@ -3558,7 +3616,7 @@ export type NodeWithAuthor = {
 /** Connection between the NodeWithAuthor type and the User type */
 export type NodeWithAuthorToUserConnectionEdge = {
   __typename?: 'NodeWithAuthorToUserConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<User>
 }
 
@@ -3605,7 +3663,7 @@ export type NodeWithFeaturedImage = {
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
 export type NodeWithFeaturedImageToMediaItemConnectionEdge = {
   __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<MediaItem>
 }
 
@@ -3626,7 +3684,7 @@ export type NodeWithRevisions = {
 /** Connection between the NodeWithRevisions type and the ContentNode type */
 export type NodeWithRevisionsToContentNodeConnectionEdge = {
   __typename?: 'NodeWithRevisionsToContentNodeConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<ContentNode>
 }
 
@@ -3668,9 +3726,9 @@ export enum OrderEnum {
 /** The page type */
 export type Page = Node &
   ContentNode &
+  UniformResourceIdentifiable &
   DatabaseIdentifier &
   NodeWithTemplate &
-  UniformResourceIdentifiable &
   NodeWithTitle &
   NodeWithContentEditor &
   NodeWithAuthor &
@@ -3703,7 +3761,7 @@ export type Page = Node &
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
     /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
     customExcerpt?: Maybe<Page_Customexcerpt>
-    /** The ID of the node in the database. */
+    /** The unique resource identifier path */
     databaseId: Scalars['Int']
     /** Post publishing date. */
     date?: Maybe<Scalars['String']>
@@ -3731,6 +3789,8 @@ export type Page = Node &
     homePageSettings?: Maybe<Page_Homepagesettings>
     /** The globally unique identifier of the page object. */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether this page is set to the static front page. */
     isFrontPage: Scalars['Boolean']
     /** Whether this page is set to the blog posts page. */
@@ -3743,6 +3803,8 @@ export type Page = Node &
     isRestricted?: Maybe<Scalars['Boolean']>
     /** True if the node is a revision of another node */
     isRevision?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** The user that most recently edited the node */
     lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>
     /** The permalink of the post */
@@ -3780,12 +3842,12 @@ export type Page = Node &
     slug?: Maybe<Scalars['String']>
     /** The current status of the object */
     status?: Maybe<Scalars['String']>
-    /** The template assigned to a node of content */
+    /** The template assigned to the node */
     template?: Maybe<ContentTemplate>
     /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
     title?: Maybe<Scalars['String']>
-    /** URI path for the resource */
-    uri: Scalars['String']
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']>
     /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist ID&quot; was set to Show in GraphQL. */
     youTubePlaylist?: Maybe<Page_Youtubeplaylist>
   }
@@ -3947,7 +4009,7 @@ export type PageToCommentConnectionWhereArgs = {
 /** Connection between the page type and the page type */
 export type PageToPreviewConnectionEdge = {
   __typename?: 'PageToPreviewConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Page>
 }
 
@@ -4081,7 +4143,6 @@ export type Page_Sitewidesettings = AcfFieldGroup & {
   ctaButton?: Maybe<AcfLink>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']>
-  logo?: Maybe<MediaItem>
   /** This is all HTML for the MailChip newsletter signup form, formerly its own page called &quot;Announcement Form&quot;. Will likely need to style via CSS. */
   newsletter?: Maybe<Scalars['String']>
   social?: Maybe<Page_Sitewidesettings_Social>
@@ -4145,9 +4206,9 @@ export type Plugin = Node & {
 /** The post type */
 export type Post = Node &
   ContentNode &
+  UniformResourceIdentifiable &
   DatabaseIdentifier &
   NodeWithTemplate &
-  UniformResourceIdentifiable &
   NodeWithTitle &
   NodeWithContentEditor &
   NodeWithAuthor &
@@ -4178,7 +4239,7 @@ export type Post = Node &
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
     /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
     customExcerpt?: Maybe<Post_Customexcerpt>
-    /** The ID of the node in the database. */
+    /** The unique resource identifier path */
     databaseId: Scalars['Int']
     /** Post publishing date. */
     date?: Maybe<Scalars['String']>
@@ -4206,6 +4267,8 @@ export type Post = Node &
     guid?: Maybe<Scalars['String']>
     /** The globally unique identifier of the post object. */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']>
     /** Whether the object is restricted from the current viewer */
@@ -4214,6 +4277,8 @@ export type Post = Node &
     isRevision?: Maybe<Scalars['Boolean']>
     /** Whether this page is sticky */
     isSticky: Scalars['Boolean']
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** The user that most recently edited the node */
     lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>
     /** The permalink of the post */
@@ -4249,7 +4314,7 @@ export type Post = Node &
     status?: Maybe<Scalars['String']>
     /** Connection between the post type and the tag type */
     tags?: Maybe<PostToTagConnection>
-    /** The template assigned to a node of content */
+    /** The template assigned to the node */
     template?: Maybe<ContentTemplate>
     /** Connection between the post type and the TermNode type */
     terms?: Maybe<PostToTermNodeConnection>
@@ -4257,8 +4322,8 @@ export type Post = Node &
     title?: Maybe<Scalars['String']>
     /** URLs queued to be pinged. */
     toPing?: Maybe<Array<Maybe<Scalars['String']>>>
-    /** URI path for the resource */
-    uri: Scalars['String']
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']>
     /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist ID&quot; was set to Show in GraphQL. */
     youTubePlaylist?: Maybe<Post_Youtubeplaylist>
   }
@@ -4371,15 +4436,15 @@ export type PostCategoriesNodeInput = {
 /** The postFormat type */
 export type PostFormat = Node &
   TermNode &
-  DatabaseIdentifier &
   UniformResourceIdentifiable &
+  DatabaseIdentifier &
   MenuItemLinkable & {
     __typename?: 'PostFormat'
     /** Connection between the postFormat type and the ContentNode type */
     contentNodes?: Maybe<PostFormatToContentNodeConnection>
     /** The number of objects connected to the object */
     count?: Maybe<Scalars['Int']>
-    /** Identifies the primary key from the database. */
+    /** The unique resource identifier path */
     databaseId: Scalars['Int']
     /** The description of the object */
     description?: Maybe<Scalars['String']>
@@ -4387,10 +4452,14 @@ export type PostFormat = Node &
     enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>
-    /** The globally unique ID for the object */
+    /** The unique resource identifier path */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** The link to the term */
     link?: Maybe<Scalars['String']>
     /** The human friendly name of the object. */
@@ -4411,7 +4480,7 @@ export type PostFormat = Node &
     /** The taxonomy ID that the object is associated with */
     termTaxonomyId?: Maybe<Scalars['Int']>
     /** The unique resource identifier path */
-    uri: Scalars['String']
+    uri?: Maybe<Scalars['String']>
   }
 
 /** The postFormat type */
@@ -4484,6 +4553,8 @@ export type PostFormatToContentNodeConnectionEdge = {
 
 /** Arguments for filtering the PostFormatToContentNodeConnection connection */
 export type PostFormatToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypesOfPostFormatEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -4609,7 +4680,7 @@ export type PostFormatToPostConnectionWhereArgs = {
 /** Connection between the postFormat type and the Taxonomy type */
 export type PostFormatToTaxonomyConnectionEdge = {
   __typename?: 'PostFormatToTaxonomyConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Taxonomy>
 }
 
@@ -4959,7 +5030,7 @@ export type PostToPostFormatConnectionWhereArgs = {
 /** Connection between the post type and the post type */
 export type PostToPreviewConnectionEdge = {
   __typename?: 'PostToPreviewConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Post>
 }
 
@@ -5257,9 +5328,9 @@ export type Post_Youtubeplaylist = AcfFieldGroup & {
 /** The Project type */
 export type Project = Node &
   ContentNode &
+  UniformResourceIdentifiable &
   DatabaseIdentifier &
   NodeWithTemplate &
-  UniformResourceIdentifiable &
   NodeWithTitle &
   NodeWithContentEditor &
   NodeWithFeaturedImage &
@@ -5278,7 +5349,7 @@ export type Project = Node &
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
     /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
     customExcerpt?: Maybe<Project_Customexcerpt>
-    /** The ID of the node in the database. */
+    /** The unique resource identifier path */
     databaseId: Scalars['Int']
     /** Post publishing date. */
     date?: Maybe<Scalars['String']>
@@ -5306,12 +5377,16 @@ export type Project = Node &
     guid?: Maybe<Scalars['String']>
     /** The globally unique identifier of the project object. */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']>
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
     /** True if the node is a revision of another node */
     isRevision?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** The user that most recently edited the node */
     lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>
     /** The permalink of the post */
@@ -5336,12 +5411,12 @@ export type Project = Node &
     slug?: Maybe<Scalars['String']>
     /** The current status of the object */
     status?: Maybe<Scalars['String']>
-    /** The template assigned to a node of content */
+    /** The template assigned to the node */
     template?: Maybe<ContentTemplate>
     /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
     title?: Maybe<Scalars['String']>
-    /** URI path for the resource */
-    uri: Scalars['String']
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']>
     /** YouTube playlist ID for this Post or Page | Added to the GraphQL Schema because the ACF Field Group &quot;YouTube Playlist ID&quot; was set to Show in GraphQL. */
     youTubePlaylist?: Maybe<Project_Youtubeplaylist>
   }
@@ -5401,7 +5476,7 @@ export enum ProjectIdType {
 /** Connection between the Project type and the Project type */
 export type ProjectToPreviewConnectionEdge = {
   __typename?: 'ProjectToPreviewConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Project>
 }
 
@@ -6605,6 +6680,8 @@ export type RootQueryToContentRevisionUnionConnectionEdge = {
 
 /** Arguments for filtering the RootQueryToContentRevisionUnionConnection connection */
 export type RootQueryToContentRevisionUnionConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypeEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -7544,15 +7621,15 @@ export type Settings = {
 /** The tag type */
 export type Tag = Node &
   TermNode &
-  DatabaseIdentifier &
   UniformResourceIdentifiable &
+  DatabaseIdentifier &
   MenuItemLinkable & {
     __typename?: 'Tag'
     /** Connection between the tag type and the ContentNode type */
     contentNodes?: Maybe<TagToContentNodeConnection>
     /** The number of objects connected to the object */
     count?: Maybe<Scalars['Int']>
-    /** Identifies the primary key from the database. */
+    /** The unique resource identifier path */
     databaseId: Scalars['Int']
     /** The description of the object */
     description?: Maybe<Scalars['String']>
@@ -7560,10 +7637,14 @@ export type Tag = Node &
     enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>
-    /** The globally unique ID for the object */
+    /** The unique resource identifier path */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** The link to the term */
     link?: Maybe<Scalars['String']>
     /** The human friendly name of the object. */
@@ -7584,7 +7665,7 @@ export type Tag = Node &
     /** The taxonomy ID that the object is associated with */
     termTaxonomyId?: Maybe<Scalars['Int']>
     /** The unique resource identifier path */
-    uri: Scalars['String']
+    uri?: Maybe<Scalars['String']>
   }
 
 /** The tag type */
@@ -7657,6 +7738,8 @@ export type TagToContentNodeConnectionEdge = {
 
 /** Arguments for filtering the TagToContentNodeConnection connection */
 export type TagToContentNodeConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypesOfTagEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -7782,7 +7865,7 @@ export type TagToPostConnectionWhereArgs = {
 /** Connection between the tag type and the Taxonomy type */
 export type TagToTaxonomyConnectionEdge = {
   __typename?: 'TagToTaxonomyConnectionEdge'
-  /** The nodes of the connection, without the edges */
+  /** The node of the connection, without the edges */
   node?: Maybe<Taxonomy>
 }
 
@@ -7891,10 +7974,14 @@ export type TermNode = {
   enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>
   /** Connection between the TermNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>
-  /** Unique identifier for the term */
+  /** The unique resource identifier path */
   id: Scalars['ID']
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']>
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']
   /** The link to the term */
   link?: Maybe<Scalars['String']>
   /** The human friendly name of the object. */
@@ -7906,7 +7993,7 @@ export type TermNode = {
   /** The taxonomy ID that the object is associated with */
   termTaxonomyId?: Maybe<Scalars['Int']>
   /** The unique resource identifier path */
-  uri: Scalars['String']
+  uri?: Maybe<Scalars['String']>
 }
 
 /** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
@@ -8947,6 +9034,10 @@ export enum TimezoneEnum {
 export type UniformResourceIdentifiable = {
   /** The unique resource identifier path */
   id: Scalars['ID']
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']
   /** The unique resource identifier path */
   uri?: Maybe<Scalars['String']>
 }
@@ -9421,8 +9512,12 @@ export type User = Node &
     firstName?: Maybe<Scalars['String']>
     /** The globally unique identifier for the user object. */
     id: Scalars['ID']
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']>
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']
     /** Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property. */
     lastName?: Maybe<Scalars['String']>
     /** The preferred language locale set for the user. Value derived from get_user_locale(). */
@@ -9685,6 +9780,8 @@ export type UserToContentRevisionUnionConnectionEdge = {
 
 /** Arguments for filtering the UserToContentRevisionUnionConnection connection */
 export type UserToContentRevisionUnionConnectionWhereArgs = {
+  /** The Types of content to filter */
+  contentTypes?: Maybe<Array<Maybe<ContentTypeEnum>>>
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */

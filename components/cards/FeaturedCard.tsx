@@ -20,6 +20,8 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = (props) => {
             alt={altText || title}
             layout="fill"
             objectFit="cover"
+            priority
+            placeholder="blur"
           />
         </div>
       </header>
