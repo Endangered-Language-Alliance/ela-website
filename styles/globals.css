@@ -309,5 +309,6 @@ address {
 
 /* UGGHHHH */
 .mapboxgl-popup-content {
+  max-width: 225px;
   padding: 10px !important;
 }
