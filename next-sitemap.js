@@ -45,7 +45,7 @@ const defaultFreqAndPriority = {
 }
 
 const settings = {
-  siteUrl: process.env.SITE_URL || 'https://elalliance.org',
+  siteUrl: process.env.SITE_URL || 'https://www.elalliance.org',
   generateRobotsTxt: true,
   outDir: '.next',
   exclude: ['/sitemap'], // internal sitemap only seen in local and dev anyway

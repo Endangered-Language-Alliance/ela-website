@@ -2,8 +2,8 @@ import Head from 'next/head'
 import { LayoutProps } from './types'
 
 const SITE_NAME = 'Endangered Language Alliance'
-const SITE_URL = 'https://elalliance.org/'
-const SITE_LOGO = 'https://elalliance.org/ela-logo-hq-black.png'
+const SITE_URL = 'https://www.elalliance.org/'
+const SITE_LOGO = 'https://www.elalliance.org/ela-logo-hq-black.png'
 const SITE_DESC =
   'Founded in 2010, the Endangered Language Alliance (ELA) is a non-profit dedicated to documenting Indigenous, minority, and endangered languages, supporting linguistic diversity in New York City and beyond.'
 
