@@ -1,5 +1,5 @@
 query AllProjectsWithSlug {
-  projects(first: 10000) {
+  projects(first: 10000, where: { status: PUBLISH }) {
     edges {
       node {
         uri

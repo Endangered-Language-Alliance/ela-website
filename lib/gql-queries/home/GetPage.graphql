@@ -8,7 +8,9 @@ query GetPage($id: ID!) {
     customExcerpt {
       excerpt
     }
-    children(where: { orderby: { field: MENU_ORDER, order: ASC } }) {
+    children(
+      where: { orderby: { field: MENU_ORDER, order: ASC }, status: PUBLISH }
+    ) {
       nodes {
         uri
         ... on Page {

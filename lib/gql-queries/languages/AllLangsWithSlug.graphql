@@ -1,5 +1,5 @@
 query AllLangsWithSlug {
-  languages(first: 10000) {
+  languages(first: 10000, where: { status: PUBLISH }) {
     edges {
       node {
         uri

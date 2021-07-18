@@ -1,5 +1,5 @@
 query AllPostsWithSlug {
-  posts(first: 10000) {
+  posts(first: 10000, where: { status: PUBLISH }) {
     edges {
       node {
         uri

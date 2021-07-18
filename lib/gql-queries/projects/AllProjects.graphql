@@ -3,7 +3,10 @@ query AllProjects {
   contentType(id: "project", idType: NAME) {
     description
   }
-  projects(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
+  projects(
+    first: 2000
+    where: { status: PUBLISH, orderby: { field: TITLE, order: ASC } }
+  ) {
     nodes {
       title
       uri
@@ -15,7 +18,10 @@ query AllProjects {
       }
     }
   }
-  languages(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
+  languages(
+    first: 2000
+    where: { status: PUBLISH, orderby: { field: TITLE, order: ASC } }
+  ) {
     nodes {
       title
       uri

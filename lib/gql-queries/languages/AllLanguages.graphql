@@ -3,7 +3,10 @@ query AllLanguages {
   contentType(id: "language", idType: NAME) {
     description
   }
-  languages(first: 2000, where: { orderby: { field: TITLE, order: ASC } }) {
+  languages(
+    first: 2000
+    where: { orderby: { field: TITLE, order: ASC }, status: PUBLISH }
+  ) {
     nodes {
       title
       uri

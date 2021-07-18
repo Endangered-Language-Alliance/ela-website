@@ -1,5 +1,8 @@
 query AllPosts {
-  posts(first: 25, where: { orderby: { field: DATE, order: DESC } }) {
+  posts(
+    first: 25
+    where: { orderby: { field: DATE, order: DESC }, status: PUBLISH }
+  ) {
     nodes {
       date
       title
