@@ -43,7 +43,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
       <CustomHead {...props} />
       <div className={styles.page}>
         <Header />
-        <div className={styles.scrollWrap} ref={refElem}>
+        <div className={styles.scrollWrap} ref={refElem} id="scroll-wrap">
           <main className={`${styles.container} ${styles.main}`}>
             <Hero
               title={title}
@@ -67,7 +67,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
               >
                 {children}
               </div>
-              {childPages?.length && (
+              {childPages?.length ? (
                 <FeaturedCardList>
                   {childPages.map((childPage, i) => {
                     if (i === 0 && childPage.featuredImage?.node?.sourceUrl) {
@@ -93,7 +93,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
                     )
                   })}
                 </FeaturedCardList>
-              )}
+              ) : null}
             </div>
           </main>
           <Footer />

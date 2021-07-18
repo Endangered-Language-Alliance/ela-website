@@ -12,6 +12,10 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
   useEffect(() => {
     const handleRouteChange = (url: string): void => {
       pageview(url)
+
+      const scrollWrapElem = document.getElementById('scroll-wrap') // 🤮 🤮 🤮
+
+      if (scrollWrapElem) scrollWrapElem.scroll(0, 0)
     }
 
     router.events.on('routeChangeComplete', handleRouteChange)

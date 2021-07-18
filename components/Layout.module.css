@@ -1,10 +1,9 @@
 .page {
   display: flex;
   flex-direction: column;
+  height: calc(100vh - var(--headerHt));
   height: 100vh;
   justify-content: space-between;
-  overflow-x: hidden;
-  width: 100%;
 }
 
 .container {
@@ -14,10 +13,8 @@
 }
 
 .main {
-  overflow-x: hidden;
   padding-bottom: var(--p3);
   padding-top: var(--p2);
-  width: 100%;
 }
 
 .scrollWrap {
