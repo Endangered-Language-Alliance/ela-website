@@ -43,8 +43,8 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   let pageImgUrl = SITE_LOGO
 
   // UGHHHHHHH operator-linebreak
-  if (childPages) {
-    pageImgUrl = childPages[0].featuredImage?.node?.sourceUrl || ''
+  if (childPages && childPages[0] && childPages[0].featuredImage) {
+    pageImgUrl = childPages[0].featuredImage.node?.sourceUrl || ''
   }
 
   const titlePrefix = pageTitle ? `${pageTitle} - ` : ''
