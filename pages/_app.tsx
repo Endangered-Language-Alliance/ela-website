@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 import { pageview } from 'lib/gtag'
+import { TransitionLayout } from 'components/TransitionLayout'
 
 import '../styles/globals.css'
 
@@ -25,7 +26,11 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
     }
   }, [router.events])
 
-  return <Component {...pageProps} />
+  return (
+    <TransitionLayout>
+      <Component {...pageProps} />
+    </TransitionLayout>
+  )
 }
 
 export default MyApp

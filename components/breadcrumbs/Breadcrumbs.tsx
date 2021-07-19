@@ -40,7 +40,10 @@ export const Breadcrumbs: React.FC = () => {
     }
   }, [router])
 
-  if (!breadcrumbs || breadcrumbs.length === 1) return null
+  if (!breadcrumbs || breadcrumbs.length === 1) {
+    // Reduce layout jank on page transition
+    return <div className={styles.root} />
+  }
 
   return (
     <nav aria-label="breadcrumbs" className={styles.root}>

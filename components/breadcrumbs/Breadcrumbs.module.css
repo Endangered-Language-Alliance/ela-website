@@ -4,6 +4,7 @@
   margin-bottom: var(--p0);
   overflow-x: auto; /* just in case on mobile */
   width: 100%;
+  min-height: 30px; /* reduce layout jank on page transition */
 }
 
 .list {

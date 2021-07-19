@@ -1,7 +1,15 @@
+.transitionWrap {
+  opacity: 0;
+  transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
 .page {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - var(--headerHt));
   height: 100vh;
   justify-content: space-between;
 }

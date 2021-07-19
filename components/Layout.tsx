@@ -1,5 +1,4 @@
 import { useRef } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { Hero } from 'components/Hero'
 import { BackToTopBtn } from 'components/buttons/BackToTopBtn'
@@ -7,25 +6,12 @@ import { PostsItem } from 'components/latest/PostsItem'
 import { FeaturedCardList, FeaturedCard } from 'components/cards/FeaturedCard'
 import { useHideOnScroll } from 'lib/hooks'
 
-import Header from './header'
 import { Footer } from './footer'
 import { LayoutProps } from './types'
 import { YouTubePlaylist } from './video/YouTubePlaylist'
 
 import styles from './Layout.module.css'
 import { CustomHead } from './CustomHead'
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      cacheTime: Infinity,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
-      staleTime: Infinity,
-    },
-  },
-})
 
 export const Layout: React.FC<LayoutProps> = (props) => {
   const { title, children, summary } = props
@@ -39,10 +25,9 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   const hide = useHideOnScroll(refElem, 450)
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <CustomHead {...props} />
       <div className={styles.page}>
-        <Header />
         <div className={styles.scrollWrap} ref={refElem} id="scroll-wrap">
           <main className={`${styles.container} ${styles.main}`}>
             <Hero
@@ -100,6 +85,6 @@ export const Layout: React.FC<LayoutProps> = (props) => {
         </div>
         <BackToTopBtn hide={!hide} targetElemID={targetElemID} />
       </div>
-    </QueryClientProvider>
+    </>
   )
 }
