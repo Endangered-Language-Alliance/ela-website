@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import { Menu, MenuList, MenuButton, MenuLink } from '@reach/menu-button'
+import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button'
 import '@reach/menu-button/styles.css'
 
-import { MenuItem } from 'gql-ts/wp-graphql'
+import { MenuItem as WpMenuItem } from 'gql-ts/wp-graphql'
 
 import styles from './Header.module.css'
 
 export type NavMenuProps = {
-  data: MenuItem[]
+  data: WpMenuItem[]
 }
 
 export const NavMenu: React.FC<NavMenuProps> = (props) => {
@@ -38,13 +38,11 @@ export const NavMenu: React.FC<NavMenuProps> = (props) => {
                 <MenuList className={styles.menuList}>
                   {childItems?.nodes?.map((item) => {
                     return (
-                      <MenuLink
-                        key={item?.path}
-                        as={Link}
-                        href={item?.path || '/'}
-                      >
-                        {item?.label}
-                      </MenuLink>
+                      <MenuItem key={item?.path} onSelect={() => {}}>
+                        <Link href={item?.path || '/'}>
+                          <a>{item?.label}</a>
+                        </Link>
+                      </MenuItem>
                     )
                   })}
                 </MenuList>

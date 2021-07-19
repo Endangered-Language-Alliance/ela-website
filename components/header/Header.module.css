@@ -86,12 +86,22 @@
   box-shadow: var(--elev3);
   display: grid;
   font-size: var(--navItemFontSize);
-  grid-column-gap: var(--p3);
+  grid-column-gap: var(--p6);
   grid-row-gap: var(--p1);
   grid-template-columns: auto auto;
   padding: var(--p2) var(--p3);
   position: relative;
   z-index: 3; /* my goodness */
+}
+
+/* Wrapper around <Link> elements */
+.menuList [data-reach-menu-item] {
+  padding: 4px 1rem;
+  padding: 0;
+}
+
+.menuList [data-reach-menu-item][data-selected] {
+  background-color: unset;
 }
 
 .menuList a {
