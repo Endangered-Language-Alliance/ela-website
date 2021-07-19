@@ -1,0 +1,10 @@
+# Defaults: https://docs.netlify.com/routing/redirects/redirect-options/
+[[redirects]]
+  from = "https://endangeredlanguagealliance.org/*"
+  to = "/"
+[[redirects]]
+  from = "https://endangeredlanguagealliance.org/"
+  to = "/"
+[[redirects]]
+  from = "https://endangeredlanguagealliance.org"
+  to = "/"

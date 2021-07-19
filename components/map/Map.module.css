@@ -108,7 +108,7 @@
   color: var(--gr5);
   font-size: 1.25rem;
   /* MB default for .mapboxgl-popup-content padding: 10px 10px 15px */
-  padding: 2px 10px 2px 0; /* iOS Safari weirdness */
+  padding: 2px 8px 2px 0; /* iOS Safari weirdness */
 }
 
 .popupContent {
@@ -117,6 +117,7 @@
 
 .popupHeading {
   font-size: var(--font-h5);
+  margin-right: 1rem; /* prevent overlap with X btn */
   margin-bottom: 0;
 }
 

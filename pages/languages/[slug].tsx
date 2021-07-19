@@ -97,7 +97,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                       style={{ marginTop: 'var(--p2)' }} // dammit
                     >
                       <a
-                        href="https://glottolog.org/resource/languoid/id/"
+                        href={`https://glottolog.org/resource/languoid/id/${glottologId}`}
                         target="_blank"
                         rel="noreferrer"
                         className={`${btnStyles.button} ${btnStyles.secondary}`}

@@ -1,10 +1,17 @@
+.transitionWrap {
+  opacity: 0;
+  transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
 .page {
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: space-between;
-  overflow-x: hidden;
-  width: 100%;
 }
 
 .container {
@@ -14,10 +21,8 @@
 }
 
 .main {
-  overflow-x: hidden;
   padding-bottom: var(--p3);
   padding-top: var(--p2);
-  width: 100%;
 }
 
 .scrollWrap {

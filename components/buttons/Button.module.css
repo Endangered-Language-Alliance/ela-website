@@ -108,7 +108,6 @@ a.button:hover,
   right: 1vw;
   transform: translateY(0);
   width: var(--size);
-  z-index: 1;
 }
 
 .offScreenBottom {

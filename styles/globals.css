@@ -117,6 +117,7 @@
   --font-xs: 0.64rem;
   --font-tiny: 0.512rem;
   --font-body: var(--font-md);
+  --font-card-summary: 0.85rem; /* not from typescale */
 
   /* Layout */
   --maxWidth: 1150px;
@@ -163,6 +164,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  height: 100%;
 }
 
 /* CRED: BG img */
@@ -307,5 +309,6 @@ address {
 
 /* UGGHHHH */
 .mapboxgl-popup-content {
+  max-width: 225px;
   padding: 10px !important;
 }

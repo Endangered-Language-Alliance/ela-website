@@ -68,11 +68,21 @@ to obtain the settings.
 
 ## Setup Notes
 
+### Main site
+
+#### DNS
+
+[Great explanation](https://answers.netlify.com/t/godaddy-dns-netlify/4430/3) of
+why not all the records from GoDaddy are needed in a Netlify DNS domain (just
+the `MX`). Other than that pretty much just pointed the Name Servers in GoDaddy
+to Netlify. Guide
+[here](https://docs.netlify.com/domains-https/netlify-dns/delegate-to-netlify/).
+
 ### Content site
 
 [https://content.endangeredlanguagealliance.org/](https://content.endangeredlanguagealliance.org/)
 
-### HTTPS (SSL)
+#### HTTPS (SSL)
 
 Followed
 [this](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-enabling-https-on-wordpress)
