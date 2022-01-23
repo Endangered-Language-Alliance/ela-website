@@ -3,8 +3,8 @@
   "workbench.editor.untitled.labelFormat": "name",
   "window.title": "${activeEditorShort}${separator}ELA Website",
   "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#5b2c75",
-    "titleBar.activeForeground": "#ffffff"
+    "titleBar.activeBackground": "#8d80a1",
+    "titleBar.activeForeground": "#3d167a"
   },
   "search.exclude": {
     "public/fonts": true

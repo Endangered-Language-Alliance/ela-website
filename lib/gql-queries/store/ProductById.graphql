@@ -1,0 +1,10 @@
+# TODO: rm if not using
+query ProductBySlug($id: ID!) {
+  language(id: $id, idType: SLUG) {
+    ...LanguageFields
+  }
+}
+
+fragment ProductFields on Product {
+  name
+}

@@ -1,0 +1,17 @@
+query AllProducts {
+  products(first: 1000) {
+    edges {
+      node {
+        id
+        name
+        shortDescription
+        onSale
+        type
+        image {
+          id
+          srcSet
+        }
+      }
+    }
+  }
+}
