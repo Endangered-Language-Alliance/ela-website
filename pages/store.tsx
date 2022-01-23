@@ -2,7 +2,7 @@ import { Layout } from 'components/Layout'
 import { ProductList } from 'components/store/ProductList'
 import { Product } from 'gql-ts/wp-graphql'
 import { getAllProducts } from 'lib/api/api.store'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 
 type Props = {
   data: {
@@ -26,11 +26,11 @@ const Store: React.FC<Props> = ({
 
 export default Store
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const data = await getAllProducts()
 
   return {
     props: { data },
-    revalidate: 300,
+    // revalidate: 300, // TODO: rm if not using
   }
 }
