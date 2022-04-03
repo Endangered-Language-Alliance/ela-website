@@ -260,6 +260,7 @@ export const zoomToMarkersExtent = (
   try {
     map.fitBounds(bounds, boundsSettings, { forceViewportUpdate: true })
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e)
   }
 }

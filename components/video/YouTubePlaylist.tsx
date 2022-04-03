@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { BiPlay } from 'react-icons/bi'
@@ -46,7 +47,7 @@ export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
           height: thumbnails.medium?.height || 180,
         }}
       >
-        <img alt={title} src={thumbnails.medium?.url || ''} />
+        <Image src={thumbnails.medium?.url || ''} alt={title} />
         <div className={styles.mask}>
           <div className={styles.playBtnCircle}>
             <BiPlay />

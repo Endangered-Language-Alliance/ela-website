@@ -12,7 +12,7 @@ type BackToTopBtnProps = {
 export const BackToTopBtn: FC<BackToTopBtnProps> = (props) => {
   const { targetElemID, hide } = props
 
-  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleClick = (event: MouseEvent<HTMLDivElement>): void => {
     const anchor = (
       (event.target as HTMLDivElement).ownerDocument || document
     ).querySelector(`#${targetElemID}`)

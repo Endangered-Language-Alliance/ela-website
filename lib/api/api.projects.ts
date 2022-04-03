@@ -1,20 +1,26 @@
-import getConfig from 'next/config'
-import { request } from 'graphql-request'
-
-import allProjects from 'lib/gql-queries/projects/AllProjects.graphql'
-import projectBySlug from 'lib/gql-queries/projects/ProjectBySlug.graphql'
-import allProjectsWithSlug from 'lib/gql-queries/projects/AllProjectsWithSlug.graphql'
 import {
+  ContentType,
   Project,
   RootQuery,
-  RootQueryToProjectConnection,
   RootQueryToLanguageConnection,
+  RootQueryToProjectConnection,
 } from 'gql-ts/wp-graphql'
+import { request } from 'graphql-request'
+import allProjects from 'lib/gql-queries/projects/AllProjects.graphql'
+import allProjectsWithSlug from 'lib/gql-queries/projects/AllProjectsWithSlug.graphql'
+import projectBySlug from 'lib/gql-queries/projects/ProjectBySlug.graphql'
+import getConfig from 'next/config'
 
 const { publicRuntimeConfig } = getConfig()
 const { wpGqlEndpoint } = publicRuntimeConfig
 
-export async function getAllProjects() {
+type AllProjects = {
+  contentType: ContentType | null
+  projects: RootQueryToProjectConnection
+  languages: RootQueryToLanguageConnection
+}
+
+export async function getAllProjects(): Promise<AllProjects> {
   const data = await request(wpGqlEndpoint, allProjects)
 
   return data

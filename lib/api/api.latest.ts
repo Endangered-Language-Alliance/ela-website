@@ -11,7 +11,7 @@ import allPostsWithSlug from 'lib/gql-queries/blog/QueryAllPostsWithSlug.graphql
 const { publicRuntimeConfig } = getConfig()
 const { wpGqlEndpoint } = publicRuntimeConfig
 
-export async function getAllPosts() {
+export async function getAllPosts(): Promise<RootQueryToPostConnection> {
   const data = await request(wpGqlEndpoint, allPosts)
 
   return data?.posts
