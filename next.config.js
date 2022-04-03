@@ -27,8 +27,6 @@ const nextConfig = {
     // the main content space, which has a max width smaller than 1024 anyway.
     deviceSizes: [300, 768, 1024],
   },
-  // TODO: rm if this works: https://tinyurl.com/y85p53ea
-  // target: 'serverless', // Netlify plugin might handle it, but had problems
   publicRuntimeConfig: {
     mbToken: process.env.MB_TOKEN,
     youTubeKey: process.env.YOUTUBE_KEY,
