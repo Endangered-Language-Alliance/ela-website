@@ -1,0 +1,42 @@
+/* CRED: (partial) https://codepen.io/nardecode/pen/yLOqPVM */
+.searchBox {
+  --size: 2.25rem;
+  --font-size: 1.85rem;
+
+  align-items: center;
+  background-color: #fff;
+  border-radius: var(--size);
+  display: inline-flex;
+  font-size: var(--font-size);
+  height: var(--size);
+  margin: 0 12px;
+  padding: 0.25rem 8px;
+}
+
+.searchBtnIcon {
+  align-items: center;
+  border-radius: inherit;
+  color: var(--gr2);
+  display: inline-flex;
+  font-size: calc(0.75 * var(--font-size));
+}
+
+.searchInput {
+  background: none;
+  border: none;
+  color: var(--gr11);
+  line-height: var(--size);
+  margin-left: 8px;
+  outline: none;
+  transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+  width: 125px;
+}
+
+.searchInput::placeholder { 
+  color: var(--gr8);
+}
+
+.searchInput:focus { 
+  width: 200px; 
+}
+

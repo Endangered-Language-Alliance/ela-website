@@ -12,7 +12,7 @@ export const SearchResult: React.FC<Props> = (props) => {
 
   return (
     <article>
-      <h3>
+      <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
         <Link href={href}>{title}</Link>
       </h3>
       {(!isHtml && <p>{content}</p>) || (

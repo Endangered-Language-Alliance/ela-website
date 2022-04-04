@@ -10,7 +10,15 @@ export const SearchResults: React.FC = () => {
   if (!queryString) return null // prevent outbound jank
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Something went wrong</div>
-  if (!data) return <div>No results found</div>
+
+  // 🤮
+  const noResults =
+    !data?.languages.nodes?.length &&
+    !data?.projects.nodes?.length &&
+    !data?.pages.nodes?.length &&
+    !data?.posts.nodes?.length
+
+  if (!data || noResults) return <div>No results found</div>
 
   const config = [
     { heading: 'Languages', items: data.languages },
@@ -18,44 +26,49 @@ export const SearchResults: React.FC = () => {
     { heading: 'Pages', items: data.pages },
   ]
 
+  // TODO: DRY out
   return (
     <div>
-      {config.map(({ heading, items }) => (
-        <div key={heading}>
-          <h2>{heading}</h2>
-          {items?.nodes?.map((node) => {
-            if (!node) return null
+      {config
+        .filter(({ items }) => items?.nodes?.length)
+        .map(({ heading, items }) => (
+          <div key={heading} style={{ marginBottom: 'var(--p5)' }}>
+            <h2>{heading}</h2>
+            {items?.nodes?.map((node) => {
+              if (!node) return null
 
-            const { title, uri, customExcerpt } = node
+              const { title, uri, customExcerpt } = node
+
+              return (
+                <SearchResult
+                  key={title}
+                  title={title || ''}
+                  href={uri || ''}
+                  content={customExcerpt?.excerpt || ''}
+                />
+              )
+            })}
+          </div>
+        ))}
+      {!!data.posts?.nodes?.length && (
+        <div style={{ marginBottom: 'var(--p5)' }}>
+          <h2>Posts</h2>
+          {data.posts?.nodes?.map((node) => {
+            if (!node) return null
+            const { title, uri, excerpt } = node
 
             return (
               <SearchResult
                 key={title}
                 title={title || ''}
                 href={uri || ''}
-                content={customExcerpt?.excerpt || ''}
+                isHtml
+                content={excerpt || ''}
               />
             )
           })}
         </div>
-      ))}
-      <div>
-        <h2>Posts</h2>
-        {data.posts?.nodes?.map((node) => {
-          if (!node) return null
-          const { title, uri, excerpt } = node
-
-          return (
-            <SearchResult
-              key={title}
-              title={title || ''}
-              href={uri || ''}
-              isHtml
-              content={excerpt || ''}
-            />
-          )
-        })}
-      </div>
+      )}
     </div>
   )
 }
