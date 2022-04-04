@@ -1,4 +1,3 @@
-import { ButtonHTMLAttributes } from 'react'
 import styles from './Button.module.css'
 
 type ButtonProps = {
@@ -13,7 +12,8 @@ export const Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <button
-      type="button"
+      // eslint-disable-next-line react/button-has-type
+      type={type} // not worth the linter fight
       onClick={onClick}
       aria-label={ariaLabel}
       className={`${styles.button} ${styles.secondary} ${classes}`}
