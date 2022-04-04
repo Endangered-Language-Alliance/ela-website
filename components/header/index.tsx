@@ -56,6 +56,16 @@ const Header: React.FC = () => {
               isOpen={mobileNavIsOpen}
               setIsOpen={setMobileNavIsOpen}
             >
+              <div
+                style={{
+                  width: 300,
+                  margin: '0 auto var(--p2)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                <SearchInput />
+              </div>
               <MobileNavMenu
                 setIsOpen={setMobileNavIsOpen}
                 data={menuItems.nodes}
@@ -64,7 +74,7 @@ const Header: React.FC = () => {
             </Burger>
           </>
         )}
-        <SearchInput />
+        <SearchInput desktopOnly />
         <CtaButton
           url={siteWideSettings?.ctaButton?.url}
           text={siteWideSettings?.ctaButton?.title}

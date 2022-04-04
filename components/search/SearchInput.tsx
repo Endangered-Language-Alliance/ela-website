@@ -1,9 +1,20 @@
 import { IoSearch } from 'react-icons/io5'
 import styles from './Search.module.css'
 
-export const SearchInput: React.FC = () => {
+type Props = {
+  desktopOnly?: boolean
+}
+
+export const SearchInput: React.FC<Props> = (props) => {
+  const { desktopOnly } = props
+  const extraClass = desktopOnly ? ` ${styles.desktopOnly}` : ''
+
   return (
-    <form role="search" className={styles.searchBox} action="/search?q=null">
+    <form
+      role="search"
+      className={styles.searchBox + extraClass}
+      action="/search?q=null"
+    >
       <div className={styles.searchBtnIcon}>
         <IoSearch />
       </div>
