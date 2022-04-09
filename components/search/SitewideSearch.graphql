@@ -1,0 +1,41 @@
+query GetSearchResults($q: String) {
+  languages(first: 5, where: { search: $q }) {
+    nodes {
+      title
+      uri
+      excerpt
+      customExcerpt {
+        excerpt
+      }
+    }
+  }
+  projects(first: 5, where: { search: $q }) {
+    nodes {
+      title
+      uri
+      excerpt
+      customExcerpt {
+        excerpt
+      }
+    }
+  }
+  posts(first: 5, where: { search: $q }) {
+    nodes {
+      title
+      uri
+      excerpt
+      customExcerpt {
+        excerpt
+      }
+    }
+  }
+  pages(first: 5, where: { search: $q }) {
+    nodes {
+      title
+      uri
+      customExcerpt {
+        excerpt
+      }
+    }
+  }
+}

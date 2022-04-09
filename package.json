@@ -67,7 +67,7 @@
     "prettier-eslint-cli": "^5.0.1"
   },
   "lint-staged": {
-    "*/**/*.{js,ts,tsx}": "eslint  --quiet --cache --fix"
+    "*/**/*.{js,ts,tsx}": "eslint --quiet --cache --fix"
   },
   "peerDependencies": {
     "mapbox-gl": "^2.2.0"

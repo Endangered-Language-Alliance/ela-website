@@ -1,19 +1,16 @@
-import { useState } from 'react'
-import Link from 'next/link'
-
-import { CONTENT_URL, PROD_URL } from 'lib/config'
-
-import sharedStyles from 'components/Layout.module.css'
 import btnStyles from 'components/buttons/Button.module.css'
-
-import { CtaButtonProps } from './types'
+import sharedStyles from 'components/Layout.module.css'
+import { SearchInput } from 'components/search/SearchInput'
+import { CONTENT_URL, PROD_URL } from 'lib/config'
+import Link from 'next/link'
+import { useState } from 'react'
 import { Burger } from './Burger'
-import { NavMenu } from './NavMenu'
+import styles from './Header.module.css'
+import { useHeaderQuery } from './hooks'
 import { Logo } from './Logo'
 import { MobileNavMenu } from './MobileNavMenu'
-import { useHeaderQuery } from './hooks'
-
-import styles from './Header.module.css'
+import { NavMenu } from './NavMenu'
+import { CtaButtonProps } from './types'
 
 const CtaButton: React.FC<CtaButtonProps> = (props) => {
   const { url, text } = props
@@ -27,7 +24,7 @@ const CtaButton: React.FC<CtaButtonProps> = (props) => {
 
 const Header: React.FC = () => {
   const { data, error, isLoading } = useHeaderQuery()
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [mobileNavIsOpen, setMobileNavIsOpen] = useState<boolean>(false)
 
   if (isLoading || error) {
     return (
@@ -54,15 +51,30 @@ const Header: React.FC = () => {
         {menuItems?.nodes && (
           <>
             <NavMenu data={menuItems.nodes} />
-            <Burger id="menu-label" isOpen={isOpen} setIsOpen={setIsOpen}>
+            <Burger
+              id="menu-label"
+              isOpen={mobileNavIsOpen}
+              setIsOpen={setMobileNavIsOpen}
+            >
+              <div
+                style={{
+                  width: 300,
+                  margin: '0 auto var(--p2)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                <SearchInput setIsOpen={setMobileNavIsOpen} />
+              </div>
               <MobileNavMenu
-                setIsOpen={setIsOpen}
+                setIsOpen={setMobileNavIsOpen}
                 data={menuItems.nodes}
                 id="menu-label"
               />
             </Burger>
           </>
         )}
+        <SearchInput desktopOnly />
         <CtaButton
           url={siteWideSettings?.ctaButton?.url}
           text={siteWideSettings?.ctaButton?.title}

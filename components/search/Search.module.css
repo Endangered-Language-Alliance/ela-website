@@ -1,0 +1,60 @@
+/* CRED: (partial) https://codepen.io/nardecode/pen/yLOqPVM */
+.searchBox {
+  --size: 2.25rem;
+  --font-size: 1.85rem;
+
+  align-items: center;
+  background-color: #fff;
+  border-radius: var(--size);
+  display: inline-flex;
+  font-size: var(--font-size);
+  height: var(--size);
+  margin: 0 12px;
+  padding: 0.25em 0.5em;
+}
+
+/* NOTE: on build, Next always seems to put the button class second, no matter
+what, so have to heavy-hand with extra specificity. */
+button.searchBtn {
+  align-items: center;
+  border-radius: inherit;
+  box-shadow: none;
+  color: hsl(210deg 6% 63%); /* because Google */
+  display: inline-flex;
+  font-size: calc(0.75 * var(--font-size));
+  min-width: unset;
+  padding-left: 12px;
+  padding-right: 0px;
+}
+
+.searchBtn:hover {
+  box-shadow: none;
+}
+
+.searchInput {
+  appearance: none;
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.87); /* because Google */
+  font-size: 1rem;
+  line-height: var(--size);
+  outline: none;
+  margin: 0;
+  padding: 0;
+  transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+  width: 125px;
+}
+
+.searchInput::placeholder { 
+  color: var(--gr8);
+}
+
+.searchInput:focus { 
+  width: 200px; 
+}
+
+@media screen and (max-width: 800px) {
+  .desktopOnly {
+    display: none;
+  }
+}
