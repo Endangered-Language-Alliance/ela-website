@@ -16,7 +16,7 @@ export const SearchResult: React.FC<Props> = (props) => {
         <Link href={href}>{title}</Link>
       </h3>
       {(!isHtml && <p>{content}</p>) || (
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <p dangerouslySetInnerHTML={{ __html: content }} />
       )}
     </article>
   )

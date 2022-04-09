@@ -2,6 +2,12 @@ import { useSearchQuery } from 'components/search/hooks.search'
 import { useRouter } from 'next/router'
 import { SearchResult } from './SearchResult'
 
+// CRED: for the tags part:
+// https://css-tricks.com/snippets/javascript/strip-html-tags-in-javascript/
+function removeWpLinks(text: string): string {
+  return text.replace(/(<([^>]+)>)/gi, '').replace(/ Continue reading.*/gi, '')
+}
+
 export const SearchResults: React.FC = () => {
   const router = useRouter()
   const queryString = router.query.q
@@ -44,7 +50,7 @@ export const SearchResults: React.FC = () => {
                   key={title}
                   title={title || ''}
                   href={uri || ''}
-                  content={customExcerpt?.excerpt || ''}
+                  content={removeWpLinks(customExcerpt?.excerpt || '')}
                 />
               )
             })}
@@ -63,7 +69,7 @@ export const SearchResults: React.FC = () => {
                 title={title || ''}
                 href={uri || ''}
                 isHtml
-                content={excerpt || ''}
+                content={removeWpLinks(excerpt || '')}
               />
             )
           })}
