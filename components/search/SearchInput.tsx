@@ -42,6 +42,14 @@ export const SearchInput: React.FC<Props> = (props) => {
       />
       <button
         type="submit"
+        // NOTE: on build, Next always seems to put the button class second, no
+        // matter what, so have to heavy-hand with style tag.
+        style={{
+          minWidth: 'unset',
+          boxShadow: 'none',
+          paddingLeft: 12,
+          paddingRight: 0,
+        }}
         className={`${styles.searchBtn} ${btnStyles.button}`}
       >
         <IoSearch />
