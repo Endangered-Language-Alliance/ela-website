@@ -64,7 +64,7 @@ const Header: React.FC = () => {
                   justifyContent: 'center',
                 }}
               >
-                <SearchInput />
+                <SearchInput setIsOpen={setMobileNavIsOpen} />
               </div>
               <MobileNavMenu
                 setIsOpen={setMobileNavIsOpen}

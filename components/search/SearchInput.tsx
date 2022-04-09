@@ -1,30 +1,51 @@
+import btnStyles from 'components/buttons/Button.module.css'
+import { useRouter } from 'next/router'
+import { BaseSyntheticEvent } from 'react'
 import { IoSearch } from 'react-icons/io5'
 import styles from './Search.module.css'
 
 type Props = {
   desktopOnly?: boolean
+  setIsOpen?: React.Dispatch<boolean>
 }
 
+const INPUT_ELEM_NAME = 'q'
+
+// CRED: (some) https://pagedart.com/blog/how-to-add-a-search-bar-in-html/
 export const SearchInput: React.FC<Props> = (props) => {
-  const { desktopOnly } = props
+  const { desktopOnly, setIsOpen } = props
   const extraClass = desktopOnly ? ` ${styles.desktopOnly}` : ''
+  const router = useRouter()
 
   return (
     <form
       role="search"
       className={styles.searchBox + extraClass}
-      action="/search?q=null"
+      onSubmit={(e: BaseSyntheticEvent) => {
+        e.preventDefault()
+
+        const form = new FormData(e.target)
+        const query = form.get(INPUT_ELEM_NAME)
+
+        if (query !== null) {
+          setIsOpen?.(false)
+          router.push(`/search?q=${query}`)
+        }
+      }}
     >
-      <div className={styles.searchBtnIcon}>
-        <IoSearch />
-      </div>
       <input
         className={styles.searchInput}
-        name="q"
+        name={INPUT_ELEM_NAME}
         id="search"
         type="search"
         placeholder="Search"
       />
+      <button
+        type="submit"
+        className={`${btnStyles.button} ${styles.searchBtn}`}
+      >
+        <IoSearch />
+      </button>
     </form>
   )
 }

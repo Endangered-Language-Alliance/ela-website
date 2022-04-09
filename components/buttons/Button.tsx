@@ -5,10 +5,12 @@ type ButtonProps = {
   ariaLabel?: string
   classes?: string
   type?: 'submit' | 'button' | 'reset'
+  style?: React.CSSProperties
 }
 
 export const Button: React.FC<ButtonProps> = (props) => {
   const { children, onClick, ariaLabel, classes, type = 'button' } = props
+  const { style } = props
 
   return (
     <button
@@ -17,6 +19,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
       onClick={onClick}
       aria-label={ariaLabel}
       className={`${styles.button} ${styles.secondary} ${classes}`}
+      style={style}
     >
       {children}
     </button>
