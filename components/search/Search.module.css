@@ -16,18 +16,22 @@
 .searchBtnIcon {
   align-items: center;
   border-radius: inherit;
-  color: var(--gr2);
+  color: hsl(210deg 6% 63%); /* because Google */
   display: inline-flex;
   font-size: calc(0.75 * var(--font-size));
+  padding-right: 8px;
 }
 
 .searchInput {
+  appearance: none;
   background: none;
   border: none;
-  color: var(--gr11);
+  color: rgba(0, 0, 0, 0.87); /* because Google */
+  font-size: 1rem;
   line-height: var(--size);
-  margin-left: 8px;
   outline: none;
+  margin: 0;
+  padding: 0;
   transition: width cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
   width: 125px;
 }
