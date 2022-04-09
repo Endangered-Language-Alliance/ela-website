@@ -46,6 +46,9 @@ export const YouTubePlaylist: React.FC<YouTubePlaylistProps> = (props) => {
           height: thumbnails.medium?.height || 180,
         }}
       >
+        {/* This breaks if <Image> is actually used. Probably a way to fix using
+          getStaticProps or something, but <img> is working just fine. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img alt={title} src={thumbnails.medium?.url || ''} />
         <div className={styles.mask}>
           <div className={styles.playBtnCircle}>

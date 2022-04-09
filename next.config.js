@@ -1,6 +1,16 @@
-module.exports = {
+// @ts-check
+
+/**
+ * @type {import('next').NextConfig}
+ * */
+const nextConfig = {
+  swcMinify: true, // YOLO: https://tinyurl.com/y8loobnn
   // This doesn't seem to do anything. Set NEXT_IMAGE_ALLOWED_DOMAINS instead:
   // github.com/netlify/netlify-plugin-nextjs/blob/main/docs/image-handling.md
+  // UPDATE: The Essential Next.js plugin now supports reading image domains
+  // from your Next config, so using NEXT_IMAGE_ALLOWED_DOMAINS is now
+  // deprecated. Please set images.domains in next.config.js instead, and remove
+  // the NEXT_IMAGE_ALLOWED_DOMAINS variable.
   images: {
     domains: [
       'content.endangeredlanguagealliance.org',
@@ -17,7 +27,6 @@ module.exports = {
     // the main content space, which has a max width smaller than 1024 anyway.
     deviceSizes: [300, 768, 1024],
   },
-  target: 'serverless', // Netlify plugin might handle it, but had problems
   publicRuntimeConfig: {
     mbToken: process.env.MB_TOKEN,
     youTubeKey: process.env.YOUTUBE_KEY,
@@ -33,7 +42,11 @@ module.exports = {
 
     return config
   },
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore // ridiculous
   webpackDevMiddleware: (config) => {
     return config
   },
 }
+
+module.exports = nextConfig

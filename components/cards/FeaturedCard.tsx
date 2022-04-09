@@ -21,7 +21,6 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = (props) => {
             layout="fill"
             objectFit="cover"
             priority
-            placeholder="blur"
           />
         </div>
       </header>

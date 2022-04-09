@@ -1,20 +1,26 @@
 import getConfig from 'next/config'
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+} from 'next/document'
 
 const { publicRuntimeConfig } = getConfig()
 const { gaTrackingID } = publicRuntimeConfig
 
 // TODO: nextjs.org/docs/api-reference/data-fetching/getInitialProps#typescript
 class MyDocument extends Document {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  static async getInitialProps(ctx) {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<{ html: string }> {
     const initialProps = await Document.getInitialProps(ctx)
 
     return { ...initialProps }
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <Html>
         <Head>

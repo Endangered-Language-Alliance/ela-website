@@ -41,6 +41,7 @@ fragment LanguageFields on Language {
       gDriveDocId
       glottologId
       nycLangMap
+      kratylos
     }
     # Background group
     background

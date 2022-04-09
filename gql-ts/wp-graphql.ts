@@ -128,6 +128,8 @@ export type Category = Node &
     slug?: Maybe<Scalars['String']>
     /** Connection between the category type and the Taxonomy type */
     taxonomy?: Maybe<CategoryToTaxonomyConnectionEdge>
+    /** The name of the taxonomy that the object is associated with */
+    taxonomyName?: Maybe<Scalars['String']>
     /** The ID of the term group that this term object belongs to */
     termGroupId?: Maybe<Scalars['Int']>
     /** The taxonomy ID that the object is associated with */
@@ -513,6 +515,8 @@ export type CommentRepliesArgs = {
 export type CommentAuthor = Node &
   Commenter & {
     __typename?: 'CommentAuthor'
+    /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+    avatar?: Maybe<Avatar>
     /** Identifies the primary key from the database. */
     databaseId: Scalars['Int']
     /** The email for the comment author */
@@ -526,6 +530,13 @@ export type CommentAuthor = Node &
     /** The url the comment author. */
     url?: Maybe<Scalars['String']>
   }
+
+/** A Comment Author object */
+export type CommentAuthorAvatarArgs = {
+  size?: Maybe<Scalars['Int']>
+  forceDefault?: Maybe<Scalars['Boolean']>
+  rating?: Maybe<AvatarRatingEnum>
+}
 
 /** Connection between the Comment type and the Comment type */
 export type CommentToCommentConnection = {
@@ -694,6 +705,8 @@ export type CommentToParentCommentConnectionWhereArgs = {
 
 /** The author of a comment */
 export type Commenter = {
+  /** Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument. */
+  avatar?: Maybe<Avatar>
   /** Identifies the primary key from the database. */
   databaseId: Scalars['Int']
   /** The email address of the author of a comment. */
@@ -748,6 +761,8 @@ export enum CommentsConnectionOrderbyEnum {
 export type ContentNode = {
   /** Connection between the ContentNode type and the ContentType type */
   contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']
   /** The ID of the node in the database. */
   databaseId: Scalars['Int']
   /** Post publishing date. */
@@ -2068,6 +2083,8 @@ export type LangLocation = Node &
     slug?: Maybe<Scalars['String']>
     /** Connection between the LangLocation type and the Taxonomy type */
     taxonomy?: Maybe<LangLocationToTaxonomyConnectionEdge>
+    /** The name of the taxonomy that the object is associated with */
+    taxonomyName?: Maybe<Scalars['String']>
     /** The ID of the term group that this term object belongs to */
     termGroupId?: Maybe<Scalars['Int']>
     /** The taxonomy ID that the object is associated with */
@@ -2391,6 +2408,8 @@ export type Language = Node &
     languageId: Scalars['Int']
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']
     /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
     customExcerpt?: Maybe<Language_Customexcerpt>
     /** Individual language instance | Added to the GraphQL Schema because the ACF Field Group &quot;Language Instance Info&quot; was set to Show in GraphQL. */
@@ -2457,7 +2476,7 @@ export type Language = Node &
     slug?: Maybe<Scalars['String']>
     /** The current status of the object */
     status?: Maybe<Scalars['String']>
-    /** The template assigned to the node */
+    /** The template assigned to a node of content */
     template?: Maybe<ContentTemplate>
     /** Connection between the Language type and the TermNode type */
     terms?: Maybe<LanguageToTermNodeConnection>
@@ -2790,6 +2809,8 @@ export type Language_Custominfo_External = AcfFieldGroup & {
   /** e.g. &quot;1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v&quot; sans quotes for file https://drive.google.com/file/d/1-OPCl3h0kZv1PMgeqLO9a72k9aWRQk_v */
   gDriveDocId?: Maybe<Scalars['String']>
   glottologId?: Maybe<Scalars['String']>
+  /** The value of this field will be used in the &quot;language&quot; query param of the Kratylos URL, e.g. &quot;Bishnupriya Manipuri&quot; without the quotes. Spaces are fine. */
+  kratylos?: Maybe<Scalars['String']>
   nycLangMap?: Maybe<Scalars['String']>
 }
 
@@ -2854,6 +2875,8 @@ export type MediaItem = Node &
     comments?: Maybe<MediaItemToCommentConnection>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']
     /** The unique identifier stored in the database */
     databaseId: Scalars['Int']
     /** Post publishing date. */
@@ -3359,14 +3382,6 @@ export type MenuItemToMenuItemLinkableConnectionEdge = {
   node?: Maybe<MenuItemLinkable>
 }
 
-/** Options for filtering the connection */
-export type MenuItemsWhereArgs = {
-  /** The ID of the object */
-  id?: Maybe<Scalars['Int']>
-  /** The menu location for the menu being queried */
-  location?: Maybe<MenuLocationEnum>
-}
-
 /** Registered menu locations */
 export enum MenuLocationEnum {
   /** Put the menu in the footer location */
@@ -3549,6 +3564,8 @@ export enum MimeTypeEnum {
   ImagePng = 'IMAGE_PNG',
   /** MimeType image/tiff */
   ImageTiff = 'IMAGE_TIFF',
+  /** MimeType image/webp */
+  ImageWebp = 'IMAGE_WEBP',
   /** MimeType image/x-icon */
   ImageXIcon = 'IMAGE_X_ICON',
   /** MimeType text/calendar */
@@ -3652,12 +3669,80 @@ export type NodeWithExcerptExcerptArgs = {
 
 /** A node that can have a featured image set */
 export type NodeWithFeaturedImage = {
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']>
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']>
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']>
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']>
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>
   /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
   featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>
   /** The database identifier for the featured image node assigned to the content node */
   featuredImageDatabaseId?: Maybe<Scalars['Int']>
   /** Globally unique ID of the featured image assigned to the node */
   featuredImageId?: Maybe<Scalars['ID']>
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']>
+  /** The unique resource identifier path */
+  id: Scalars['ID']
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']>
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']>
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']>
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']>
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']>
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']>
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']>
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']>
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']>
+  /** The template assigned to a node of content */
+  template?: Maybe<ContentTemplate>
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']>
+}
+
+/** A node that can have a featured image set */
+export type NodeWithFeaturedImageEnqueuedScriptsArgs = {
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+}
+
+/** A node that can have a featured image set */
+export type NodeWithFeaturedImageEnqueuedStylesheetsArgs = {
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
 }
 
 /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
@@ -3759,6 +3844,8 @@ export type Page = Node &
     content?: Maybe<Scalars['String']>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']
     /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
     customExcerpt?: Maybe<Page_Customexcerpt>
     /** The unique resource identifier path */
@@ -3842,7 +3929,7 @@ export type Page = Node &
     slug?: Maybe<Scalars['String']>
     /** The current status of the object */
     status?: Maybe<Scalars['String']>
-    /** The template assigned to the node */
+    /** The template assigned to a node of content */
     template?: Maybe<ContentTemplate>
     /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
     title?: Maybe<Scalars['String']>
@@ -4237,6 +4324,8 @@ export type Post = Node &
     content?: Maybe<Scalars['String']>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']
     /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
     customExcerpt?: Maybe<Post_Customexcerpt>
     /** The unique resource identifier path */
@@ -4314,7 +4403,7 @@ export type Post = Node &
     status?: Maybe<Scalars['String']>
     /** Connection between the post type and the tag type */
     tags?: Maybe<PostToTagConnection>
-    /** The template assigned to the node */
+    /** The template assigned to a node of content */
     template?: Maybe<ContentTemplate>
     /** Connection between the post type and the TermNode type */
     terms?: Maybe<PostToTermNodeConnection>
@@ -4475,6 +4564,8 @@ export type PostFormat = Node &
     slug?: Maybe<Scalars['String']>
     /** Connection between the postFormat type and the Taxonomy type */
     taxonomy?: Maybe<PostFormatToTaxonomyConnectionEdge>
+    /** The name of the taxonomy that the object is associated with */
+    taxonomyName?: Maybe<Scalars['String']>
     /** The ID of the term group that this term object belongs to */
     termGroupId?: Maybe<Scalars['Int']>
     /** The taxonomy ID that the object is associated with */
@@ -4704,9 +4795,6 @@ export enum PostObjectFieldFormatEnum {
   Rendered = 'RENDERED',
 }
 
-/** Union between the post, page and media item types */
-export type PostObjectUnion = Post | Page | MediaItem | Language | Project
-
 /** The column to use when filtering by date */
 export enum PostObjectsConnectionDateColumnEnum {
   /** The date the comment was created in local time. */
@@ -4793,6 +4881,8 @@ export enum PostStatusEnum {
   RequestFailed = 'REQUEST_FAILED',
   /** Objects with the request-pending status */
   RequestPending = 'REQUEST_PENDING',
+  /** Objects with the spam status */
+  Spam = 'SPAM',
   /** Objects with the trash status */
   Trash = 'TRASH',
 }
@@ -5347,6 +5437,8 @@ export type Project = Node &
     content?: Maybe<Scalars['String']>
     /** Connection between the ContentNode type and the ContentType type */
     contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
+    /** The name of the Content Type the node belongs to */
+    contentTypeName: Scalars['String']
     /** Custom excerpt to override WP&#039;s (more info shown below the actual field you&#039;ll be editing) | Added to the GraphQL Schema because the ACF Field Group &quot;Excerpt&quot; was set to Show in GraphQL. */
     customExcerpt?: Maybe<Project_Customexcerpt>
     /** The unique resource identifier path */
@@ -5411,7 +5503,7 @@ export type Project = Node &
     slug?: Maybe<Scalars['String']>
     /** The current status of the object */
     status?: Maybe<Scalars['String']>
-    /** The template assigned to the node */
+    /** The template assigned to a node of content */
     template?: Maybe<ContentTemplate>
     /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
     title?: Maybe<Scalars['String']>
@@ -6032,7 +6124,7 @@ export type RootQuery = {
   postFormats?: Maybe<RootQueryToPostFormatConnection>
   /** Connection between the RootQuery type and the post type */
   posts?: Maybe<RootQueryToPostConnection>
-  /** An object of the Project Type. With ten current larger-scale projects and additional work on individual languages, ELA focuses on languages spoken by communities and individuals in the New York City area. */
+  /** An object of the Project Type. With ten current larger-scale projects and additional work on individual languages, ELA focuses on communities and individuals in the New York City area. */
   project?: Maybe<Project>
   /**
    * A Project object
@@ -7660,6 +7752,8 @@ export type Tag = Node &
     tagId?: Maybe<Scalars['Int']>
     /** Connection between the tag type and the Taxonomy type */
     taxonomy?: Maybe<TagToTaxonomyConnectionEdge>
+    /** The name of the taxonomy that the object is associated with */
+    taxonomyName?: Maybe<Scalars['String']>
     /** The ID of the term group that this term object belongs to */
     termGroupId?: Maybe<Scalars['Int']>
     /** The taxonomy ID that the object is associated with */
@@ -7988,6 +8082,8 @@ export type TermNode = {
   name?: Maybe<Scalars['String']>
   /** An alphanumeric identifier for the object unique to its type. */
   slug?: Maybe<Scalars['String']>
+  /** The name of the taxonomy that the object is associated with */
+  taxonomyName?: Maybe<Scalars['String']>
   /** The ID of the term group that this term object belongs to */
   termGroupId?: Maybe<Scalars['Int']>
   /** The taxonomy ID that the object is associated with */
@@ -8066,9 +8162,6 @@ export type TermNodeToEnqueuedStylesheetConnectionEdge = {
   node?: Maybe<EnqueuedStylesheet>
 }
 
-/** Union between the Category, Tag and PostFormatPost types */
-export type TermObjectUnion = Category | Tag | PostFormat | LangLocation
-
 /** Options for ordering the connection by */
 export enum TermObjectsConnectionOrderbyEnum {
   /** Order the connection by item count. */
@@ -8112,922 +8205,6 @@ export type Theme = Node & {
   themeUri?: Maybe<Scalars['String']>
   /** The current version of the theme. This field is equivalent to WP_Theme-&gt;get( &quot;Version&quot; ). */
   version?: Maybe<Scalars['String']>
-}
-
-/** Available timezones */
-export enum TimezoneEnum {
-  /** Abidjan */
-  AfricaAbidjan = 'AFRICA_ABIDJAN',
-  /** Accra */
-  AfricaAccra = 'AFRICA_ACCRA',
-  /** Addis Ababa */
-  AfricaAddisAbaba = 'AFRICA_ADDIS_ABABA',
-  /** Algiers */
-  AfricaAlgiers = 'AFRICA_ALGIERS',
-  /** Asmara */
-  AfricaAsmara = 'AFRICA_ASMARA',
-  /** Bamako */
-  AfricaBamako = 'AFRICA_BAMAKO',
-  /** Bangui */
-  AfricaBangui = 'AFRICA_BANGUI',
-  /** Banjul */
-  AfricaBanjul = 'AFRICA_BANJUL',
-  /** Bissau */
-  AfricaBissau = 'AFRICA_BISSAU',
-  /** Blantyre */
-  AfricaBlantyre = 'AFRICA_BLANTYRE',
-  /** Brazzaville */
-  AfricaBrazzaville = 'AFRICA_BRAZZAVILLE',
-  /** Bujumbura */
-  AfricaBujumbura = 'AFRICA_BUJUMBURA',
-  /** Cairo */
-  AfricaCairo = 'AFRICA_CAIRO',
-  /** Casablanca */
-  AfricaCasablanca = 'AFRICA_CASABLANCA',
-  /** Ceuta */
-  AfricaCeuta = 'AFRICA_CEUTA',
-  /** Conakry */
-  AfricaConakry = 'AFRICA_CONAKRY',
-  /** Dakar */
-  AfricaDakar = 'AFRICA_DAKAR',
-  /** Dar es Salaam */
-  AfricaDarEsSalaam = 'AFRICA_DAR_ES_SALAAM',
-  /** Djibouti */
-  AfricaDjibouti = 'AFRICA_DJIBOUTI',
-  /** Douala */
-  AfricaDouala = 'AFRICA_DOUALA',
-  /** El Aaiun */
-  AfricaElAaiun = 'AFRICA_EL_AAIUN',
-  /** Freetown */
-  AfricaFreetown = 'AFRICA_FREETOWN',
-  /** Gaborone */
-  AfricaGaborone = 'AFRICA_GABORONE',
-  /** Harare */
-  AfricaHarare = 'AFRICA_HARARE',
-  /** Johannesburg */
-  AfricaJohannesburg = 'AFRICA_JOHANNESBURG',
-  /** Juba */
-  AfricaJuba = 'AFRICA_JUBA',
-  /** Kampala */
-  AfricaKampala = 'AFRICA_KAMPALA',
-  /** Khartoum */
-  AfricaKhartoum = 'AFRICA_KHARTOUM',
-  /** Kigali */
-  AfricaKigali = 'AFRICA_KIGALI',
-  /** Kinshasa */
-  AfricaKinshasa = 'AFRICA_KINSHASA',
-  /** Lagos */
-  AfricaLagos = 'AFRICA_LAGOS',
-  /** Libreville */
-  AfricaLibreville = 'AFRICA_LIBREVILLE',
-  /** Lome */
-  AfricaLome = 'AFRICA_LOME',
-  /** Luanda */
-  AfricaLuanda = 'AFRICA_LUANDA',
-  /** Lubumbashi */
-  AfricaLubumbashi = 'AFRICA_LUBUMBASHI',
-  /** Lusaka */
-  AfricaLusaka = 'AFRICA_LUSAKA',
-  /** Malabo */
-  AfricaMalabo = 'AFRICA_MALABO',
-  /** Maputo */
-  AfricaMaputo = 'AFRICA_MAPUTO',
-  /** Maseru */
-  AfricaMaseru = 'AFRICA_MASERU',
-  /** Mbabane */
-  AfricaMbabane = 'AFRICA_MBABANE',
-  /** Mogadishu */
-  AfricaMogadishu = 'AFRICA_MOGADISHU',
-  /** Monrovia */
-  AfricaMonrovia = 'AFRICA_MONROVIA',
-  /** Nairobi */
-  AfricaNairobi = 'AFRICA_NAIROBI',
-  /** Ndjamena */
-  AfricaNdjamena = 'AFRICA_NDJAMENA',
-  /** Niamey */
-  AfricaNiamey = 'AFRICA_NIAMEY',
-  /** Nouakchott */
-  AfricaNouakchott = 'AFRICA_NOUAKCHOTT',
-  /** Ouagadougou */
-  AfricaOuagadougou = 'AFRICA_OUAGADOUGOU',
-  /** Porto-Novo */
-  AfricaPortoNovo = 'AFRICA_PORTO_NOVO',
-  /** Sao Tome */
-  AfricaSaoTome = 'AFRICA_SAO_TOME',
-  /** Tripoli */
-  AfricaTripoli = 'AFRICA_TRIPOLI',
-  /** Tunis */
-  AfricaTunis = 'AFRICA_TUNIS',
-  /** Windhoek */
-  AfricaWindhoek = 'AFRICA_WINDHOEK',
-  /** Adak */
-  AmericaAdak = 'AMERICA_ADAK',
-  /** Anchorage */
-  AmericaAnchorage = 'AMERICA_ANCHORAGE',
-  /** Anguilla */
-  AmericaAnguilla = 'AMERICA_ANGUILLA',
-  /** Antigua */
-  AmericaAntigua = 'AMERICA_ANTIGUA',
-  /** Araguaina */
-  AmericaAraguaina = 'AMERICA_ARAGUAINA',
-  /** Argentina - Buenos Aires */
-  AmericaArgentinaBuenosAires = 'AMERICA_ARGENTINA_BUENOS_AIRES',
-  /** Argentina - Catamarca */
-  AmericaArgentinaCatamarca = 'AMERICA_ARGENTINA_CATAMARCA',
-  /** Argentina - Cordoba */
-  AmericaArgentinaCordoba = 'AMERICA_ARGENTINA_CORDOBA',
-  /** Argentina - Jujuy */
-  AmericaArgentinaJujuy = 'AMERICA_ARGENTINA_JUJUY',
-  /** Argentina - La Rioja */
-  AmericaArgentinaLaRioja = 'AMERICA_ARGENTINA_LA_RIOJA',
-  /** Argentina - Mendoza */
-  AmericaArgentinaMendoza = 'AMERICA_ARGENTINA_MENDOZA',
-  /** Argentina - Rio Gallegos */
-  AmericaArgentinaRioGallegos = 'AMERICA_ARGENTINA_RIO_GALLEGOS',
-  /** Argentina - Salta */
-  AmericaArgentinaSalta = 'AMERICA_ARGENTINA_SALTA',
-  /** Argentina - San Juan */
-  AmericaArgentinaSanJuan = 'AMERICA_ARGENTINA_SAN_JUAN',
-  /** Argentina - San Luis */
-  AmericaArgentinaSanLuis = 'AMERICA_ARGENTINA_SAN_LUIS',
-  /** Argentina - Tucuman */
-  AmericaArgentinaTucuman = 'AMERICA_ARGENTINA_TUCUMAN',
-  /** Argentina - Ushuaia */
-  AmericaArgentinaUshuaia = 'AMERICA_ARGENTINA_USHUAIA',
-  /** Aruba */
-  AmericaAruba = 'AMERICA_ARUBA',
-  /** Asuncion */
-  AmericaAsuncion = 'AMERICA_ASUNCION',
-  /** Atikokan */
-  AmericaAtikokan = 'AMERICA_ATIKOKAN',
-  /** Bahia */
-  AmericaBahia = 'AMERICA_BAHIA',
-  /** Bahia Banderas */
-  AmericaBahiaBanderas = 'AMERICA_BAHIA_BANDERAS',
-  /** Barbados */
-  AmericaBarbados = 'AMERICA_BARBADOS',
-  /** Belem */
-  AmericaBelem = 'AMERICA_BELEM',
-  /** Belize */
-  AmericaBelize = 'AMERICA_BELIZE',
-  /** Blanc-Sablon */
-  AmericaBlancSablon = 'AMERICA_BLANC_SABLON',
-  /** Boa Vista */
-  AmericaBoaVista = 'AMERICA_BOA_VISTA',
-  /** Bogota */
-  AmericaBogota = 'AMERICA_BOGOTA',
-  /** Boise */
-  AmericaBoise = 'AMERICA_BOISE',
-  /** Cambridge Bay */
-  AmericaCambridgeBay = 'AMERICA_CAMBRIDGE_BAY',
-  /** Campo Grande */
-  AmericaCampoGrande = 'AMERICA_CAMPO_GRANDE',
-  /** Cancun */
-  AmericaCancun = 'AMERICA_CANCUN',
-  /** Caracas */
-  AmericaCaracas = 'AMERICA_CARACAS',
-  /** Cayenne */
-  AmericaCayenne = 'AMERICA_CAYENNE',
-  /** Cayman */
-  AmericaCayman = 'AMERICA_CAYMAN',
-  /** Chicago */
-  AmericaChicago = 'AMERICA_CHICAGO',
-  /** Chihuahua */
-  AmericaChihuahua = 'AMERICA_CHIHUAHUA',
-  /** Costa Rica */
-  AmericaCostaRica = 'AMERICA_COSTA_RICA',
-  /** Creston */
-  AmericaCreston = 'AMERICA_CRESTON',
-  /** Cuiaba */
-  AmericaCuiaba = 'AMERICA_CUIABA',
-  /** Curacao */
-  AmericaCuracao = 'AMERICA_CURACAO',
-  /** Danmarkshavn */
-  AmericaDanmarkshavn = 'AMERICA_DANMARKSHAVN',
-  /** Dawson */
-  AmericaDawson = 'AMERICA_DAWSON',
-  /** Dawson Creek */
-  AmericaDawsonCreek = 'AMERICA_DAWSON_CREEK',
-  /** Denver */
-  AmericaDenver = 'AMERICA_DENVER',
-  /** Detroit */
-  AmericaDetroit = 'AMERICA_DETROIT',
-  /** Dominica */
-  AmericaDominica = 'AMERICA_DOMINICA',
-  /** Edmonton */
-  AmericaEdmonton = 'AMERICA_EDMONTON',
-  /** Eirunepe */
-  AmericaEirunepe = 'AMERICA_EIRUNEPE',
-  /** El Salvador */
-  AmericaElSalvador = 'AMERICA_EL_SALVADOR',
-  /** Fortaleza */
-  AmericaFortaleza = 'AMERICA_FORTALEZA',
-  /** Fort Nelson */
-  AmericaFortNelson = 'AMERICA_FORT_NELSON',
-  /** Glace Bay */
-  AmericaGlaceBay = 'AMERICA_GLACE_BAY',
-  /** Goose Bay */
-  AmericaGooseBay = 'AMERICA_GOOSE_BAY',
-  /** Grand Turk */
-  AmericaGrandTurk = 'AMERICA_GRAND_TURK',
-  /** Grenada */
-  AmericaGrenada = 'AMERICA_GRENADA',
-  /** Guadeloupe */
-  AmericaGuadeloupe = 'AMERICA_GUADELOUPE',
-  /** Guatemala */
-  AmericaGuatemala = 'AMERICA_GUATEMALA',
-  /** Guayaquil */
-  AmericaGuayaquil = 'AMERICA_GUAYAQUIL',
-  /** Guyana */
-  AmericaGuyana = 'AMERICA_GUYANA',
-  /** Halifax */
-  AmericaHalifax = 'AMERICA_HALIFAX',
-  /** Havana */
-  AmericaHavana = 'AMERICA_HAVANA',
-  /** Hermosillo */
-  AmericaHermosillo = 'AMERICA_HERMOSILLO',
-  /** Indiana - Indianapolis */
-  AmericaIndianaIndianapolis = 'AMERICA_INDIANA_INDIANAPOLIS',
-  /** Indiana - Knox */
-  AmericaIndianaKnox = 'AMERICA_INDIANA_KNOX',
-  /** Indiana - Marengo */
-  AmericaIndianaMarengo = 'AMERICA_INDIANA_MARENGO',
-  /** Indiana - Petersburg */
-  AmericaIndianaPetersburg = 'AMERICA_INDIANA_PETERSBURG',
-  /** Indiana - Tell City */
-  AmericaIndianaTellCity = 'AMERICA_INDIANA_TELL_CITY',
-  /** Indiana - Vevay */
-  AmericaIndianaVevay = 'AMERICA_INDIANA_VEVAY',
-  /** Indiana - Vincennes */
-  AmericaIndianaVincennes = 'AMERICA_INDIANA_VINCENNES',
-  /** Indiana - Winamac */
-  AmericaIndianaWinamac = 'AMERICA_INDIANA_WINAMAC',
-  /** Inuvik */
-  AmericaInuvik = 'AMERICA_INUVIK',
-  /** Iqaluit */
-  AmericaIqaluit = 'AMERICA_IQALUIT',
-  /** Jamaica */
-  AmericaJamaica = 'AMERICA_JAMAICA',
-  /** Juneau */
-  AmericaJuneau = 'AMERICA_JUNEAU',
-  /** Kentucky - Louisville */
-  AmericaKentuckyLouisville = 'AMERICA_KENTUCKY_LOUISVILLE',
-  /** Kentucky - Monticello */
-  AmericaKentuckyMonticello = 'AMERICA_KENTUCKY_MONTICELLO',
-  /** Kralendijk */
-  AmericaKralendijk = 'AMERICA_KRALENDIJK',
-  /** La Paz */
-  AmericaLaPaz = 'AMERICA_LA_PAZ',
-  /** Lima */
-  AmericaLima = 'AMERICA_LIMA',
-  /** Los Angeles */
-  AmericaLosAngeles = 'AMERICA_LOS_ANGELES',
-  /** Lower Princes */
-  AmericaLowerPrinces = 'AMERICA_LOWER_PRINCES',
-  /** Maceio */
-  AmericaMaceio = 'AMERICA_MACEIO',
-  /** Managua */
-  AmericaManagua = 'AMERICA_MANAGUA',
-  /** Manaus */
-  AmericaManaus = 'AMERICA_MANAUS',
-  /** Marigot */
-  AmericaMarigot = 'AMERICA_MARIGOT',
-  /** Martinique */
-  AmericaMartinique = 'AMERICA_MARTINIQUE',
-  /** Matamoros */
-  AmericaMatamoros = 'AMERICA_MATAMOROS',
-  /** Mazatlan */
-  AmericaMazatlan = 'AMERICA_MAZATLAN',
-  /** Menominee */
-  AmericaMenominee = 'AMERICA_MENOMINEE',
-  /** Merida */
-  AmericaMerida = 'AMERICA_MERIDA',
-  /** Metlakatla */
-  AmericaMetlakatla = 'AMERICA_METLAKATLA',
-  /** Mexico City */
-  AmericaMexicoCity = 'AMERICA_MEXICO_CITY',
-  /** Miquelon */
-  AmericaMiquelon = 'AMERICA_MIQUELON',
-  /** Moncton */
-  AmericaMoncton = 'AMERICA_MONCTON',
-  /** Monterrey */
-  AmericaMonterrey = 'AMERICA_MONTERREY',
-  /** Montevideo */
-  AmericaMontevideo = 'AMERICA_MONTEVIDEO',
-  /** Montserrat */
-  AmericaMontserrat = 'AMERICA_MONTSERRAT',
-  /** Nassau */
-  AmericaNassau = 'AMERICA_NASSAU',
-  /** New York */
-  AmericaNewYork = 'AMERICA_NEW_YORK',
-  /** Nipigon */
-  AmericaNipigon = 'AMERICA_NIPIGON',
-  /** Nome */
-  AmericaNome = 'AMERICA_NOME',
-  /** Noronha */
-  AmericaNoronha = 'AMERICA_NORONHA',
-  /** North Dakota - Beulah */
-  AmericaNorthDakotaBeulah = 'AMERICA_NORTH_DAKOTA_BEULAH',
-  /** North Dakota - Center */
-  AmericaNorthDakotaCenter = 'AMERICA_NORTH_DAKOTA_CENTER',
-  /** North Dakota - New Salem */
-  AmericaNorthDakotaNewSalem = 'AMERICA_NORTH_DAKOTA_NEW_SALEM',
-  /** Nuuk */
-  AmericaNuuk = 'AMERICA_NUUK',
-  /** Ojinaga */
-  AmericaOjinaga = 'AMERICA_OJINAGA',
-  /** Panama */
-  AmericaPanama = 'AMERICA_PANAMA',
-  /** Pangnirtung */
-  AmericaPangnirtung = 'AMERICA_PANGNIRTUNG',
-  /** Paramaribo */
-  AmericaParamaribo = 'AMERICA_PARAMARIBO',
-  /** Phoenix */
-  AmericaPhoenix = 'AMERICA_PHOENIX',
-  /** Porto Velho */
-  AmericaPortoVelho = 'AMERICA_PORTO_VELHO',
-  /** Port-au-Prince */
-  AmericaPortAuPrince = 'AMERICA_PORT_AU_PRINCE',
-  /** Port of Spain */
-  AmericaPortOfSpain = 'AMERICA_PORT_OF_SPAIN',
-  /** Puerto Rico */
-  AmericaPuertoRico = 'AMERICA_PUERTO_RICO',
-  /** Punta Arenas */
-  AmericaPuntaArenas = 'AMERICA_PUNTA_ARENAS',
-  /** Rainy River */
-  AmericaRainyRiver = 'AMERICA_RAINY_RIVER',
-  /** Rankin Inlet */
-  AmericaRankinInlet = 'AMERICA_RANKIN_INLET',
-  /** Recife */
-  AmericaRecife = 'AMERICA_RECIFE',
-  /** Regina */
-  AmericaRegina = 'AMERICA_REGINA',
-  /** Resolute */
-  AmericaResolute = 'AMERICA_RESOLUTE',
-  /** Rio Branco */
-  AmericaRioBranco = 'AMERICA_RIO_BRANCO',
-  /** Santarem */
-  AmericaSantarem = 'AMERICA_SANTAREM',
-  /** Santiago */
-  AmericaSantiago = 'AMERICA_SANTIAGO',
-  /** Santo Domingo */
-  AmericaSantoDomingo = 'AMERICA_SANTO_DOMINGO',
-  /** Sao Paulo */
-  AmericaSaoPaulo = 'AMERICA_SAO_PAULO',
-  /** Scoresbysund */
-  AmericaScoresbysund = 'AMERICA_SCORESBYSUND',
-  /** Sitka */
-  AmericaSitka = 'AMERICA_SITKA',
-  /** St Barthelemy */
-  AmericaStBarthelemy = 'AMERICA_ST_BARTHELEMY',
-  /** St Johns */
-  AmericaStJohns = 'AMERICA_ST_JOHNS',
-  /** St Kitts */
-  AmericaStKitts = 'AMERICA_ST_KITTS',
-  /** St Lucia */
-  AmericaStLucia = 'AMERICA_ST_LUCIA',
-  /** St Thomas */
-  AmericaStThomas = 'AMERICA_ST_THOMAS',
-  /** St Vincent */
-  AmericaStVincent = 'AMERICA_ST_VINCENT',
-  /** Swift Current */
-  AmericaSwiftCurrent = 'AMERICA_SWIFT_CURRENT',
-  /** Tegucigalpa */
-  AmericaTegucigalpa = 'AMERICA_TEGUCIGALPA',
-  /** Thule */
-  AmericaThule = 'AMERICA_THULE',
-  /** Thunder Bay */
-  AmericaThunderBay = 'AMERICA_THUNDER_BAY',
-  /** Tijuana */
-  AmericaTijuana = 'AMERICA_TIJUANA',
-  /** Toronto */
-  AmericaToronto = 'AMERICA_TORONTO',
-  /** Tortola */
-  AmericaTortola = 'AMERICA_TORTOLA',
-  /** Vancouver */
-  AmericaVancouver = 'AMERICA_VANCOUVER',
-  /** Whitehorse */
-  AmericaWhitehorse = 'AMERICA_WHITEHORSE',
-  /** Winnipeg */
-  AmericaWinnipeg = 'AMERICA_WINNIPEG',
-  /** Yakutat */
-  AmericaYakutat = 'AMERICA_YAKUTAT',
-  /** Yellowknife */
-  AmericaYellowknife = 'AMERICA_YELLOWKNIFE',
-  /** Casey */
-  AntarcticaCasey = 'ANTARCTICA_CASEY',
-  /** Davis */
-  AntarcticaDavis = 'ANTARCTICA_DAVIS',
-  /** DumontDUrville */
-  AntarcticaDumontdurville = 'ANTARCTICA_DUMONTDURVILLE',
-  /** Macquarie */
-  AntarcticaMacquarie = 'ANTARCTICA_MACQUARIE',
-  /** Mawson */
-  AntarcticaMawson = 'ANTARCTICA_MAWSON',
-  /** McMurdo */
-  AntarcticaMcmurdo = 'ANTARCTICA_MCMURDO',
-  /** Palmer */
-  AntarcticaPalmer = 'ANTARCTICA_PALMER',
-  /** Rothera */
-  AntarcticaRothera = 'ANTARCTICA_ROTHERA',
-  /** Syowa */
-  AntarcticaSyowa = 'ANTARCTICA_SYOWA',
-  /** Troll */
-  AntarcticaTroll = 'ANTARCTICA_TROLL',
-  /** Vostok */
-  AntarcticaVostok = 'ANTARCTICA_VOSTOK',
-  /** Longyearbyen */
-  ArcticLongyearbyen = 'ARCTIC_LONGYEARBYEN',
-  /** Aden */
-  AsiaAden = 'ASIA_ADEN',
-  /** Almaty */
-  AsiaAlmaty = 'ASIA_ALMATY',
-  /** Amman */
-  AsiaAmman = 'ASIA_AMMAN',
-  /** Anadyr */
-  AsiaAnadyr = 'ASIA_ANADYR',
-  /** Aqtau */
-  AsiaAqtau = 'ASIA_AQTAU',
-  /** Aqtobe */
-  AsiaAqtobe = 'ASIA_AQTOBE',
-  /** Ashgabat */
-  AsiaAshgabat = 'ASIA_ASHGABAT',
-  /** Atyrau */
-  AsiaAtyrau = 'ASIA_ATYRAU',
-  /** Baghdad */
-  AsiaBaghdad = 'ASIA_BAGHDAD',
-  /** Bahrain */
-  AsiaBahrain = 'ASIA_BAHRAIN',
-  /** Baku */
-  AsiaBaku = 'ASIA_BAKU',
-  /** Bangkok */
-  AsiaBangkok = 'ASIA_BANGKOK',
-  /** Barnaul */
-  AsiaBarnaul = 'ASIA_BARNAUL',
-  /** Beirut */
-  AsiaBeirut = 'ASIA_BEIRUT',
-  /** Bishkek */
-  AsiaBishkek = 'ASIA_BISHKEK',
-  /** Brunei */
-  AsiaBrunei = 'ASIA_BRUNEI',
-  /** Chita */
-  AsiaChita = 'ASIA_CHITA',
-  /** Choibalsan */
-  AsiaChoibalsan = 'ASIA_CHOIBALSAN',
-  /** Colombo */
-  AsiaColombo = 'ASIA_COLOMBO',
-  /** Damascus */
-  AsiaDamascus = 'ASIA_DAMASCUS',
-  /** Dhaka */
-  AsiaDhaka = 'ASIA_DHAKA',
-  /** Dili */
-  AsiaDili = 'ASIA_DILI',
-  /** Dubai */
-  AsiaDubai = 'ASIA_DUBAI',
-  /** Dushanbe */
-  AsiaDushanbe = 'ASIA_DUSHANBE',
-  /** Famagusta */
-  AsiaFamagusta = 'ASIA_FAMAGUSTA',
-  /** Gaza */
-  AsiaGaza = 'ASIA_GAZA',
-  /** Hebron */
-  AsiaHebron = 'ASIA_HEBRON',
-  /** Hong Kong */
-  AsiaHongKong = 'ASIA_HONG_KONG',
-  /** Hovd */
-  AsiaHovd = 'ASIA_HOVD',
-  /** Ho Chi Minh */
-  AsiaHoChiMinh = 'ASIA_HO_CHI_MINH',
-  /** Irkutsk */
-  AsiaIrkutsk = 'ASIA_IRKUTSK',
-  /** Jakarta */
-  AsiaJakarta = 'ASIA_JAKARTA',
-  /** Jayapura */
-  AsiaJayapura = 'ASIA_JAYAPURA',
-  /** Jerusalem */
-  AsiaJerusalem = 'ASIA_JERUSALEM',
-  /** Kabul */
-  AsiaKabul = 'ASIA_KABUL',
-  /** Kamchatka */
-  AsiaKamchatka = 'ASIA_KAMCHATKA',
-  /** Karachi */
-  AsiaKarachi = 'ASIA_KARACHI',
-  /** Kathmandu */
-  AsiaKathmandu = 'ASIA_KATHMANDU',
-  /** Khandyga */
-  AsiaKhandyga = 'ASIA_KHANDYGA',
-  /** Kolkata */
-  AsiaKolkata = 'ASIA_KOLKATA',
-  /** Krasnoyarsk */
-  AsiaKrasnoyarsk = 'ASIA_KRASNOYARSK',
-  /** Kuala Lumpur */
-  AsiaKualaLumpur = 'ASIA_KUALA_LUMPUR',
-  /** Kuching */
-  AsiaKuching = 'ASIA_KUCHING',
-  /** Kuwait */
-  AsiaKuwait = 'ASIA_KUWAIT',
-  /** Macau */
-  AsiaMacau = 'ASIA_MACAU',
-  /** Magadan */
-  AsiaMagadan = 'ASIA_MAGADAN',
-  /** Makassar */
-  AsiaMakassar = 'ASIA_MAKASSAR',
-  /** Manila */
-  AsiaManila = 'ASIA_MANILA',
-  /** Muscat */
-  AsiaMuscat = 'ASIA_MUSCAT',
-  /** Nicosia */
-  AsiaNicosia = 'ASIA_NICOSIA',
-  /** Novokuznetsk */
-  AsiaNovokuznetsk = 'ASIA_NOVOKUZNETSK',
-  /** Novosibirsk */
-  AsiaNovosibirsk = 'ASIA_NOVOSIBIRSK',
-  /** Omsk */
-  AsiaOmsk = 'ASIA_OMSK',
-  /** Oral */
-  AsiaOral = 'ASIA_ORAL',
-  /** Phnom Penh */
-  AsiaPhnomPenh = 'ASIA_PHNOM_PENH',
-  /** Pontianak */
-  AsiaPontianak = 'ASIA_PONTIANAK',
-  /** Pyongyang */
-  AsiaPyongyang = 'ASIA_PYONGYANG',
-  /** Qatar */
-  AsiaQatar = 'ASIA_QATAR',
-  /** Qostanay */
-  AsiaQostanay = 'ASIA_QOSTANAY',
-  /** Qyzylorda */
-  AsiaQyzylorda = 'ASIA_QYZYLORDA',
-  /** Riyadh */
-  AsiaRiyadh = 'ASIA_RIYADH',
-  /** Sakhalin */
-  AsiaSakhalin = 'ASIA_SAKHALIN',
-  /** Samarkand */
-  AsiaSamarkand = 'ASIA_SAMARKAND',
-  /** Seoul */
-  AsiaSeoul = 'ASIA_SEOUL',
-  /** Shanghai */
-  AsiaShanghai = 'ASIA_SHANGHAI',
-  /** Singapore */
-  AsiaSingapore = 'ASIA_SINGAPORE',
-  /** Srednekolymsk */
-  AsiaSrednekolymsk = 'ASIA_SREDNEKOLYMSK',
-  /** Taipei */
-  AsiaTaipei = 'ASIA_TAIPEI',
-  /** Tashkent */
-  AsiaTashkent = 'ASIA_TASHKENT',
-  /** Tbilisi */
-  AsiaTbilisi = 'ASIA_TBILISI',
-  /** Tehran */
-  AsiaTehran = 'ASIA_TEHRAN',
-  /** Thimphu */
-  AsiaThimphu = 'ASIA_THIMPHU',
-  /** Tokyo */
-  AsiaTokyo = 'ASIA_TOKYO',
-  /** Tomsk */
-  AsiaTomsk = 'ASIA_TOMSK',
-  /** Ulaanbaatar */
-  AsiaUlaanbaatar = 'ASIA_ULAANBAATAR',
-  /** Urumqi */
-  AsiaUrumqi = 'ASIA_URUMQI',
-  /** Ust-Nera */
-  AsiaUstNera = 'ASIA_UST_NERA',
-  /** Vientiane */
-  AsiaVientiane = 'ASIA_VIENTIANE',
-  /** Vladivostok */
-  AsiaVladivostok = 'ASIA_VLADIVOSTOK',
-  /** Yakutsk */
-  AsiaYakutsk = 'ASIA_YAKUTSK',
-  /** Yangon */
-  AsiaYangon = 'ASIA_YANGON',
-  /** Yekaterinburg */
-  AsiaYekaterinburg = 'ASIA_YEKATERINBURG',
-  /** Yerevan */
-  AsiaYerevan = 'ASIA_YEREVAN',
-  /** Azores */
-  AtlanticAzores = 'ATLANTIC_AZORES',
-  /** Bermuda */
-  AtlanticBermuda = 'ATLANTIC_BERMUDA',
-  /** Canary */
-  AtlanticCanary = 'ATLANTIC_CANARY',
-  /** Cape Verde */
-  AtlanticCapeVerde = 'ATLANTIC_CAPE_VERDE',
-  /** Faroe */
-  AtlanticFaroe = 'ATLANTIC_FAROE',
-  /** Madeira */
-  AtlanticMadeira = 'ATLANTIC_MADEIRA',
-  /** Reykjavik */
-  AtlanticReykjavik = 'ATLANTIC_REYKJAVIK',
-  /** South Georgia */
-  AtlanticSouthGeorgia = 'ATLANTIC_SOUTH_GEORGIA',
-  /** Stanley */
-  AtlanticStanley = 'ATLANTIC_STANLEY',
-  /** St Helena */
-  AtlanticStHelena = 'ATLANTIC_ST_HELENA',
-  /** Adelaide */
-  AustraliaAdelaide = 'AUSTRALIA_ADELAIDE',
-  /** Brisbane */
-  AustraliaBrisbane = 'AUSTRALIA_BRISBANE',
-  /** Broken Hill */
-  AustraliaBrokenHill = 'AUSTRALIA_BROKEN_HILL',
-  /** Currie */
-  AustraliaCurrie = 'AUSTRALIA_CURRIE',
-  /** Darwin */
-  AustraliaDarwin = 'AUSTRALIA_DARWIN',
-  /** Eucla */
-  AustraliaEucla = 'AUSTRALIA_EUCLA',
-  /** Hobart */
-  AustraliaHobart = 'AUSTRALIA_HOBART',
-  /** Lindeman */
-  AustraliaLindeman = 'AUSTRALIA_LINDEMAN',
-  /** Lord Howe */
-  AustraliaLordHowe = 'AUSTRALIA_LORD_HOWE',
-  /** Melbourne */
-  AustraliaMelbourne = 'AUSTRALIA_MELBOURNE',
-  /** Perth */
-  AustraliaPerth = 'AUSTRALIA_PERTH',
-  /** Sydney */
-  AustraliaSydney = 'AUSTRALIA_SYDNEY',
-  /** Amsterdam */
-  EuropeAmsterdam = 'EUROPE_AMSTERDAM',
-  /** Andorra */
-  EuropeAndorra = 'EUROPE_ANDORRA',
-  /** Astrakhan */
-  EuropeAstrakhan = 'EUROPE_ASTRAKHAN',
-  /** Athens */
-  EuropeAthens = 'EUROPE_ATHENS',
-  /** Belgrade */
-  EuropeBelgrade = 'EUROPE_BELGRADE',
-  /** Berlin */
-  EuropeBerlin = 'EUROPE_BERLIN',
-  /** Bratislava */
-  EuropeBratislava = 'EUROPE_BRATISLAVA',
-  /** Brussels */
-  EuropeBrussels = 'EUROPE_BRUSSELS',
-  /** Bucharest */
-  EuropeBucharest = 'EUROPE_BUCHAREST',
-  /** Budapest */
-  EuropeBudapest = 'EUROPE_BUDAPEST',
-  /** Busingen */
-  EuropeBusingen = 'EUROPE_BUSINGEN',
-  /** Chisinau */
-  EuropeChisinau = 'EUROPE_CHISINAU',
-  /** Copenhagen */
-  EuropeCopenhagen = 'EUROPE_COPENHAGEN',
-  /** Dublin */
-  EuropeDublin = 'EUROPE_DUBLIN',
-  /** Gibraltar */
-  EuropeGibraltar = 'EUROPE_GIBRALTAR',
-  /** Guernsey */
-  EuropeGuernsey = 'EUROPE_GUERNSEY',
-  /** Helsinki */
-  EuropeHelsinki = 'EUROPE_HELSINKI',
-  /** Isle of Man */
-  EuropeIsleOfMan = 'EUROPE_ISLE_OF_MAN',
-  /** Istanbul */
-  EuropeIstanbul = 'EUROPE_ISTANBUL',
-  /** Jersey */
-  EuropeJersey = 'EUROPE_JERSEY',
-  /** Kaliningrad */
-  EuropeKaliningrad = 'EUROPE_KALININGRAD',
-  /** Kiev */
-  EuropeKiev = 'EUROPE_KIEV',
-  /** Kirov */
-  EuropeKirov = 'EUROPE_KIROV',
-  /** Lisbon */
-  EuropeLisbon = 'EUROPE_LISBON',
-  /** Ljubljana */
-  EuropeLjubljana = 'EUROPE_LJUBLJANA',
-  /** London */
-  EuropeLondon = 'EUROPE_LONDON',
-  /** Luxembourg */
-  EuropeLuxembourg = 'EUROPE_LUXEMBOURG',
-  /** Madrid */
-  EuropeMadrid = 'EUROPE_MADRID',
-  /** Malta */
-  EuropeMalta = 'EUROPE_MALTA',
-  /** Mariehamn */
-  EuropeMariehamn = 'EUROPE_MARIEHAMN',
-  /** Minsk */
-  EuropeMinsk = 'EUROPE_MINSK',
-  /** Monaco */
-  EuropeMonaco = 'EUROPE_MONACO',
-  /** Moscow */
-  EuropeMoscow = 'EUROPE_MOSCOW',
-  /** Oslo */
-  EuropeOslo = 'EUROPE_OSLO',
-  /** Paris */
-  EuropeParis = 'EUROPE_PARIS',
-  /** Podgorica */
-  EuropePodgorica = 'EUROPE_PODGORICA',
-  /** Prague */
-  EuropePrague = 'EUROPE_PRAGUE',
-  /** Riga */
-  EuropeRiga = 'EUROPE_RIGA',
-  /** Rome */
-  EuropeRome = 'EUROPE_ROME',
-  /** Samara */
-  EuropeSamara = 'EUROPE_SAMARA',
-  /** San Marino */
-  EuropeSanMarino = 'EUROPE_SAN_MARINO',
-  /** Sarajevo */
-  EuropeSarajevo = 'EUROPE_SARAJEVO',
-  /** Saratov */
-  EuropeSaratov = 'EUROPE_SARATOV',
-  /** Simferopol */
-  EuropeSimferopol = 'EUROPE_SIMFEROPOL',
-  /** Skopje */
-  EuropeSkopje = 'EUROPE_SKOPJE',
-  /** Sofia */
-  EuropeSofia = 'EUROPE_SOFIA',
-  /** Stockholm */
-  EuropeStockholm = 'EUROPE_STOCKHOLM',
-  /** Tallinn */
-  EuropeTallinn = 'EUROPE_TALLINN',
-  /** Tirane */
-  EuropeTirane = 'EUROPE_TIRANE',
-  /** Ulyanovsk */
-  EuropeUlyanovsk = 'EUROPE_ULYANOVSK',
-  /** Uzhgorod */
-  EuropeUzhgorod = 'EUROPE_UZHGOROD',
-  /** Vaduz */
-  EuropeVaduz = 'EUROPE_VADUZ',
-  /** Vatican */
-  EuropeVatican = 'EUROPE_VATICAN',
-  /** Vienna */
-  EuropeVienna = 'EUROPE_VIENNA',
-  /** Vilnius */
-  EuropeVilnius = 'EUROPE_VILNIUS',
-  /** Volgograd */
-  EuropeVolgograd = 'EUROPE_VOLGOGRAD',
-  /** Warsaw */
-  EuropeWarsaw = 'EUROPE_WARSAW',
-  /** Zagreb */
-  EuropeZagreb = 'EUROPE_ZAGREB',
-  /** Zaporozhye */
-  EuropeZaporozhye = 'EUROPE_ZAPOROZHYE',
-  /** Zurich */
-  EuropeZurich = 'EUROPE_ZURICH',
-  /** Antananarivo */
-  IndianAntananarivo = 'INDIAN_ANTANANARIVO',
-  /** Chagos */
-  IndianChagos = 'INDIAN_CHAGOS',
-  /** Christmas */
-  IndianChristmas = 'INDIAN_CHRISTMAS',
-  /** Cocos */
-  IndianCocos = 'INDIAN_COCOS',
-  /** Comoro */
-  IndianComoro = 'INDIAN_COMORO',
-  /** Kerguelen */
-  IndianKerguelen = 'INDIAN_KERGUELEN',
-  /** Mahe */
-  IndianMahe = 'INDIAN_MAHE',
-  /** Maldives */
-  IndianMaldives = 'INDIAN_MALDIVES',
-  /** Mauritius */
-  IndianMauritius = 'INDIAN_MAURITIUS',
-  /** Mayotte */
-  IndianMayotte = 'INDIAN_MAYOTTE',
-  /** Reunion */
-  IndianReunion = 'INDIAN_REUNION',
-  /** Apia */
-  PacificApia = 'PACIFIC_APIA',
-  /** Auckland */
-  PacificAuckland = 'PACIFIC_AUCKLAND',
-  /** Bougainville */
-  PacificBougainville = 'PACIFIC_BOUGAINVILLE',
-  /** Chatham */
-  PacificChatham = 'PACIFIC_CHATHAM',
-  /** Chuuk */
-  PacificChuuk = 'PACIFIC_CHUUK',
-  /** Easter */
-  PacificEaster = 'PACIFIC_EASTER',
-  /** Efate */
-  PacificEfate = 'PACIFIC_EFATE',
-  /** Enderbury */
-  PacificEnderbury = 'PACIFIC_ENDERBURY',
-  /** Fakaofo */
-  PacificFakaofo = 'PACIFIC_FAKAOFO',
-  /** Fiji */
-  PacificFiji = 'PACIFIC_FIJI',
-  /** Funafuti */
-  PacificFunafuti = 'PACIFIC_FUNAFUTI',
-  /** Galapagos */
-  PacificGalapagos = 'PACIFIC_GALAPAGOS',
-  /** Gambier */
-  PacificGambier = 'PACIFIC_GAMBIER',
-  /** Guadalcanal */
-  PacificGuadalcanal = 'PACIFIC_GUADALCANAL',
-  /** Guam */
-  PacificGuam = 'PACIFIC_GUAM',
-  /** Honolulu */
-  PacificHonolulu = 'PACIFIC_HONOLULU',
-  /** Kiritimati */
-  PacificKiritimati = 'PACIFIC_KIRITIMATI',
-  /** Kosrae */
-  PacificKosrae = 'PACIFIC_KOSRAE',
-  /** Kwajalein */
-  PacificKwajalein = 'PACIFIC_KWAJALEIN',
-  /** Majuro */
-  PacificMajuro = 'PACIFIC_MAJURO',
-  /** Marquesas */
-  PacificMarquesas = 'PACIFIC_MARQUESAS',
-  /** Midway */
-  PacificMidway = 'PACIFIC_MIDWAY',
-  /** Nauru */
-  PacificNauru = 'PACIFIC_NAURU',
-  /** Niue */
-  PacificNiue = 'PACIFIC_NIUE',
-  /** Norfolk */
-  PacificNorfolk = 'PACIFIC_NORFOLK',
-  /** Noumea */
-  PacificNoumea = 'PACIFIC_NOUMEA',
-  /** Pago Pago */
-  PacificPagoPago = 'PACIFIC_PAGO_PAGO',
-  /** Palau */
-  PacificPalau = 'PACIFIC_PALAU',
-  /** Pitcairn */
-  PacificPitcairn = 'PACIFIC_PITCAIRN',
-  /** Pohnpei */
-  PacificPohnpei = 'PACIFIC_POHNPEI',
-  /** Port Moresby */
-  PacificPortMoresby = 'PACIFIC_PORT_MORESBY',
-  /** Rarotonga */
-  PacificRarotonga = 'PACIFIC_RAROTONGA',
-  /** Saipan */
-  PacificSaipan = 'PACIFIC_SAIPAN',
-  /** Tahiti */
-  PacificTahiti = 'PACIFIC_TAHITI',
-  /** Tarawa */
-  PacificTarawa = 'PACIFIC_TARAWA',
-  /** Tongatapu */
-  PacificTongatapu = 'PACIFIC_TONGATAPU',
-  /** Wake */
-  PacificWake = 'PACIFIC_WAKE',
-  /** Wallis */
-  PacificWallis = 'PACIFIC_WALLIS',
-  /** UTC offset: UTC+0 */
-  Utc_0 = 'UTC_0',
-  /** UTC offset: UTC+0:30 */
-  Utc_0_30 = 'UTC_0_30',
-  /** UTC offset: UTC+1 */
-  Utc_1 = 'UTC_1',
-  /** UTC offset: UTC+10 */
-  Utc_10 = 'UTC_10',
-  /** UTC offset: UTC+10:30 */
-  Utc_10_30 = 'UTC_10_30',
-  /** UTC offset: UTC+11 */
-  Utc_11 = 'UTC_11',
-  /** UTC offset: UTC+11:30 */
-  Utc_11_30 = 'UTC_11_30',
-  /** UTC offset: UTC+12 */
-  Utc_12 = 'UTC_12',
-  /** UTC offset: UTC+12:45 */
-  Utc_12_45 = 'UTC_12_45',
-  /** UTC offset: UTC+13 */
-  Utc_13 = 'UTC_13',
-  /** UTC offset: UTC+13:45 */
-  Utc_13_45 = 'UTC_13_45',
-  /** UTC offset: UTC+14 */
-  Utc_14 = 'UTC_14',
-  /** UTC offset: UTC+1:30 */
-  Utc_1_30 = 'UTC_1_30',
-  /** UTC offset: UTC+2 */
-  Utc_2 = 'UTC_2',
-  /** UTC offset: UTC+2:30 */
-  Utc_2_30 = 'UTC_2_30',
-  /** UTC offset: UTC+3 */
-  Utc_3 = 'UTC_3',
-  /** UTC offset: UTC+3:30 */
-  Utc_3_30 = 'UTC_3_30',
-  /** UTC offset: UTC+4 */
-  Utc_4 = 'UTC_4',
-  /** UTC offset: UTC+4:30 */
-  Utc_4_30 = 'UTC_4_30',
-  /** UTC offset: UTC+5 */
-  Utc_5 = 'UTC_5',
-  /** UTC offset: UTC+5:30 */
-  Utc_5_30 = 'UTC_5_30',
-  /** UTC offset: UTC+5:45 */
-  Utc_5_45 = 'UTC_5_45',
-  /** UTC offset: UTC+6 */
-  Utc_6 = 'UTC_6',
-  /** UTC offset: UTC+6:30 */
-  Utc_6_30 = 'UTC_6_30',
-  /** UTC offset: UTC+7 */
-  Utc_7 = 'UTC_7',
-  /** UTC offset: UTC+7:30 */
-  Utc_7_30 = 'UTC_7_30',
-  /** UTC offset: UTC+8 */
-  Utc_8 = 'UTC_8',
-  /** UTC offset: UTC+8:30 */
-  Utc_8_30 = 'UTC_8_30',
-  /** UTC offset: UTC+8:45 */
-  Utc_8_45 = 'UTC_8_45',
-  /** UTC offset: UTC+9 */
-  Utc_9 = 'UTC_9',
-  /** UTC offset: UTC+9:30 */
-  Utc_9_30 = 'UTC_9_30',
 }
 
 /** Any node that has a URI */
@@ -9398,13 +8575,13 @@ export type UpdateSettingsPayload = {
   allSettings?: Maybe<Settings>
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']>
-  /** Update the discussion setting. */
+  /** Update the DiscussionSettings setting. */
   discussionSettings?: Maybe<DiscussionSettings>
-  /** Update the general setting. */
+  /** Update the GeneralSettings setting. */
   generalSettings?: Maybe<GeneralSettings>
-  /** Update the reading setting. */
+  /** Update the ReadingSettings setting. */
   readingSettings?: Maybe<ReadingSettings>
-  /** Update the writing setting. */
+  /** Update the WritingSettings setting. */
   writingSettings?: Maybe<WritingSettings>
 }
 
@@ -9671,7 +8848,11 @@ export enum UserRoleEnum {
   /** User role with specific capabilities */
   Contributor = 'CONTRIBUTOR',
   /** User role with specific capabilities */
+  Customer = 'CUSTOMER',
+  /** User role with specific capabilities */
   Editor = 'EDITOR',
+  /** User role with specific capabilities */
+  ShopManager = 'SHOP_MANAGER',
   /** User role with specific capabilities */
   Subscriber = 'SUBSCRIBER',
 }

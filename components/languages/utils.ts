@@ -1,11 +1,16 @@
 import { ChipProps } from 'components/buttons/types'
 import { LangInstanceLinksListProps } from './types'
 
+export const KRATYLOS_BASE_URL = [
+  'https://kratylos.org/~kratylos/project.cgi?',
+  'institution=ELA&language=',
+].join('')
+
 export const prepLangInstanceChips = (
   data: LangInstanceLinksListProps
 ): ChipProps[] => {
   const { project, external } = data
-  const { archiveOrgLink, nycLangMap } = external || {}
+  const { archiveOrgLink, nycLangMap, kratylos } = external || {}
 
   const chips: ChipProps[] = []
 
@@ -28,6 +33,14 @@ export const prepLangInstanceChips = (
     chips.push({
       text: 'NYC Map',
       uri: nycLangMap,
+      external: true,
+    })
+  }
+
+  if (kratylos) {
+    chips.push({
+      text: 'Kratylos',
+      uri: KRATYLOS_BASE_URL + kratylos,
       external: true,
     })
   }

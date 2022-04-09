@@ -1,19 +1,26 @@
-import getConfig from 'next/config'
+import {
+  Page,
+  RootQueryToPageConnection,
+  RootQueryToPostConnection,
+} from 'gql-ts/wp-graphql'
 import { request } from 'graphql-request'
-
-import { Page, Post, RootQueryToPageConnection } from 'gql-ts/wp-graphql'
+import getPageQuery from 'lib/gql-queries/home/GetPage.graphql'
 import homePageQuery from 'lib/gql-queries/home/HomePageQuery.graphql'
 import publishedPagesQuery from 'lib/gql-queries/home/PublishedPages.graphql'
-import getPageQuery from 'lib/gql-queries/home/GetPage.graphql'
+import getConfig from 'next/config'
 
 const { publicRuntimeConfig } = getConfig()
 const { wpGqlEndpoint } = publicRuntimeConfig
 
-// TODO: type this out. Should match HomeProps in pages/index.tsx
-export async function getHomePageContent() {
-  const data = await request<{
-    data: { homePageContent: Page; posts: Post[] }
-  }>(wpGqlEndpoint, homePageQuery)
+type Response = {
+  data: {
+    homePageContent: Page
+    posts: RootQueryToPostConnection
+  }
+}
+
+export async function getHomePageContent(): Promise<Response> {
+  const data = await request(wpGqlEndpoint, homePageQuery)
 
   return data
 }
