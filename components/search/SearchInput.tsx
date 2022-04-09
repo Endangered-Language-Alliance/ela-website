@@ -42,7 +42,7 @@ export const SearchInput: React.FC<Props> = (props) => {
       />
       <button
         type="submit"
-        className={`${btnStyles.button} ${styles.searchBtn}`}
+        className={`${styles.searchBtn} ${btnStyles.button}`}
       >
         <IoSearch />
       </button>
