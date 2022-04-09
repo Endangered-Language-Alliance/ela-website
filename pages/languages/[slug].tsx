@@ -11,7 +11,10 @@ import { getAllLangsWithSlug, getLanguage } from 'lib/api/api.languages'
 import { Layout } from 'components/Layout'
 import { prepCitiesMarkers } from 'components/map/utils'
 import { Map } from 'components/map/Map'
-import { prepLangInstanceChips } from 'components/languages/utils'
+import {
+  KRATYLOS_BASE_URL,
+  prepLangInstanceChips,
+} from 'components/languages/utils'
 import { LangInstancePageProps } from 'components/languages/types'
 
 const Language: React.FC<LangInstancePageProps> = (props) => {
@@ -35,6 +38,7 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
   const { langStructure, prevResearch, addlInfo, background } = customInfo || {}
   const { elaWork, inNewYork } = customInfo || {}
   const { glottologId, gDriveDocId, archiveOrgLink } = external || {}
+  const { kratylos } = external || {}
   const { projectMeta } = project || {}
 
   const preppedData = prepCitiesMarkers(
@@ -124,19 +128,31 @@ const Language: React.FC<LangInstancePageProps> = (props) => {
                       />
                     </>
                   )}
-                  {archiveOrgLink && (
+                  {(archiveOrgLink || kratylos) && (
                     <div
                       className={sharedStyles.flexCenter}
-                      style={{ marginTop: 'var(--p2)' }} // dammit
+                      style={{ gap: 12, marginTop: 'var(--p2)' }} // dammit
                     >
-                      <a
-                        href={archiveOrgLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className={`${btnStyles.button} ${btnStyles.secondary}`}
-                      >
-                        View on Archive.org
-                      </a>
+                      {!!archiveOrgLink && (
+                        <a
+                          href={archiveOrgLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`${btnStyles.button} ${btnStyles.secondary}`}
+                        >
+                          View Archive.org
+                        </a>
+                      )}
+                      {!!kratylos && (
+                        <a
+                          href={KRATYLOS_BASE_URL + kratylos}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`${btnStyles.button} ${btnStyles.secondary}`}
+                        >
+                          View Kratylos
+                        </a>
+                      )}
                     </div>
                   )}
                 </TabPanel>

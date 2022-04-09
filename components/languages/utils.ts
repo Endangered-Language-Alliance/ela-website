@@ -1,7 +1,7 @@
 import { ChipProps } from 'components/buttons/types'
 import { LangInstanceLinksListProps } from './types'
 
-const KRATYLOS_BASE_URL = [
+export const KRATYLOS_BASE_URL = [
   'https://kratylos.org/~kratylos/project.cgi?',
   'institution=ELA&language=',
 ].join('')
