@@ -13,12 +13,18 @@
   padding: 0.25em 0.5em;
 }
 
-.searchBtn {
+/* NOTE: on build, Next always seems to put the button class second, no matter
+what, so have to heavy-hand with extra specificity. */
+button.searchBtn {
   align-items: center;
   border-radius: inherit;
+  box-shadow: none;
   color: hsl(210deg 6% 63%); /* because Google */
   display: inline-flex;
   font-size: calc(0.75 * var(--font-size));
+  min-width: unset;
+  padding-left: 12px;
+  padding-right: 0px;
 }
 
 .searchBtn:hover {
