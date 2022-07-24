@@ -145,11 +145,6 @@ Followed [this
 tutorial](https://www.wpbeginner.com/plugins/how-to-send-email-in-wordpress-using-the-gmail-smtp-server/)
 to set up OAuth.
 
-Client ID (from Gmail API):
-`256431451400-0jdqi29q1es4d7lelci9r8hdm8qn2o99.apps.googleusercontent.com`
-
-Client secret: `ZSiwBfchD-XSBRDGTeAZDFJx`
-
 ### When Lightsail Crashes
 
 ...or at least when _Apache_ crashes? SSH in via web UI, then:
@@ -162,25 +157,6 @@ sudo /opt/bitnami/ctlscript.sh restart
 
 [https://codepen.io/the_ruther4d/post/custom-query-string-vars-in-wordpress](https://codepen.io/the_ruther4d/post/custom-query-string-vars-in-wordpress)
 
-## TODOs (rm later)
+## things
 
-Larger restructurings:
-
-```
-> Products (formerly Store)
-> Public Programs (formerly Outreach)
-> Support Our Work (formerly Donate)
->> Introduction (formerly So What?)
->> Language and Song (formerly Song)
->> Language Documentation (formerly Documentation)
->> Linguistics (formerly Science)
->> Publications (formerly under Documentation)
->> Talks (formerly ELA in the Classroom)
->> Team (formerly Staff)
->> Tours (formerly ELA Tours)
-Get Involved (formerly Support)
-Latest (formerly News & Events)
-Our Work (formerly Programs)
-```
-
-(Move Yugacure and Garifuna Nursery Rhymes to be tabs under Garifuna?)
+- https://www.one-tab.com/page/1ojOOTDFRaSbWWqy0wxaTQ
