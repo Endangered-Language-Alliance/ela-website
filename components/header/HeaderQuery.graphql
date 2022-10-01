@@ -2,7 +2,7 @@ query MainMenuQuery {
   # TODO: one level up, nice and specific, theme-independent, and can be used
   # for header and footer menu queries:
   # menu(id: "main", idType: NAME) { menuItems }
-  menuItems(where: { location: PRIMARY, parentId: "" }) {
+  menuItems(where: { location: PRIMARY, parentId: 0 }) {
     nodes {
       ...MenuBits
       childItems(first: 200) {
