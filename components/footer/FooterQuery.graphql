@@ -1,6 +1,6 @@
 query FooterQuery {
   # TODO: `FOOTER` is kinda fragile if theme-dependent. Is there another way?
-  menuItems(where: { location: FOOTER, parentId: "" }) {
+  menuItems(where: { location: FOOTER, parentId: 0 }) {
     nodes {
       ...MenuBits
       childItems(first: 200) {
