@@ -1,10 +1,11 @@
 query PublishedPages {
   pages(
-    where: { orderby: { field: TITLE, order: ASC }, status: PUBLISH }
+    # Password check is a gross hack to omit NYC-specific pages
+    where: { orderby: { field: TITLE, order: ASC }, hasPassword: false }
     first: 2000
   ) {
     nodes {
-      uri
+      uri # just to filter out the Home page 😞
     }
   }
 }
