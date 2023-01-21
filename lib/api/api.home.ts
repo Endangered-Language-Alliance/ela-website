@@ -11,7 +11,6 @@ import getConfig from 'next/config'
 
 const { publicRuntimeConfig } = getConfig()
 const { wpGqlEndpoint } = publicRuntimeConfig
-
 type Response = {
   data: {
     homePageContent: Page
@@ -31,7 +30,7 @@ export async function getPublishedPages(): Promise<RootQueryToPageConnection> {
     publishedPagesQuery
   )
 
-  return response?.pages // super important to TYPE THE RIGHT CODE
+  return response?.pages
 }
 
 export const getPage = async (

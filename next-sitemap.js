@@ -11,6 +11,9 @@ const isLangsLanding = (path) => path === '/languages'
 
 const getBlogPostYear = (path) => parseInt(path.split('/')[2], 10)
 
+// internal sitemap only seen in local and dev anyway
+const BLACKLISTED_PATHS = ['/sitemap']
+
 function isPostWithinPastYear(postYear) {
   const thisYear = new Date().getFullYear()
 
@@ -47,13 +50,13 @@ const defaultFreqAndPriority = {
 const settings = {
   siteUrl: process.env.SITE_URL || 'https://www.elalliance.org',
   generateRobotsTxt: true,
-  exclude: ['/sitemap'], // internal sitemap only seen in local and dev anyway
+  exclude: BLACKLISTED_PATHS,
 }
 
 module.exports = {
   ...settings,
   transform: async (config, path) => {
-    if (path === '/sitemap') return null
+    if (BLACKLISTED_PATHS.includes(path)) return null
 
     let { priority, changefreq } = defaultFreqAndPriority
 
